@@ -1,0 +1,31 @@
+extends layout
+
+include mixins/_breadcrumb
+
+block content
+  .layout-centered
+    +breadcrumb
+    .error
+      h1 #{somethingWentWrongLabel} (#{status})
+      h2 #{tryLabel}:
+      ul
+        case status
+          when 404
+            li #{error404Route}
+            li #{draftOrPublishedErrorLabel}
+          when 400
+            li #{contentModelChangedErrorLabel}
+          when 401
+            li #{verifyCredentialsErrorLabel}
+            li #{localeContentErrorLabel}
+
+      if stack
+        li #{stackTraceErrorLabel}
+      if responseData
+        h2 #{errorLabel}
+          pre.error__stack-trace
+            code.shell #{responseData}
+      if stack
+        h2 #{stackTraceLabel}
+        pre.error__stack-trace
+          code.shell #{stack}

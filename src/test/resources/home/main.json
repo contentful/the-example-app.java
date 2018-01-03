@@ -1,0 +1,1032 @@
+{
+    "includes": {
+        "Asset": [
+            {
+                "fields": {
+                    "file": {
+                        "en-US": {
+                            "contentType": "image/svg+xml",
+                            "details": {
+                                "image": {
+                                    "height": 274,
+                                    "width": 463
+                                },
+                                "size": 44975
+                            },
+                            "fileName": "json-presentation-layer.svg",
+                            "url": "//images.contentful.com/jnzexv31feqf/1PzXR2apawY8iYM4o0AUoi/52d8c924bd60a6188c282b1770e1f855/json-presentation-layer.svg"
+                        }
+                    },
+                    "title": {
+                        "en-US": "json-presentation"
+                    }
+                },
+                "sys": {
+                    "createdAt": "2017-12-11T12:13:30.026Z",
+                    "id": "1PzXR2apawY8iYM4o0AUoi",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-11T12:13:50.344Z"
+                }
+            },
+            {
+                "fields": {
+                    "file": {
+                        "en-US": {
+                            "contentType": "image/svg+xml",
+                            "details": {
+                                "image": {
+                                    "height": 232,
+                                    "width": 708
+                                },
+                                "size": 52144
+                            },
+                            "fileName": "minimal-setup.svg",
+                            "url": "//images.contentful.com/jnzexv31feqf/3z7ErmBLIccwQkQkuEY0w4/14273331c93ac1afe80b150f1f22a04f/minimal-setup.svg"
+                        }
+                    },
+                    "title": {
+                        "en-US": "minimal contentful setup"
+                    }
+                },
+                "sys": {
+                    "createdAt": "2017-12-11T12:13:30.063Z",
+                    "id": "3z7ErmBLIccwQkQkuEY0w4",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-11T12:13:49.812Z"
+                }
+            },
+            {
+                "fields": {
+                    "file": {
+                        "en-US": {
+                            "contentType": "image/jpeg",
+                            "details": {
+                                "image": {
+                                    "height": 768,
+                                    "width": 1024
+                                },
+                                "size": 355459
+                            },
+                            "fileName": "6086229920_4dc2e1a941_b.jpg",
+                            "url": "//images.contentful.com/jnzexv31feqf/47tYeR7zi8cgKuoMu6qkwy/9ada5e9af955bb4f20b98686c97a055f/6086229920_4dc2e1a941_b.jpg"
+                        }
+                    },
+                    "title": {
+                        "en-US": "Content model building blocks"
+                    }
+                },
+                "sys": {
+                    "createdAt": "2017-12-11T12:13:30.070Z",
+                    "id": "47tYeR7zi8cgKuoMu6qkwy",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-11T12:13:46.860Z"
+                }
+            },
+            {
+                "fields": {
+                    "file": {
+                        "en-US": {
+                            "contentType": "image/png",
+                            "details": {
+                                "image": {
+                                    "height": 1290,
+                                    "width": 2038
+                                },
+                                "size": 325881
+                            },
+                            "fileName": "webapp.png",
+                            "url": "//images.contentful.com/jnzexv31feqf/4CWJDjGTzaU8CMAW2eYeie/1f339cfae443bd382eb90cc531d842d3/webapp.png"
+                        }
+                    },
+                    "title": {
+                        "en-US": "webapp"
+                    }
+                },
+                "sys": {
+                    "createdAt": "2017-12-11T12:13:30.117Z",
+                    "id": "4CWJDjGTzaU8CMAW2eYeie",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-11T12:13:49.243Z"
+                }
+            },
+            {
+                "fields": {
+                    "file": {
+                        "en-US": {
+                            "contentType": "image/svg+xml",
+                            "details": {
+                                "image": {
+                                    "height": 567,
+                                    "width": 313
+                                },
+                                "size": 5493
+                            },
+                            "fileName": "content-model-full.svg",
+                            "url": "//images.contentful.com/jnzexv31feqf/5o1Zu7UJheEGGQUC6gYEmS/12a641a659017d8cea2ea64390040bc1/content-model-full.svg"
+                        }
+                    },
+                    "title": {
+                        "en-US": "content-model-full"
+                    }
+                },
+                "sys": {
+                    "createdAt": "2017-12-11T12:13:30.760Z",
+                    "id": "5o1Zu7UJheEGGQUC6gYEmS",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-11T12:13:48.675Z"
+                }
+            },
+            {
+                "fields": {
+                    "file": {
+                        "en-US": {
+                            "contentType": "image/png",
+                            "details": {
+                                "image": {
+                                    "height": 887,
+                                    "width": 1908
+                                },
+                                "size": 100983
+                            },
+                            "fileName": "EngineeringHistory.png",
+                            "url": "//images.contentful.com/jnzexv31feqf/6nvWJT1AkM64so8Auue4QQ/fa1968163c514925a94824abfde5f5d7/EngineeringHistory.png"
+                        }
+                    },
+                    "title": {
+                        "en-US": "home course image"
+                    }
+                },
+                "sys": {
+                    "createdAt": "2017-12-11T12:13:30.689Z",
+                    "id": "6nvWJT1AkM64so8Auue4QQ",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-11T12:13:47.442Z"
+                }
+            }
+        ],
+        "Entry": [
+            {
+                "fields": {
+                    "copy": {
+                        "de-DE": "Der Aufbau einer einfachen Anwendung die Contentful benutzt, besteht aus einer Anwendung, die den Inhalt liest, wie zum Beispiel diese Beispielanwendung und einer Weiteren, die den Inhalt erzeugt und ver\u00e4ndert. Dies ist die Contentful Web-Anwendung. Die Anwendung liest den Inhalt, indem sie sich mit der Content Delivery API verbindet. Die Contentful Web-Anwendung schreibt Inhalt indem sie mit der Content Management API verbunden ist:\n\n![Minimaler Aufbau](//images.contentful.com/ft4tkuv7nwl0/3z7ErmBLIccwQkQkuEY0w4/bd438f4b8c540f56fcc76d75c688baf1/minimal-setup.svg)\n\nDie *Contentful Web-Anwendung* ist eine _single page_ Anwendung, die von Contentful zur Verf\u00fcgung gestellt wird, um alle Aufgaben rund ums Content Management zu erledigen:\n\n- Schreiben von Inhalten durch Autoren.\n- Einrichten des Spaces, der Content Types, Zugriffsrechte und Webhook-Benachrichtigungen durch Entwickler.\n\nWie bereits erw\u00e4hnt, benutzt die Contentful Web-Anwendung die Content Management API. Daher k\u00f6nnen Sie diese Funktionen selber nachbauen, indem Sie die gleichen API-Anfragen durchf\u00fchren. Dies ist ein sehr m\u00e4chtiger Aspekt der _API-First_-Sichtweise, da sie Ihnen hilft Contentful in Contentful-fremden Systemen einzusetzen.",
+                        "en-US": "A simple Contentful setup consists of a client application reading content, such as this example app, and another application that is writing content, such as the Contentful web app. The client application is reading content by connecting to the Content Delivery API, and the Contentful Web app is writing content by connecting to the Content Mangement API:\n\n![minimal contentful setup](//images.contentful.com/ft4tkuv7nwl0/3z7ErmBLIccwQkQkuEY0w4/bd438f4b8c540f56fcc76d75c688baf1/minimal-setup.svg)\n\nThe *Contentful web app* is a single page application that Contentful provides to help with the most common tasks when managing content:\n\n- Provide an interface for editors to write content.\n- Provide an interface for developes to configure a space, model data, define roles and permissions, and set up webhook notifications.\n\nAs mentioned, the Contentful web app is a client that uses the Content Management API. Therefore, you could replicate the functionality that the Contentful web app provides by making an API call. This is a powerful aspect of an API-first design because it helps you to connect Contentful to third-party systems.\n"
+                    },
+                    "title": {
+                        "en-US": "Content management > copy"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:54.847Z",
+                    "id": "1AqQQzRvKAkEOekuMUcQIY",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:08.737Z"
+                }
+            },
+            {
+                "fields": {
+                    "categories": {
+                        "en-US": [
+                            {
+                                "sys": {
+                                    "id": "6ucY5w3oswEU6EYSCEi0C8",
+                                    "linkType": "Entry",
+                                    "type": "Link"
+                                }
+                            }
+                        ]
+                    },
+                    "description": {
+                        "de-DE": "Diese Beispielanwendung hilft Ihnen, Ihre eigene Anwendung mittels Contentful zu bauen. Sie enth\u00e4lt Module, die Ihnen verschiedene Grundkonzepte n\u00e4her bringen, Content-Modellierung erkl\u00e4rt und sie erl\u00e4utert, wie Ihre eigene Anwendung Inhalt von Contentful verarbeitet. Der Inhalt wird von den APIs von Contentful unter zuhilfenahme von Contentful SDKs zurverf\u00fcgung gestellt. \n\nDie Benutzeroberfl\u00e4che dieses Beispieles wird nur von dem Beispiel selbst benutzt und bediehnt sich _keines_ Templates. Dies ist Absicht, da es sich bei Contentful um ein `Headless CMS` handelt. Was dies bedeuted, wird sp\u00e4ter nocheinmal verdeutlicht.   \n\nFolgende Themen werden von diesem Kurs abgehandelt:\n\n- **Die Architektur von Contentful**: Komponenten von Contentful.\n- **Content-Modellierung**: Das Content-Modell der Anwendung.\n- **Integration mit Contentful**: Wie wurde diese Anwendung mit Contentful verbunden?",
+                        "en-US": "This example app helps you build your own application using Contentful. The app contains modules that introduce you to core concepts, content modelling, and how your app consumes content from Contentful. The content is pulled from Contentful APIs using a Contentful SDK.\n\nThe user interface of this example app is unique to this application and is _not_ a template. This is intentional, and it touches an aspect of a headless CMS that will be covered later.\n\nThis course covers the following topics:\n\n- **Contentful's architecture:**: Basic components of Contentful\n- **Content modelling**: The application's content model\n- **Integrating with Contentful**: Connecting this application to Contentful."
+                    },
+                    "duration": {
+                        "en-US": 5
+                    },
+                    "image": {
+                        "de-DE": {
+                            "sys": {
+                                "id": "3z7ErmBLIccwQkQkuEY0w4",
+                                "linkType": "Asset",
+                                "type": "Link"
+                            }
+                        },
+                        "en-US": {
+                            "sys": {
+                                "id": "6nvWJT1AkM64so8Auue4QQ",
+                                "linkType": "Asset",
+                                "type": "Link"
+                            }
+                        }
+                    },
+                    "lessons": {
+                        "en-US": [
+                            {
+                                "sys": {
+                                    "id": "3op5VIqGZiwoe06c8IQIMO",
+                                    "linkType": "Entry",
+                                    "type": "Link"
+                                }
+                            },
+                            {
+                                "sys": {
+                                    "id": "5p9qNpTOJaCE6ykC4a8Wqg",
+                                    "linkType": "Entry",
+                                    "type": "Link"
+                                }
+                            },
+                            {
+                                "sys": {
+                                    "id": "1zwAjpe38UC8iqKMM6gu0Q",
+                                    "linkType": "Entry",
+                                    "type": "Link"
+                                }
+                            },
+                            {
+                                "sys": {
+                                    "id": "3KinTi83FecuMeiUo0qGU4",
+                                    "linkType": "Entry",
+                                    "type": "Link"
+                                }
+                            }
+                        ]
+                    },
+                    "shortDescription": {
+                        "de-DE": "Lernen Sie, wie Sie Anwendungen mit Contentful bauen k\u00f6nnen.",
+                        "en-US": "Learn how to build your own applications with Contentful."
+                    },
+                    "skillLevel": {
+                        "en-US": "beginner"
+                    },
+                    "slug": {
+                        "en-US": "hello-world"
+                    },
+                    "title": {
+                        "de-DE": "Hallo Welt",
+                        "en-US": "Hello world"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "course",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:56.083Z",
+                    "id": "1toEOumnkEksWakieoeC6M",
+                    "revision": 2,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-13T10:17:09.749Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": {
+                        "en-US": [
+                            {
+                                "sys": {
+                                    "id": "1AqQQzRvKAkEOekuMUcQIY",
+                                    "linkType": "Entry",
+                                    "type": "Link"
+                                }
+                            },
+                            {
+                                "sys": {
+                                    "id": "5DtGCVHfr2OC2Is6KceS0G",
+                                    "linkType": "Entry",
+                                    "type": "Link"
+                                }
+                            }
+                        ]
+                    },
+                    "slug": {
+                        "en-US": "content-management"
+                    },
+                    "title": {
+                        "de-DE": "Content Management",
+                        "en-US": "Content management"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:56.096Z",
+                    "id": "1zwAjpe38UC8iqKMM6gu0Q",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:16.777Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": {
+                        "en-US": [
+                            {
+                                "sys": {
+                                    "id": "5jR4ciJ8Y8m2KKqmMKOkg4",
+                                    "linkType": "Entry",
+                                    "type": "Link"
+                                }
+                            }
+                        ]
+                    },
+                    "slug": {
+                        "en-US": "summary"
+                    },
+                    "title": {
+                        "de-DE": "Zusammenfassung",
+                        "en-US": "Summary"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:55.487Z",
+                    "id": "3KinTi83FecuMeiUo0qGU4",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:11.865Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": {
+                        "en-US": "Copy text to be rendered \ud83e\udd29\ud83d\udc68\u200d\ud83c\udfa4\u2b50"
+                    },
+                    "ctaLink": {
+                        "en-US": "https://lorempixel.com/200/200/cats"
+                    },
+                    "ctaTitle": {
+                        "en-US": "Call to action title"
+                    },
+                    "headline": {
+                        "en-US": "Emphasized headline"
+                    },
+                    "title": {
+                        "en-US": "Copy > Emphasized"
+                    },
+                    "visualStyle": {
+                        "en-US": "Emphasized"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "layoutCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-14T10:58:15.173Z",
+                    "id": "3KnsbmiCr6MI8kgQSioaQM",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-14T14:36:59.532Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": {
+                        "en-US": [
+                            {
+                                "sys": {
+                                    "id": "7iCSSldqDuUkG4GWa46uUq",
+                                    "linkType": "Entry",
+                                    "type": "Link"
+                                }
+                            },
+                            {
+                                "sys": {
+                                    "id": "41fdMtrUzmiqKykUwA8u2A",
+                                    "linkType": "Entry",
+                                    "type": "Link"
+                                }
+                            }
+                        ]
+                    },
+                    "slug": {
+                        "en-US": "architecture"
+                    },
+                    "title": {
+                        "de-DE": "Architektur",
+                        "en-US": "Architecture"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:55.975Z",
+                    "id": "3op5VIqGZiwoe06c8IQIMO",
+                    "revision": 3,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-13T14:47:06.724Z"
+                }
+            },
+            {
+                "fields": {
+                    "caption": {
+                        "de-DE": "Contentfuls APIs senden Daten im JSON-Format. Hierdurch kann Inhalt platformunabh\u00e4ngig benutzt werden.",
+                        "en-US": "Contentful's APIs send data in JSON format which enables cross channel distribution of content."
+                    },
+                    "image": {
+                        "en-US": {
+                            "sys": {
+                                "id": "1PzXR2apawY8iYM4o0AUoi",
+                                "linkType": "Asset",
+                                "type": "Link"
+                            }
+                        }
+                    },
+                    "title": {
+                        "en-US": "Architecture > headless image"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonImage",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:54.473Z",
+                    "id": "41fdMtrUzmiqKykUwA8u2A",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:06.841Z"
+                }
+            },
+            {
+                "fields": {
+                    "course": {
+                        "en-US": {
+                            "sys": {
+                                "id": "1toEOumnkEksWakieoeC6M",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    },
+                    "title": {
+                        "en-US": "Home > Highlighted Course"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "layoutHighlightedCourse",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:52.244Z",
+                    "id": "4B9n4zqG6QCgui8YiUs4Yc",
+                    "revision": 2,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-14T14:36:48.422Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": {
+                        "en-US": "Copy text, pending changes"
+                    },
+                    "ctaLink": {
+                        "en-US": "https://example.com"
+                    },
+                    "ctaTitle": {
+                        "en-US": "Cta title "
+                    },
+                    "headline": {
+                        "en-US": "Not emphasized, but pending"
+                    },
+                    "title": {
+                        "en-US": "Not Emphasized > Copy"
+                    },
+                    "visualStyle": {
+                        "en-US": "Default"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "layoutCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-14T10:46:08.140Z",
+                    "id": "4Rw2wXaJYsOMSE2k2wgoAA",
+                    "revision": 2,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-14T14:37:45.930Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": {
+                        "de-DE": "Unter _Content-Modellierung_ versteht man die Art und Weise Inhalt zu strukturieren. Hier in Contentful, passiert dies durch _Content Types_. Ein Content Type kann man sich als Schema gleichen Inhalts vorstellen: F\u00fcr jeden Content Type spezifiziert man dessen Eigenschaften, hier _Fields_ genannt. Diese _Fields_ rep\u00e4sentieren ein Aspekt eines Content Types. \n\nSie k\u00f6nnen Content Types auch sich gegenseitig referenzieren lassen.\n\n## Der Content Type dieser Lektion\n\nDen Text den Sie hier lesen, wurde in Contentful gespeichert. Sein Content Type sieht wie folgt aus:\n\n- Lesson: wird benutzt um Inhalt zu grupieren und neu anzuordnen.\n- Lesson > Copy: Ein Block von Markdown-Text \n- Lesson > Code: Ein Block von Quellcode\n- Lesson > Image: Ein Bild\n\n![content-model-lesson](//images.contentful.com/ft4tkuv7nwl0/1nXjR47jxOagUcc8iU6wUQ/2363d14a14ad8becb0869ebd5d2853c7/content-model-lesson.svg)\n\nUm eine _Lektion_ zu modellieren, w\u00e4hlten wir auch hier wieder die modulare Sichtweise: Wir gaben dem Content Type _Lesson_ verschiedene Referenzen auf andere Content Types.\n\nDiese Herangehensweise ist f\u00fcr Autoren vorteilhaft, da sie Teile des Inhaltes so leicht neuanordnen k\u00f6nnen. Gleichzeitig k\u00f6nnen Entwickler die Kontrolle behalten, wie einzelne Teile an Inhalt dargestellt werden.\n\n\n## Das Content-Modell dieser Anwendung\n\nDas folgende Diagramm zeigt das gesamte Content-Modell dieser Anwendung:\n\nIn detail:\n\n- Der _Layout_ Content Type referenziert den _Highlighted course_ Content Type.\n- Der _Highlighted course_ Content Type referenziert den _Course_ content type.\n- Der _Course_ Content Type referenziert den _Lesson_ Content Type.\n\nMit diesem Wissen, k\u00f6nnen Sie nun die Hierarchie der Besipielanwendung erkunden. Dannach, erkunden Sie die Hierarchie der Content Types in der Contentful Webanwendung. Sobald Sie dies getan haben, wird Ihr Verst\u00e4ndniss f\u00fcr die Interaktion zwischen Content-Modell und dessen Repr\u00e4sentation innerhalb der Beispielanwendung sich verbessern.",
+                        "en-US": "_Content modelling_ is the practice of structuring your content. At Contentful, you do this by creating _content types_. A content type can be thought of as a schema for content that is similiar. For each content type, you populate its fields. Each field represents one piece of data of a specific type.\n\nYou can referenece one content type from another to define relationships between them.\n\n## The content model of this lesson\n\nThe text you are reading now is stored in Contentful. Its content-type structure is as follows:\n\n- Lesson: used to group and arrange content\n- Lesson > Copy: one chunk of markdown content\n- Lesson > Code: one chunk of code in different languages\n- Lesson > Image: an image\n\n![content-model-lesson](//images.contentful.com/ft4tkuv7nwl0/1nXjR47jxOagUcc8iU6wUQ/2363d14a14ad8becb0869ebd5d2853c7/content-model-lesson.svg)\n\nTo model a _lesson_, we chose a modular approach where the content type called _Lesson_ uses a reference field that contains references to other content types.\n\nThis approach is benefitial because content writers can put chunks of information in any order they want. Meanwhile, developers can control how each chunk of information is presented.\n\n## The content model of this application\n\nThe following diagram displays the entire content model of this application.\n\nIn more detail:\n\n- The _Layout_ content type references the _Highlighted course_ content type.\n- The _Highlighted course_ content type references the _Course_ content type.\n- The _Course_ content type references the _Lesson_ content type.\n\nKnowing this, explore the hierarchy of this example app. Afterwards, explore the corresponding hierarchy of the content types in the Contentful web app. Doing so strengthens your understanding of the relationships between the content model and how it\u2019s represented within this example app and the Contentful web app."
+                    },
+                    "title": {
+                        "en-US": "Content model > copy"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:54.511Z",
+                    "id": "4qT1W3HXewc0SscAs80UuA",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:07.462Z"
+                }
+            },
+            {
+                "fields": {
+                    "backgroundImage": {
+                        "en-US": {
+                            "sys": {
+                                "id": "47tYeR7zi8cgKuoMu6qkwy",
+                                "linkType": "Asset",
+                                "type": "Link"
+                            }
+                        }
+                    },
+                    "headline": {
+                        "en-US": "[Draft] Hero Image Copy"
+                    },
+                    "title": {
+                        "en-US": "Draft > Hero!"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "layoutHeroImage",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-14T10:56:52.140Z",
+                    "id": "5BvslT2RpeiIOEAAiqKuYa",
+                    "revision": 0,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-14T14:36:22.124Z"
+                }
+            },
+            {
+                "fields": {
+                    "caption": {
+                        "de-DE": "Die Contentful Web-Anwendung ist eine single page Anwendung, die die Content Management API benutzt. Sie kann genutzt werden um Inhalte zu Erzeugen und um Einstellungen an Contentful vorzunehmen.",
+                        "en-US": "The Contentful web app is a single page application sitting on top of our Content Management API. It can be used as an interface for content writers as well as for setup tasks."
+                    },
+                    "image": {
+                        "en-US": {
+                            "sys": {
+                                "id": "4CWJDjGTzaU8CMAW2eYeie",
+                                "linkType": "Asset",
+                                "type": "Link"
+                            }
+                        }
+                    },
+                    "title": {
+                        "en-US": "Content management > image"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonImage",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:55.048Z",
+                    "id": "5DtGCVHfr2OC2Is6KceS0G",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:09.935Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": {
+                        "de-DE": "In diesem Kurs haben sie die grundlegenden Konzepte von Contentful kennengelernt:\n\n- `API-first`-Denkweise von Contentful erleichtert die Verbindung von Contentful und Contentful-fremden Systemen.\n- Contentful ist ein _Content Infrastructure As a Service_, welcher auf AWS (Amazon Web Services) l\u00e4uft.\n- Contentful ist `headless` und bietet sowohl JSON als auch bin\u00e4re Antworten an.\n- Eine `Client`-Anwendung die Inhalte von Contentful verarbeitet, hat stets die volle Kontrolle \u00fcber visuelle representation des Inhalts.\n- Datenmodellierung innerhalb von Contentful benutzt flexible Content Typen, die entkoppelt von der Presentation ist.\n- Die Contentful Web-Anwendung ist ein einfach zu verwendender Editor.",
+                        "en-US": "In this course, you learned the basic concepts of Contentful:\n\n- Contentful\u2019s API-first design facilitates connecting Contentful with third-party systems.\n- Contentful\u2019s content infrastructure is a service that runs on AWS (Amazon Web Services).\n- Contentful is headless and provides JSON and binaries as output.\n- A client application that consumes content is in full control of its presentation.\n- Data modeling within Contentful uses flexible content types that are decoupled from presentation.\n- The Contentful web app is easy-to-use content editor.\n\n"
+                    },
+                    "title": {
+                        "en-US": "Summary > Copy"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:55.388Z",
+                    "id": "5jR4ciJ8Y8m2KKqmMKOkg4",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:10.495Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": {
+                        "en-US": [
+                            {
+                                "sys": {
+                                    "id": "4qT1W3HXewc0SscAs80UuA",
+                                    "linkType": "Entry",
+                                    "type": "Link"
+                                }
+                            },
+                            {
+                                "sys": {
+                                    "id": "6gFiJvssqQ62CMYqECOu2M",
+                                    "linkType": "Entry",
+                                    "type": "Link"
+                                }
+                            }
+                        ]
+                    },
+                    "slug": {
+                        "en-US": "content-model"
+                    },
+                    "title": {
+                        "de-DE": "Content-Modell",
+                        "en-US": "Content model"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:55.574Z",
+                    "id": "5p9qNpTOJaCE6ykC4a8Wqg",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:13.957Z"
+                }
+            },
+            {
+                "fields": {
+                    "caption": {
+                        "de-DE": "Die Hierarchie der Content Types von der Startseite zu einer Lektion mit ihren Modulen.",
+                        "en-US": "The full content type hierarchy from the home route down to a lesson with lesson modules."
+                    },
+                    "image": {
+                        "en-US": {
+                            "sys": {
+                                "id": "5o1Zu7UJheEGGQUC6gYEmS",
+                                "linkType": "Asset",
+                                "type": "Link"
+                            }
+                        }
+                    },
+                    "title": {
+                        "en-US": "Content model > image"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonImage",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:55.404Z",
+                    "id": "6gFiJvssqQ62CMYqECOu2M",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:11.242Z"
+                }
+            },
+            {
+                "fields": {
+                    "slug": {
+                        "en-US": "getting-started"
+                    },
+                    "title": {
+                        "en-US": "Getting started"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "category",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:54.858Z",
+                    "id": "6ucY5w3oswEU6EYSCEi0C8",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:08.115Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": {
+                        "de-DE": "## API-first\n\nContentful folgt der API-First-Denkweise, dies bedeutet, dass alle Funktionalit\u00e4ten durch die API zur Verf\u00fcgung gestellt werden.\n\nD.h. Sie k\u00f6nnen:\n- Datenschemata ver\u00e4ndern, oder Webhooks durch die Content Managewment API konfigurieren.\n- Platformunabh\u00e4ngigen Inhalt mittels unserer Contend Delivery API verteilen.\n- Entw\u00fcrfe von unver\u00f6ffentlichten Inhalt durch unsere Content Preview API begutachten.\n- Bilder skalieren, schneiden oder erneut komprimieren unter zuhilfenahme unserer Images API.\n\n![api first](//images.contentful.com/ft4tkuv7nwl0/1YK5kwroV6UEGS64mQs0Eo/c5eb53f39703f73d215e7ed8ad2f88e6/api-first.svg)\n\nContentful ist ein sogennantes `Headless CMS`, das bedeuted, das kein `Templating` und kein Pr\u00e4sentationslayer fest mit Ihrem Inhalt verbunden ist. Stattdessen hat ein Entwickler die komplette Freiheit eine Anwendung zu bauen die Contentful benutzt. Auf diese Art und Weise, k\u00f6nnen Sie Ihre Anwendung komplett von Contentful entkoppeln k\u00f6nnen.\n\nDies sind die minimalen Anforderungen von Contentful:\n\n- Unterst\u00fctzung des Protokolls HTTP\n- Verarbeitung von JSON-Daten\n\nMehr ist nicht n\u00f6tig, Sie haben die Freiheit sich Ihre Technologie selbst auszusuchen.",
+                        "en-US": "## API-first\n\nContentful follows an API-first approach, which means all functionality is provided through an API.\n\nThis means you can:\n- modify data schemas or configure a webhook through the Content Management API.\n- deliver cross-channel content through the Content Delivery API.\n- preview unpubublished content through the Content Preview API.\n- resize, crop, or re-compress images through the Images API.\n\n![api first](//images.contentful.com/ft4tkuv7nwl0/1YK5kwroV6UEGS64mQs0Eo/c5eb53f39703f73d215e7ed8ad2f88e6/api-first.svg)\n\nContentful is a headless CMS; there is no templating or presentation layer tied to the content. Instead, a developer has complete freedom when it comes to building an application that consumes and presents content from Contentful. This allows you to decouple your applications from Contentful's services.\n\nContentful has minimal requirements:\n- support for HTTP\n- parsing of JSON\n\nBeyond that, you are free to chose any technology you want."
+                    },
+                    "title": {
+                        "en-US": "Architecture > copy"
+                    }
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:54.021Z",
+                    "id": "7iCSSldqDuUkG4GWa46uUq",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:06.237Z"
+                }
+            }
+        ]
+    },
+    "items": [
+        {
+            "fields": {
+                "contentModules": {
+                    "en-US": [
+                        {
+                            "sys": {
+                                "id": "4B9n4zqG6QCgui8YiUs4Yc",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "5BvslT2RpeiIOEAAiqKuYa",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "3KnsbmiCr6MI8kgQSioaQM",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "4Rw2wXaJYsOMSE2k2wgoAA",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    ]
+                },
+                "slug": {
+                    "en-US": "home"
+                },
+                "title": {
+                    "en-US": "Home"
+                }
+            },
+            "sys": {
+                "contentType": {
+                    "sys": {
+                        "id": "layout",
+                        "linkType": "ContentType",
+                        "type": "Link"
+                    }
+                },
+                "createdAt": "2017-12-11T12:13:52.305Z",
+                "id": "2uNOpLMJioKeoMq8W44uYc",
+                "revision": 2,
+                "space": {
+                    "sys": {
+                        "id": "jnzexv31feqf",
+                        "linkType": "Space",
+                        "type": "Link"
+                    }
+                },
+                "type": "Entry",
+                "updatedAt": "2017-12-14T11:03:39.784Z"
+            }
+        }
+    ],
+    "limit": 100,
+    "skip": 0,
+    "sys": {
+        "type": "Array"
+    },
+    "total": 1
+}

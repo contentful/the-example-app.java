@@ -1,0 +1,24 @@
+extends layout
+
+include mixins/_breadcrumb
+include mixins/_editorialFeatures
+include mixins/_moduleCopy
+include mixins/_moduleHeroImage
+include mixins/_moduleHighlightedCourse
+
+block content
+  .layout-centered
+    +breadcrumb
+  .layout-centered
+    +editorialFeatures(landingPage)
+  .modules-container
+    each module in modules
+      case module.type
+        when 'copy'
+          +moduleCopy(module)
+
+        when 'heroImage'
+          +moduleHeroImage(module)
+
+        when 'highlightedCourse'
+          +moduleHighlightedCourse(module)

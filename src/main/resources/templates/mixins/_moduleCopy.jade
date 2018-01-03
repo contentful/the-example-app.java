@@ -1,0 +1,10 @@
+mixin moduleCopy(module)
+  .module
+    div(class='module-copy!{module.style}')
+      div(class='module-copy__first!{module.style}')
+        if module.headline
+          h1(class='module-copy__headline!{module.style}') #{module.headline}
+        div(class='module-copy__copy!{module.style}') !{module.copy}
+      div(class='module-copy__second!{module.style}')
+        if module.ctaTitle && module.ctaLink
+          a.cta(class='module-copy__cta!{module.style}' href=module.ctaLink)= module.ctaTitle

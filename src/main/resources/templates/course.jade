@@ -1,0 +1,44 @@
+extends layout
+
+include mixins/_breadcrumb
+include mixins/_editorialFeatures
+include mixins/_lesson
+
+block content
+  .layout-no-sidebar
+    +breadcrumb
+  .layout-sidebar
+    section.layout-sidebar__sidebar
+      .layout-sidebar__sidebar-header
+        h2.layout-sidebar__sidebar-title #{tableOfContentsLabel}
+      .layout-sidebar__sidebar-content
+        .table-of-contents
+          .table-of-contents__list
+            .table-of-contents__item
+              a.table-of-contents__link(href='/courses/!{course.slug}!{queryString}' class='!{course.cssClass}') !{overviewLabel}
+            each lesson in course.lessons
+              if lesson
+                .table-of-contents__item
+                  a.table-of-contents__link(href='/courses/!{course.slug}/lessons/!{lesson.slug}!{queryString}' class='!{lesson.cssClass}') !{lesson.title}
+    section.layout-sidebar__content
+      if lesson
+        +lesson(lesson, course, nextLesson)
+      else
+        .course
+          h1.course__title= course.title
+          +editorialFeatures(course)
+          .course__overview
+            h3.course__overview-title #{overviewLabel}
+            if course.duration
+              .course__overview-item
+                svg.course__overview-icon
+                  use(xlink:href='/icons/icons.svg#duration')
+                .course__overview-value #{durationLabel}: #{course.duration} #{minutesLabel}
+            if course.skillLevel
+              .course__overview-item
+                svg.course__overview-icon
+                  use(xlink:href='/icons/icons.svg#skill-level')
+                .course__overview-value #{skillLevelLabel}: #{course.skillLevel}
+            .course__overview-cta-wrapper
+              a.course__overview-cta.cta(href='/courses/!{course.slug}/lessons/!{course.lessons[0].slug}!{queryString}') #{startCourseLabel}
+          .course__description !{course.description}

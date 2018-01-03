@@ -1,0 +1,27 @@
+extends layout
+
+include mixins/_breadcrumb
+include mixins/_courseCard
+
+block content
+  .layout-no-sidebar
+    +breadcrumb
+  .layout-sidebar
+    section.layout-sidebar__sidebar
+      .layout-sidebar__sidebar-header
+        h2.layout-sidebar__sidebar-title #{base.meta.categoriesLabel}
+      .layout-sidebar__sidebar-content
+        .sidebar-menu
+          ul.sidebar-menu__list
+            li.sidebar-menu__item
+              a.sidebar-menu__link(href='/courses!{queryString}' class='!{allCoursesCSSClass}') #{base.meta.allCoursesLabel}
+            each category in categories
+              li.sidebar-menu__item
+                a.sidebar-menu__link(href='/courses/categories/!{category.slug}!{queryString}' class='!{category.cssClass}') #{category.title}
+    section.layout-sidebar__content
+      .courses
+        h1= title
+        .grid-list
+          each course in courses
+            .grid-list__item
+              +courseCard(course)

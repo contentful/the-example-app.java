@@ -1,0 +1,9 @@
+mixin lessonModuleImage(module)
+  .lesson-module.lesson-module-image
+    if module.image && module.image.file && module.image.file.url
+      figure.lesson-module-image__figure
+        img.lesson-module-image__image(src=module.image.file.url alt=module.image.title)
+        if module.caption
+          figcaption.lesson-module-image__caption= module.caption
+    else
+      h3 #{imageErrorTitle}

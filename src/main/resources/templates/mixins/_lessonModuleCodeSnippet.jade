@@ -1,0 +1,60 @@
+mixin lessonModuleCodeSnippet(module)
+  .lesson-module.lesson-module-code
+    .lesson-module-code__header
+      if module.curl
+        a.lesson-module-code__trigger(data-target='!{module.sys.id}-curl') cURL
+      if module.dotNet
+        a.lesson-module-code__trigger(data-target='!{module.sys.id}-dotnet') .NET
+      if module.javascript
+        a.lesson-module-code__trigger.lesson-module-code__trigger--active(data-target='!{module.sys.id}-javascript') JavaScript
+      if module.java
+        a.lesson-module-code__trigger(data-target='!{module.sys.id}-java') Java
+      if module.javaAndroid
+        a.lesson-module-code__trigger(data-target='!{module.sys.id}-android') Android
+      if module.php
+        a.lesson-module-code__trigger(data-target='!{module.sys.id}-php') PHP
+      if module.python
+        a.lesson-module-code__trigger(data-target='!{module.sys.id}-python') Python
+      if module.ruby
+        a.lesson-module-code__trigger(data-target='!{module.sys.id}-ruby') Ruby
+      if module.swift
+        a.lesson-module-code__trigger(data-target='!{module.sys.id}-swift') Swift
+
+    .lesson-module-code__code-area
+      if module.curl
+        .lesson-module-code__code(id='!{module.sys.id}-curl')
+          pre
+            code.shell= module.curl
+      if module.dotNet
+        .lesson-module-code__code(id='!{module.sys.id}-dotnet')
+          pre
+            code.csharp= module.dotNet
+      if module.javascript
+        .lesson-module-code__code.lesson-module-code__code--active(id='!{module.sys.id}-javascript')
+          pre
+            code.javascript= module.javascript
+      if module.java
+        .lesson-module-code__code(id='!{module.sys.id}-java')
+          pre
+            code.java= module.java
+      if module.javaAndroid
+        .lesson-module-code__code(id='!{module.sys.id}-android')
+          pre
+            code.java= module.javaAndroid
+      if module.php
+        .lesson-module-code__code(id='!{module.sys.id}-php')
+          pre
+            code.php= module.php
+      if module.python
+        .lesson-module-code__code(id='!{module.sys.id}-python')
+          pre
+            code.python= module.python
+      if module.ruby
+        .lesson-module-code__code(id='!{module.sys.id}-ruby')
+          pre
+            code.ruby= module.ruby
+      if module.swift
+        .lesson-module-code__code(id='!{module.sys.id}-swift')
+          pre
+            code.swift= module.swift
+

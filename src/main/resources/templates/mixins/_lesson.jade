@@ -1,0 +1,27 @@
+include _editorialFeatures
+include _lessonModuleCodeSnippet
+include _lessonModuleCopy
+include _lessonModuleImage
+
+mixin lesson(lesson, course, nextLesson)
+  .lesson
+    h1.lesson__title #{lesson.title}
+    +editorialFeatures(lesson)
+    .lesson__modules
+      each module in lesson.modules
+        if module.sys.contentType
+          case module.sys.contentType.sys.id
+            when 'lessonCodeSnippets'
+              +lessonModuleCodeSnippet(module)
+            when 'lessonCopy'
+              +lessonModuleCopy(module)
+            when 'lessonImage'
+              +lessonModuleImage(module)
+        else
+          h2 ️️#{lessonModuleErrorTitle}
+          p
+            span #{lessonModuleErrorBody}
+            strong  #{module.sys.id}
+    if nextLesson
+      a.lesson__cta.cta(href='/courses/!{course.slug}/lessons/!{nextLesson.slug}!{queryString}') #{nextLessonLabel}
+
