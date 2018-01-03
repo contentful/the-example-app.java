@@ -50,7 +50,7 @@ public class StaticContentSetterTests extends EnqueuedHttpResponseTests {
 
     final LandingPageParameter p = new LandingPageParameter();
     p.getBase().getMeta().setTitle("foo");
-    setter.applyBaseContent(p.getBase());
+    setter.applyContent(p.getBase());
 
     assertThat(p.getBase().getMeta().getContactUsLabel()).isEqualTo("Contact us");
     assertThat(p.getBase().getMeta().getCoursesCSSClass()).isEqualTo("");
@@ -109,7 +109,7 @@ public class StaticContentSetterTests extends EnqueuedHttpResponseTests {
     settings.setLocale("de-DE");
 
     final LandingPageParameter p = new LandingPageParameter();
-    setter.applyBaseContent(p.getBase());
+    setter.applyContent(p.getBase());
 
     assertThat(p.getBase().getMeta().getContactUsLabel()).isEqualTo("Kontakt");
     assertThat(p.getBase().getMeta().getCoursesCSSClass()).isEqualTo("");
@@ -127,7 +127,7 @@ public class StaticContentSetterTests extends EnqueuedHttpResponseTests {
     settings.setQueryString("");
 
     final CoursesParameter p = new CoursesParameter();
-    setter.applyBaseContent(p.getBase());
+    setter.applyContent(p.getBase());
 
     assertThat(p.getBase().getMeta().getCoursesLabel()).isEqualTo("Courses");
     assertThat(p.getBase().getMeta().getCoursesCSSClass()).isEqualTo("active");

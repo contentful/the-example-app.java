@@ -52,7 +52,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
 
     final CoursesParameter p = new CoursesParameter();
     p.getBase().getMeta().setTitle("title");
-    setter.applyBaseContent(p.getBase());
+    setter.applyContent(p.getBase());
 
     final List<BreadcrumbParameter.Breadcrumb> breadcrumbs = p.getBase().getBreadcrumb().getBreadcrumbs();
     assertThat(breadcrumbs).hasSize(2);
@@ -70,7 +70,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
 
     final CoursesParameter p = new CoursesParameter();
     p.getBase().getMeta().setTitle("title");
-    setter.applyBaseContent(p.getBase());
+    setter.applyContent(p.getBase());
 
     final List<BreadcrumbParameter.Breadcrumb> breadcrumbs = p.getBase().getBreadcrumb().getBreadcrumbs();
     assertThat(breadcrumbs).hasSize(3);
@@ -90,7 +90,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
 
     final CoursesParameter p = new CoursesParameter();
     p.getBase().getMeta().setTitle("Something Cheesy");
-    setter.applyBaseContent(p.getBase());
+    setter.applyContent(p.getBase());
 
     final List<BreadcrumbParameter.Breadcrumb> breadcrumbs = p.getBase().getBreadcrumb().getBreadcrumbs();
     assertThat(breadcrumbs).hasSize(4);
@@ -112,7 +112,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
 
     final CoursesParameter p = new CoursesParameter();
     p.getBase().getMeta().setTitle("Something Meaty");
-    setter.applyBaseContent(p.getBase());
+    setter.applyContent(p.getBase());
 
     final List<BreadcrumbParameter.Breadcrumb> breadcrumbs = p.getBase().getBreadcrumb().getBreadcrumbs();
     assertThat(breadcrumbs).hasSize(3);
@@ -132,7 +132,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
 
     final CoursesParameter p = new CoursesParameter();
     p.getBase().getMeta().setTitle("Beef is the best");
-    setter.applyBaseContent(p.getBase());
+    setter.applyContent(p.getBase());
 
     final List<BreadcrumbParameter.Breadcrumb> breadcrumbs = p.getBase().getBreadcrumb().getBreadcrumbs();
     assertThat(breadcrumbs).hasSize(5);
@@ -156,7 +156,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
 
     final CoursesParameter p = new CoursesParameter();
     p.getBase().getMeta().setTitle("Beef is the best");
-    setter.applyBaseContent(p.getBase());
+    setter.applyContent(p.getBase());
 
     final List<BreadcrumbParameter.Breadcrumb> breadcrumbs = p.getBase().getBreadcrumb().getBreadcrumbs();
     assertThat(breadcrumbs).hasSize(2);
@@ -174,7 +174,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
 
     final CoursesParameter p = new CoursesParameter();
     p.getBase().getMeta().setTitle("Beef is the best");
-    setter.applyBaseContent(p.getBase());
+    setter.applyContent(p.getBase());
 
     final List<BreadcrumbParameter.Breadcrumb> breadcrumbs = p.getBase().getBreadcrumb().getBreadcrumbs();
     assertThat(breadcrumbs).hasSize(2);
@@ -193,7 +193,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
 
     final CoursesParameter p = new CoursesParameter();
     p.getBase().getMeta().setTitle("Rindfleisch ist das Beste");
-    setter.applyBaseContent(p.getBase());
+    setter.applyContent(p.getBase());
 
     final List<BreadcrumbParameter.Breadcrumb> breadcrumbs = p.getBase().getBreadcrumb().getBreadcrumbs();
     assertThat(breadcrumbs).hasSize(2);

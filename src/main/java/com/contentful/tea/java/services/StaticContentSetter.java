@@ -39,12 +39,16 @@ public class StaticContentSetter {
   @SuppressWarnings("unused")
   private Settings settings;
 
+  public void applyContent(BaseParameter base) {
+    applyBaseContent(base);
+    updateLocales(base);
+  }
+
   public void applyBaseContent(BaseParameter base) {
     setStaticContent(base);
     updateBreadcrumbs(base);
     updateApis(base);
     updateTitle(base);
-    updateLocales(base);
   }
 
   private void setStaticContent(BaseParameter base) {
@@ -72,7 +76,7 @@ public class StaticContentSetter {
         .setModalIntro(t(Keys.modalIntro))
         .setModalSpaceIntro(t(Keys.modalSpaceIntro))
         .setModalSpaceLinkLabel(t(Keys.modalSpaceLinkLabel))
-        .setModalTitle(t(Keys.modalTitle))
+        .setModalTitle(t(Keys.modalTitleJava))
         .setPendingChangesLabel(t(Keys.pendingChangesLabel))
         .setSettingsLabel(t(Keys.settingsLabel))
         .setTwitterCard(t(Keys.metaTwitterCard))

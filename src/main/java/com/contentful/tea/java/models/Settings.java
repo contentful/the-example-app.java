@@ -119,6 +119,7 @@ public class Settings {
           .builder()
           .setSpace(getSpaceId())
           .setToken(getPreviewAccessToken())
+          .preview()
           .build();
     }
 

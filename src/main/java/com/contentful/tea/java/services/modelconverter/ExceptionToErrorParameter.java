@@ -1,5 +1,6 @@
 package com.contentful.tea.java.services.modelconverter;
 
+import com.contentful.java.cda.CDAHttpException;
 import com.contentful.tea.java.models.errors.ErrorParameter;
 import com.contentful.tea.java.services.StaticContentSetter;
 import com.contentful.tea.java.services.localization.Keys;
@@ -15,7 +16,7 @@ import java.io.IOException;
 import static org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace;
 
 @Component
-public class ExceptionToErrorParameter implements Converter<Exception, ErrorParameter> {
+public class ExceptionToErrorParameter implements Converter<Throwable, ErrorParameter> {
 
   @Autowired
   @SuppressWarnings("unused")
@@ -26,7 +27,7 @@ public class ExceptionToErrorParameter implements Converter<Exception, ErrorPara
   private LocalizedStringsProvider localizer;
 
   @Override
-  public ErrorParameter convert(Exception source) {
+  public ErrorParameter convert(Throwable source) {
     final ErrorParameter errorParameter = new ErrorParameter();
     staticContentSetter.applyBaseContent(errorParameter.getBase());
 
@@ -47,10 +48,16 @@ public class ExceptionToErrorParameter implements Converter<Exception, ErrorPara
         ;
   }
 
-  private int exceptionToStatusCode(Exception source) {
+  private int exceptionToStatusCode(Throwable source) {
     if (source instanceof FileNotFoundException) {
       return 404;
     }
+
+    if (source instanceof CDAHttpException) {
+      final CDAHttpException cdaException = (CDAHttpException) source;
+      return cdaException.responseCode();
+    }
+
     if (source instanceof IOException) {
       return 500;
     }

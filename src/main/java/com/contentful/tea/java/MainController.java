@@ -2,6 +2,7 @@ package com.contentful.tea.java;
 
 import com.contentful.java.cda.CDAClient;
 import com.contentful.java.cda.CDAEntry;
+import com.contentful.java.cda.CDAHttpException;
 import com.contentful.tea.java.html.JadeHtmlGenerator;
 import com.contentful.tea.java.models.Settings;
 import com.contentful.tea.java.models.errors.ErrorParameter;
@@ -15,6 +16,7 @@ import com.contentful.tea.java.services.url.UrlParameterParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -33,7 +35,7 @@ import static org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace;
 @ComponentScan
 @Controller
 @EnableAutoConfiguration
-public class MainController {
+public class MainController implements ErrorController {
   private static final String ERROR_PATH = "/error";
 
   public static void main(String[] args) {
@@ -85,7 +87,7 @@ public class MainController {
     final CDAEntry cdaLanding = client.fetch(CDAEntry.class).include(5).one("2uNOpLMJioKeoMq8W44uYc");
     final LandingPageParameter parameter = entryToLandingPage.convert(cdaLanding);
 
-    staticContentSetter.applyBaseContent(parameter.getBase());
+    staticContentSetter.applyContent(parameter.getBase());
 
     try {
       return htmlGenerator.generate("templates/landingPage.jade", parameter.toMap());
@@ -115,8 +117,9 @@ public class MainController {
   }
 
   @ExceptionHandler(Throwable.class)
+  @RequestMapping("/error")
   @ResponseBody
-  public String serverError(HttpServletRequest request, Exception serverException) {
+  public String serverError(HttpServletRequest request, Throwable serverException) {
     final ErrorParameter errorParameter = exceptionToError.convert(serverException);
 
     try {
@@ -129,5 +132,28 @@ public class MainController {
           getStackTrace(nestedException),
           getStackTrace(serverException));
     }
+  }
+
+  @ExceptionHandler(CDAHttpException.class)
+  @RequestMapping("/error/contentful")
+  @ResponseBody
+  public String contentfulError(HttpServletRequest request, CDAHttpException contentfulException) {
+    settings.setPath(request.getRequestURL().toString());
+    final ErrorParameter errorParameter = exceptionToError.convert(contentfulException);
+
+    try {
+      return htmlGenerator.generate("templates/error.jade", errorParameter.toMap());
+    } catch (Exception nestedException) {
+      return format(
+          "<h1>Nested exception thrown while handling a server exception</h1><br/>\n\n%s while %s<br/>\n\n<!--\n%s\n\nwhile\n\n%s\n-->",
+          nestedException,
+          contentfulException,
+          getStackTrace(nestedException),
+          getStackTrace(contentfulException));
+    }
+  }
+
+  @Override public String getErrorPath() {
+    return ERROR_PATH;
   }
 }

@@ -11,6 +11,8 @@ import java.util.Map;
 @Component
 public class UrlParameterParser {
 
+  public static final String NAME_API = "api";
+  public static final String NAME_LOCALE = "locale";
   public static final String NAME_DELIVERY_TOKEN = "CDA_ID";
 
   @Autowired
@@ -22,7 +24,16 @@ public class UrlParameterParser {
   public UrlParameterParser() {
     parsersByName = new HashMap<>();
 
-    // TODO: Add more parsers!
+    parsersByName.put(NAME_API, new ParameterParser() {
+      @Override public void parse(String value) {
+        settings.setApi(value);
+      }
+    });
+    parsersByName.put(NAME_LOCALE, new ParameterParser() {
+      @Override public void parse(String value) {
+        settings.setLocale(value);
+      }
+    });
     parsersByName.put(NAME_DELIVERY_TOKEN, new ParameterParser() {
       @Override public void parse(String value) {
         settings.setDeliveryAccessToken(value);
