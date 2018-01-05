@@ -8,10 +8,10 @@ import com.contentful.tea.java.models.Settings;
 import com.contentful.tea.java.models.errors.ErrorParameter;
 import com.contentful.tea.java.models.landing.LandingPageParameter;
 import com.contentful.tea.java.services.StaticContentSetter;
+import com.contentful.tea.java.services.http.SessionParser;
+import com.contentful.tea.java.services.http.UrlParameterParser;
 import com.contentful.tea.java.services.modelconverter.EntryToLandingPage;
 import com.contentful.tea.java.services.modelconverter.ExceptionToErrorParameter;
-import com.contentful.tea.java.services.url.CookieParser;
-import com.contentful.tea.java.services.url.UrlParameterParser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -19,13 +19,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,7 +44,7 @@ public class MainController implements ErrorController {
 
   @Autowired
   @SuppressWarnings("unused")
-  private CookieParser cookieParser;
+  private SessionParser sessionParser;
 
   @Autowired
   @SuppressWarnings("unused")
@@ -72,17 +68,12 @@ public class MainController implements ErrorController {
 
   @RequestMapping("/")
   @ResponseBody
-  public String home(
-      @CookieValue(name = "api", defaultValue = "") String api,
-      @CookieValue(name = "space_id", defaultValue = "") String spaceId,
-      @CookieValue(name = "delivery_token", defaultValue = "") String deliveryToken,
-      @CookieValue(name = "preview_token", defaultValue = "") String previewToken,
-      @RequestParam Map<String, String> urlParameter
-  ) {
-    settings.loadDefaults();
-    cookieParser.loadCookies(api, spaceId, deliveryToken, previewToken);
-    urlParameterParser.parseUrlParameter(urlParameter);
-    settings.setPath("/");
+  public String home(HttpServletRequest request) {
+    settings.reset().loadDefaults();
+    sessionParser.loadSession(request.getSession());
+    urlParameterParser.parseUrlParameter(request.getParameterMap());
+
+    settings.setPath(request.getServletPath());
 
     final CDAClient client = settings.getCurrentClient();
     final CDAEntry cdaLanding = client
@@ -99,7 +90,7 @@ public class MainController implements ErrorController {
     } catch (Throwable t) {
       throw new IllegalStateException("Cannot render landing page.", t);
     } finally {
-      cookieParser.saveCookies();
+      sessionParser.saveSession(request.getSession());
     }
   }
 
@@ -125,6 +116,8 @@ public class MainController implements ErrorController {
   @RequestMapping("/error")
   @ResponseBody
   public String serverError(HttpServletRequest request, Throwable serverException) {
+    serverException.printStackTrace(System.err);
+
     final ErrorParameter errorParameter = exceptionToError.convert(serverException);
 
     try {
@@ -143,6 +136,8 @@ public class MainController implements ErrorController {
   @RequestMapping("/error/contentful")
   @ResponseBody
   public String contentfulError(HttpServletRequest request, CDAHttpException contentfulException) {
+    contentfulException.printStackTrace(System.err);
+
     settings.setPath(request.getRequestURL().toString());
     final ErrorParameter errorParameter = exceptionToError.convert(contentfulException);
 

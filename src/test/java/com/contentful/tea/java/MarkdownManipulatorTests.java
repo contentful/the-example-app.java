@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MainController.class)
-public class MarkdownParserTests extends InjectTextBaseTests {
+public class MarkdownManipulatorTests extends InjectTextBaseTests {
 
   @Autowired
   @SuppressWarnings("unused")

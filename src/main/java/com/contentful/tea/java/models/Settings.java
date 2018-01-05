@@ -44,7 +44,6 @@ public class Settings {
   }
 
   public Settings loadDefaults() {
-
     Properties properties = new Properties();
 
     try {

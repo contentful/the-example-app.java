@@ -1,4 +1,4 @@
-package com.contentful.tea.java.services.url;
+package com.contentful.tea.java.services.http;
 
 import com.contentful.tea.java.MainController;
 import com.contentful.tea.java.models.Settings;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MainController.class)
-public class UrlParameterParserTest {
+public class UrlParserTest {
 
   @Autowired
   @SuppressWarnings("unused")
@@ -55,7 +55,7 @@ public class UrlParameterParserTest {
   public void tokenInUrlChangesTokenInSettings() {
     final String before = settings.getDeliveryAccessToken();
 
-    parser.parseUrlParameter(Collections.singletonMap(UrlParameterParser.NAME_DELIVERY_TOKEN, "cda_token"));
+    parser.parseUrlParameter(Collections.singletonMap(Constants.NAME_DELIVERY_TOKEN, "cda_token"));
 
     final String after = settings.getDeliveryAccessToken();
     assertThat(before).isNotEqualTo(after);
