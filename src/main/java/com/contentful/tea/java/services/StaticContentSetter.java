@@ -73,15 +73,18 @@ public class StaticContentSetter {
         .setImprintLabel(t(Keys.imprintLabel))
         .setLogoAlt(t(Keys.logoAlt))
         .setModalCTALabel(t(Keys.modalCTALabel))
-        .setModalIntro(t(Keys.modalIntro))
+        .setModalIntro(t(Keys.modalIntroJava))
         .setModalSpaceIntro(t(Keys.modalSpaceIntro))
         .setModalSpaceLinkLabel(t(Keys.modalSpaceLinkLabel))
         .setModalTitle(t(Keys.modalTitleJava))
+        .setModalPlatforms(t(Keys.modalPlatforms))
         .setPendingChangesLabel(t(Keys.pendingChangesLabel))
         .setSettingsLabel(t(Keys.settingsLabel))
         .setTwitterCard(t(Keys.metaTwitterCard))
         .setViewOnGitHub(t(Keys.viewOnGithub))
         .setWhatIsThisApp(t(Keys.whatIsThisApp))
+        .setComingSoonLabel(t(Keys.comingSoonLabel))
+        .setHostedLabel(t(Keys.hostedLabel))
     ;
   }
 
@@ -113,6 +116,10 @@ public class StaticContentSetter {
           .setUpperMenuCSSClass(settings.getPath().startsWith("/settings") ? "active" : "")
           .setCoursesCSSClass(settings.getPath().startsWith("/courses") ? "active" : "")
           .setHomeCSSClass(settings.getPath().equals("/") ? "active" : "");
+    } else {
+      base
+          .getMeta()
+          .setHomeCSSClass("active");
     }
   }
 
@@ -124,6 +131,7 @@ public class StaticContentSetter {
     final LocalesParameter localesParameter = base.getLocales();
     localesParameter
         .setLocaleQuestion(t(Keys.localeQuestion))
+        .setLocaleLabel(t(Keys.locale))
         .setCurrentLocaleCode(settings.getLocale());
 
     for (final CDALocale locale : locales) {

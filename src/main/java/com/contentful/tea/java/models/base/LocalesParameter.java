@@ -12,6 +12,7 @@ public class LocalesParameter extends MappableType {
   private String currentLocaleName;
   private List<Locale> locales = new ArrayList<>();
   private String localeQuestion;
+  private String localeLabel;
 
   public String getCurrentLocaleCode() {
     return currentLocaleCode;
@@ -54,6 +55,15 @@ public class LocalesParameter extends MappableType {
     return this;
   }
 
+  public String getLocaleLabel() {
+    return localeLabel;
+  }
+
+  public LocalesParameter setLocaleLabel(String localeLabel) {
+    this.localeLabel = localeLabel;
+    return this;
+  }
+
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof LocalesParameter)) return false;
@@ -61,6 +71,7 @@ public class LocalesParameter extends MappableType {
     return Objects.equals(getCurrentLocaleCode(), localesParameter1.getCurrentLocaleCode()) &&
         Objects.equals(getCurrentLocaleName(), localesParameter1.getCurrentLocaleName()) &&
         Objects.equals(getLocales(), localesParameter1.getLocales()) &&
+        Objects.equals(getLocaleLabel(), localesParameter1.getLocaleLabel()) &&
         Objects.equals(getLocaleQuestion(), localesParameter1.getLocaleQuestion());
   }
 
@@ -69,6 +80,7 @@ public class LocalesParameter extends MappableType {
         getCurrentLocaleCode(),
         getCurrentLocaleName(),
         getLocales(),
+        getLocaleLabel(),
         getLocaleQuestion());
   }
 
@@ -81,6 +93,7 @@ public class LocalesParameter extends MappableType {
         + "currentLocaleName = " + getCurrentLocaleName() + ", "
         + "localeQuestion = " + getLocaleQuestion() + ", "
         + "locales = " + getLocales() + " "
+        + "localeLabel = " + getLocaleLabel() + " "
         + "}";
   }
 }

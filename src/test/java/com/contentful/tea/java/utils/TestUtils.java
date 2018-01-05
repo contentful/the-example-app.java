@@ -2,14 +2,7 @@ package com.contentful.tea.java.utils;
 
 import com.contentful.tea.java.models.base.BaseParameter;
 import com.contentful.tea.java.models.base.Locale;
-import com.contentful.tea.java.models.mappable.MappableType;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static com.contentful.tea.java.utilities.Reflection.findMappableSuperFields;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestUtils {
@@ -47,6 +40,7 @@ public class TestUtils {
         .setModalSpaceIntro("TEST-setModalSpaceIntro")
         .setModalSpaceLinkLabel("TEST-setModalSpaceLinkLabel")
         .setModalTitle("TEST-setModalTitle")
+        .setModalPlatforms("TEST-setModalPlatforms")
         .setPendingChangesLabel("TEST-setPendingChangesLabel")
         .setQueryString("TEST-setQueryString")
         .setSettingsLabel("TEST-setSettingsLabel")
@@ -55,12 +49,15 @@ public class TestUtils {
         .setUpperMenuCSSClass("TEST-setUpperMenuCSSClass")
         .setViewOnGitHub("TEST-setViewOnGitHub")
         .setWhatIsThisApp("TEST-setWhatIsThisApp")
+        .setComingSoonLabel("TEST-comingSoonLabel")
+        .setHostedLabel("TEST-hostedLabel")
     ;
 
     base.getLocales()
         .setCurrentLocaleCode("TEST-setCurrentLocaleCode")
         .setCurrentLocaleName("TEST-setCurrentLocaleName")
         .setLocaleQuestion("TEST-setLocaleQuestion")
+        .setLocaleLabel("TEST-setLocaleLabel")
         .addLocale(
             new Locale()
                 .setCode("en-US")
@@ -74,38 +71,6 @@ public class TestUtils {
                 .setCssClass("active")
         );
     return base;
-  }
-
-  public static void assertAllFieldsAreNonNull(Object actual) throws IllegalAccessException {
-    assertThat(actual).isNotNull();
-
-    final Class<?> actualClass = actual.getClass();
-    List<Field> fields = new ArrayList<>(Arrays.asList(actualClass.getDeclaredFields()));
-    findMappableSuperFields(actualClass.getSuperclass(), fields);
-
-    for (final Field field : fields) {
-      if (!field.isSynthetic()) {
-        field.setAccessible(true);
-        final Object value = field.get(actual);
-        assertThat(value)
-            .withFailMessage("%s.%s == null", actualClass.getSimpleName(), field.getName())
-            .isNotNull();
-
-        if (value instanceof MappableType) {
-          assertAllFieldsAreNonNull(value);
-        } else if (value instanceof MappableType[]) {
-          for (final MappableType mappable : (MappableType[]) value) {
-            assertAllFieldsAreNonNull(mappable);
-          }
-        } else if (value instanceof List) {
-          for (final Object o : (List) value) {
-            if (o instanceof MappableType) {
-              assertAllFieldsAreNonNull(o);
-            }
-          }
-        }
-      }
-    }
   }
 
   public static void assertBaseParameterInHtml(String generatedHtml) {
@@ -148,6 +113,7 @@ public class TestUtils {
         .contains("TEST-setModalSpaceIntro")
         .contains("TEST-setModalSpaceLinkLabel")
         .contains("TEST-setModalTitle")
+        .contains("TEST-setModalPlatforms")
         .contains("TEST-setQueryString")
         .contains("TEST-setSettingsLabel")
         .contains("TEST-setTitle")
@@ -155,6 +121,8 @@ public class TestUtils {
         .contains("TEST-setUpperMenuCSSClass")
         .contains("TEST-setViewOnGitHub")
         .contains("TEST-setWhatIsThisApp")
+        .contains("TEST-comingSoonLabel")
+        .contains("TEST-hostedLabel")
     ;
   }
 }

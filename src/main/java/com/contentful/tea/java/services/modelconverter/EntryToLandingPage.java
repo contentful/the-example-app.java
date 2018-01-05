@@ -1,11 +1,13 @@
 package com.contentful.tea.java.services.modelconverter;
 
+import com.contentful.java.cda.CDAAsset;
 import com.contentful.java.cda.CDAEntry;
 import com.contentful.tea.java.models.landing.LandingPageParameter;
 import com.contentful.tea.java.models.landing.modules.BaseModule;
 import com.contentful.tea.java.models.landing.modules.CopyModule;
 import com.contentful.tea.java.models.landing.modules.HeroImageModule;
 import com.contentful.tea.java.models.landing.modules.HighlightedCourseModule;
+import com.contentful.tea.java.services.localization.Keys;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,7 +27,7 @@ public class EntryToLandingPage extends ContentfulModelToMappableTypeConverter<C
     entry.setLocale(settings.getLocale());
 
     final LandingPageParameter parameter = new LandingPageParameter();
-    parameter.getBase().getMeta().setTitle(entry.getField("title"));
+    parameter.getBase().getMeta().setTitle(t(Keys.homeLabel) + " — " + t(Keys.defaultTitle));
 
     addModules(parameter, entry);
 
@@ -54,16 +56,21 @@ public class EntryToLandingPage extends ContentfulModelToMappableTypeConverter<C
       case "layoutHighlightedCourse":
         return new HighlightedCourseModule()
             .setCourse(courseConverter.convert(module.getField("course")))
-            .setViewCourseLabel(module.getField("title"))
+            .setViewCourseLabel(t(Keys.viewCourseLabel))
             ;
       case "layoutHeroImage":
         return new HeroImageModule()
             .setHeadline(module.getField("headline"))
             .setBackgroundImageTitle(module.getField("backgroundImageTitle"))
-            .setBackgroundImageUrl(module.getField("backgroundImageUrl"))
+            .setBackgroundImageUrl(backgroundImageUrlFromModule(module))
             ;
       default:
         return null;
     }
+  }
+
+  private String backgroundImageUrlFromModule(CDAEntry module) {
+    final CDAAsset asset = module.getField("backgroundImage");
+    return asset.url();
   }
 }

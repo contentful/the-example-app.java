@@ -66,10 +66,11 @@ public class StaticContentSetterTests extends EnqueuedHttpResponseTests {
     assertThat(p.getBase().getMeta().getImprintLabel()).isEqualTo("Imprint");
     assertThat(p.getBase().getMeta().getLogoAlt()).isEqualTo("Contentful Example App");
     assertThat(p.getBase().getMeta().getModalCTALabel()).isEqualTo("Ok, got it.");
-    assertThat(p.getBase().getMeta().getModalIntro()).isEqualTo("This is \"The Node.js Example App\". While building your own apps with Contentful, you can reference this app's code, found on");
+    assertThat(p.getBase().getMeta().getModalIntro()).isEqualTo("This is \"The Java Example App\". While building your own apps with Contentful, you can reference this app's code, found on");
     assertThat(p.getBase().getMeta().getModalSpaceIntro()).isEqualTo("You can also edit the content in the app by cloning the Contentful space to your own Contentful account by following the instructions");
     assertThat(p.getBase().getMeta().getModalSpaceLinkLabel()).isEqualTo("here");
-    assertThat(p.getBase().getMeta().getModalTitle()).isEqualTo("A reference for Node.js developers using Contentful");
+    assertThat(p.getBase().getMeta().getModalTitle()).isEqualTo("A reference for Java developers using Contentful");
+    assertThat(p.getBase().getMeta().getModalPlatforms()).isEqualTo("This app is also available in the following platforms and languages:");
     assertThat(p.getBase().getMeta().getPendingChangesLabel()).isEqualTo("pending changes");
     assertThat(p.getBase().getMeta().getQueryString()).isEqualTo("");
     assertThat(p.getBase().getMeta().getSettingsLabel()).isEqualTo("Settings");

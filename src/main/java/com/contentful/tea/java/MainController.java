@@ -82,9 +82,14 @@ public class MainController implements ErrorController {
     settings.loadDefaults();
     cookieParser.loadCookies(api, spaceId, deliveryToken, previewToken);
     urlParameterParser.parseUrlParameter(urlParameter);
+    settings.setPath("/");
 
     final CDAClient client = settings.getCurrentClient();
-    final CDAEntry cdaLanding = client.fetch(CDAEntry.class).include(5).one("2uNOpLMJioKeoMq8W44uYc");
+    final CDAEntry cdaLanding = client
+        .fetch(CDAEntry.class)
+        .include(5)
+        .where("locale", settings.getLocale())
+        .one("2uNOpLMJioKeoMq8W44uYc");
     final LandingPageParameter parameter = entryToLandingPage.convert(cdaLanding);
 
     staticContentSetter.applyContent(parameter.getBase());

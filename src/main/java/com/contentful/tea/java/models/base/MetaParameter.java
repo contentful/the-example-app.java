@@ -24,6 +24,7 @@ public class MetaParameter extends MappableType {
   private String modalSpaceIntro;
   private String modalSpaceLinkLabel;
   private String modalTitle;
+  private String modalPlatforms;
   private String queryString;
   private String settingsLabel;
   private String title;
@@ -32,7 +33,8 @@ public class MetaParameter extends MappableType {
   private String whatIsThisApp;
   private String draftLabel;
   private String pendingChangesLabel;
-
+  private String hostedLabel;
+  private String comingSoonLabel;
 
   public String getContactUsLabel() {
     return contactUsLabel;
@@ -205,6 +207,15 @@ public class MetaParameter extends MappableType {
     return this;
   }
 
+  public String getModalPlatforms() {
+    return modalPlatforms;
+  }
+
+  public MetaParameter setModalPlatforms(String modalPlatforms) {
+    this.modalPlatforms = modalPlatforms;
+    return this;
+  }
+
   public String getQueryString() {
     return queryString;
   }
@@ -277,6 +288,23 @@ public class MetaParameter extends MappableType {
     return this;
   }
 
+  public String getHostedLabel() {
+    return hostedLabel;
+  }
+
+  public MetaParameter setHostedLabel(String hostedLabel) {
+    this.hostedLabel = hostedLabel;
+    return this;
+  }
+
+  public String getComingSoonLabel() {
+    return comingSoonLabel;
+  }
+
+  public MetaParameter setComingSoonLabel(String comingSoonLabel) {
+    this.comingSoonLabel = comingSoonLabel;
+    return this;
+  }
 
   @Override public boolean equals(Object o) {
     if (this == o) return true;
@@ -301,6 +329,7 @@ public class MetaParameter extends MappableType {
         Objects.equals(getModalSpaceIntro(), metaParameter.getModalSpaceIntro()) &&
         Objects.equals(getModalSpaceLinkLabel(), metaParameter.getModalSpaceLinkLabel()) &&
         Objects.equals(getModalTitle(), metaParameter.getModalTitle()) &&
+        Objects.equals(getModalPlatforms(), metaParameter.getModalPlatforms()) &&
         Objects.equals(getQueryString(), metaParameter.getQueryString()) &&
         Objects.equals(getSettingsLabel(), metaParameter.getSettingsLabel()) &&
         Objects.equals(getTitle(), metaParameter.getTitle()) &&
@@ -308,7 +337,8 @@ public class MetaParameter extends MappableType {
         Objects.equals(getViewOnGitHub(), metaParameter.getViewOnGitHub()) &&
         Objects.equals(getDraftLabel(), metaParameter.getDraftLabel()) &&
         Objects.equals(getPendingChangesLabel(), metaParameter.getPendingChangesLabel()) &&
-        Objects.equals(getViewOnGitHub(), metaParameter.getViewOnGitHub()) &&
+        Objects.equals(getHostedLabel(), metaParameter.getHostedLabel()) &&
+        Objects.equals(getComingSoonLabel(), metaParameter.getComingSoonLabel()) &&
         Objects.equals(getWhatIsThisApp(), metaParameter.getWhatIsThisApp());
   }
 
@@ -332,6 +362,7 @@ public class MetaParameter extends MappableType {
         getModalSpaceIntro(),
         getModalSpaceLinkLabel(),
         getModalTitle(),
+        getModalPlatforms(),
         getQueryString(),
         getSettingsLabel(),
         getTitle(),
@@ -339,6 +370,8 @@ public class MetaParameter extends MappableType {
         getViewOnGitHub(),
         getDraftLabel(),
         getPendingChangesLabel(),
+        getHostedLabel(),
+        getComingSoonLabel(),
         getWhatIsThisApp());
   }
 
@@ -366,11 +399,14 @@ public class MetaParameter extends MappableType {
         + "modalSpaceIntro = " + getModalSpaceIntro() + ", "
         + "modalSpaceLinkLabel = " + getModalSpaceLinkLabel() + ", "
         + "modalTitle = " + getModalTitle() + ", "
+        + "modalPlatforms = " + getModalPlatforms() + ", "
         + "queryString = " + getQueryString() + ", "
         + "settingsLabel = " + getSettingsLabel() + ", "
         + "title = " + getTitle() + ", "
         + "upperMenuCSSClass = " + getUpperMenuCSSClass() + ", "
         + "viewOnGitHub = " + getViewOnGitHub() + ", "
+        + "commingSoonLabel = " + getComingSoonLabel() + ", "
+        + "hostedLabel = " + getHostedLabel() + ", "
         + "whatIsThisApp = " + getWhatIsThisApp() + " "
         + "}";
   }

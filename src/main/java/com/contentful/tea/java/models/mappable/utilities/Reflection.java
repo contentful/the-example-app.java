@@ -1,4 +1,4 @@
-package com.contentful.tea.java.utilities;
+package com.contentful.tea.java.models.mappable.utilities;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

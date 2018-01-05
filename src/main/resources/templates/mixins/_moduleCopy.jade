@@ -1,6 +1,6 @@
 mixin moduleCopy(module)
-  .module
-    div(class='module-copy!{module.style}')
+    div(class='module module-copy!{module.style}')
+     div(class='module-copy__wrapper#{module.style}')
       div(class='module-copy__first!{module.style}')
         if module.headline
           h1(class='module-copy__headline!{module.style}') #{module.headline}

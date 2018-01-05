@@ -66,7 +66,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
 
     final LandingPageParameter p = landingPageConverter.convert(homeEntry);
 
-    assertThat(p.getBase().getMeta().getTitle()).isEqualTo("Home");
+    assertThat(p.getBase().getMeta().getTitle()).isEqualTo("Home — The Example App");
 
     assertThat(p.getModules()).isNotNull().doesNotContainNull().hasSize(4);
 
@@ -89,7 +89,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
     assertThat(nonEmphasized.getHeadline()).isEqualTo("Not emphasized, but pending");
 
     final HighlightedCourseModule highlightedCourse = (HighlightedCourseModule) p.getModules().get(0);
-    assertThat(highlightedCourse.getViewCourseLabel()).isEqualTo("Home > Highlighted Course");
+    assertThat(highlightedCourse.getViewCourseLabel()).isEqualTo("view course");
   }
 
   @Test

@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.contentful.tea.java.utilities.Reflection.findMappableSuperFields;
+import static com.contentful.tea.java.models.mappable.utilities.Reflection.findMappableSuperFields;
 
 public class MappableType {
 
