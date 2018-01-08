@@ -56,7 +56,6 @@ public class EntryToLandingPage extends ContentfulModelToMappableTypeConverter<C
       case "layoutHighlightedCourse":
         return new HighlightedCourseModule()
             .setCourse(courseConverter.convert(module.getField("course")))
-            .setViewCourseLabel(t(Keys.viewCourseLabel))
             ;
       case "layoutHeroImage":
         return new HeroImageModule()

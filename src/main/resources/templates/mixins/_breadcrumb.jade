@@ -1,7 +1,7 @@
 mixin breadcrumb
-  if breadcrumb
+  if base.breadcrumb
     nav.breadcrumb
       ul
-        each item in breadcrumb
+        each breadcrumb in base.breadcrumb.breadcrumbs
           li
-            a(href='!{item.url}!{queryString}') #{item.label}
+            a(href='!{breadcrumb.url}!{queryString}') #{breadcrumb.label}

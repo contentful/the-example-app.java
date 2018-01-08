@@ -21,6 +21,8 @@ public class TestUtils {
     ;
 
     base.getMeta()
+        .setAllCoursesLabel("TEST-setAllCoursesLabel")
+        .setAllCoursesCssClass("TEST-setAllCoursesCSSClass")
         .setCategoriesLabel("TEST-setCategoriesLabel")
         .setContactUsLabel("TEST-setContactUsLabel")
         .setCoursesCSSClass("TEST-setCoursesCSSClass")
@@ -51,6 +53,7 @@ public class TestUtils {
         .setWhatIsThisApp("TEST-setWhatIsThisApp")
         .setComingSoonLabel("TEST-comingSoonLabel")
         .setHostedLabel("TEST-hostedLabel")
+        .setViewCourseLabel("TEST-viewCourseLabel")
     ;
 
     base.getLocales()

@@ -11,7 +11,6 @@ public class HighlightedCourseModule extends BaseModule {
   }
 
   private Course course;
-  private String viewCourseLabel;
 
   public Course getCourse() {
     return course;
@@ -22,26 +21,16 @@ public class HighlightedCourseModule extends BaseModule {
     return this;
   }
 
-  public String getViewCourseLabel() {
-    return viewCourseLabel;
-  }
-
-  public HighlightedCourseModule setViewCourseLabel(String viewCourseLabel) {
-    this.viewCourseLabel = viewCourseLabel;
-    return this;
-  }
-
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof HighlightedCourseModule)) return false;
     final HighlightedCourseModule that = (HighlightedCourseModule) o;
-    return Objects.equals(getCourse(), that.getCourse()) &&
-        Objects.equals(getViewCourseLabel(), that.getViewCourseLabel());
+    return Objects.equals(getCourse(), that.getCourse());
   }
 
   @Override public int hashCode() {
 
-    return Objects.hash(getCourse(), getViewCourseLabel());
+    return Objects.hash(getCourse());
   }
 
   /**
@@ -49,8 +38,7 @@ public class HighlightedCourseModule extends BaseModule {
    */
   @Override public String toString() {
     return "ModuleHighlightedCourse { " + super.toString() + " "
-        + "course = " + getCourse() + ", "
-        + "viewCourseLabel = " + getViewCourseLabel() + " "
+        + "course = " + getCourse() + " "
         + "}";
   }
 }

@@ -55,7 +55,7 @@ public class UrlParserTest {
   public void tokenInUrlChangesTokenInSettings() {
     final String before = settings.getDeliveryAccessToken();
 
-    parser.parseUrlParameter(Collections.singletonMap(Constants.NAME_DELIVERY_TOKEN, "cda_token"));
+    parser.parseUrlParameter(Collections.singletonMap(Constants.NAME_DELIVERY_TOKEN, new String[]{"cda_token"}));
 
     final String after = settings.getDeliveryAccessToken();
     assertThat(before).isNotEqualTo(after);

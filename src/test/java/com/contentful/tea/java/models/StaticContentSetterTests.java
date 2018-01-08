@@ -88,7 +88,7 @@ public class StaticContentSetterTests extends EnqueuedHttpResponseTests {
     assertThat(p.getBase().getApi().getContentPreviewApiLabel()).isEqualTo("Content Preview API");
     assertThat(p.getBase().getApi().getCpaButtonCSSClass()).isEqualTo("");
     assertThat(p.getBase().getApi().getCurrentApiId()).isEqualTo("cda");
-    assertThat(p.getBase().getApi().getCurrentApiLabel()).isEqualTo("Content Delivery API access token");
+    assertThat(p.getBase().getApi().getCurrentApiLabel()).isEqualTo("Content Delivery API");
 
     assertThat(p.getBase().getLocales().getCurrentLocaleCode()).isEqualTo("en-US");
     assertThat(p.getBase().getLocales().getCurrentLocaleName()).isEqualTo("U.S. English");

@@ -64,6 +64,7 @@ public class StaticContentSetter {
     ;
 
     base.getMeta()
+        .setAllCoursesLabel(t(Keys.allCoursesLabel))
         .setCategoriesLabel(t(Keys.categoriesLabel))
         .setContactUsLabel(t(Keys.contactUsLabel))
         .setCoursesLabel(t(Keys.coursesLabel))
@@ -88,6 +89,7 @@ public class StaticContentSetter {
         .setWhatIsThisApp(t(Keys.whatIsThisApp))
         .setComingSoonLabel(t(Keys.comingSoonLabel))
         .setHostedLabel(t(Keys.hostedLabel))
+        .setViewCourseLabel(t(Keys.viewCourseLabel));
     ;
   }
 

@@ -14,6 +14,8 @@ public class CoursesParameter extends MappableType {
   private List<Category> categories = new ArrayList<>();
   private List<Course> courses = new ArrayList<>();
 
+  private String title;
+
   public BaseParameter getBase() {
     return base;
   }
@@ -51,17 +53,27 @@ public class CoursesParameter extends MappableType {
     return this;
   }
 
+  public String getTitle() {
+    return title;
+  }
+
+  public CoursesParameter setTitle(String title) {
+    this.title = title;
+    return this;
+  }
+
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof CoursesParameter)) return false;
     final CoursesParameter that = (CoursesParameter) o;
     return Objects.equals(getBase(), that.getBase()) &&
         Objects.equals(getCourses(), that.getCourses()) &&
+        Objects.equals(getTitle(), that.getTitle()) &&
         Objects.equals(getCategories(), that.getCategories());
   }
 
   @Override public int hashCode() {
-    return Objects.hash(getBase(), getCourses(), getCategories());
+    return Objects.hash(getBase(), getCourses(), getCategories(), getTitle());
   }
 
   /**
@@ -72,6 +84,7 @@ public class CoursesParameter extends MappableType {
         + "base = " + getBase() + ", "
         + "courses = " + getCourses() + ", "
         + "categories = " + getCategories() + " "
+        + "title = " + getTitle() + " "
         + "}";
   }
 }

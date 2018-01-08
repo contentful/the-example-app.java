@@ -12,4 +12,4 @@ mixin moduleHighlightedCourse(module)
         .module-highlighted-course__description-wrapper
           p !{module.course.shortDescription}
         .module-highlighted-course__link-wrapper
-          a.module-highlighted-course__link(href='/courses/!{module.course.slug}!{queryString}') #{module.viewCourseLabel}
+          a.module-highlighted-course__link(href='/courses/!{module.course.slug}!{queryString}') #{base.meta.viewCourseLabel}

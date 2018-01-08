@@ -19,22 +19,67 @@ import java.util.Map;
 import static com.contentful.java.cda.image.ImageOption.http;
 
 @Component
-public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<CDAArray, CoursesParameter> {
+public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<ArrayToCourses.ArrayAndSelectedCategory, CoursesParameter> {
+
+  public static class ArrayAndSelectedCategory {
+    private CDAArray array;
+    private String categorySlug;
+    private String categoryName;
+
+    public CDAArray getArray() {
+      return array;
+    }
+
+    public ArrayAndSelectedCategory setArray(CDAArray array) {
+      this.array = array;
+      return this;
+    }
+
+    public String getCategorySlug() {
+      return categorySlug;
+    }
+
+    public ArrayAndSelectedCategory setCategorySlug(String categorySlug) {
+      this.categorySlug = categorySlug;
+      return this;
+    }
+
+    public String getCategoryName() {
+      return categoryName;
+    }
+
+    public ArrayAndSelectedCategory setCategoryName(String categoryName) {
+      this.categoryName = categoryName;
+      return this;
+    }
+  }
 
   @Override
-  public CoursesParameter convert(CDAArray courses) {
+  public CoursesParameter convert(ArrayAndSelectedCategory compound) {
     final CoursesParameter parameter = new CoursesParameter();
-    parameter.getBase().getMeta().setTitle(t(Keys.allCoursesLabel));
+    final String categorySlug = compound.getCategorySlug() == null ? "" : compound.getCategorySlug();
+    final String categoryName = compound.getCategoryName() == null ? "" : compound.getCategoryName();
+    final String allCssClass = categorySlug.isEmpty() ? "active" : "";
+    final String title = createTitle(categoryName, compound.array.total());
+    parameter.getBase().getMeta().setTitle(title);
 
     parameter
-        .setCategories(createCategories(courses))
-        .setCourses(createCourses(courses))
+        .setCategories(createCategories(compound.array, categorySlug))
+        .setCourses(createCourses(compound.array))
+        .setTitle(title)
+        .getBase()
+        .getMeta()
+        .setAllCoursesCssClass(allCssClass)
     ;
 
     return parameter;
   }
 
-  private List<Category> createCategories(CDAArray courses) {
+  private String createTitle(String categoryName, int total) {
+    return String.format("%s (%d)", categoryName.isEmpty() ? t(Keys.allCoursesLabel) : categoryName, total);
+  }
+
+  private List<Category> createCategories(CDAArray courses, String selectedCategory) {
     final Map<String, Category> categories = new HashMap<>();
 
     for (final CDAResource resource : courses.items()) {
@@ -48,12 +93,14 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<CDAAr
           final String categoryLocale = category.locale();
           category.setLocale(settings.getLocale());
 
-          if (!categories.containsKey((String) category.getField("slug"))) {
+          final String slug = category.getField("slug");
+          if (!categories.containsKey((String) slug)) {
             categories.put(
-                category.getField("slug"),
+                slug,
                 new Category()
-                    .setSlug(category.getField("slug"))
+                    .setSlug(slug)
                     .setTitle(category.getField("title"))
+                    .setCssClass(selectedCategory.equals(slug) ? "active" : "")
             );
           }
 

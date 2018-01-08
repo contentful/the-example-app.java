@@ -1,8 +1,9 @@
 package com.contentful.tea.java;
 
-import com.contentful.tea.java.models.mappable.MappableType;
 import com.contentful.tea.java.models.base.BaseParameter;
+import com.contentful.tea.java.models.courses.Course;
 import com.contentful.tea.java.models.landing.modules.HighlightedCourseModule;
+import com.contentful.tea.java.models.mappable.MappableType;
 
 import org.junit.Test;
 
@@ -116,15 +117,5 @@ public class MappableTypeTests {
     final Map<String, Object> map = base.toMap();
     assertThat(map).containsKeys("api", "locales", "meta");
     assertThat(((Map) map.get("meta")).get("title")).isEqualTo("foo");
-  }
-
-  @Test
-  public void inheritingMappableTypesTest() {
-    assertThat(
-        new HighlightedCourseModule().setViewCourseLabel("label").toMap()
-    ).contains(
-        entry("type", "highlightedCourse"),
-        entry("viewCourseLabel", "label")
-    );
   }
 }

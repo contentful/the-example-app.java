@@ -90,7 +90,6 @@ public class JadeTemplateTests {
     parameter.setBase(createBaseParameter());
 
     parameter.addModule(new HighlightedCourseModule()
-        .setViewCourseLabel("TEST-setViewCourseLabel")
         .setCourse(
             new Course()
                 .setTitle("TEST-Course-Title")
@@ -118,7 +117,6 @@ public class JadeTemplateTests {
         .doesNotContain("\uD83D\uDE31")
         .contains("TEST-My_short_description")
         .contains("TEST-Course-Title")
-        .contains("TEST-setViewCourseLabel")
         .contains("TEST-Course-Title")
         .contains("TEST-Courses-Slug")
         .contains("TEST-ImageUrl")
@@ -193,6 +191,7 @@ public class JadeTemplateTests {
         .doesNotContain("\uD83D\uDE31")
         .contains("TEST-Courses-Category-Slug")
         .contains("TEST-Courses-Category-Title")
+        .contains("TEST-setAllCoursesCSSClass")
         .contains("TEST-Category-Slug")
         .contains("TEST-Category-Title")
         .contains("Test-Course-Short-Description")
@@ -222,6 +221,7 @@ public class JadeTemplateTests {
                     new Category()
                         .setTitle("TEST-category-title")
                         .setSlug("TEST-category-slug")
+                        .setCssClass("TEST-category-slug")
                 )
                 .addLesson(
                     new Lesson()

@@ -14,10 +14,10 @@ block content
         .sidebar-menu
           ul.sidebar-menu__list
             li.sidebar-menu__item
-              a.sidebar-menu__link(href='/courses!{queryString}' class='!{allCoursesCSSClass}') #{base.meta.allCoursesLabel}
+              a(href='/courses!{queryString}' class='sidebar-menu__link !{base.meta.allCoursesCssClass}') #{base.meta.allCoursesLabel}
             each category in categories
               li.sidebar-menu__item
-                a.sidebar-menu__link(href='/courses/categories/!{category.slug}!{queryString}' class='!{category.cssClass}') #{category.title}
+                a(href='/courses/categories/!{category.slug}!{queryString}' class='sidebar-menu__link !{category.cssClass}') #{category.title}
     section.layout-sidebar__content
       .courses
         h1= title

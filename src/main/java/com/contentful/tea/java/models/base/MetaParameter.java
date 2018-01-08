@@ -5,36 +5,57 @@ import com.contentful.tea.java.models.mappable.MappableType;
 import java.util.Objects;
 
 public class MetaParameter extends MappableType {
+  private String allCoursesCssClass;
+  private String allCoursesLabel;
+  private String categoriesLabel;
+  private String comingSoonLabel;
   private String contactUsLabel;
   private String coursesCSSClass;
-  private String categoriesLabel;
   private String coursesLabel;
   private String currentPath;
+  private String description;
+  private String draftLabel;
   private String footerDisclaimer;
   private String homeCSSClass;
   private String homeLabel;
-  private String imprintLabel;
-  private String logoAlt;
-  private String description;
+  private String hostedLabel;
   private String imageAlt;
   private String imageDescription;
-  private String twitterCard;
+  private String imprintLabel;
+  private String logoAlt;
   private String modalCTALabel;
   private String modalIntro;
+  private String modalPlatforms;
   private String modalSpaceIntro;
   private String modalSpaceLinkLabel;
   private String modalTitle;
-  private String modalPlatforms;
+  private String pendingChangesLabel;
   private String queryString;
   private String settingsLabel;
   private String title;
+  private String viewCourseLabel;
+  private String twitterCard;
   private String upperMenuCSSClass;
   private String viewOnGitHub;
   private String whatIsThisApp;
-  private String draftLabel;
-  private String pendingChangesLabel;
-  private String hostedLabel;
-  private String comingSoonLabel;
+
+  public String getAllCoursesLabel() {
+    return allCoursesLabel;
+  }
+
+  public MetaParameter setAllCoursesLabel(String allCoursesLabel) {
+    this.allCoursesLabel = allCoursesLabel;
+    return this;
+  }
+
+  public String getAllCoursesCssClass() {
+    return allCoursesCssClass;
+  }
+
+  public MetaParameter setAllCoursesCssClass(String allCoursesCssClass) {
+    this.allCoursesCssClass = allCoursesCssClass;
+    return this;
+  }
 
   public String getContactUsLabel() {
     return contactUsLabel;
@@ -306,11 +327,21 @@ public class MetaParameter extends MappableType {
     return this;
   }
 
+  public String getViewCourseLabel() {
+    return viewCourseLabel;
+  }
+
+  public void setViewCourseLabel(String viewCourseLabel) {
+    this.viewCourseLabel = viewCourseLabel;
+  }
+
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof MetaParameter)) return false;
     final MetaParameter metaParameter = (MetaParameter) o;
-    return Objects.equals(getContactUsLabel(), metaParameter.getContactUsLabel()) &&
+    return Objects.equals(getAllCoursesLabel(), metaParameter.getAllCoursesLabel()) &&
+        Objects.equals(getAllCoursesCssClass(), metaParameter.getAllCoursesCssClass()) &&
+        Objects.equals(getContactUsLabel(), metaParameter.getContactUsLabel()) &&
         Objects.equals(getCategoriesLabel(), metaParameter.getCategoriesLabel()) &&
         Objects.equals(getCoursesCSSClass(), metaParameter.getCoursesCSSClass()) &&
         Objects.equals(getCoursesLabel(), metaParameter.getCoursesLabel()) &&
@@ -339,11 +370,14 @@ public class MetaParameter extends MappableType {
         Objects.equals(getPendingChangesLabel(), metaParameter.getPendingChangesLabel()) &&
         Objects.equals(getHostedLabel(), metaParameter.getHostedLabel()) &&
         Objects.equals(getComingSoonLabel(), metaParameter.getComingSoonLabel()) &&
+        Objects.equals(getViewCourseLabel(), metaParameter.getViewCourseLabel()) &&
         Objects.equals(getWhatIsThisApp(), metaParameter.getWhatIsThisApp());
   }
 
   @Override public int hashCode() {
     return Objects.hash(
+        getAllCoursesLabel(),
+        getAllCoursesCssClass(),
         getContactUsLabel(),
         getCategoriesLabel(),
         getCoursesCSSClass(),
@@ -371,6 +405,7 @@ public class MetaParameter extends MappableType {
         getDraftLabel(),
         getPendingChangesLabel(),
         getHostedLabel(),
+        getViewCourseLabel(),
         getComingSoonLabel(),
         getWhatIsThisApp());
   }
@@ -380,6 +415,7 @@ public class MetaParameter extends MappableType {
    */
   @Override public String toString() {
     return "Meta { "
+        + "allCoursesLabel = " + getAllCoursesLabel() + ", "
         + "contactUsLabel = " + getContactUsLabel() + ", "
         + "categoryLabel = " + getCategoriesLabel() + ", "
         + "coursesCSSClass = " + getCoursesCSSClass() + ", "
@@ -405,6 +441,7 @@ public class MetaParameter extends MappableType {
         + "title = " + getTitle() + ", "
         + "upperMenuCSSClass = " + getUpperMenuCSSClass() + ", "
         + "viewOnGitHub = " + getViewOnGitHub() + ", "
+        + "viewCourseLabel = " + getViewCourseLabel() + ", "
         + "commingSoonLabel = " + getComingSoonLabel() + ", "
         + "hostedLabel = " + getHostedLabel() + ", "
         + "whatIsThisApp = " + getWhatIsThisApp() + " "

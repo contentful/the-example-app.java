@@ -7,6 +7,16 @@ import java.util.Objects;
 public class Category extends MappableType {
   private String slug;
   private String title;
+  private String cssClass;
+
+  public String getCssClass() {
+    return cssClass;
+  }
+
+  public Category setCssClass(String cssClass) {
+    this.cssClass = cssClass;
+    return this;
+  }
 
   public String getSlug() {
     return slug;
@@ -30,13 +40,13 @@ public class Category extends MappableType {
     if (this == o) return true;
     if (!(o instanceof Category)) return false;
     final Category category = (Category) o;
-    return Objects.equals(getSlug(), category.getSlug()) &&
+    return Objects.equals(getCssClass(), category.getCssClass()) &&
+        Objects.equals(getSlug(), category.getSlug()) &&
         Objects.equals(getTitle(), category.getTitle());
   }
 
   @Override public int hashCode() {
-
-    return Objects.hash(getSlug(), getTitle());
+    return Objects.hash(getCssClass(), getSlug(), getTitle());
   }
 
   /**
@@ -44,6 +54,7 @@ public class Category extends MappableType {
    */
   @Override public String toString() {
     return "Category { " + super.toString() + " "
+        + "cssClass = " + getCssClass() + ", "
         + "slug = " + getSlug() + ", "
         + "title = " + getTitle() + " "
         + "}";

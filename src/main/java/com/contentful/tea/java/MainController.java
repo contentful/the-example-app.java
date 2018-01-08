@@ -13,6 +13,7 @@ import com.contentful.tea.java.services.StaticContentSetter;
 import com.contentful.tea.java.services.http.SessionParser;
 import com.contentful.tea.java.services.http.UrlParameterParser;
 import com.contentful.tea.java.services.modelconverter.ArrayToCourses;
+import com.contentful.tea.java.services.modelconverter.ArrayToCourses.ArrayAndSelectedCategory;
 import com.contentful.tea.java.services.modelconverter.EntryToLandingPage;
 import com.contentful.tea.java.services.modelconverter.ExceptionToErrorParameter;
 
@@ -64,6 +65,10 @@ public class MainController implements ErrorController {
 
   @Autowired
   @SuppressWarnings("unused")
+  private ArrayToCourses arrayToCourses;
+
+  @Autowired
+  @SuppressWarnings("unused")
   private ExceptionToErrorParameter exceptionToError;
 
   @Autowired
@@ -83,6 +88,7 @@ public class MainController implements ErrorController {
           .include(5)
           .where("locale", settings.getLocale())
           .one("2uNOpLMJioKeoMq8W44uYc");
+
       final LandingPageParameter parameter = entryToLandingPage.convert(cdaLanding);
 
       staticContentSetter.applyContent(parameter.getBase());
@@ -102,8 +108,24 @@ public class MainController implements ErrorController {
     try {
       setupRoute(request);
 
-      // Fixme: Add content to page
-      throw new IllegalStateException("not implemented yet");
+      final CDAClient client = settings.getCurrentClient();
+      final CDAArray curses = client
+          .fetch(CDAEntry.class)
+          .include(5)
+          .withContentType("course")
+          .all();
+
+      final String categorySlug = "";
+      final String categoryName = "";
+      final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory()
+          .setArray(curses)
+          .setCategoryName(categoryName)
+          .setCategorySlug(categorySlug);
+
+      final CoursesParameter parameter = arrayToCourses.convert(compound);
+      staticContentSetter.applyContent(parameter.getBase());
+
+      return htmlGenerator.generate("templates/courses.jade", parameter.toMap());
     } catch (Throwable t) {
       throw new IllegalStateException("Cannot render courses page.", t);
     } finally {
