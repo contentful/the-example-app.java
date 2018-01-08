@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 import static com.contentful.tea.java.models.Settings.API_CDA;
+import static com.contentful.tea.java.models.base.ApiParameter.CSS_CLASS_ACTIVE_BUTTON;
 import static java.lang.String.format;
 
 @Component
@@ -96,13 +97,13 @@ public class StaticContentSetter {
           .setCurrentApiLabel(t(Keys.cdaAccessTokenLabel))
           .setCurrentApiId(settings.getApi())
           .setCpaButtonCSSClass("")
-          .setCdaButtonCSSClass("header__controls_button--active")
+          .setCdaButtonCSSClass(CSS_CLASS_ACTIVE_BUTTON)
       ;
     } else {
       base.getApi()
           .setCurrentApiLabel(t(Keys.cpaAccessTokenLabel))
           .setCurrentApiId(settings.getApi())
-          .setCpaButtonCSSClass("header__controls_button--active")
+          .setCpaButtonCSSClass(CSS_CLASS_ACTIVE_BUTTON)
           .setCdaButtonCSSClass("")
       ;
     }
@@ -143,7 +144,7 @@ public class StaticContentSetter {
           .setName(locale.name());
 
       if (locale.code().equals(settings.getLocale())) {
-        localeParameter.setCssClass("header__controls_button--active");
+        localeParameter.setCssClass(Locale.CSS_CLASS_ACTIVE);
         localesParameter.setCurrentLocaleName(locale.name());
       } else {
         localeParameter.setCssClass("");

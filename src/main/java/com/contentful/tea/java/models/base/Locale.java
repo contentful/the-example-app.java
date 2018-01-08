@@ -3,6 +3,8 @@ package com.contentful.tea.java.models.base;
 import com.contentful.tea.java.models.mappable.MappableType;
 
 public class Locale extends MappableType {
+  public static final String CSS_CLASS_ACTIVE = "header__controls_button--active";
+
   private String code;
   private String cssClass;
   private String name;

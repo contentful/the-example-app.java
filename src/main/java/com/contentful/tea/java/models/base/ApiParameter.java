@@ -5,6 +5,8 @@ import com.contentful.tea.java.models.mappable.MappableType;
 import java.util.Objects;
 
 public class ApiParameter extends MappableType {
+  public static final String CSS_CLASS_ACTIVE_BUTTON = "header__controls_button--active";
+
   private String apiSwitcherHelp;
   private String cdaButtonCSSClass;
   private String contentDeliveryApiHelp;
