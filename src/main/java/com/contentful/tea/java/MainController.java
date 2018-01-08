@@ -20,6 +20,7 @@ import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -68,53 +69,116 @@ public class MainController implements ErrorController {
 
   @RequestMapping("/")
   @ResponseBody
+  @SuppressWarnings("unused")
   public String home(HttpServletRequest request) {
-    settings.reset().loadDefaults();
-    sessionParser.loadSession(request.getSession());
-    urlParameterParser.parseUrlParameter(request.getParameterMap());
-
-    settings.setPath(request.getServletPath());
-
-    final CDAClient client = settings.getCurrentClient();
-    final CDAEntry cdaLanding = client
-        .fetch(CDAEntry.class)
-        .include(5)
-        .where("locale", settings.getLocale())
-        .one("2uNOpLMJioKeoMq8W44uYc");
-    final LandingPageParameter parameter = entryToLandingPage.convert(cdaLanding);
-
-    staticContentSetter.applyContent(parameter.getBase());
-
     try {
+      setupRoute(request);
+
+      final CDAClient client = settings.getCurrentClient();
+      final CDAEntry cdaLanding = client
+          .fetch(CDAEntry.class)
+          .include(5)
+          .where("locale", settings.getLocale())
+          .one("2uNOpLMJioKeoMq8W44uYc");
+      final LandingPageParameter parameter = entryToLandingPage.convert(cdaLanding);
+
+      staticContentSetter.applyContent(parameter.getBase());
+
       return htmlGenerator.generate("templates/landingPage.jade", parameter.toMap());
     } catch (Throwable t) {
       throw new IllegalStateException("Cannot render landing page.", t);
     } finally {
-      sessionParser.saveSession(request.getSession());
+      teardownRoute(request);
     }
   }
 
   @RequestMapping("/courses")
   @ResponseBody
-  public String courses() {
-    return "courses";
+  @SuppressWarnings("unused")
+  public String courses(HttpServletRequest request) {
+    try {
+      setupRoute(request);
+
+      // Fixme: Add content to page
+      throw new IllegalStateException("not implemented yet");
+    } catch (Throwable t) {
+      throw new IllegalStateException("Cannot render courses page.", t);
+    } finally {
+      teardownRoute(request);
+    }
   }
 
-  @RequestMapping("/course")
+  @RequestMapping("/courses/{courseId}")
   @ResponseBody
-  public String course() {
-    return "course";
+  @SuppressWarnings("unused")
+  public String course(HttpServletRequest request, @PathVariable("courseId") String courseId) {
+    try {
+      setupRoute(request);
+
+      // Fixme: Add content to page
+      throw new IllegalStateException("not implemented yet");
+    } catch (Throwable t) {
+      throw new IllegalStateException("Cannot render '" + courseId + "' courses page.", t);
+    } finally {
+      teardownRoute(request);
+    }
+  }
+
+  @RequestMapping("/courses/categories/{categoryId}")
+  @ResponseBody
+  @SuppressWarnings("unused")
+  public String coursesCategory(HttpServletRequest request,
+                                @PathVariable("categoryId") String categoryId) {
+    try {
+      setupRoute(request);
+
+      // Fixme: Add content to page
+      throw new IllegalStateException("not implemented yet");
+    } catch (Throwable t) {
+      throw new IllegalStateException("Cannot render '" + categoryId + "' courses category page.", t);
+    } finally {
+      teardownRoute(request);
+    }
+  }
+
+  @RequestMapping("/courses/{courseId}/lessons/{lessonId}")
+  @ResponseBody
+  @SuppressWarnings("unused")
+  public String lesson(HttpServletRequest request,
+                       @PathVariable("courseId") String courseId,
+                       @PathVariable("lessonId") String lessonId) {
+    try {
+      setupRoute(request);
+
+      // Fixme: Add content to page
+      throw new IllegalStateException("not implemented yet");
+    } catch (Throwable t) {
+      throw new IllegalStateException("Cannot render " + courseId + "'s lesson '" + lessonId + "'page.", t);
+    } finally {
+      teardownRoute(request);
+    }
   }
 
   @RequestMapping("/settings")
   @ResponseBody
-  public String settings() {
-    return "settings";
+  @SuppressWarnings("unused")
+  public String settings(HttpServletRequest request) {
+    try {
+      setupRoute(request);
+
+      // Fixme: Add content to page
+      throw new IllegalStateException("not implemented yet");
+    } catch (Throwable t) {
+      throw new IllegalStateException("Cannot render settings page.", t);
+    } finally {
+      teardownRoute(request);
+    }
   }
 
   @ExceptionHandler(Throwable.class)
   @RequestMapping("/error")
   @ResponseBody
+  @SuppressWarnings("unused")
   public String serverError(HttpServletRequest request, Throwable serverException) {
     serverException.printStackTrace(System.err);
 
@@ -135,6 +199,7 @@ public class MainController implements ErrorController {
   @ExceptionHandler(CDAHttpException.class)
   @RequestMapping("/error/contentful")
   @ResponseBody
+  @SuppressWarnings("unused")
   public String contentfulError(HttpServletRequest request, CDAHttpException contentfulException) {
     contentfulException.printStackTrace(System.err);
 
@@ -153,7 +218,21 @@ public class MainController implements ErrorController {
     }
   }
 
-  @Override public String getErrorPath() {
+  @Override
+  public String getErrorPath() {
     return ERROR_PATH;
   }
+
+  private void setupRoute(HttpServletRequest request) {
+    settings.reset().loadDefaults();
+    sessionParser.loadSession(request.getSession());
+    urlParameterParser.parseUrlParameter(request.getParameterMap());
+
+    settings.setPath(request.getServletPath());
+  }
+
+  private void teardownRoute(HttpServletRequest request) {
+    sessionParser.saveSession(request.getSession());
+  }
+
 }
