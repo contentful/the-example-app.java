@@ -108,7 +108,7 @@ public class MainController implements ErrorController {
     }
   }
 
-  @RequestMapping("/courses/{courseId}")
+  @RequestMapping({"/courses/{courseId}", "/courses/{courseId}/lessons"})
   @ResponseBody
   @SuppressWarnings("unused")
   public String course(HttpServletRequest request, @PathVariable("courseId") String courseId) {
@@ -153,7 +153,7 @@ public class MainController implements ErrorController {
       // Fixme: Add content to page
       throw new IllegalStateException("not implemented yet");
     } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render " + courseId + "'s lesson '" + lessonId + "'page.", t);
+      throw new IllegalStateException("Cannot render " + courseId + "'s lesson '" + lessonId + "' page.", t);
     } finally {
       teardownRoute(request);
     }

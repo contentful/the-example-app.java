@@ -51,6 +51,12 @@ public class StaticContentSetter {
     updateTitle(base);
   }
 
+  public void applyErrorContent(BaseParameter base) {
+    setStaticContent(base);
+    updateApis(base);
+    updateTitle(base);
+  }
+
   private void setStaticContent(BaseParameter base) {
     base.getApi()
         .setApiSwitcherHelp(t(Keys.apiSwitcherHelp))
