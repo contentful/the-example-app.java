@@ -94,14 +94,14 @@ public class StaticContentSetter {
   private void updateApis(BaseParameter base) {
     if (API_CDA.equals(settings.getApi())) {
       base.getApi()
-          .setCurrentApiLabel(t(Keys.cdaAccessTokenLabel))
+          .setCurrentApiLabel(t(Keys.contentDeliveryApiLabel))
           .setCurrentApiId(settings.getApi())
           .setCpaButtonCSSClass("")
           .setCdaButtonCSSClass(CSS_CLASS_ACTIVE_BUTTON)
       ;
     } else {
       base.getApi()
-          .setCurrentApiLabel(t(Keys.cpaAccessTokenLabel))
+          .setCurrentApiLabel(t(Keys.contentPreviewApiLabel))
           .setCurrentApiId(settings.getApi())
           .setCpaButtonCSSClass(CSS_CLASS_ACTIVE_BUTTON)
           .setCdaButtonCSSClass("")
