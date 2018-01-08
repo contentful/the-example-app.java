@@ -1,6 +1,9 @@
 package com.contentful.tea.java.services.modelconverter;
 
 import com.contentful.java.cda.CDAHttpException;
+import com.contentful.tea.java.models.base.BaseParameter;
+import com.contentful.tea.java.models.base.Locale;
+import com.contentful.tea.java.models.base.LocalesParameter;
 import com.contentful.tea.java.models.errors.ErrorParameter;
 import com.contentful.tea.java.services.StaticContentSetter;
 import com.contentful.tea.java.services.localization.Keys;
@@ -29,7 +32,21 @@ public class ExceptionToErrorParameter implements Converter<Throwable, ErrorPara
   @Override
   public ErrorParameter convert(Throwable source) {
     final ErrorParameter errorParameter = new ErrorParameter();
-    staticContentSetter.applyBaseContent(errorParameter.getBase());
+    final BaseParameter base = errorParameter.getBase();
+    staticContentSetter.applyErrorContent(base);
+    base.setLocales(
+        new LocalesParameter()
+            .setLocaleLabel(t(Keys.locale))
+            .setLocaleQuestion(t(Keys.localeQuestion))
+            .setCurrentLocaleName("U.S. English")
+            .setCurrentLocaleCode("en-US")
+            .addLocale(
+                new Locale()
+                    .setCode("en-US")
+                    .setName("EN-US")
+                    .setCssClass(Locale.CSS_CLASS_ACTIVE))
+    );
+
 
     return errorParameter
         .setContentModelChangedErrorLabel(t(Keys.contentModelChangedErrorLabel))
@@ -37,14 +54,14 @@ public class ExceptionToErrorParameter implements Converter<Throwable, ErrorPara
         .setError404Route(t(Keys.error404Route))
         .setErrorLabel(t(Keys.errorLabel))
         .setLocaleContentErrorLabel(t(Keys.localeContentErrorLabel))
+        .setResponseData(source.getMessage())
         .setSomethingWentWrongLabel(t(Keys.somethingWentWrongLabel))
+        .setStack(getStackTrace(source))
         .setStackTraceErrorLabel(t(Keys.stackTraceErrorLabel))
         .setStackTraceLabel(t(Keys.stackTraceLabel))
+        .setStatus(exceptionToStatusCode(source))
         .setTryLabel(t(Keys.tryLabel))
         .setVerifyCredentialsErrorLabel(t(Keys.verifyCredentialsErrorLabel))
-        .setStack(getStackTrace(source))
-        .setStatus(exceptionToStatusCode(source))
-        .setResponseData(source.getMessage())
         ;
   }
 
@@ -60,6 +77,10 @@ public class ExceptionToErrorParameter implements Converter<Throwable, ErrorPara
 
     if (source instanceof IOException) {
       return 500;
+    }
+
+    if (source.getMessage() == null) {
+      return 404;
     }
 
     return 500;

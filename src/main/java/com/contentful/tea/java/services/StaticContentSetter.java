@@ -40,15 +40,11 @@ public class StaticContentSetter {
   private Settings settings;
 
   public void applyContent(BaseParameter base) {
-    applyBaseContent(base);
-    updateLocales(base);
-  }
-
-  public void applyBaseContent(BaseParameter base) {
     setStaticContent(base);
     updateBreadcrumbs(base);
     updateApis(base);
     updateTitle(base);
+    updateLocales(base);
   }
 
   public void applyErrorContent(BaseParameter base) {

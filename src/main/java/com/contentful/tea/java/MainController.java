@@ -1,15 +1,18 @@
 package com.contentful.tea.java;
 
+import com.contentful.java.cda.CDAArray;
 import com.contentful.java.cda.CDAClient;
 import com.contentful.java.cda.CDAEntry;
 import com.contentful.java.cda.CDAHttpException;
 import com.contentful.tea.java.html.JadeHtmlGenerator;
 import com.contentful.tea.java.models.Settings;
+import com.contentful.tea.java.models.courses.CoursesParameter;
 import com.contentful.tea.java.models.errors.ErrorParameter;
 import com.contentful.tea.java.models.landing.LandingPageParameter;
 import com.contentful.tea.java.services.StaticContentSetter;
 import com.contentful.tea.java.services.http.SessionParser;
 import com.contentful.tea.java.services.http.UrlParameterParser;
+import com.contentful.tea.java.services.modelconverter.ArrayToCourses;
 import com.contentful.tea.java.services.modelconverter.EntryToLandingPage;
 import com.contentful.tea.java.services.modelconverter.ExceptionToErrorParameter;
 
@@ -186,7 +189,7 @@ public class MainController implements ErrorController {
 
     try {
       return htmlGenerator.generate("templates/error.jade", errorParameter.toMap());
-    } catch (Exception nestedException) {
+    } catch (Throwable nestedException) {
       return format(
           "<h1>Nested exception thrown while handling a server exception</h1><br/>\n\n%s while %s<br/>\n\n<!--\n%s\n\nwhile\n\n%s\n-->",
           nestedException,
@@ -208,7 +211,7 @@ public class MainController implements ErrorController {
 
     try {
       return htmlGenerator.generate("templates/error.jade", errorParameter.toMap());
-    } catch (Exception nestedException) {
+    } catch (Throwable nestedException) {
       return format(
           "<h1>Nested exception thrown while handling a server exception</h1><br/>\n\n%s while %s<br/>\n\n<!--\n%s\n\nwhile\n\n%s\n-->",
           nestedException,
