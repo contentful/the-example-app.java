@@ -124,7 +124,6 @@ public class MainController implements ErrorController {
       final String categoryName = "";
       final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory()
           .setList(courses.items())
-          .setCategoryName(categoryName)
           .setCategorySlug(categorySlug);
 
       final CoursesParameter parameter = arrayToCourses.convert(compound);
@@ -153,21 +152,8 @@ public class MainController implements ErrorController {
           .withContentType("course")
           .all();
 
-      CDAEntry category = null;
-      final List<CDAResource> filteredCourses = new ArrayList<>();
-      for (CDAResource courseResource : courses.items()) {
-        final CDAEntry course = (CDAEntry) courseResource;
-        final List<CDAEntry> categories = getCategoriesBySlug(course, slug);
-        if (categories.size() > 0) {
-          filteredCourses.add(course);
-          category = categories.get(0);
-        }
-      }
-
-      final String categoryName = category != null ? category.getField("title") : "";
       final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory()
-          .setList(filteredCourses)
-          .setCategoryName(categoryName)
+          .setList(courses.items())
           .setCategorySlug(slug);
 
       final CoursesParameter parameter = arrayToCourses.convert(compound);
@@ -291,12 +277,4 @@ public class MainController implements ErrorController {
     sessionParser.saveSession(request.getSession());
   }
 
-  private List<CDAEntry> getCategoriesBySlug(CDAEntry course, String slug) {
-    final List<CDAEntry> categories = course.getField("categories");
-    return Arrays.asList(categories
-        .stream()
-        .filter(e -> e.getField("slug").equals(slug))
-        .toArray(CDAEntry[]::new)
-    );
-  }
 }

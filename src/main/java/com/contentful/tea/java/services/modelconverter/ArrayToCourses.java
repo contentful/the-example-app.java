@@ -1,6 +1,5 @@
 package com.contentful.tea.java.services.modelconverter;
 
-import com.contentful.java.cda.CDAArray;
 import com.contentful.java.cda.CDAAsset;
 import com.contentful.java.cda.CDAEntry;
 import com.contentful.java.cda.CDAResource;
@@ -24,7 +23,6 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
   public static class ArrayAndSelectedCategory {
     private List<CDAResource> list;
     private String categorySlug;
-    private String categoryName;
 
     public List<CDAResource> getList() {
       return list;
@@ -43,33 +41,40 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
       this.categorySlug = categorySlug;
       return this;
     }
-
-    public String getCategoryName() {
-      return categoryName;
-    }
-
-    public ArrayAndSelectedCategory setCategoryName(String categoryName) {
-      this.categoryName = categoryName;
-      return this;
-    }
   }
 
   @Override
   public CoursesParameter convert(ArrayAndSelectedCategory compound) {
-    final CoursesParameter parameter = new CoursesParameter();
-    final String categorySlug = compound.getCategorySlug() == null ? "" : compound.getCategorySlug();
-    final String categoryName = compound.getCategoryName() == null ? "" : compound.getCategoryName();
-    final String allCssClass = categorySlug.isEmpty() ? "active" : "";
-    final String title = createTitle(categoryName, compound.list.size());
-    parameter.getBase().getMeta().setTitle(title);
+    final String slug = compound.getCategorySlug() == null ? "" : compound.getCategorySlug();
 
+    // find slugged category and filter out non slugged courses.
+    CDAEntry sluggedCategory = null;
+    final List<CDAResource> filteredCourses = new ArrayList<>();
+    for (final CDAResource courseResource : compound.getList()) {
+      final CDAEntry course = (CDAEntry) courseResource;
+      final CDAEntry category = getCategoryBySlug(course, slug);
+      if (category != null) {
+        filteredCourses.add(course);
+        sluggedCategory = category;
+      }
+    }
+
+    final List<CDAResource> courses = slug.isEmpty() ? compound.getList() : filteredCourses;
+    final String categoryName = sluggedCategory != null ? sluggedCategory.getField("title") : "";
+    final String title = createTitle(categoryName, courses.size());
+
+    final CoursesParameter parameter = new CoursesParameter();
     parameter
-        .setCategories(createCategories(compound.list, categorySlug))
-        .setCourses(createCourses(compound.list))
-        .setTitle(title)
         .getBase()
         .getMeta()
-        .setAllCoursesCssClass(allCssClass)
+        .setTitle(title)
+        .setAllCoursesCssClass(slug.isEmpty() ? "active" : "")
+    ;
+
+    parameter
+        .setCategories(createCategories(courses, slug))
+        .setCourses(createCourses(courses))
+        .setTitle(title)
     ;
 
     return parameter;
@@ -83,33 +88,32 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
     final Map<String, Category> categories = new HashMap<>();
 
     for (final CDAResource resource : courses) {
-      if (resource instanceof CDAEntry) {
-        final CDAEntry course = (CDAEntry) resource;
-        final String courseLocale = course.locale();
-        course.setLocale(settings.getLocale());
+      if (!(resource instanceof CDAEntry)) {
+        throw new IllegalStateException("Courses found of non entry type");
+      }
 
-        final List<CDAEntry> cdaCategories = course.getField("categories");
-        for (final CDAEntry category : cdaCategories) {
-          final String categoryLocale = category.locale();
-          category.setLocale(settings.getLocale());
+      final CDAEntry course = (CDAEntry) resource;
+      final String courseLocale = course.locale();
+      course.setLocale(settings.getLocale());
 
-          final String slug = category.getField("slug");
-          if (!categories.containsKey((String) slug)) {
-            categories.put(
-                slug,
-                new Category()
-                    .setSlug(slug)
-                    .setTitle(category.getField("title"))
-                    .setCssClass(selectedCategory.equals(slug) ? "active" : "")
-            );
-          }
+      final List<CDAEntry> cdaCategories = course.getField("categories");
+      for (final CDAEntry category : cdaCategories) {
+        final String categoryLocale = category.locale();
+        category.setLocale(settings.getLocale());
 
-          category.setLocale(categoryLocale);
+        final String slug = category.getField("slug");
+        if (!categories.containsKey((String) slug)) {
+          categories.put(
+              slug,
+              new Category()
+                  .setSlug(slug)
+                  .setTitle(category.getField("title"))
+                  .setCssClass(selectedCategory.equals(slug) ? "active" : "")
+          );
         }
 
+        category.setLocale(categoryLocale);
         course.setLocale(courseLocale);
-      } else {
-        throw new IllegalStateException("Courses found of non entry type");
       }
     }
 
@@ -120,41 +124,52 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
     final List<Course> courses = new ArrayList<>();
 
     for (final CDAResource resource : cdaCourses) {
-      if (resource instanceof CDAEntry) {
-        final CDAEntry course = (CDAEntry) resource;
-        final String courseLocale = course.locale();
-        course.setLocale(settings.getLocale());
-
-        final CDAAsset image = course.getField("image");
-        final Course createdCourse = new Course()
-            .setImageUrl(image.urlForImageWith(http()))
-            .setTitle(course.getField("title"))
-            .setShortDescription(course.getField("description"))
-            .setSlug(course.getField("slug"));
-
-        final List<CDAEntry> categories = course.getField("categories");
-        for (final CDAEntry category : categories) {
-          final String categoryLocale = category.locale();
-          category.setLocale(settings.getLocale());
-
-          createdCourse.addCategory(
-              new Category()
-                  .setSlug(category.getField("slug"))
-                  .setTitle(category.getField("title"))
-          );
-
-          category.setLocale(categoryLocale);
-        }
-
-        courses.add(createdCourse);
-
-        course.setLocale(courseLocale);
-      } else {
+      if (!(resource instanceof CDAEntry)) {
         throw new IllegalStateException("Courses found of non entry type");
       }
+
+
+      final CDAEntry course = (CDAEntry) resource;
+      final String courseLocale = course.locale();
+      course.setLocale(settings.getLocale());
+
+      final CDAAsset image = course.getField("image");
+      final Course createdCourse = new Course()
+          .setImageUrl(image.urlForImageWith(http()))
+          .setTitle(course.getField("title"))
+          .setShortDescription(course.getField("description"))
+          .setSlug(course.getField("slug"));
+
+      final List<CDAEntry> categories = course.getField("categories");
+      for (final CDAEntry category : categories) {
+        final String categoryLocale = category.locale();
+        category.setLocale(settings.getLocale());
+
+        createdCourse.addCategory(
+            new Category()
+                .setSlug(category.getField("slug"))
+                .setTitle(category.getField("title"))
+        );
+
+        category.setLocale(categoryLocale);
+      }
+
+      courses.add(createdCourse);
+
+      course.setLocale(courseLocale);
     }
 
     return courses;
   }
 
+  private CDAEntry getCategoryBySlug(CDAEntry course, String slug) {
+    final List<CDAEntry> categories = course.getField("categories");
+    final List<CDAEntry> list = new ArrayList<>();
+    for (final CDAEntry e : categories) {
+      if (slug.equals(e.getField("slug"))) {
+        list.add(e);
+      }
+    }
+    return list.size() > 0 ? list.get(0) : null;
+  }
 }

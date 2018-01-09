@@ -104,8 +104,7 @@ public class HomeTests extends EnqueuedHttpResponseTests {
 
     final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory()
         .setList(courses.items())
-        .setCategorySlug("")
-        .setCategoryName("");
+        .setCategorySlug("");
     final CoursesParameter p = coursesConverter.convert(compound);
 
     assertThat(p.getBase().getMeta().getTitle()).isEqualTo("All courses (5)");

@@ -35,7 +35,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
 
   @Autowired
   @SuppressWarnings("unused")
-  private ArrayToCourses coursesConverter;
+  private ArrayToCourses arrayToCourses;
 
   @Autowired
   @SuppressWarnings("unused")
@@ -101,7 +101,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
         .all();
 
     final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory().setList(courses.items());
-    final CoursesParameter p = coursesConverter.convert(compound);
+    final CoursesParameter p = arrayToCourses.convert(compound);
 
     assertThat(p.getBase().getMeta().getTitle()).isEqualTo("All courses (5)");
 
@@ -119,6 +119,34 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
     assertThat(p.getCourses().get(3).getCategories().get(0).getTitle()).isEqualTo("Application Development");
   }
 
+  @Test
+  @EnqueueHttpResponse({"courses/one_category.json", "defaults/space.json"})
+  public void courseCategoryTest() {
+    settings.setPath("/courses/categories/application-development");
+    settings.setQueryString("");
+
+    final CDAArray courses = client.fetch(CDAEntry.class)
+        .withContentType("courses")
+        .all();
+
+    final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory().setList(courses.items()).setCategorySlug("application-development");
+    final CoursesParameter p = arrayToCourses.convert(compound);
+
+    assertThat(p.getBase().getMeta().getTitle()).isEqualTo("Application Development (2)");
+
+    assertThat(p.getCategories()).hasSize(2);
+    assertThat(p.getCategories().get(1).getTitle()).isEqualTo("Application Development");
+    assertThat(p.getCategories().get(1).getSlug()).isEqualTo("application-development");
+
+    assertThat(p.getCourses()).hasSize(2);
+    assertThat(p.getCourses().get(0).getTitle()).isEqualTo("How the example app is built");
+    assertThat(p.getCourses().get(0).getImageUrl()).isEqualTo("http://images.contentful.com/jnzexv31feqf/2KUZRfRHgk8Q8MqOYaa4aA/142bb20449dedbe70bd039d214dab2e3/Contentful_Architecture_101.jpg");
+    assertThat(p.getCourses().get(0).getShortDescription()).isEqualTo("By looking at the code of the example app, you will get a sense of how to use a Contentful SDK in your programming language. For any third-party dependency, refer to its documentation.");
+    assertThat(p.getCourses().get(0).getSlug()).isEqualTo("how-the-example-app-is-built");
+    assertThat(p.getCourses().get(0).getCategories()).hasSize(1);
+    assertThat(p.getCourses().get(0).getCategories().get(0).getSlug()).isEqualTo("application-development");
+    assertThat(p.getCourses().get(0).getCategories().get(0).getTitle()).isEqualTo("Application Development");
+  }
 
   @Test
   @EnqueueHttpResponse({"courses/one.json", "defaults/space.json"})
