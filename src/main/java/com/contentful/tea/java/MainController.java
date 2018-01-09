@@ -119,6 +119,7 @@ public class MainController implements ErrorController {
           .fetch(CDAEntry.class)
           .include(5)
           .withContentType("course")
+          .where("locale", settings.getLocale())
           .all();
 
       final String categorySlug = "";
@@ -151,6 +152,7 @@ public class MainController implements ErrorController {
           .fetch(CDAEntry.class)
           .include(5)
           .withContentType("course")
+          .where("locale", settings.getLocale())
           .all();
 
       final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory()
