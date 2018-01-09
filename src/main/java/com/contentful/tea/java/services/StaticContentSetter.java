@@ -158,7 +158,7 @@ public class StaticContentSetter {
 
   private void updateBreadcrumbs(BaseParameter base) {
     final String path = settings.getPath();
-    if (path == null) {
+    if (path == null || path.isEmpty() || path.equals("/")) {
       return;
     }
 
@@ -208,7 +208,7 @@ public class StaticContentSetter {
       breadcrumb.addBreadcrumb(
           new BreadcrumbParameter.Breadcrumb()
               .setUrl(path)
-              .setLabel(base.getMeta().getTitle())
+              .setLabel(base.getMeta().getTitle().replaceAll(" \\([0-9]+\\)", ""))
       );
     }
   }
