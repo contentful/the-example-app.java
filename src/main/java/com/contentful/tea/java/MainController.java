@@ -29,6 +29,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -173,7 +179,11 @@ public class MainController implements ErrorController {
   @RequestMapping({"/courses/{slug}", "/courses/{slug}/lessons"})
   @ResponseBody
   @SuppressWarnings("unused")
-  public String course(HttpServletRequest request, @PathVariable("slug") String slug) {
+  public String course(
+      HttpServletRequest request,
+      @PathVariable("slug") String slug,
+      @SessionAttribute(required = false) Map<String, Set<String>> visitedLessonsByCourseSlug
+  ) {
     try {
       setupRoute(request);
 
@@ -188,12 +198,23 @@ public class MainController implements ErrorController {
           .items()
           .get(0));
 
+      if (visitedLessonsByCourseSlug == null) {
+        visitedLessonsByCourseSlug = new HashMap<>();
+      }
+
+      Set<String> visitedLessons = visitedLessonsByCourseSlug.computeIfAbsent(slug, k -> new HashSet<>());
+      visitedLessons.add("/");
+
+      request.getSession().setAttribute("visitedLessonsByCourseSlug", visitedLessonsByCourseSlug);
+
       final EntryToCourse.Compound compound = new EntryToCourse.Compound()
           .setCourse(course)
-          .setSlug(slug);
+          .setSlug(slug)
+          .setVisitedLessons(visitedLessons);
 
       final CourseParameter parameter = entryToCourse.convert(compound);
       staticContentSetter.applyContent(parameter.getBase());
+
 
       return htmlGenerator.generate("templates/course.jade", parameter.toMap());
     } catch (Throwable t) {

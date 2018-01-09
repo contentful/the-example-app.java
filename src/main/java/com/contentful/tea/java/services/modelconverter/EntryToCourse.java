@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static com.contentful.java.cda.image.ImageOption.http;
 
@@ -21,6 +22,7 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
   public static class Compound {
     private CDAEntry course;
     private String slug;
+    private Set<String> visitedLessons;
 
     public CDAEntry getCourse() {
       return course;
@@ -37,6 +39,15 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
 
     public Compound setSlug(String selectedId) {
       this.slug = selectedId;
+      return this;
+    }
+
+    public Set<String> getVisitedLessons() {
+      return visitedLessons;
+    }
+
+    public Compound setVisitedLessons(Set<String> visitedLessons) {
+      this.visitedLessons = visitedLessons;
       return this;
     }
   }
@@ -60,10 +71,13 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
 
     final List<CDAEntry> cdaLessons = course.getField("lessons");
     final List<Lesson> lessons = new ArrayList<>();
+    final Set<String> visitedLessons = compound.getVisitedLessons();
     for (final CDAEntry cdaLesson : cdaLessons) {
-      lessons.add(
-          entryToLesson.convert(cdaLesson)
-      );
+      final Lesson lesson = entryToLesson.convert(cdaLesson);
+      final String cssClass = lesson.getCssClass();
+      final String visited = visitedLessons.contains(lesson.getSlug()) ? "visited" : "";
+      lesson.setCssClass(String.format("%s %s", cssClass, visited));
+      lessons.add(lesson);
     }
 
     final String selectedId = compound.getSlug() != null && !compound.getSlug().isEmpty() ? compound.getSlug() : "";
@@ -80,7 +94,7 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
         .setMinutesLabel(t(Keys.minutesLabel))
         .setOverviewLabel(t(Keys.overviewLabel))
         .setCourseOverviewLabel(t(Keys.courseOverviewLabel))
-        .setCourseOverviewCssClass("active")
+        .setCourseOverviewCssClass("active " + (visitedLessons.contains("/") ? "visited" : ""))
         .setSkillLevelLabel(t(Keys.skillLevelLabel))
         .setTableOfContentsLabel(t(Keys.tableOfContentsLabel))
         .setCourse(new Course()
