@@ -100,7 +100,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
         .withContentType("layout")
         .all();
 
-    final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory().setArray(courses);
+    final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory().setList(courses.items());
     final CoursesParameter p = coursesConverter.convert(compound);
 
     assertThat(p.getBase().getMeta().getTitle()).isEqualTo("All courses (5)");

@@ -103,7 +103,7 @@ public class HomeTests extends EnqueuedHttpResponseTests {
         .all();
 
     final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory()
-        .setArray(courses)
+        .setList(courses.items())
         .setCategorySlug("")
         .setCategoryName("");
     final CoursesParameter p = coursesConverter.convert(compound);
