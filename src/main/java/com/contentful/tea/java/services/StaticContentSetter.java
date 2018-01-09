@@ -277,7 +277,7 @@ public class StaticContentSetter {
       if (courses.total() == 0) {
         throw new IllegalStateException(format("Course with slug '%s' not found.", courseSlug));
       } else {
-        throw new IllegalStateException(format("More then one curse with the slug of '%s' found …", courseSlug));
+        throw new IllegalStateException(format("More then one course with the slug of '%s' found …", courseSlug));
       }
     }
   }

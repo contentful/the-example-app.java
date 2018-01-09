@@ -22,16 +22,16 @@ import static com.contentful.java.cda.image.ImageOption.http;
 public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<ArrayToCourses.ArrayAndSelectedCategory, CoursesParameter> {
 
   public static class ArrayAndSelectedCategory {
-    private CDAArray array;
+    private List<CDAResource> list;
     private String categorySlug;
     private String categoryName;
 
-    public CDAArray getArray() {
-      return array;
+    public List<CDAResource> getList() {
+      return list;
     }
 
-    public ArrayAndSelectedCategory setArray(CDAArray array) {
-      this.array = array;
+    public ArrayAndSelectedCategory setList(List<CDAResource> list) {
+      this.list = list;
       return this;
     }
 
@@ -60,12 +60,12 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
     final String categorySlug = compound.getCategorySlug() == null ? "" : compound.getCategorySlug();
     final String categoryName = compound.getCategoryName() == null ? "" : compound.getCategoryName();
     final String allCssClass = categorySlug.isEmpty() ? "active" : "";
-    final String title = createTitle(categoryName, compound.array.total());
+    final String title = createTitle(categoryName, compound.list.size());
     parameter.getBase().getMeta().setTitle(title);
 
     parameter
-        .setCategories(createCategories(compound.array, categorySlug))
-        .setCourses(createCourses(compound.array))
+        .setCategories(createCategories(compound.list, categorySlug))
+        .setCourses(createCourses(compound.list))
         .setTitle(title)
         .getBase()
         .getMeta()
@@ -79,10 +79,10 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
     return String.format("%s (%d)", categoryName.isEmpty() ? t(Keys.allCoursesLabel) : categoryName, total);
   }
 
-  private List<Category> createCategories(CDAArray courses, String selectedCategory) {
+  private List<Category> createCategories(List<CDAResource> courses, String selectedCategory) {
     final Map<String, Category> categories = new HashMap<>();
 
-    for (final CDAResource resource : courses.items()) {
+    for (final CDAResource resource : courses) {
       if (resource instanceof CDAEntry) {
         final CDAEntry course = (CDAEntry) resource;
         final String courseLocale = course.locale();
@@ -116,10 +116,10 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
     return new ArrayList<>(categories.values());
   }
 
-  private List<Course> createCourses(CDAArray cdaCourses) {
+  private List<Course> createCourses(List<CDAResource> cdaCourses) {
     final List<Course> courses = new ArrayList<>();
 
-    for (final CDAResource resource : cdaCourses.items()) {
+    for (final CDAResource resource : cdaCourses) {
       if (resource instanceof CDAEntry) {
         final CDAEntry course = (CDAEntry) resource;
         final String courseLocale = course.locale();

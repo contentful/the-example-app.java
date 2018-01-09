@@ -4,6 +4,7 @@ import com.contentful.java.cda.CDAArray;
 import com.contentful.java.cda.CDAClient;
 import com.contentful.java.cda.CDAEntry;
 import com.contentful.java.cda.CDAHttpException;
+import com.contentful.java.cda.CDAResource;
 import com.contentful.tea.java.html.JadeHtmlGenerator;
 import com.contentful.tea.java.models.Settings;
 import com.contentful.tea.java.models.courses.CoursesParameter;
@@ -27,6 +28,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -109,7 +114,7 @@ public class MainController implements ErrorController {
       setupRoute(request);
 
       final CDAClient client = settings.getCurrentClient();
-      final CDAArray curses = client
+      final CDAArray courses = client
           .fetch(CDAEntry.class)
           .include(5)
           .withContentType("course")
@@ -118,7 +123,7 @@ public class MainController implements ErrorController {
       final String categorySlug = "";
       final String categoryName = "";
       final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory()
-          .setArray(curses)
+          .setList(courses.items())
           .setCategoryName(categoryName)
           .setCategorySlug(categorySlug);
 
@@ -128,6 +133,49 @@ public class MainController implements ErrorController {
       return htmlGenerator.generate("templates/courses.jade", parameter.toMap());
     } catch (Throwable t) {
       throw new IllegalStateException("Cannot render courses page.", t);
+    } finally {
+      teardownRoute(request);
+    }
+  }
+
+  @RequestMapping("/courses/categories/{slug}")
+  @ResponseBody
+  @SuppressWarnings("unused")
+  public String coursesCategory(HttpServletRequest request,
+                                @PathVariable("slug") String slug) {
+    try {
+      setupRoute(request);
+
+      final CDAClient client = settings.getCurrentClient();
+      final CDAArray courses = client
+          .fetch(CDAEntry.class)
+          .include(5)
+          .withContentType("course")
+          .all();
+
+      CDAEntry category = null;
+      final List<CDAResource> filteredCourses = new ArrayList<>();
+      for (CDAResource courseResource : courses.items()) {
+        final CDAEntry course = (CDAEntry) courseResource;
+        final List<CDAEntry> categories = getCategoriesBySlug(course, slug);
+        if (categories.size() > 0) {
+          filteredCourses.add(course);
+          category = categories.get(0);
+        }
+      }
+
+      final String categoryName = category != null ? category.getField("title") : "";
+      final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory()
+          .setList(filteredCourses)
+          .setCategoryName(categoryName)
+          .setCategorySlug(slug);
+
+      final CoursesParameter parameter = arrayToCourses.convert(compound);
+      staticContentSetter.applyContent(parameter.getBase());
+
+      return htmlGenerator.generate("templates/courses.jade", parameter.toMap());
+    } catch (Throwable t) {
+      throw new IllegalStateException("Cannot render '" + slug + "' courses category page.", t);
     } finally {
       teardownRoute(request);
     }
@@ -144,23 +192,6 @@ public class MainController implements ErrorController {
       throw new IllegalStateException("not implemented yet");
     } catch (Throwable t) {
       throw new IllegalStateException("Cannot render '" + courseId + "' courses page.", t);
-    } finally {
-      teardownRoute(request);
-    }
-  }
-
-  @RequestMapping("/courses/categories/{categoryId}")
-  @ResponseBody
-  @SuppressWarnings("unused")
-  public String coursesCategory(HttpServletRequest request,
-                                @PathVariable("categoryId") String categoryId) {
-    try {
-      setupRoute(request);
-
-      // Fixme: Add content to page
-      throw new IllegalStateException("not implemented yet");
-    } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render '" + categoryId + "' courses category page.", t);
     } finally {
       teardownRoute(request);
     }
@@ -260,4 +291,12 @@ public class MainController implements ErrorController {
     sessionParser.saveSession(request.getSession());
   }
 
+  private List<CDAEntry> getCategoriesBySlug(CDAEntry course, String slug) {
+    final List<CDAEntry> categories = course.getField("categories");
+    return Arrays.asList(categories
+        .stream()
+        .filter(e -> e.getField("slug").equals(slug))
+        .toArray(CDAEntry[]::new)
+    );
+  }
 }
