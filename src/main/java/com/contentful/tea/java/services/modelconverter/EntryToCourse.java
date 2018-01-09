@@ -4,7 +4,9 @@ import com.contentful.java.cda.CDAAsset;
 import com.contentful.java.cda.CDAEntry;
 import com.contentful.tea.java.models.courses.Category;
 import com.contentful.tea.java.models.courses.Course;
+import com.contentful.tea.java.models.courses.CourseParameter;
 import com.contentful.tea.java.models.courses.lessons.Lesson;
+import com.contentful.tea.java.services.localization.Keys;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,15 +17,38 @@ import java.util.List;
 import static com.contentful.java.cda.image.ImageOption.http;
 
 @Component
-public class EntryToCourse extends ContentfulModelToMappableTypeConverter<CDAEntry, Course> {
+public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryToCourse.Compound, CourseParameter> {
+  public static class Compound {
+    private CDAEntry course;
+    private String slug;
+
+    public CDAEntry getCourse() {
+      return course;
+    }
+
+    public Compound setCourse(CDAEntry course) {
+      this.course = course;
+      return this;
+    }
+
+    public String getSlug() {
+      return slug;
+    }
+
+    public Compound setSlug(String selectedId) {
+      this.slug = selectedId;
+      return this;
+    }
+  }
 
   @Autowired
   @SuppressWarnings("unused")
   private EntryToLesson entryToLesson;
 
   @Override
-  public Course convert(CDAEntry cdaCourse) {
-    final List<CDAEntry> cdaCategories = cdaCourse.getField("categories");
+  public CourseParameter convert(EntryToCourse.Compound compound) {
+    final CDAEntry course = compound.getCourse();
+    final List<CDAEntry> cdaCategories = course.getField("categories");
     final List<Category> categories = new ArrayList<>();
     for (final CDAEntry cdaCategory : cdaCategories) {
       categories.add(
@@ -33,7 +58,7 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<CDAEnt
       );
     }
 
-    final List<CDAEntry> cdaLessons = cdaCourse.getField("lessons");
+    final List<CDAEntry> cdaLessons = course.getField("lessons");
     final List<Lesson> lessons = new ArrayList<>();
     for (final CDAEntry cdaLesson : cdaLessons) {
       lessons.add(
@@ -41,20 +66,36 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<CDAEnt
       );
     }
 
-    final CDAAsset image = cdaCourse.getField("image");
-    final Course course = new Course()
-        .setCategories(categories)
-        .setImageUrl(image.urlForImageWith(http()))
-        .setShortDescription(cdaCourse.getField("shortDescription"))
-        .setTitle(cdaCourse.getField("title"))
-        .setSlug(cdaCourse.getField("slug"))
-        .setDuration((((Double) cdaCourse.getField("duration"))).intValue())
-        .setDraft(isDraft(cdaCourse))
-        .setPendingChanges(hasPendingChanges(cdaCourse))
-        .setSkillLevel(cdaCourse.getField("skillLevel"))
-        .setCssClass("")
-        .setLessons(lessons);
-    return course;
-  }
+    final String selectedId = compound.getSlug() != null && !compound.getSlug().isEmpty() ? compound.getSlug() : "";
+    final CDAAsset image = course.getField("image");
+    final CourseParameter courseParameter = new CourseParameter();
+    courseParameter
+        .getBase()
+        .getMeta()
+        .setTitle(course.getField("title"));
 
+    return courseParameter
+        .setDurationLabel(t(Keys.durationLabel))
+        .setStartCourseLabel(t(Keys.startCourseLabel))
+        .setMinutesLabel(t(Keys.minutesLabel))
+        .setOverviewLabel(t(Keys.overviewLabel))
+        .setCourseOverviewLabel(t(Keys.courseOverviewLabel))
+        .setCourseOverviewCssClass("active")
+        .setSkillLevelLabel(t(Keys.skillLevelLabel))
+        .setTableOfContentsLabel(t(Keys.tableOfContentsLabel))
+        .setCourse(new Course()
+            .setCategories(categories)
+            .setImageUrl(image.urlForImageWith(http()))
+            .setDescription(m(course.getField("description")))
+            .setShortDescription(course.getField("shortDescription"))
+            .setTitle(course.getField("title"))
+            .setSlug(course.getField("slug"))
+            .setDuration((((Double) course.getField("duration"))).intValue())
+            .setDraft(isDraft(course))
+            .setPendingChanges(hasPendingChanges(course))
+            .setSkillLevel(t(Keys.valueOf(course.getField("skillLevel") + "Label")))
+            .setCssClass(selectedId)
+            .setLessons(lessons)
+        );
+  }
 }

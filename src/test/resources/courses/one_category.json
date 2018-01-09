@@ -1,0 +1,1931 @@
+{
+    "includes": {
+        "Asset": [
+            {
+                "fields": {
+                    "file": {
+                        "contentType": "image/svg+xml",
+                        "details": {
+                            "image": {
+                                "height": 274,
+                                "width": 463
+                            },
+                            "size": 44975
+                        },
+                        "fileName": "json-presentation-layer.svg",
+                        "url": "//images.contentful.com/jnzexv31feqf/1PzXR2apawY8iYM4o0AUoi/52d8c924bd60a6188c282b1770e1f855/json-presentation-layer.svg"
+                    },
+                    "title": "json-presentation"
+                },
+                "sys": {
+                    "createdAt": "2017-12-11T12:13:50.344Z",
+                    "id": "1PzXR2apawY8iYM4o0AUoi",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-11T12:13:50.344Z"
+                }
+            },
+            {
+                "fields": {
+                    "description": "An image showing CMS as Code",
+                    "file": {
+                        "contentType": "image/jpeg",
+                        "details": {
+                            "image": {
+                                "height": 843,
+                                "width": 1500
+                            },
+                            "size": 85890
+                        },
+                        "fileName": "Contentful Architecture 101.jpg",
+                        "url": "//images.contentful.com/jnzexv31feqf/2KUZRfRHgk8Q8MqOYaa4aA/142bb20449dedbe70bd039d214dab2e3/Contentful_Architecture_101.jpg"
+                    },
+                    "title": "CMS as code"
+                },
+                "sys": {
+                    "createdAt": "2017-12-11T12:13:51.007Z",
+                    "id": "2KUZRfRHgk8Q8MqOYaa4aA",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-11T12:13:51.007Z"
+                }
+            },
+            {
+                "fields": {
+                    "file": {
+                        "contentType": "image/svg+xml",
+                        "details": {
+                            "image": {
+                                "height": 232,
+                                "width": 708
+                            },
+                            "size": 52144
+                        },
+                        "fileName": "minimal-setup.svg",
+                        "url": "//images.contentful.com/jnzexv31feqf/3z7ErmBLIccwQkQkuEY0w4/14273331c93ac1afe80b150f1f22a04f/minimal-setup.svg"
+                    },
+                    "title": "minimal contentful setup"
+                },
+                "sys": {
+                    "createdAt": "2017-12-11T12:13:49.812Z",
+                    "id": "3z7ErmBLIccwQkQkuEY0w4",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-11T12:13:49.812Z"
+                }
+            },
+            {
+                "fields": {
+                    "file": {
+                        "contentType": "image/png",
+                        "details": {
+                            "image": {
+                                "height": 1290,
+                                "width": 2038
+                            },
+                            "size": 325881
+                        },
+                        "fileName": "webapp.png",
+                        "url": "//images.contentful.com/jnzexv31feqf/4CWJDjGTzaU8CMAW2eYeie/1f339cfae443bd382eb90cc531d842d3/webapp.png"
+                    },
+                    "title": "webapp"
+                },
+                "sys": {
+                    "createdAt": "2017-12-11T12:13:49.243Z",
+                    "id": "4CWJDjGTzaU8CMAW2eYeie",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-11T12:13:49.243Z"
+                }
+            },
+            {
+                "fields": {
+                    "file": {
+                        "contentType": "image/svg+xml",
+                        "details": {
+                            "image": {
+                                "height": 567,
+                                "width": 313
+                            },
+                            "size": 5493
+                        },
+                        "fileName": "content-model-full.svg",
+                        "url": "//images.contentful.com/jnzexv31feqf/5o1Zu7UJheEGGQUC6gYEmS/12a641a659017d8cea2ea64390040bc1/content-model-full.svg"
+                    },
+                    "title": "content-model-full"
+                },
+                "sys": {
+                    "createdAt": "2017-12-11T12:13:48.675Z",
+                    "id": "5o1Zu7UJheEGGQUC6gYEmS",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-11T12:13:48.675Z"
+                }
+            },
+            {
+                "fields": {
+                    "file": {
+                        "contentType": "image/png",
+                        "details": {
+                            "image": {
+                                "height": 887,
+                                "width": 1908
+                            },
+                            "size": 100983
+                        },
+                        "fileName": "EngineeringHistory.png",
+                        "url": "//images.contentful.com/jnzexv31feqf/6nvWJT1AkM64so8Auue4QQ/fa1968163c514925a94824abfde5f5d7/EngineeringHistory.png"
+                    },
+                    "title": "home course image"
+                },
+                "sys": {
+                    "createdAt": "2017-12-11T12:13:47.442Z",
+                    "id": "6nvWJT1AkM64so8Auue4QQ",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-11T12:13:47.442Z"
+                }
+            },
+            {
+                "fields": {
+                    "file": {
+                        "contentType": "image/jpeg",
+                        "details": {
+                            "image": {
+                                "height": 960,
+                                "width": 1280
+                            },
+                            "size": 296437
+                        },
+                        "fileName": "pending_changes.jpg",
+                        "url": "//images.contentful.com/jnzexv31feqf/6q0SqWXHHOkmAgoqgAaiGG/6792fb650d7563b91726cbad1ed95778/pending_changes.jpg"
+                    },
+                    "title": "pending changes"
+                },
+                "sys": {
+                    "createdAt": "2017-12-14T11:42:04.752Z",
+                    "id": "6q0SqWXHHOkmAgoqgAaiGG",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-14T11:42:04.752Z"
+                }
+            },
+            {
+                "fields": {
+                    "file": {
+                        "contentType": "image/png",
+                        "details": {
+                            "image": {
+                                "height": 982,
+                                "width": 864
+                            },
+                            "size": 290089
+                        },
+                        "fileName": "foo",
+                        "url": "//images.contentful.com/jnzexv31feqf/PKYPMsOlqK4SAwEOwMQky/2ccd7c30325fab8a4f34b35cc4e7e427/foo"
+                    },
+                    "title": "pirate"
+                },
+                "sys": {
+                    "createdAt": "2017-12-14T10:57:38.996Z",
+                    "id": "PKYPMsOlqK4SAwEOwMQky",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Asset",
+                    "updatedAt": "2017-12-14T10:57:38.996Z"
+                }
+            }
+        ],
+        "Entry": [
+            {
+                "fields": {
+                    "copy": "Include the SDK in your project and initialize a client: \n1. Add the import statement.\n2. Configure a client with your space ID and Content Delivery API token.",
+                    "title": "SDK basics > SDK initialization"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:02.308Z",
+                    "id": "15Cx6Bu1Y2qAkyq2yWgkK2",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:02.308Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "A simple Contentful setup consists of a client application reading content, such as this example app, and another application that is writing content, such as the Contentful web app. The client application is reading content by connecting to the Content Delivery API, and the Contentful Web app is writing content by connecting to the Content Mangement API:\n\n![minimal contentful setup](//images.contentful.com/ft4tkuv7nwl0/3z7ErmBLIccwQkQkuEY0w4/bd438f4b8c540f56fcc76d75c688baf1/minimal-setup.svg)\n\nThe *Contentful web app* is a single page application that Contentful provides to help with the most common tasks when managing content:\n\n- Provide an interface for editors to write content.\n- Provide an interface for developes to configure a space, model data, define roles and permissions, and set up webhook notifications.\n\nAs mentioned, the Contentful web app is a client that uses the Content Management API. Therefore, you could replicate the functionality that the Contentful web app provides by making an API call. This is a powerful aspect of an API-first design because it helps you to connect Contentful to third-party systems.\n",
+                    "title": "Content management > copy"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:08.737Z",
+                    "id": "1AqQQzRvKAkEOekuMUcQIY",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:08.737Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": [
+                        {
+                            "sys": {
+                                "id": "2tV9n41tryO2QMwIkQUQeQ",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "5u5i90HuEgcOYKacSoMEG6",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "58B62ubQbmIOiAkmq44kAo",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    ],
+                    "slug": "serve-localized-content",
+                    "title": "Serve localized content"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:17.378Z",
+                    "id": "1HR1QvURo4MoSqO0eqmUeO",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:17.378Z"
+                }
+            },
+            {
+                "fields": {
+                    "curl": "# N/A",
+                    "dotNet": "dotnet add package contentful.csharp",
+                    "java": "compile 'com.contentful.java:java-sdk:+'",
+                    "javaAndroid": "compile 'com.contentful.java:java-sdk:+'",
+                    "javascript": "npm install contentful",
+                    "php": "composer require contentful/contentful",
+                    "python": "pip install contentful",
+                    "ruby": "gem install contentful",
+                    "swift": "// Add to your Podfile\n\npod 'Contentful', '~> 0.10.1'\n\n// Then execute \"pod install\" in your projects directory",
+                    "title": "SDK basics > installation - code"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCodeSnippets",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:04.196Z",
+                    "id": "1ph3B44420k2wgG8y2aYcM",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:04.196Z"
+                }
+            },
+            {
+                "fields": {
+                    "curl": "export CDA_TOKEN='<access_token>';\nexport SPACE_ID='<space_id>';",
+                    "dotNet": "var httpClient = new HttpClient();\nvar client = new ContentfulClient(httpClient, \"<access_token>\", \"\", \"<space_id>\");",
+                    "java": "final CDAClient client =\n    CDAClient\n        .builder()\n        .setToken(\"<access_token>\")\n        .setSpace(\"<space_id>\")\n        .build();\n",
+                    "javaAndroid": "final CDAClient client =\n    CDAClient\n        .builder()\n        .setToken(\"<access_token>\")\n        .setSpace(\"<space_id>\")\n        .build();\n",
+                    "javascript": "const contentful = require('contentful')\nconst client = contentful.createClient({\n  space: '<space_id>',\n  accessToken: '<access_token>'\n})\n",
+                    "php": "$client = new \\Contentful\\Delivery\\Client(\n    '<access_token>',\n    '<space_id>'\n);",
+                    "python": "import contentful\n\nclient = contentful.Client('<space_id>', '<access_token>')\n",
+                    "ruby": "require \u2018contentful\u2019\n\nclient = Contentful::Client.new(\n \u00a0space: '<space_id>',\n \u00a0access_token: '<access_token>',\n \u00a0dynamic_entries: :auto,\n \u00a0raise_errors: true\n)",
+                    "swift": "import Contentful\n\nlet client = Client(spaceId: \"<space_id>\", \n                    accessToken: \"<access_token>\")",
+                    "title": "SDK basics > SDK initialization - code"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCodeSnippets",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:03.521Z",
+                    "id": "1u8xSIQR4UaoQOc4m6KiiU",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:03.521Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "Before you publish your content, you can preview it using the Content Preview API. The Preview API and Delivery API both accept the same parameters and return the same payload structures.\n\nTo fetch preview content, change the configuration of the client to use the Preview API token:",
+                    "title": "Fetch draft content > preview "
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:01.107Z",
+                    "id": "1wMm7tnKi0kIYsI24eYiKS",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:01.107Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": [
+                        {
+                            "sys": {
+                                "id": "1AqQQzRvKAkEOekuMUcQIY",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "5DtGCVHfr2OC2Is6KceS0G",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    ],
+                    "slug": "content-management",
+                    "title": "Content management"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:16.777Z",
+                    "id": "1zwAjpe38UC8iqKMM6gu0Q",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:16.777Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "If you have configured different locales within your content model, you can fetch localized content:",
+                    "title": "Serve localized content > fetching"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:58.541Z",
+                    "id": "2tV9n41tryO2QMwIkQUQeQ",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:13:58.541Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "There is nothing here to see ...",
+                    "title": "lesson copy > empty"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-14T11:43:19.079Z",
+                    "id": "34o40Ox504yiw6Keec8iWA",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-14T11:43:19.080Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "lesson > pending > empty",
+                    "title": "lesson > pending > empty"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-14T14:21:13.839Z",
+                    "id": "3AtnhO0pGwu2yYSSOoGy4U",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-14T14:21:13.839Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": [
+                        {
+                            "sys": {
+                                "id": "5jR4ciJ8Y8m2KKqmMKOkg4",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    ],
+                    "slug": "summary",
+                    "title": "Summary"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:11.865Z",
+                    "id": "3KinTi83FecuMeiUo0qGU4",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:11.865Z"
+                }
+            },
+            {
+                "fields": {
+                    "curl": "curl -H 'Authorization: Bearer '$CDA_TOKEN 'https://cdn.contentful.com/spaces/'$SPACE_ID'/entries/'",
+                    "dotNet": "var entry = await client.GetEntries<dynamic>();\n\nConsole.WriteLine(entry.ToString());",
+                    "java": "final CDAArray all =\n    client\n        .fetch(CDAEntry.class)\n        .all();\n\nSystem.out.println(all);\n",
+                    "javaAndroid": "client\n    .observe(CDAEntry.class)\n    .all()\n    .observeOn(AndroidSchedulers.mainThread())\n    .subscribeOn(io.reactivex.schedulers.Schedulers.io())\n    .subscribe(\n        new DisposableSubscriber<CDAArray>() {\n          CDAArray result;\n\n          @Override public void onComplete() {\n            new AlertDialog.Builder(context)\n                .setTitle(\"Contentful\")\n                .setMessage(result.toString())\n                .show();\n          }\n\n          @Override public void onError(Throwable e) {\n            // Handle error case.\n            new AlertDialog.Builder(context)\n                .setTitle(\"Contentful\")\n                .setMessage(\"An error occurred: \" + e.toString())\n                .show();\n          }\n\n          @Override public void onNext(CDAArray array) {\n            // Array received, maybe more to come.\n            result = entry;\n          }\n        }",
+                    "javascript": "client.getEntries()\n.then((response) => console.log(response))",
+                    "php": "$entries = $client->getEntries();\n\nvar_dump($entries);",
+                    "python": "entries = client.entries()\nprint(repr(entries))",
+                    "ruby": "entries = client.entries()\nputs(entries)",
+                    "swift": "client.fetchEntries() { (result: Result<ArrayResponse<Entry>>) in\n \u00a0\u00a0\u00a0switch result {\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0case .success(arrayResponse):\n            let entries = arrayResponse.items\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0print(entries)\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0case .error(let error):\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0print(\"Error \\(error)!\")\n \u00a0\u00a0\u00a0}\n}",
+                    "title": "Fetch all entries > code"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCodeSnippets",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:01.673Z",
+                    "id": "3QJuO2TNxm0OqSgIMaoCwi",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:01.673Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "To make communication with Contentful as easy as possible, we created open-source SDKs.\n\nInstall an SDK:",
+                    "title": "SDK basics > installation"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:04.810Z",
+                    "id": "3Y1JQg9bjqIG6OgA2KAM4A",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:04.810Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": [
+                        {
+                            "sys": {
+                                "id": "5WZ7JD9Hb2Myi6uYYSscIw",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "3QJuO2TNxm0OqSgIMaoCwi",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    ],
+                    "slug": "fetch-all-entries",
+                    "title": "Fetch all entries"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:17.980Z",
+                    "id": "3jkW4CdxPqu8Q2oSgCeOuy",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:17.980Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "New to APIs? An API token ensures that only an authorized person or application can pull content from your space.",
+                    "title": "SDK basics > SDK initialization - API token tip"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:09.328Z",
+                    "id": "3k6uoYm9i8MycCm42IsY62",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:09.328Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": [
+                        {
+                            "sys": {
+                                "id": "7iCSSldqDuUkG4GWa46uUq",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "41fdMtrUzmiqKykUwA8u2A",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    ],
+                    "slug": "architecture",
+                    "title": "Architecture"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:14.623Z",
+                    "id": "3op5VIqGZiwoe06c8IQIMO",
+                    "locale": "en-US",
+                    "revision": 3,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-13T14:47:06.724Z"
+                }
+            },
+            {
+                "fields": {
+                    "caption": "Contentful's APIs send data in JSON format which enables cross channel distribution of content.",
+                    "image": {
+                        "sys": {
+                            "id": "1PzXR2apawY8iYM4o0AUoi",
+                            "linkType": "Asset",
+                            "type": "Link"
+                        }
+                    },
+                    "title": "Architecture > headless image"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonImage",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:06.841Z",
+                    "id": "41fdMtrUzmiqKykUwA8u2A",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:06.841Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": [
+                        {
+                            "sys": {
+                                "id": "52phR1CiHmcakyUaayE6sg",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    ],
+                    "slug": "this-is-a-different-course-slug-for-lesson-a",
+                    "title": "Different Slug Course > Lesson A"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-20T13:02:18.071Z",
+                    "id": "43ehEtNrOUkoCykeSiSgWA",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-20T13:02:18.071Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": [
+                        {
+                            "sys": {
+                                "id": "3AtnhO0pGwu2yYSSOoGy4U",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    ],
+                    "slug": "pending_lesson",
+                    "title": "Pending lesson"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-14T14:21:17.575Z",
+                    "id": "4LZD8ABPAQwUsuoMASQQGi",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-14T14:21:17.575Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "You now know how the example app was built using a Contentful SDK. To deepen your understanding, download the source code and interact with it. If you have a question, you can ask the [Contentful Community](https://www.contentfulcommunity.com/) or [contact support](https://www.contentful.com/support/).",
+                    "title": "How the example is built > summary"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:57.313Z",
+                    "id": "4Ng6zmj9e8Sw0eaYKQM8Es",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:13:57.313Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "The example app is configured to connect to both the Delivery API and the Preview API. \n\nFor fun, change the formatting of *pizza* by going to the menu item `API: Content Delivery API` and selecting `API: Content Preview API`.",
+                    "title": "Fetch draft content > footnote"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:59.900Z",
+                    "id": "4ZQtjYftNKaoKWuksM0sS0",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:13:59.900Z"
+                }
+            },
+            {
+                "fields": {
+                    "curl": "export CPA_TOKEN='<cpa_token>';\nexport SPACE_ID='<space_id>';",
+                    "dotNet": "var httpClient = new HttpClient();\nvar client = new ContentfulClient(httpClient, \"\", \"<cpa_token>\", \"<space_id>\", usePreviewApi: true);",
+                    "java": "final CDAClient client =\n \u00a0\u00a0\u00a0CDAClient\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.builder()\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.setToken(\"<cpa_token>\")\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.preview()\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.setSpace(\"<space_id>\")\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.build();",
+                    "javaAndroid": "final CDAClient client =\n \u00a0\u00a0\u00a0CDAClient\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.builder()\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.setToken(\"<cpa_token>\")\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.preview()\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.setSpace(\"<space_id>\")\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.build();",
+                    "javascript": "const contentful = require('contentful')\nconst client = contentful.createClient({\n \u00a0space: '<space_id>',\n \u00a0accessToken: '<cpa_token>',\n \u00a0host: 'preview.contentful.com'\n})",
+                    "php": "$client = new \\Contentful\\Delivery\\Client(\n    '<cpa_token>',\n    '<space_id>',\n    true\n);",
+                    "python": "import contentful\n\nclient = contentful.Client('<space_id>', '<cpa_token>', api_url='preview.contentful.com')",
+                    "ruby": "require \u2018contentful\u2019\n\nclient = Contentful::Client.new(\n \u00a0space: '<space_id>',\n \u00a0access_token: '<cpa_token>',\n \u00a0dynamic_entries: :auto,\n \u00a0api_url: 'preview.contentful.com',\n \u00a0raise_errors: true\n)",
+                    "swift": "var configuration = ClientConfiguration()\nconfiguration.previewMode = true\n\n// Retain the client as a property on a type you define so that \n// the client's asynchronous network callbacks are executed.\nlet client = Client(spaceId: \"<space_id>\", accessToken: \"<cpa_token>\")",
+                    "title": "Fetch draft content > code"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCodeSnippets",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:00.545Z",
+                    "id": "4Zg99dYM5awic2iwIKo6EW",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:00.545Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "_Content modelling_ is the practice of structuring your content. At Contentful, you do this by creating _content types_. A content type can be thought of as a schema for content that is similiar. For each content type, you populate its fields. Each field represents one piece of data of a specific type.\n\nYou can referenece one content type from another to define relationships between them.\n\n## The content model of this lesson\n\nThe text you are reading now is stored in Contentful. Its content-type structure is as follows:\n\n- Lesson: used to group and arrange content\n- Lesson > Copy: one chunk of markdown content\n- Lesson > Code: one chunk of code in different languages\n- Lesson > Image: an image\n\n![content-model-lesson](//images.contentful.com/ft4tkuv7nwl0/1nXjR47jxOagUcc8iU6wUQ/2363d14a14ad8becb0869ebd5d2853c7/content-model-lesson.svg)\n\nTo model a _lesson_, we chose a modular approach where the content type called _Lesson_ uses a reference field that contains references to other content types.\n\nThis approach is benefitial because content writers can put chunks of information in any order they want. Meanwhile, developers can control how each chunk of information is presented.\n\n## The content model of this application\n\nThe following diagram displays the entire content model of this application.\n\nIn more detail:\n\n- The _Layout_ content type references the _Highlighted course_ content type.\n- The _Highlighted course_ content type references the _Course_ content type.\n- The _Course_ content type references the _Lesson_ content type.\n\nKnowing this, explore the hierarchy of this example app. Afterwards, explore the corresponding hierarchy of the content types in the Contentful web app. Doing so strengthens your understanding of the relationships between the content model and how it\u2019s represented within this example app and the Contentful web app.",
+                    "title": "Content model > copy"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:07.462Z",
+                    "id": "4qT1W3HXewc0SscAs80UuA",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:07.462Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "This is a copy\ud83d\udda8\ufe0f",
+                    "title": "Course with different slug > lesson a > copy 1"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-20T13:02:14.219Z",
+                    "id": "52phR1CiHmcakyUaayE6sg",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-20T13:02:14.219Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "Switch to the language from English to German by going to the menu item Locale: `U.S. English` and selecting `German`.",
+                    "title": "Serve localized content > Code - Success"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:57.916Z",
+                    "id": "58B62ubQbmIOiAkmq44kAo",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:13:57.916Z"
+                }
+            },
+            {
+                "fields": {
+                    "caption": "The Contentful web app is a single page application sitting on top of our Content Management API. It can be used as an interface for content writers as well as for setup tasks.",
+                    "image": {
+                        "sys": {
+                            "id": "4CWJDjGTzaU8CMAW2eYeie",
+                            "linkType": "Asset",
+                            "type": "Link"
+                        }
+                    },
+                    "title": "Content management > image"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonImage",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:09.935Z",
+                    "id": "5DtGCVHfr2OC2Is6KceS0G",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:09.935Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": [
+                        {
+                            "sys": {
+                                "id": "4Ng6zmj9e8Sw0eaYKQM8Es",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    ],
+                    "slug": "example-app-summary",
+                    "title": "Summary"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:12.473Z",
+                    "id": "5VWYVBc39Cia0sqqaeyiIW",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:12.473Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "Now that you have configured a Contentful client, you can use it to fetch all the entries in your Contentful space:",
+                    "title": "Fetch all entries > introduction"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:02.916Z",
+                    "id": "5WZ7JD9Hb2Myi6uYYSscIw",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:02.916Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": [
+                        {
+                            "sys": {
+                                "id": "34o40Ox504yiw6Keec8iWA",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    ],
+                    "slug": "pendinglesson",
+                    "title": "pending lesson"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-14T11:43:27.420Z",
+                    "id": "5Wfxa9xYAMYswoi28YOeYu",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-14T11:43:27.420Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "In this course, you learned the basic concepts of Contentful:\n\n- Contentful\u2019s API-first design facilitates connecting Contentful with third-party systems.\n- Contentful\u2019s content infrastructure is a service that runs on AWS (Amazon Web Services).\n- Contentful is headless and provides JSON and binaries as output.\n- A client application that consumes content is in full control of its presentation.\n- Data modeling within Contentful uses flexible content types that are decoupled from presentation.\n- The Contentful web app is easy-to-use content editor.\n\n",
+                    "title": "Summary > Copy"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:10.495Z",
+                    "id": "5jR4ciJ8Y8m2KKqmMKOkg4",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:10.495Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": [
+                        {
+                            "sys": {
+                                "id": "3Y1JQg9bjqIG6OgA2KAM4A",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "1ph3B44420k2wgG8y2aYcM",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "15Cx6Bu1Y2qAkyq2yWgkK2",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "1u8xSIQR4UaoQOc4m6KiiU",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "3k6uoYm9i8MycCm42IsY62",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    ],
+                    "slug": "sdk-basics",
+                    "title": "SDK basics"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:13.134Z",
+                    "id": "5mgMoU9aCWE88SIqSIMGYE",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:13.134Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": [
+                        {
+                            "sys": {
+                                "id": "4qT1W3HXewc0SscAs80UuA",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "6gFiJvssqQ62CMYqECOu2M",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    ],
+                    "slug": "content-model",
+                    "title": "Content model"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:13.957Z",
+                    "id": "5p9qNpTOJaCE6ykC4a8Wqg",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:13.957Z"
+                }
+            },
+            {
+                "fields": {
+                    "curl": "entry = client.entry('2uNOpLMJioKeoMq8W44uYc', locale: 'de-DE')\nputs(entry.fields)",
+                    "dotNet": "var queryBuilder = QueryBuilder<dynamic>.New.LocaleIs(\"de-DE\");\nvar entries = await client.GetEntriesAsync(queryBuilder);\nConsole.WriteLine(entries.ToString());",
+                    "java": "final CDAArray all =\n \u00a0\u00a0\u00a0client\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.fetch(CDAEntry.class)\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.where(\"locale\", \"de-DE\")\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.all();\n\nSystem.out.println(all.toString());",
+                    "javaAndroid": "client\n \u00a0\u00a0\u00a0.observe(CDAEntry.class)\n \u00a0\u00a0\u00a0.where(\"locale\", \"de-DE\")\n \u00a0\u00a0\u00a0.all()\n \u00a0\u00a0\u00a0.observeOn(AndroidSchedulers.mainThread())\n \u00a0\u00a0\u00a0.subscribeOn(io.reactivex.schedulers.Schedulers.io())\n \u00a0\u00a0\u00a0.subscribe(\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0new DisposableSubscriber<CDAArray>() {\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0CDAArray result;\n\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0@Override public void onComplete() {\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0new AlertDialog.Builder(context)\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.setTitle(\"Contentful\")\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.setMessage(result.toString())\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.show();\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}\n\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0@Override public void onError(Throwable e) {\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0// Handle error case.\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0new AlertDialog.Builder(context)\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.setTitle(\"Contentful\")\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.setMessage(\"An error occurred: \" + e.toString())\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0.show();\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}\n\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0@Override public void onNext(CDAArray entry) {\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0// Array received, maybe more to come.\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result = entry;\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}\n \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}",
+                    "javascript": "client.getEntries({'locale': 'de-DE'}).then((response) => {\n \u00a0console.log(response)\n})",
+                    "php": "$query = (new Contentful\\Delivery\\Query())\n \u00a0\u00a0\u00a0->setLocale('de-DE');\n\n$entries = $client->getEntries($query);\n\nvar_dump($entries);",
+                    "python": "entry = client.entry('2uNOpLMJioKeoMq8W44uYc', {'locale': 'de-DE'})\nprint(entry.fields())",
+                    "ruby": "entry = client.entry('2uNOpLMJioKeoMq8W44uYc', locale: 'de-DE')\nputs(entry.fields)",
+                    "swift": "let query = Query(where: \"locale\", .equals(\"de-DE\"))\n\nclient.fetchEntries(with: query) { (result: Result<ArrayResponse<Entry>>) in\n \u00a0switch result {\n \u00a0case .success(let arrayResponse):\n \u00a0\u00a0\u00a0let entries = arrayResponse.items\n \u00a0\u00a0\u00a0print(entries)\n \u00a0case .error(let error):\n \u00a0\u00a0\u00a0print(error)\n \u00a0}\n}",
+                    "title": "Serve localized content > Fetch - Code "
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCodeSnippets",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:59.210Z",
+                    "id": "5u5i90HuEgcOYKacSoMEG6",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:13:59.210Z"
+                }
+            },
+            {
+                "fields": {
+                    "caption": "The full content type hierarchy from the home route down to a lesson with lesson modules.",
+                    "image": {
+                        "sys": {
+                            "id": "5o1Zu7UJheEGGQUC6gYEmS",
+                            "linkType": "Asset",
+                            "type": "Link"
+                        }
+                    },
+                    "title": "Content model > image"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonImage",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:11.242Z",
+                    "id": "6gFiJvssqQ62CMYqECOu2M",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:11.242Z"
+                }
+            },
+            {
+                "fields": {
+                    "slug": "getting-started",
+                    "title": "Getting started"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "category",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:08.115Z",
+                    "id": "6ucY5w3oswEU6EYSCEi0C8",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:08.115Z"
+                }
+            },
+            {
+                "fields": {
+                    "slug": "application-development",
+                    "title": "Application Development"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "category",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:13:56.738Z",
+                    "id": "7JhDodrNmwmwGmQqiACW4",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:13:56.738Z"
+                }
+            },
+            {
+                "fields": {
+                    "copy": "## API-first\n\nContentful follows an API-first approach, which means all functionality is provided through an API.\n\nThis means you can:\n- modify data schemas or configure a webhook through the Content Management API.\n- deliver cross-channel content through the Content Delivery API.\n- preview unpubublished content through the Content Preview API.\n- resize, crop, or re-compress images through the Images API.\n\n![api first](//images.contentful.com/ft4tkuv7nwl0/1YK5kwroV6UEGS64mQs0Eo/c5eb53f39703f73d215e7ed8ad2f88e6/api-first.svg)\n\nContentful is a headless CMS; there is no templating or presentation layer tied to the content. Instead, a developer has complete freedom when it comes to building an application that consumes and presents content from Contentful. This allows you to decouple your applications from Contentful's services.\n\nContentful has minimal requirements:\n- support for HTTP\n- parsing of JSON\n\nBeyond that, you are free to chose any technology you want.",
+                    "title": "Architecture > copy"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lessonCopy",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:06.237Z",
+                    "id": "7iCSSldqDuUkG4GWa46uUq",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:06.237Z"
+                }
+            },
+            {
+                "fields": {
+                    "modules": [
+                        {
+                            "sys": {
+                                "id": "1wMm7tnKi0kIYsI24eYiKS",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "4Zg99dYM5awic2iwIKo6EW",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        },
+                        {
+                            "sys": {
+                                "id": "4ZQtjYftNKaoKWuksM0sS0",
+                                "linkType": "Entry",
+                                "type": "Link"
+                            }
+                        }
+                    ],
+                    "slug": "fetch-draft-content",
+                    "title": "Fetch draft content"
+                },
+                "sys": {
+                    "contentType": {
+                        "sys": {
+                            "id": "lesson",
+                            "linkType": "ContentType",
+                            "type": "Link"
+                        }
+                    },
+                    "createdAt": "2017-12-11T12:14:15.407Z",
+                    "id": "Dy6jo5j4goU2C4sc8Kwkk",
+                    "locale": "en-US",
+                    "revision": 1,
+                    "space": {
+                        "sys": {
+                            "id": "jnzexv31feqf",
+                            "linkType": "Space",
+                            "type": "Link"
+                        }
+                    },
+                    "type": "Entry",
+                    "updatedAt": "2017-12-11T12:14:15.407Z"
+                }
+            }
+        ]
+    },
+    "items": [
+        {
+            "fields": {
+                "categories": [
+                    {
+                        "sys": {
+                            "id": "6ucY5w3oswEU6EYSCEi0C8",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    }
+                ],
+                "description": "This course has a pending change, but was published before ...\n",
+                "duration": 10,
+                "image": {
+                    "sys": {
+                        "id": "6q0SqWXHHOkmAgoqgAaiGG",
+                        "linkType": "Asset",
+                        "type": "Link"
+                    }
+                },
+                "lessons": [
+                    {
+                        "sys": {
+                            "id": "5Wfxa9xYAMYswoi28YOeYu",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    }
+                ],
+                "shortDescription": "short description",
+                "skillLevel": "advanced",
+                "slug": "pending_changes",
+                "title": "My pending changes course"
+            },
+            "sys": {
+                "contentType": {
+                    "sys": {
+                        "id": "course",
+                        "linkType": "ContentType",
+                        "type": "Link"
+                    }
+                },
+                "createdAt": "2017-12-14T11:43:38.059Z",
+                "id": "4jC2XKX8tGSwGCiSo2Mwia",
+                "locale": "en-US",
+                "revision": 3,
+                "space": {
+                    "sys": {
+                        "id": "jnzexv31feqf",
+                        "linkType": "Space",
+                        "type": "Link"
+                    }
+                },
+                "type": "Entry",
+                "updatedAt": "2017-12-14T14:24:21.148Z"
+            }
+        },
+        {
+            "fields": {
+                "categories": [
+                    {
+                        "sys": {
+                            "id": "6ucY5w3oswEU6EYSCEi0C8",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    }
+                ],
+                "description": "Take a look at the slug, it is different then the title ... :)",
+                "duration": 123,
+                "image": {
+                    "sys": {
+                        "id": "PKYPMsOlqK4SAwEOwMQky",
+                        "linkType": "Asset",
+                        "type": "Link"
+                    }
+                },
+                "lessons": [
+                    {
+                        "sys": {
+                            "id": "43ehEtNrOUkoCykeSiSgWA",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    }
+                ],
+                "shortDescription": "This course has a different slug",
+                "skillLevel": "beginner",
+                "slug": "this-slug-is-different",
+                "title": "Course with different slug"
+            },
+            "sys": {
+                "contentType": {
+                    "sys": {
+                        "id": "course",
+                        "linkType": "ContentType",
+                        "type": "Link"
+                    }
+                },
+                "createdAt": "2017-12-20T13:02:32.507Z",
+                "id": "22T0z4Abr6SeksycEwsi4o",
+                "locale": "en-US",
+                "revision": 1,
+                "space": {
+                    "sys": {
+                        "id": "jnzexv31feqf",
+                        "linkType": "Space",
+                        "type": "Link"
+                    }
+                },
+                "type": "Entry",
+                "updatedAt": "2017-12-20T13:02:32.507Z"
+            }
+        },
+        {
+            "fields": {
+                "categories": [
+                    {
+                        "sys": {
+                            "id": "6ucY5w3oswEU6EYSCEi0C8",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    }
+                ],
+                "description": "This example app helps you build your own application using Contentful. The app contains modules that introduce you to core concepts, content modelling, and how your app consumes content from Contentful. The content is pulled from Contentful APIs using a Contentful SDK.\n\nThe user interface of this example app is unique to this application and is _not_ a template. This is intentional, and it touches an aspect of a headless CMS that will be covered later.\n\nThis course covers the following topics:\n\n- **Contentful's architecture:**: Basic components of Contentful\n- **Content modelling**: The application's content model\n- **Integrating with Contentful**: Connecting this application to Contentful.",
+                "duration": 5,
+                "image": {
+                    "sys": {
+                        "id": "6nvWJT1AkM64so8Auue4QQ",
+                        "linkType": "Asset",
+                        "type": "Link"
+                    }
+                },
+                "lessons": [
+                    {
+                        "sys": {
+                            "id": "3op5VIqGZiwoe06c8IQIMO",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    },
+                    {
+                        "sys": {
+                            "id": "5p9qNpTOJaCE6ykC4a8Wqg",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    },
+                    {
+                        "sys": {
+                            "id": "1zwAjpe38UC8iqKMM6gu0Q",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    },
+                    {
+                        "sys": {
+                            "id": "3KinTi83FecuMeiUo0qGU4",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    }
+                ],
+                "shortDescription": "Learn how to build your own applications with Contentful.",
+                "skillLevel": "beginner",
+                "slug": "hello-world",
+                "title": "Hello world"
+            },
+            "sys": {
+                "contentType": {
+                    "sys": {
+                        "id": "course",
+                        "linkType": "ContentType",
+                        "type": "Link"
+                    }
+                },
+                "createdAt": "2017-12-11T12:14:16.135Z",
+                "id": "1toEOumnkEksWakieoeC6M",
+                "locale": "en-US",
+                "revision": 2,
+                "space": {
+                    "sys": {
+                        "id": "jnzexv31feqf",
+                        "linkType": "Space",
+                        "type": "Link"
+                    }
+                },
+                "type": "Entry",
+                "updatedAt": "2017-12-13T10:17:09.749Z"
+            }
+        },
+        {
+            "fields": {
+                "categories": [
+                    {
+                        "sys": {
+                            "id": "7JhDodrNmwmwGmQqiACW4",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    }
+                ],
+                "description": "By looking at the code of the example app, you will get a sense of how to use a Contentful SDK in your programming language. For any third-party dependency, refer to its documentation.",
+                "duration": 5,
+                "image": {
+                    "sys": {
+                        "id": "2KUZRfRHgk8Q8MqOYaa4aA",
+                        "linkType": "Asset",
+                        "type": "Link"
+                    }
+                },
+                "lessons": [
+                    {
+                        "sys": {
+                            "id": "5mgMoU9aCWE88SIqSIMGYE",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    },
+                    {
+                        "sys": {
+                            "id": "3jkW4CdxPqu8Q2oSgCeOuy",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    },
+                    {
+                        "sys": {
+                            "id": "Dy6jo5j4goU2C4sc8Kwkk",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    },
+                    {
+                        "sys": {
+                            "id": "1HR1QvURo4MoSqO0eqmUeO",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    },
+                    {
+                        "sys": {
+                            "id": "5VWYVBc39Cia0sqqaeyiIW",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    }
+                ],
+                "shortDescription": "Learn about best practices when building an application.",
+                "skillLevel": "beginner",
+                "slug": "how-the-example-app-is-built",
+                "title": "How the example app is built"
+            },
+            "sys": {
+                "contentType": {
+                    "sys": {
+                        "id": "course",
+                        "linkType": "ContentType",
+                        "type": "Link"
+                    }
+                },
+                "createdAt": "2017-12-11T12:14:18.594Z",
+                "id": "34MlmiuMgU8wKCOOIkAuMy",
+                "locale": "en-US",
+                "revision": 1,
+                "space": {
+                    "sys": {
+                        "id": "jnzexv31feqf",
+                        "linkType": "Space",
+                        "type": "Link"
+                    }
+                },
+                "type": "Entry",
+                "updatedAt": "2017-12-11T12:14:18.594Z"
+            }
+        },
+        {
+            "fields": {
+                "categories": [
+                    {
+                        "sys": {
+                            "id": "6ucY5w3oswEU6EYSCEi0C8",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    },
+                    {
+                        "sys": {
+                            "id": "7JhDodrNmwmwGmQqiACW4",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    }
+                ],
+                "description": "This course has lessons with drafts and links to pending changes.",
+                "duration": 10000,
+                "image": {
+                    "sys": {
+                        "id": "6q0SqWXHHOkmAgoqgAaiGG",
+                        "linkType": "Asset",
+                        "type": "Link"
+                    }
+                },
+                "lessons": [
+                    {
+                        "sys": {
+                            "id": "4LZD8ABPAQwUsuoMASQQGi",
+                            "linkType": "Entry",
+                            "type": "Link"
+                        }
+                    }
+                ],
+                "shortDescription": "This course has lessons with a draft and links to pending changes.",
+                "skillLevel": "advanced",
+                "slug": "course-with-draft-and-pending-lending",
+                "title": "Course with Draft and Pending Lesson"
+            },
+            "sys": {
+                "contentType": {
+                    "sys": {
+                        "id": "course",
+                        "linkType": "ContentType",
+                        "type": "Link"
+                    }
+                },
+                "createdAt": "2017-12-14T14:38:51.765Z",
+                "id": "MH6YA2xlU4mOw0s28I2Eu",
+                "locale": "en-US",
+                "revision": 3,
+                "space": {
+                    "sys": {
+                        "id": "jnzexv31feqf",
+                        "linkType": "Space",
+                        "type": "Link"
+                    }
+                },
+                "type": "Entry",
+                "updatedAt": "2017-12-20T12:58:42.604Z"
+            }
+        }
+    ],
+    "limit": 100,
+    "skip": 0,
+    "sys": {
+        "type": "Array"
+    },
+    "total": 5
+}

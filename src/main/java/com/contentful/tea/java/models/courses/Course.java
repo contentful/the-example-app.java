@@ -19,6 +19,7 @@ public class Course extends MappableType {
   private String cssClass;
   private String imageUrl;
   private String shortDescription;
+  private String description;
   private String slug;
   private String title;
 
@@ -28,6 +29,15 @@ public class Course extends MappableType {
 
   public Course setShortDescription(String shortDescription) {
     this.shortDescription = shortDescription;
+    return this;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public Course setDescription(String description) {
+    this.description = description;
     return this;
   }
 
@@ -140,6 +150,7 @@ public class Course extends MappableType {
         Objects.equals(getSlug(), course.getSlug()) &&
         Objects.equals(getTitle(), course.getTitle()) &&
         Objects.equals(getShortDescription(), course.getShortDescription()) &&
+        Objects.equals(getDescription(), course.getDescription()) &&
         Objects.equals(getImageUrl(), course.getImageUrl()) &&
         Objects.equals(getCssClass(), course.getCssClass()) &&
         Objects.equals(getLessons(), course.getLessons()) &&
@@ -149,7 +160,7 @@ public class Course extends MappableType {
   }
 
   @Override public int hashCode() {
-    return Objects.hash(getSlug(), getTitle(), getShortDescription(), getImageUrl(), isDraft(), hasPendingChanges(), getCategories(), getCssClass(), getLessons(), getDuration());
+    return Objects.hash(getSlug(), getTitle(), getDescription(), getShortDescription(), getImageUrl(), isDraft(), hasPendingChanges(), getCategories(), getCssClass(), getLessons(), getDuration());
   }
 
   /**
@@ -161,6 +172,7 @@ public class Course extends MappableType {
         + "draft = " + isDraft() + ", "
         + "imageUrl = " + getImageUrl() + ", "
         + "pendingChanges = " + hasPendingChanges() + ", "
+        + "description = " + getDescription() + ", "
         + "shortDescription = " + getShortDescription() + ", "
         + "slug = " + getSlug() + ", "
         + "cssClass = " + getCssClass() + ", "

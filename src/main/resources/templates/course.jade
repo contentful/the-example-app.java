@@ -15,11 +15,11 @@ block content
         .table-of-contents
           .table-of-contents__list
             .table-of-contents__item
-              a.table-of-contents__link(href='/courses/!{course.slug}!{queryString}' class='!{course.cssClass}') !{overviewLabel}
+              a(href='/courses/!{course.slug}!{queryString}' class='table-of-contents__link !{courseOverviewCssClass}') !{courseOverviewLabel}
             each lesson in course.lessons
               if lesson
                 .table-of-contents__item
-                  a.table-of-contents__link(href='/courses/!{course.slug}/lessons/!{lesson.slug}!{queryString}' class='!{lesson.cssClass}') !{lesson.title}
+                  a(href='/courses/!{course.slug}/lessons/!{lesson.slug}!{queryString}' class='table-of-contents__link !{lesson.cssClass}') !{lesson.title}
     section.layout-sidebar__content
       if lesson
         +lesson(lesson, course, nextLesson)

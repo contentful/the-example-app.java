@@ -6,11 +6,13 @@ import com.contentful.tea.java.models.mappable.MappableType;
 import java.util.Objects;
 
 public class CourseParameter extends MappableType {
-  private BaseParameter base;
+  private BaseParameter base = new BaseParameter();
 
   private String tableOfContentsLabel;
   private String skillLevelLabel;
   private String overviewLabel;
+  private String courseOverviewLabel;
+  private String courseOverviewCssClass;
   private String durationLabel;
   private String minutesLabel;
   private String startCourseLabel;
@@ -48,6 +50,24 @@ public class CourseParameter extends MappableType {
 
   public CourseParameter setOverviewLabel(String overviewLabel) {
     this.overviewLabel = overviewLabel;
+    return this;
+  }
+
+  public String getCourseOverviewLabel() {
+    return courseOverviewLabel;
+  }
+
+  public CourseParameter setCourseOverviewLabel(String courseOverviewLabel) {
+    this.courseOverviewLabel = courseOverviewLabel;
+    return this;
+  }
+
+  public String getCourseOverviewCssClass() {
+    return courseOverviewCssClass;
+  }
+
+  public CourseParameter setCourseOverviewCssClass(String courseOverviewCssClass) {
+    this.courseOverviewCssClass = courseOverviewCssClass;
     return this;
   }
 
@@ -93,6 +113,8 @@ public class CourseParameter extends MappableType {
     final CourseParameter that = (CourseParameter) o;
     return Objects.equals(getTableOfContentsLabel(), that.getTableOfContentsLabel()) &&
         Objects.equals(getSkillLevelLabel(), that.getSkillLevelLabel()) &&
+        Objects.equals(getCourseOverviewLabel(), that.getCourseOverviewLabel()) &&
+        Objects.equals(getCourseOverviewCssClass(), that.getCourseOverviewCssClass()) &&
         Objects.equals(getOverviewLabel(), that.getOverviewLabel()) &&
         Objects.equals(getDurationLabel(), that.getDurationLabel()) &&
         Objects.equals(getMinutesLabel(), that.getMinutesLabel()) &&
@@ -101,7 +123,7 @@ public class CourseParameter extends MappableType {
   }
 
   @Override public int hashCode() {
-    return Objects.hash(getTableOfContentsLabel(), getSkillLevelLabel(), getOverviewLabel(), getDurationLabel(), getMinutesLabel(), getStartCourseLabel(), getCourse());
+    return Objects.hash(getTableOfContentsLabel(), getSkillLevelLabel(), getCourseOverviewLabel(), getCourseOverviewCssClass(), getOverviewLabel(), getDurationLabel(), getMinutesLabel(), getStartCourseLabel(), getCourse());
   }
 
   /**
@@ -112,6 +134,8 @@ public class CourseParameter extends MappableType {
         + "durationLabel = " + getDurationLabel() + ", "
         + "course = " + getCourse() + ", "
         + "minutesLabel = " + getMinutesLabel() + ", "
+        + "courseOverViewLabel = " + getCourseOverviewLabel() + ", "
+        + "courseOverviewCssClass = " + getCourseOverviewCssClass() + ", "
         + "overviewLabel = " + getOverviewLabel() + ", "
         + "skillLevelLabel = " + getSkillLevelLabel() + ", "
         + "startCourseLabel = " + getStartCourseLabel() + ", "

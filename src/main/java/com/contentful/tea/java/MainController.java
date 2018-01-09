@@ -4,9 +4,9 @@ import com.contentful.java.cda.CDAArray;
 import com.contentful.java.cda.CDAClient;
 import com.contentful.java.cda.CDAEntry;
 import com.contentful.java.cda.CDAHttpException;
-import com.contentful.java.cda.CDAResource;
 import com.contentful.tea.java.html.JadeHtmlGenerator;
 import com.contentful.tea.java.models.Settings;
+import com.contentful.tea.java.models.courses.CourseParameter;
 import com.contentful.tea.java.models.courses.CoursesParameter;
 import com.contentful.tea.java.models.errors.ErrorParameter;
 import com.contentful.tea.java.models.landing.LandingPageParameter;
@@ -15,6 +15,7 @@ import com.contentful.tea.java.services.http.SessionParser;
 import com.contentful.tea.java.services.http.UrlParameterParser;
 import com.contentful.tea.java.services.modelconverter.ArrayToCourses;
 import com.contentful.tea.java.services.modelconverter.ArrayToCourses.ArrayAndSelectedCategory;
+import com.contentful.tea.java.services.modelconverter.EntryToCourse;
 import com.contentful.tea.java.services.modelconverter.EntryToLandingPage;
 import com.contentful.tea.java.services.modelconverter.ExceptionToErrorParameter;
 
@@ -28,10 +29,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -71,6 +68,10 @@ public class MainController implements ErrorController {
   @Autowired
   @SuppressWarnings("unused")
   private ArrayToCourses arrayToCourses;
+
+  @Autowired
+  @SuppressWarnings("unused")
+  private EntryToCourse entryToCourse;
 
   @Autowired
   @SuppressWarnings("unused")
@@ -167,17 +168,34 @@ public class MainController implements ErrorController {
     }
   }
 
-  @RequestMapping({"/courses/{courseId}", "/courses/{courseId}/lessons"})
+  @RequestMapping({"/courses/{slug}", "/courses/{slug}/lessons"})
   @ResponseBody
   @SuppressWarnings("unused")
-  public String course(HttpServletRequest request, @PathVariable("courseId") String courseId) {
+  public String course(HttpServletRequest request, @PathVariable("slug") String slug) {
     try {
       setupRoute(request);
 
-      // Fixme: Add content to page
-      throw new IllegalStateException("not implemented yet");
+      final CDAClient client = settings.getCurrentClient();
+      final CDAEntry course = ((CDAEntry) client
+          .fetch(CDAEntry.class)
+          .include(5)
+          .withContentType("course")
+          .where("fields.slug", slug)
+          .where("locale", settings.getLocale())
+          .all()
+          .items()
+          .get(0));
+
+      final EntryToCourse.Compound compound = new EntryToCourse.Compound()
+          .setCourse(course)
+          .setSlug(slug);
+
+      final CourseParameter parameter = entryToCourse.convert(compound);
+      staticContentSetter.applyContent(parameter.getBase());
+
+      return htmlGenerator.generate("templates/course.jade", parameter.toMap());
     } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render '" + courseId + "' courses page.", t);
+      throw new IllegalStateException("Cannot render '" + slug + "' courses page.", t);
     } finally {
       teardownRoute(request);
     }

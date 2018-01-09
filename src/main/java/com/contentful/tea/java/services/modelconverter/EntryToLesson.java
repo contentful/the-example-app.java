@@ -27,8 +27,8 @@ public class EntryToLesson extends ContentfulModelToMappableTypeConverter<CDAEnt
   public Lesson convert(CDAEntry cdaLesson) {
     final String locale = cdaLesson.locale();
     try {
+      // TODO: REMOVE THAT: THE CONTROLLER TAKES CARE OF IT
       cdaLesson.setLocale(settings.getLocale());
-
       final Lesson result = new Lesson()
           .setSlug(cdaLesson.getField("slug"))
           .setTitle(cdaLesson.getField("title"));

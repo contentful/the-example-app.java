@@ -39,7 +39,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
 
   @Autowired
   @SuppressWarnings("unused")
-  private EntryToCourse singleCourseConverter;
+  private EntryToCourse entryToCourse;
 
   @Autowired
   @SuppressWarnings("unused")
@@ -157,7 +157,8 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
     final CDAEntry cdaCourse = client.fetch(CDAEntry.class)
         .one("34MlmiuMgU8wKCOOIkAuMy");
 
-    final Course course = singleCourseConverter.convert(cdaCourse);
+    final EntryToCourse.Compound compound = new EntryToCourse.Compound().setCourse(cdaCourse);
+    final Course course = entryToCourse.convert(compound).getCourse();
 
     assertThat(course.getSlug()).isEqualTo("how-the-example-app-is-built");
     assertThat(course.getTitle()).isEqualTo("How the example app is built");
@@ -167,7 +168,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
     assertThat(course.getDuration()).isEqualTo(5);
     assertThat(course.getImageUrl()).isEqualTo("http://images.contentful.com/jnzexv31feqf/2KUZRfRHgk8Q8MqOYaa4aA/142bb20449dedbe70bd039d214dab2e3/Contentful_Architecture_101.jpg");
     assertThat(course.getShortDescription()).isEqualTo("Learn about best practices when building an application.");
-    assertThat(course.getSkillLevel()).isEqualTo("beginner");
+    assertThat(course.getSkillLevel()).isEqualTo("Beginner");
 
     assertThat(course.getLessons()).hasSize(5).doesNotContainNull();
   }
