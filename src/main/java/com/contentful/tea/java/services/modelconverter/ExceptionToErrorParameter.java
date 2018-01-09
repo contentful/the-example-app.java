@@ -1,6 +1,7 @@
 package com.contentful.tea.java.services.modelconverter;
 
 import com.contentful.java.cda.CDAHttpException;
+import com.contentful.java.cda.CDAResourceNotFoundException;
 import com.contentful.tea.java.models.base.BaseParameter;
 import com.contentful.tea.java.models.base.Locale;
 import com.contentful.tea.java.models.base.LocalesParameter;
@@ -68,6 +69,16 @@ public class ExceptionToErrorParameter implements Converter<Throwable, ErrorPara
   private int exceptionToStatusCode(Throwable source) {
     if (source instanceof FileNotFoundException) {
       return 404;
+    }
+
+    if (source.getCause() != null) {
+      if (source.getCause() instanceof CDAResourceNotFoundException) {
+        return 404;
+      }
+
+      if (source.getCause() instanceof CDAHttpException) {
+        return ((CDAHttpException) source.getCause()).responseCode();
+      }
     }
 
     if (source instanceof CDAHttpException) {
