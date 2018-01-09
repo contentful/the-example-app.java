@@ -93,14 +93,8 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
       }
 
       final CDAEntry course = (CDAEntry) resource;
-      final String courseLocale = course.locale();
-      course.setLocale(settings.getLocale());
-
       final List<CDAEntry> cdaCategories = course.getField("categories");
       for (final CDAEntry category : cdaCategories) {
-        final String categoryLocale = category.locale();
-        category.setLocale(settings.getLocale());
-
         final String slug = category.getField("slug");
         if (!categories.containsKey((String) slug)) {
           categories.put(
@@ -111,9 +105,6 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
                   .setCssClass(selectedCategory.equals(slug) ? "active" : "")
           );
         }
-
-        category.setLocale(categoryLocale);
-        course.setLocale(courseLocale);
       }
     }
 
@@ -128,11 +119,7 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
         throw new IllegalStateException("Courses found of non entry type");
       }
 
-
       final CDAEntry course = (CDAEntry) resource;
-      final String courseLocale = course.locale();
-      course.setLocale(settings.getLocale());
-
       final CDAAsset image = course.getField("image");
       final Course createdCourse = new Course()
           .setImageUrl(image.urlForImageWith(http()))
@@ -142,21 +129,14 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
 
       final List<CDAEntry> categories = course.getField("categories");
       for (final CDAEntry category : categories) {
-        final String categoryLocale = category.locale();
-        category.setLocale(settings.getLocale());
-
         createdCourse.addCategory(
             new Category()
                 .setSlug(category.getField("slug"))
                 .setTitle(category.getField("title"))
         );
-
-        category.setLocale(categoryLocale);
       }
 
       courses.add(createdCourse);
-
-      course.setLocale(courseLocale);
     }
 
     return courses;

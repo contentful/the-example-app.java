@@ -25,64 +25,50 @@ public class EntryToLesson extends ContentfulModelToMappableTypeConverter<CDAEnt
 
   @Override
   public Lesson convert(CDAEntry cdaLesson) {
-    final String locale = cdaLesson.locale();
-    try {
-      // TODO: REMOVE THAT: THE CONTROLLER TAKES CARE OF IT
-      cdaLesson.setLocale(settings.getLocale());
-      final Lesson result = new Lesson()
-          .setSlug(cdaLesson.getField("slug"))
-          .setTitle(cdaLesson.getField("title"));
+    final Lesson result = new Lesson()
+        .setSlug(cdaLesson.getField("slug"))
+        .setTitle(cdaLesson.getField("title"));
 
-      final List<CDAEntry> cdaModules = cdaLesson.getField("modules");
-      for (final CDAEntry cdaModule : cdaModules) {
-        final Module module = createModule(cdaModule);
-        if (module != null) {
-          result.addModule(module);
-        }
+    final List<CDAEntry> cdaModules = cdaLesson.getField("modules");
+    for (final CDAEntry cdaModule : cdaModules) {
+      final Module module = createModule(cdaModule);
+      if (module != null) {
+        result.addModule(module);
       }
-
-      return result;
-    } finally {
-      cdaLesson.setLocale(locale);
     }
+
+    return result;
   }
 
   private Module createModule(CDAEntry cdaModule) {
-    final String locale = cdaModule.locale();
-
-    try {
-      cdaModule.setLocale(settings.getLocale());
-      final String title = cdaModule.getField("title");
-      switch (cdaModule.contentType().id()) {
-        case "lessonCopy":
-          return new CopyModule()
-              .<CopyModule>setTitle(title)
-              .setCopy(m(title))
-              ;
-        case "lessonImage":
-          return new ImageModule()
-              .<ImageModule>setTitle(title)
-              .setCaption(cdaModule.getField("caption"))
-              .setImage(((CDAAsset) cdaModule.getField("image")).urlForImageWith(http()))
-              ;
-        case "lessonCodeSnippets":
-          return new CodeModule()
-              .<CodeModule>setTitle(title)
-              .setCurl(cdaModule.getField("curl"))
-              .setDotNet(cdaModule.getField("dotNet"))
-              .setJava(cdaModule.getField("java"))
-              .setJavaAndroid(cdaModule.getField("javaAndroid"))
-              .setJavascript(cdaModule.getField("javascript"))
-              .setPhp(cdaModule.getField("php"))
-              .setPython(cdaModule.getField("python"))
-              .setRuby(cdaModule.getField("ruby"))
-              .setSwift(cdaModule.getField("swift"))
-              ;
-        default:
-          return null;
-      }
-    } finally {
-      cdaModule.setLocale(locale);
+    final String title = cdaModule.getField("title");
+    switch (cdaModule.contentType().id()) {
+      case "lessonCopy":
+        return new CopyModule()
+            .<CopyModule>setTitle(title)
+            .setCopy(m(title))
+            ;
+      case "lessonImage":
+        return new ImageModule()
+            .<ImageModule>setTitle(title)
+            .setCaption(cdaModule.getField("caption"))
+            .setImage(((CDAAsset) cdaModule.getField("image")).urlForImageWith(http()))
+            ;
+      case "lessonCodeSnippets":
+        return new CodeModule()
+            .<CodeModule>setTitle(title)
+            .setCurl(cdaModule.getField("curl"))
+            .setDotNet(cdaModule.getField("dotNet"))
+            .setJava(cdaModule.getField("java"))
+            .setJavaAndroid(cdaModule.getField("javaAndroid"))
+            .setJavascript(cdaModule.getField("javascript"))
+            .setPhp(cdaModule.getField("php"))
+            .setPython(cdaModule.getField("python"))
+            .setRuby(cdaModule.getField("ruby"))
+            .setSwift(cdaModule.getField("swift"))
+            ;
+      default:
+        return null;
     }
   }
 

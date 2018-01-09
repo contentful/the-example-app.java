@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -71,7 +72,7 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
 
     final List<CDAEntry> cdaLessons = course.getField("lessons");
     final List<Lesson> lessons = new ArrayList<>();
-    final Set<String> visitedLessons = compound.getVisitedLessons();
+    final Set<String> visitedLessons = compound.getVisitedLessons() == null ? new HashSet<>() : compound.getVisitedLessons();
     for (final CDAEntry cdaLesson : cdaLessons) {
       final Lesson lesson = entryToLesson.convert(cdaLesson);
       final String cssClass = lesson.getCssClass();
