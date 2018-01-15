@@ -126,6 +126,7 @@ public class MainController implements ErrorController {
           .include(5)
           .withContentType("course")
           .where("locale", settings.getLocale())
+          .orderBy("-sys.createdAt")
           .all();
 
       final String categorySlug = "";
