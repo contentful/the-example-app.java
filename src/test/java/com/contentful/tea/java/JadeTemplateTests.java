@@ -16,7 +16,9 @@ import com.contentful.tea.java.models.mappable.NullHandler;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.contentful.tea.java.utils.TestUtils.assertBaseParameterInHtml;
@@ -25,10 +27,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 public class JadeTemplateTests {
-  private static final NullHandler TESTING_NULL_HANDLER = field -> {
-    fail("'%s' of '%s' is undefined!", field.getName(), field.getDeclaringClass());
+  private static final List<String> TESTING_NULLABLE_FIELDS = Arrays.asList(
+      "currentLesson", "nextLessonSlug"
+  );
 
-    return "\uD83D\uDE31";
+  private static final NullHandler TESTING_NULL_HANDLER = field -> {
+    if (TESTING_NULLABLE_FIELDS.contains(field.getName())) {
+      return "";
+    } else {
+      fail("'%s' of '%s' is undefined!", field.getName(), field.getDeclaringClass());
+
+      return "\uD83D\uDE31";
+    }
   };
 
   private JadeHtmlGenerator generator;
@@ -228,14 +238,14 @@ public class JadeTemplateTests {
                         .setSlug("TEST-lesson-slug")
                         .setTitle("TEST-lesson-title")
                         .setCssClass("TEST-lesson-css")
+                        .addModule(
+                            new com.contentful.tea.java.models.courses.lessons.modules.CopyModule()
+                                .setCopy("TEST-lesson-module-copy")
+                                .setTitle("TEST-lesson-module-title")
+                        )
                 )
-                .setCurrentLesson(
-                    new Lesson()
-                        .setSlug("TEST-currentLesson-slug")
-                        .setTitle("TEST-currentLesson-title")
-                        .setCssClass("TEST-currentLesson-cssClass")
-                )
-                .setNextLessonSlug("TEST-nextLessonSlug")
+            .setCurrentLesson(null)
+            .setNextLessonSlug(null)
         )
         .setMinutesLabel("TEST-setMinutesLabel")
         .setOverviewLabel("TEST-setOverviewLabel")
@@ -250,7 +260,9 @@ public class JadeTemplateTests {
     final String generatedHtml = generator
         .generate(
             "templates/course.jade",
-            parameter.toMap(TESTING_NULL_HANDLER));
+            parameter.toMap(
+                TESTING_NULL_HANDLER
+            ));
 
     assertBaseParameterInHtml(generatedHtml);
     assertThat(generatedHtml)
