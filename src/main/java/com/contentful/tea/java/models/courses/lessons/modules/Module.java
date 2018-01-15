@@ -5,6 +5,12 @@ import com.contentful.tea.java.models.mappable.MappableType;
 import java.util.Objects;
 
 public class Module extends MappableType {
+  private final String type;
+
+  public Module(String type) {
+    this.type = type;
+  }
+
   private String title;
 
   public String getTitle() {
@@ -14,6 +20,10 @@ public class Module extends MappableType {
   public <T extends Module> T setTitle(String title) {
     this.title = title;
     return (T) this;
+  }
+
+  public String getType() {
+    return type;
   }
 
   @Override public boolean equals(Object o) {
@@ -32,6 +42,7 @@ public class Module extends MappableType {
    */
   @Override public String toString() {
     return "Module { " + super.toString() + " "
+        + "type = " + getType() + ", "
         + "title = " + getTitle() + " "
         + "}";
   }

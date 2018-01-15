@@ -16,6 +16,7 @@ public class CourseParameter extends MappableType {
   private String durationLabel;
   private String minutesLabel;
   private String startCourseLabel;
+  private String nextLessonLabel;
   private Course course;
 
   public BaseParameter getBase() {
@@ -107,6 +108,15 @@ public class CourseParameter extends MappableType {
     return this;
   }
 
+  public String getNextLessonLabel() {
+    return nextLessonLabel;
+  }
+
+  public CourseParameter setNextLessonLabel(String nextLessonLabel) {
+    this.nextLessonLabel = nextLessonLabel;
+    return this;
+  }
+
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof CourseParameter)) return false;
@@ -119,11 +129,12 @@ public class CourseParameter extends MappableType {
         Objects.equals(getDurationLabel(), that.getDurationLabel()) &&
         Objects.equals(getMinutesLabel(), that.getMinutesLabel()) &&
         Objects.equals(getStartCourseLabel(), that.getStartCourseLabel()) &&
+        Objects.equals(getNextLessonLabel(), that.getNextLessonLabel()) &&
         Objects.equals(getCourse(), that.getCourse());
   }
 
   @Override public int hashCode() {
-    return Objects.hash(getTableOfContentsLabel(), getSkillLevelLabel(), getCourseOverviewLabel(), getCourseOverviewCssClass(), getOverviewLabel(), getDurationLabel(), getMinutesLabel(), getStartCourseLabel(), getCourse());
+    return Objects.hash(getTableOfContentsLabel(), getSkillLevelLabel(), getCourseOverviewLabel(), getCourseOverviewCssClass(), getOverviewLabel(), getDurationLabel(), getMinutesLabel(), getStartCourseLabel(), getNextLessonLabel(), getCourse());
   }
 
   /**
@@ -139,7 +150,8 @@ public class CourseParameter extends MappableType {
         + "overviewLabel = " + getOverviewLabel() + ", "
         + "skillLevelLabel = " + getSkillLevelLabel() + ", "
         + "startCourseLabel = " + getStartCourseLabel() + ", "
-        + "tableOfContentsLabel = " + getTableOfContentsLabel() + " "
+        + "tableOfContentsLabel = " + getTableOfContentsLabel() + ", "
+        + "nextLessonLabel= " + getNextLessonLabel() + " "
         + "}";
   }
 }

@@ -3,25 +3,25 @@ include _lessonModuleCodeSnippet
 include _lessonModuleCopy
 include _lessonModuleImage
 
-mixin lesson(lesson, course, nextLesson)
+mixin lesson(lesson, course, nextLessonSlug)
   .lesson
     h1.lesson__title #{lesson.title}
     +editorialFeatures(lesson)
     .lesson__modules
       each module in lesson.modules
-        if module.sys.contentType
-          case module.sys.contentType.sys.id
-            when 'lessonCodeSnippets'
+        if module.type
+          case module.type
+            when 'code'
               +lessonModuleCodeSnippet(module)
-            when 'lessonCopy'
+            when 'copy'
               +lessonModuleCopy(module)
-            when 'lessonImage'
+            when 'image'
               +lessonModuleImage(module)
         else
           h2 ️️#{lessonModuleErrorTitle}
           p
             span #{lessonModuleErrorBody}
             strong  #{module.sys.id}
-    if nextLesson
-      a.lesson__cta.cta(href='/courses/!{course.slug}/lessons/!{nextLesson.slug}!{queryString}') #{nextLessonLabel}
+    if nextLessonSlug
+      a.lesson__cta.cta(href='/courses/!{course.slug}/lessons/!{nextLessonSlug}!{queryString}') #{nextLessonLabel}
 

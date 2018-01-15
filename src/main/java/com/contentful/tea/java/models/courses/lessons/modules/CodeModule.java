@@ -13,6 +13,10 @@ public class CodeModule extends Module {
   private String ruby;
   private String swift;
 
+  public CodeModule() {
+    super("code");
+  }
+
   public String getCurl() {
     return curl;
   }

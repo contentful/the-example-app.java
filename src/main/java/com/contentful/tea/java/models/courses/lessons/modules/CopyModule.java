@@ -5,6 +5,10 @@ import java.util.Objects;
 public class CopyModule extends Module {
   private String copy;
 
+  public CopyModule() {
+    super("copy");
+  }
+
   public String getCopy() {
     return copy;
   }

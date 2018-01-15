@@ -15,8 +15,9 @@ public class Course extends MappableType {
   private int duration;
   private List<Category> categories = new ArrayList<>();
   private List<Lesson> lessons = new ArrayList<>();
+  private Lesson currentLesson;
+  private String nextLessonSlug;
   private String skillLevel;
-  private String cssClass;
   private String imageUrl;
   private String shortDescription;
   private String description;
@@ -118,15 +119,6 @@ public class Course extends MappableType {
     return this;
   }
 
-  public String getCssClass() {
-    return cssClass;
-  }
-
-  public Course setCssClass(String cssClass) {
-    this.cssClass = cssClass;
-    return this;
-  }
-
   public List<Category> getCategories() {
     return categories;
   }
@@ -141,6 +133,24 @@ public class Course extends MappableType {
     return this;
   }
 
+  public Lesson getCurrentLesson() {
+    return currentLesson;
+  }
+
+  public Course setCurrentLesson(Lesson currentLesson) {
+    this.currentLesson = currentLesson;
+    return this;
+  }
+
+  public String getNextLessonSlug() {
+    return nextLessonSlug;
+  }
+
+  public Course setNextLessonSlug(String nextLessonSlug) {
+    this.nextLessonSlug = nextLessonSlug;
+    return this;
+  }
+
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof Course)) return false;
@@ -152,15 +162,16 @@ public class Course extends MappableType {
         Objects.equals(getShortDescription(), course.getShortDescription()) &&
         Objects.equals(getDescription(), course.getDescription()) &&
         Objects.equals(getImageUrl(), course.getImageUrl()) &&
-        Objects.equals(getCssClass(), course.getCssClass()) &&
         Objects.equals(getLessons(), course.getLessons()) &&
         Objects.equals(getDuration(), course.getDuration()) &&
         Objects.equals(getSkillLevel(), course.getSkillLevel()) &&
+        Objects.equals(getCurrentLesson(), course.getCurrentLesson()) &&
+        Objects.equals(getNextLessonSlug(), course.getNextLessonSlug()) &&
         Objects.equals(getCategories(), course.getCategories());
   }
 
   @Override public int hashCode() {
-    return Objects.hash(getSlug(), getTitle(), getDescription(), getShortDescription(), getImageUrl(), isDraft(), hasPendingChanges(), getCategories(), getCssClass(), getLessons(), getDuration());
+    return Objects.hash(getSlug(), getTitle(), getDescription(), getShortDescription(), getImageUrl(), isDraft(), hasPendingChanges(), getCategories(), getLessons(), getDuration(), getCurrentLesson(), getNextLessonSlug());
   }
 
   /**
@@ -175,10 +186,11 @@ public class Course extends MappableType {
         + "description = " + getDescription() + ", "
         + "shortDescription = " + getShortDescription() + ", "
         + "slug = " + getSlug() + ", "
-        + "cssClass = " + getCssClass() + ", "
         + "lessons = " + getLessons() + ", "
         + "duration = " + getDuration() + ", "
-        + "title = " + getTitle() + " "
+        + "title = " + getTitle() + ", "
+        + "nextSessionSlug = " + getNextLessonSlug() + ", "
+        + "currentLesson = " + getCurrentLesson() + " "
         + "}";
   }
 }

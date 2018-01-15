@@ -8,13 +8,14 @@ import com.contentful.tea.java.models.courses.lessons.modules.CodeModule;
 import com.contentful.tea.java.models.courses.lessons.modules.CopyModule;
 import com.contentful.tea.java.models.courses.lessons.modules.ImageModule;
 import com.contentful.tea.java.models.courses.lessons.modules.Module;
+import com.contentful.tea.java.services.localization.Keys;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static com.contentful.java.cda.image.ImageOption.http;
+import static com.contentful.java.cda.image.ImageOption.https;
 
 @Component
 public class EntryToLesson extends ContentfulModelToMappableTypeConverter<CDAEntry, Lesson> {
@@ -41,18 +42,19 @@ public class EntryToLesson extends ContentfulModelToMappableTypeConverter<CDAEnt
   }
 
   private Module createModule(CDAEntry cdaModule) {
-    final String title = cdaModule.getField("title");
+    final String title = m(cdaModule.getField("title"));
     switch (cdaModule.contentType().id()) {
       case "lessonCopy":
         return new CopyModule()
             .<CopyModule>setTitle(title)
-            .setCopy(m(title))
+            .setCopy(m(cdaModule.getField("copy")))
             ;
       case "lessonImage":
         return new ImageModule()
             .<ImageModule>setTitle(title)
-            .setCaption(cdaModule.getField("caption"))
-            .setImage(((CDAAsset) cdaModule.getField("image")).urlForImageWith(http()))
+            .setCaption(m(cdaModule.getField("caption")))
+            .setMissingImageLabel(t(Keys.imageErrorTitle))
+            .setImageUrl(((CDAAsset) cdaModule.getField("image")).urlForImageWith(https()))
             ;
       case "lessonCodeSnippets":
         return new CodeModule()

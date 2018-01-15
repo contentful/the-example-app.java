@@ -210,7 +210,6 @@ public class JadeTemplateTests {
         .setDurationLabel("TEST-setDurationLabel")
         .setCourse(
             new Course()
-                .setCssClass("TEST-setCssClass")
                 .setDuration(42)
                 .setImageUrl("TEST-setImageUrl")
                 .setDescription("TEST-setDescription")
@@ -230,6 +229,13 @@ public class JadeTemplateTests {
                         .setTitle("TEST-lesson-title")
                         .setCssClass("TEST-lesson-css")
                 )
+                .setCurrentLesson(
+                    new Lesson()
+                        .setSlug("TEST-currentLesson-slug")
+                        .setTitle("TEST-currentLesson-title")
+                        .setCssClass("TEST-currentLesson-cssClass")
+                )
+                .setNextLessonSlug("TEST-nextLessonSlug")
         )
         .setMinutesLabel("TEST-setMinutesLabel")
         .setOverviewLabel("TEST-setOverviewLabel")
@@ -237,7 +243,9 @@ public class JadeTemplateTests {
         .setCourseOverviewCssClass("TEST-setCourseOverviewCssClass")
         .setSkillLevelLabel("TEST-setSkillLevelLabel")
         .setStartCourseLabel("TEST-setStartCourseLabel")
-        .setTableOfContentsLabel("TEST-setTableOfContentsLabel");
+        .setTableOfContentsLabel("TEST-setTableOfContentsLabel")
+        .setNextLessonLabel("TEST-nextLessonLabel")
+    ;
 
     final String generatedHtml = generator
         .generate(
@@ -267,6 +275,7 @@ public class JadeTemplateTests {
         .doesNotContain("TEST-category-slug")
         .doesNotContain("TEST-setShortDescription")
         .doesNotContain("TEST-setImageUrl")
+        .doesNotContain("TEST-nextLessonLabel")
     ;
   }
 }

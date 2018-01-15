@@ -21,8 +21,8 @@ block content
                 .table-of-contents__item
                   a(href='/courses/!{course.slug}/lessons/!{lesson.slug}!{queryString}' class='table-of-contents__link !{lesson.cssClass}') !{lesson.title}
     section.layout-sidebar__content
-      if lesson
-        +lesson(lesson, course, nextLesson)
+      if course.currentLesson
+        +lesson(course.currentLesson, course, course.nextLessonSlug)
       else
         .course
           h1.course__title= course.title

@@ -176,14 +176,13 @@ public class MainController implements ErrorController {
     }
   }
 
-  @RequestMapping({"/courses/{slug}", "/courses/{slug}/lessons"})
+  @RequestMapping({"/courses/{coursesSlug}", "/courses/{coursesSlug}/lessons"})
   @ResponseBody
   @SuppressWarnings("unused")
   public String course(
       HttpServletRequest request,
-      @PathVariable("slug") String slug,
-      @SessionAttribute(required = false) Map<String, Set<String>> visitedLessonsByCourseSlug
-  ) {
+      @SessionAttribute(required = false) Map<String, Set<String>> visitedLessonsByCourseSlug,
+      @PathVariable("coursesSlug") String coursesSlug) {
     try {
       setupRoute(request);
 
@@ -192,54 +191,82 @@ public class MainController implements ErrorController {
           .fetch(CDAEntry.class)
           .include(5)
           .withContentType("course")
-          .where("fields.slug", slug)
+          .where("fields.slug", coursesSlug)
           .where("locale", settings.getLocale())
           .all()
           .items()
           .get(0));
 
-      if (visitedLessonsByCourseSlug == null) {
-        visitedLessonsByCourseSlug = new HashMap<>();
-      }
-
-      Set<String> visitedLessons = visitedLessonsByCourseSlug.computeIfAbsent(slug, k -> new HashSet<>());
-      visitedLessons.add("/");
-
-      request.getSession().setAttribute("visitedLessonsByCourseSlug", visitedLessonsByCourseSlug);
+      final Set<String> visitedLessons =
+          updateVisitedLessonsInSession(request, visitedLessonsByCourseSlug, coursesSlug, "/");
 
       final EntryToCourse.Compound compound = new EntryToCourse.Compound()
           .setCourse(course)
-          .setSlug(slug)
+          .setCourseSlug(coursesSlug)
           .setVisitedLessons(visitedLessons);
 
       final CourseParameter parameter = entryToCourse.convert(compound);
       staticContentSetter.applyContent(parameter.getBase());
 
-
       return htmlGenerator.generate("templates/course.jade", parameter.toMap());
     } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render '" + slug + "' courses page.", t);
+      throw new IllegalStateException("Cannot render '" + coursesSlug + "' courses page.", t);
     } finally {
       teardownRoute(request);
     }
   }
 
-  @RequestMapping("/courses/{courseId}/lessons/{lessonId}")
+  @RequestMapping("/courses/{courseSlug}/lessons/{lessonSlug}")
   @ResponseBody
   @SuppressWarnings("unused")
-  public String lesson(HttpServletRequest request,
-                       @PathVariable("courseId") String courseId,
-                       @PathVariable("lessonId") String lessonId) {
+  public String lesson(
+      HttpServletRequest request,
+      @SessionAttribute(required = false) Map<String, Set<String>> visitedLessonsByCourseSlug,
+      @PathVariable String courseSlug,
+      @PathVariable String lessonSlug) {
     try {
       setupRoute(request);
 
-      // Fixme: Add content to page
-      throw new IllegalStateException("not implemented yet");
+      final CDAClient client = settings.getCurrentClient();
+      final CDAEntry course = ((CDAEntry) client
+          .fetch(CDAEntry.class)
+          .include(5)
+          .withContentType("course")
+          .where("fields.slug", courseSlug)
+          .where("locale", settings.getLocale())
+          .all()
+          .items()
+          .get(0));
+
+      final Set<String> visitedLessons =
+          updateVisitedLessonsInSession(request, visitedLessonsByCourseSlug, courseSlug, lessonSlug);
+
+      final EntryToCourse.Compound compound = new EntryToCourse.Compound()
+          .setCourse(course)
+          .setCourseSlug(courseSlug)
+          .setLessonSlug(lessonSlug)
+          .setVisitedLessons(visitedLessons);
+
+      final CourseParameter parameter = entryToCourse.convert(compound);
+      staticContentSetter.applyContent(parameter.getBase());
+
+      return htmlGenerator.generate("templates/course.jade", parameter.toMap());
     } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render " + courseId + "'s lesson '" + lessonId + "' page.", t);
+      throw new IllegalStateException("Cannot render " + courseSlug + "'s lesson '" + lessonSlug + "' page.", t);
     } finally {
       teardownRoute(request);
     }
+  }
+
+  private Set<String> updateVisitedLessonsInSession(HttpServletRequest request, @SessionAttribute(required = false) Map<String, Set<String>> visitedLessonsByCourseSlug, @PathVariable String courseSlug, @PathVariable String lessonSlug) {
+    if (visitedLessonsByCourseSlug == null) {
+      visitedLessonsByCourseSlug = new HashMap<>();
+    }
+
+    Set<String> visitedLessons = visitedLessonsByCourseSlug.computeIfAbsent(courseSlug, k -> new HashSet<>());
+    visitedLessons.add(lessonSlug);
+    request.getSession().setAttribute("visitedLessonsByCourseSlug", visitedLessonsByCourseSlug);
+    return visitedLessons;
   }
 
   @RequestMapping("/settings")
