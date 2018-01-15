@@ -1,14 +1,14 @@
 doctype html
 html
   head
-    title= base.meta.title
+    title: !{base.meta.title} — The Example App
     link(rel='stylesheet', href='/stylesheets/style.css')
     meta(name='viewport' content='width=device-width, initial-scale=1')
     meta(name='description' content=base.meta.description)
     meta(name='twitter:card' content=base.meta.twitterCard)
-    meta(property='og:title' content=base.meta.title)
+    meta(property='og:title' content='#{base.meta.title} — The Example App')
     meta(property='og:type' content='article')
-    meta(property='og:url' content='http://contentful-example-app-java.herokuapp.com/!{base.meta.currentPath}')
+    meta(property='og:url' content='http://contentful-example-app-java.herokuapp.com!{base.meta.currentPath}')
     meta(property='og:image' content='http://contentful-example-app-java.herokuapp.com/og-image.jpg')
     meta(property='og:image:type' content='image/jpeg')
     meta(property='og:image:width' content='1200')

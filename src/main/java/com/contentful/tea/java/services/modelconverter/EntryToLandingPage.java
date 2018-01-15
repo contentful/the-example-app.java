@@ -24,7 +24,7 @@ public class EntryToLandingPage extends ContentfulModelToMappableTypeConverter<C
   @Override
   public LandingPageParameter convert(CDAEntry entry) {
     final LandingPageParameter parameter = new LandingPageParameter();
-    parameter.getBase().getMeta().setTitle(t(Keys.homeLabel) + " — " + t(Keys.defaultTitle));
+    parameter.getBase().getMeta().setTitle(t(Keys.homeLabel));
 
     addModules(parameter, entry);
     return parameter;

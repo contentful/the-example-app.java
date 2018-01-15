@@ -97,7 +97,7 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
     courseParameter
         .getBase()
         .getMeta()
-        .setTitle(course.getField("title"))
+        .setTitle(sluggedLesson == null ? course.getField("title") : sluggedLesson.getTitle())
     ;
 
     final String active = sluggedLesson == null ? "active" : "";
