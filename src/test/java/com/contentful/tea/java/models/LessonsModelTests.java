@@ -66,25 +66,27 @@ public class LessonsModelTests extends EnqueuedHttpResponseTests {
 
     int i = 0;
     assertThat(lesson.getModules().get(i)).isInstanceOf(CopyModule.class);
-    assertThat(lesson.getModules().get(i).getTitle()).isEqualTo("Complete Lesson > Copy");
-    assertThat(((CopyModule) lesson.getModules().get(i)).getCopy()).isEqualTo("Complete Lesson &gt; Copy");
+    assertThat(lesson.getModules().get(i).getTitle()).isEqualTo("Complete Lesson &gt; Copy");
+    assertThat(((CopyModule) lesson.getModules().get(i)).getCopy()).isEqualTo("This is the copy...");
     i++;
 
     assertThat(lesson.getModules().get(i)).isInstanceOf(ImageModule.class);
-    assertThat(lesson.getModules().get(i).getTitle()).isEqualTo("Complete Lesson > Image Module");
-    assertThat(((ImageModule) lesson.getModules().get(i)).getCaption()).isEqualTo("Image Module");
-    assertThat(((ImageModule) lesson.getModules().get(i)).getImage()).isEqualTo("http://images.contentful.com/jnzexv31feqf/PKYPMsOlqK4SAwEOwMQky/2ccd7c30325fab8a4f34b35cc4e7e427/foo");
+    assertThat(lesson.getModules().get(i).getTitle()).isEqualTo("Complete Lesson &gt; Image Module");
+    final ImageModule imageModule = (ImageModule) lesson.getModules().get(i);
+    assertThat(imageModule.getCaption()).isEqualTo("Image Module");
+    assertThat(imageModule.getImageUrl()).isEqualTo("https://images.contentful.com/jnzexv31feqf/PKYPMsOlqK4SAwEOwMQky/2ccd7c30325fab8a4f34b35cc4e7e427/foo");
     i++;
 
     assertThat(lesson.getModules().get(i)).isInstanceOf(CodeModule.class);
-    assertThat(lesson.getModules().get(i).getTitle()).isEqualTo("Complete Lesson > Code Module");
-    assertThat(((CodeModule) lesson.getModules().get(i)).getCurl()).isEqualTo("curl");
-    assertThat(((CodeModule) lesson.getModules().get(i)).getJava()).isEqualTo("java");
-    assertThat(((CodeModule) lesson.getModules().get(i)).getJavaAndroid()).isEqualTo("java-android");
-    assertThat(((CodeModule) lesson.getModules().get(i)).getJavascript()).isEqualTo("javascript");
-    assertThat(((CodeModule) lesson.getModules().get(i)).getPhp()).isEqualTo("php");
-    assertThat(((CodeModule) lesson.getModules().get(i)).getRuby()).isEqualTo("ruby");
-    assertThat(((CodeModule) lesson.getModules().get(i)).getPython()).isEqualTo("python");
+    assertThat(lesson.getModules().get(i).getTitle()).isEqualTo("Complete Lesson &gt; Code Module");
+    final CodeModule codeModule = (CodeModule) lesson.getModules().get(i);
+    assertThat(codeModule.getCurl()).isEqualTo("curl");
+    assertThat(codeModule.getJava()).isEqualTo("java");
+    assertThat(codeModule.getJavaAndroid()).isEqualTo("java-android");
+    assertThat(codeModule.getJavascript()).isEqualTo("javascript");
+    assertThat(codeModule.getPhp()).isEqualTo("php");
+    assertThat(codeModule.getRuby()).isEqualTo("ruby");
+    assertThat(codeModule.getPython()).isEqualTo("python");
     i++;
   }
 }
