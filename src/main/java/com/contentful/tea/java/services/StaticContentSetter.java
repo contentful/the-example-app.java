@@ -7,21 +7,22 @@ import com.contentful.java.cda.CDALocale;
 import com.contentful.java.cda.CDASpace;
 import com.contentful.java.cda.QueryOperation;
 import com.contentful.tea.java.markdown.MarkdownParser;
-import com.contentful.tea.java.models.Settings;
 import com.contentful.tea.java.models.base.BaseParameter;
 import com.contentful.tea.java.models.base.BreadcrumbParameter;
 import com.contentful.tea.java.models.base.Locale;
 import com.contentful.tea.java.models.base.LocalesParameter;
+import com.contentful.tea.java.services.contentful.Contentful;
 import com.contentful.tea.java.services.localization.Keys;
 import com.contentful.tea.java.services.localization.LocalizedStringsProvider;
+import com.contentful.tea.java.services.settings.Settings;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static com.contentful.tea.java.models.Settings.API_CDA;
 import static com.contentful.tea.java.models.base.ApiParameter.CSS_CLASS_ACTIVE_BUTTON;
+import static com.contentful.tea.java.services.contentful.Contentful.API_CDA;
 import static java.lang.String.format;
 
 @Component
@@ -35,6 +36,10 @@ public class StaticContentSetter {
   @Autowired
   @SuppressWarnings("unused")
   private MarkdownParser markdown;
+
+  @Autowired
+  @SuppressWarnings("unused")
+  private Contentful contentful;
 
   @Autowired
   @SuppressWarnings("unused")
@@ -94,17 +99,17 @@ public class StaticContentSetter {
   }
 
   private void updateApis(BaseParameter base) {
-    if (API_CDA.equals(settings.getApi())) {
+    if (API_CDA.equals(contentful.getApi())) {
       base.getApi()
           .setCurrentApiLabel(t(Keys.contentDeliveryApiLabel))
-          .setCurrentApiId(settings.getApi())
+          .setCurrentApiId(contentful.getApi())
           .setCpaButtonCSSClass("")
           .setCdaButtonCSSClass(CSS_CLASS_ACTIVE_BUTTON)
       ;
     } else {
       base.getApi()
           .setCurrentApiLabel(t(Keys.contentPreviewApiLabel))
-          .setCurrentApiId(settings.getApi())
+          .setCurrentApiId(contentful.getApi())
           .setCpaButtonCSSClass(CSS_CLASS_ACTIVE_BUTTON)
           .setCdaButtonCSSClass("")
       ;
@@ -129,7 +134,7 @@ public class StaticContentSetter {
   }
 
   private void updateLocales(BaseParameter base) {
-    final CDAClient client = settings.getCurrentClient();
+    final CDAClient client = contentful.getCurrentClient();
     final CDASpace space = client.fetchSpace();
     final List<CDALocale> locales = space.locales();
 
@@ -264,7 +269,7 @@ public class StaticContentSetter {
   }
 
   private String slugToTitle(String courseSlug) {
-    final CDAArray courses = settings.getCurrentClient()
+    final CDAArray courses = contentful.getCurrentClient()
         .fetch(CDAEntry.class)
         .withContentType("course")
         .where("fields.slug", QueryOperation.IsEqualTo, courseSlug)

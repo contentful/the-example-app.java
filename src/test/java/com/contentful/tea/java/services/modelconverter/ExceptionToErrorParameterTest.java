@@ -1,8 +1,8 @@
 package com.contentful.tea.java.services.modelconverter;
 
 import com.contentful.tea.java.MainController;
-import com.contentful.tea.java.models.Settings;
 import com.contentful.tea.java.models.errors.ErrorParameter;
+import com.contentful.tea.java.services.contentful.Contentful;
 import com.contentful.tea.java.services.localization.Keys;
 import com.contentful.tea.java.services.localization.LocalizedStringsProvider;
 
@@ -32,16 +32,16 @@ public class ExceptionToErrorParameterTest {
 
   @Autowired
   @SuppressWarnings("unused")
-  private Settings settings;
+  private Contentful contentful;
 
   @Before
   public void setup() {
-    settings.loadDefaults();
+    contentful.loadDefaults();
   }
 
   @After
   public void tearDown() {
-    settings.reset();
+    contentful.reset();
   }
 
   @Test

@@ -1,7 +1,8 @@
 package com.contentful.tea.java.services.http;
 
 import com.contentful.tea.java.MainController;
-import com.contentful.tea.java.models.Settings;
+import com.contentful.tea.java.services.contentful.Contentful;
+import com.contentful.tea.java.services.settings.Settings;
 
 import org.junit.After;
 import org.junit.Test;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpSession;
 
 import static com.contentful.tea.java.services.http.Constants.NAME_API;
 import static com.contentful.tea.java.services.http.Constants.NAME_DELIVERY_TOKEN;
+import static com.contentful.tea.java.services.http.Constants.NAME_EDITORIAL_FEATURES;
 import static com.contentful.tea.java.services.http.Constants.NAME_LOCALE;
 import static com.contentful.tea.java.services.http.Constants.NAME_PREVIEW_TOKEN;
 import static com.contentful.tea.java.services.http.Constants.NAME_SPACE_ID;
@@ -30,6 +32,10 @@ public class SessionParserTest {
 
   @Autowired
   @SuppressWarnings("unused")
+  private Contentful contentful;
+
+  @Autowired
+  @SuppressWarnings("unused")
   private Settings settings;
 
   @Autowired
@@ -38,14 +44,14 @@ public class SessionParserTest {
 
   @After
   public void teardown() {
-    settings.reset();
+    contentful.reset();
   }
 
   @Test
   public void parserLoadsSession() {
     final HttpSession session = new MockHttpSession();
 
-    session.setAttribute(NAME_API, Settings.API_CDA);
+    session.setAttribute(NAME_API, Contentful.API_CDA);
     session.setAttribute(NAME_SPACE_ID, "spaceId");
     session.setAttribute(NAME_LOCALE, "locale");
     session.setAttribute(NAME_DELIVERY_TOKEN, "cdaToken");
@@ -53,21 +59,23 @@ public class SessionParserTest {
 
     parser.loadSession(session);
 
-    assertThat(settings.getApi()).isEqualTo(Settings.API_CDA);
-    assertThat(settings.getSpaceId()).isEqualTo("spaceId");
+    assertThat(contentful.getApi()).isEqualTo(Contentful.API_CDA);
+    assertThat(contentful.getSpaceId()).isEqualTo("spaceId");
     assertThat(settings.getLocale()).isEqualTo("locale");
-    assertThat(settings.getDeliveryAccessToken()).isEqualTo("cdaToken");
-    assertThat(settings.getPreviewAccessToken()).isEqualTo("cpaToken");
+    assertThat(contentful.getDeliveryAccessToken()).isEqualTo("cdaToken");
+    assertThat(contentful.getPreviewAccessToken()).isEqualTo("cpaToken");
   }
 
   @Test
   public void parserSavesSession() {
-    settings
-        .setApi(Settings.API_CPA)
+    contentful
+        .setApi(Contentful.API_CPA)
         .setSpaceId("spaceId")
-        .setLocale("locale")
         .setDeliveryAccessToken("cdaToken")
         .setPreviewAccessToken("cpaToken");
+
+    settings.setLocale("locale");
+
 
     final HttpSession session = new MockHttpSession();
     parser.saveSession(session);
@@ -77,11 +85,11 @@ public class SessionParserTest {
 
     final String[] names = attributes.keySet().toArray(new String[attributes.size()]);
     assertThat(names)
-        .containsExactlyInAnyOrder(NAME_API, NAME_DELIVERY_TOKEN, NAME_PREVIEW_TOKEN, NAME_SPACE_ID, NAME_LOCALE);
+        .containsExactlyInAnyOrder(NAME_API, NAME_DELIVERY_TOKEN, NAME_PREVIEW_TOKEN, NAME_SPACE_ID, NAME_LOCALE, NAME_EDITORIAL_FEATURES);
 
     final Object[] values = attributes.values().toArray();
     assertThat(values)
-        .containsExactlyInAnyOrder("spaceId", "locale", "cdaToken", "cpaToken", Settings.API_CPA);
+        .containsExactlyInAnyOrder("spaceId", "locale", "cdaToken", "cpaToken", Contentful.API_CPA, false);
   }
 
   private Map<String, Object> extractAttributesIntoMap(HttpSession session) {

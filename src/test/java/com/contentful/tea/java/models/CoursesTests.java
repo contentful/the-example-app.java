@@ -9,10 +9,12 @@ import com.contentful.tea.java.models.landing.LandingPageParameter;
 import com.contentful.tea.java.models.landing.modules.CopyModule;
 import com.contentful.tea.java.models.landing.modules.HeroImageModule;
 import com.contentful.tea.java.models.landing.modules.HighlightedCourseModule;
+import com.contentful.tea.java.services.contentful.Contentful;
 import com.contentful.tea.java.services.modelconverter.ArrayToCourses;
 import com.contentful.tea.java.services.modelconverter.ArrayToCourses.ArrayAndSelectedCategory;
 import com.contentful.tea.java.services.modelconverter.EntryToCourse;
 import com.contentful.tea.java.services.modelconverter.EntryToLandingPage;
+import com.contentful.tea.java.services.settings.Settings;
 import com.contentful.tea.java.utils.http.EnqueueHttpResponse;
 import com.contentful.tea.java.utils.http.EnqueuedHttpResponseTests;
 
@@ -21,9 +23,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MainController.class)
@@ -41,16 +45,17 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
   @SuppressWarnings("unused")
   private EntryToCourse entryToCourse;
 
+  @MockBean
+  @SuppressWarnings("unused")
+  private Contentful contentful;
+
   @Autowired
   @SuppressWarnings("unused")
   private Settings settings;
 
   @Before
   public void setup() {
-    settings.setSpaceId("jnzexv31feqf");
-    settings.setDeliveryAccessToken("<DELIVERY_TOKEN>");
-
-    settings.contentfulDeliveryClient = client;
+    given(this.contentful.getCurrentClient()).willReturn(client);
   }
 
   @Test
@@ -67,7 +72,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
 
     final LandingPageParameter p = landingPageConverter.convert(homeEntry);
 
-    assertThat(p.getBase().getMeta().getTitle()).isEqualTo("Home — The Example App");
+    assertThat(p.getBase().getMeta().getTitle()).isEqualTo("Home");
 
     assertThat(p.getModules()).isNotNull().doesNotContainNull().hasSize(4);
 

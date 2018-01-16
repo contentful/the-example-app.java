@@ -1,4 +1,4 @@
-package com.contentful.tea.java.models;
+package com.contentful.tea.java.services.contentful;
 
 import com.contentful.java.cda.CDAClient;
 import com.contentful.tea.java.MainController;
@@ -16,39 +16,39 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MainController.class)
-public class SettingsTests extends EnqueuedHttpResponseTests {
+public class ContentfulTests extends EnqueuedHttpResponseTests {
 
   @Autowired
   @SuppressWarnings("unused")
-  private Settings settings;
+  private Contentful contentful;
 
   @Before
   public void setup() {
-    settings.setSpaceId("jnzexv31feqf");
-    settings.setPreviewAccessToken("<PREVIEW_TOKEN>");
-    settings.setDeliveryAccessToken("<DELIVERY_TOKEN>");
+    contentful.setSpaceId("jnzexv31feqf");
+    contentful.setPreviewAccessToken("<PREVIEW_TOKEN>");
+    contentful.setDeliveryAccessToken("<DELIVERY_TOKEN>");
   }
 
   @Test
   public void clientRetrievalTest() {
-    assertThat(settings.contentfulPreviewClient).isNull();
+    assertThat(contentful.contentfulPreviewClient).isNull();
 
-    CDAClient client = settings.getCurrentClient();
+    CDAClient client = contentful.getCurrentClient();
     assertThat(client).isNotNull();
 
-    settings.setApi(Settings.API_CDA);
-    assertThat(settings.getCurrentClient()).isEqualTo(client);
+    contentful.setApi(Contentful.API_CDA);
+    assertThat(contentful.getCurrentClient()).isEqualTo(client);
 
-    settings.setApi(Settings.API_CPA);
-    assertThat(settings.getCurrentClient()).isNotEqualTo(client);
+    contentful.setApi(Contentful.API_CPA);
+    assertThat(contentful.getCurrentClient()).isNotEqualTo(client);
 
-    settings.setApi(Settings.API_CDA);
-    assertThat(settings.getCurrentClient()).isEqualTo(client);
+    contentful.setApi(Contentful.API_CDA);
+    assertThat(contentful.getCurrentClient()).isEqualTo(client);
   }
 
   @After
   public void tearDown() {
-    settings.reset();
+    contentful.reset();
   }
 
 }

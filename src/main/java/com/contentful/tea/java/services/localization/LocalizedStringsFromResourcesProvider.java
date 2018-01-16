@@ -1,6 +1,6 @@
 package com.contentful.tea.java.services.localization;
 
-import com.contentful.tea.java.models.Settings;
+import com.contentful.tea.java.services.settings.Settings;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

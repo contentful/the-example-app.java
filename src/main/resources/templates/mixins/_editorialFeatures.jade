@@ -1,9 +1,9 @@
 include _entryState
 
 mixin editorialFeatures(entry)
-  if settings.editorialFeatures
+  if settings.editorialFeaturesEnabled
     .editorial-features
-      if currentApi.id === 'cpa' && (entry.draft || entry.pendingChanges)
+      if base.api.currentApiId === 'cpa' && (entry.draft || entry.pendingChanges)
         .editorial-features__item
           +entryState(entry)
       .editorial-features__item

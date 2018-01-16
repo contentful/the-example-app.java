@@ -3,6 +3,8 @@ package com.contentful.tea.java.models;
 import com.contentful.tea.java.MainController;
 import com.contentful.tea.java.models.base.BreadcrumbParameter;
 import com.contentful.tea.java.models.courses.CoursesParameter;
+import com.contentful.tea.java.services.contentful.Contentful;
+import com.contentful.tea.java.services.settings.Settings;
 import com.contentful.tea.java.services.StaticContentSetter;
 import com.contentful.tea.java.utils.http.EnqueueHttpResponse;
 import com.contentful.tea.java.utils.http.EnqueuedHttpResponseTests;
@@ -13,11 +15,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MainController.class)
@@ -26,22 +30,26 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
   @SuppressWarnings("unused")
   private StaticContentSetter setter;
 
-  @Autowired()
+  @MockBean
+  @SuppressWarnings("unused")
+  private Contentful contentful;
+
+  @Autowired
   @SuppressWarnings("unused")
   private Settings settings;
 
   @Before
   public void setup() {
-    settings.setSpaceId("jnzexv31feqf");
-    settings.setDeliveryAccessToken("<DELIVERY_TOKEN>");
+    contentful.setSpaceId("jnzexv31feqf");
+    contentful.setDeliveryAccessToken("<DELIVERY_TOKEN>");
     settings.setLocale("en-US");
 
-    settings.contentfulDeliveryClient = client;
+    given(this.contentful.getCurrentClient()).willReturn(client);
   }
 
   @After
   public void shutDown() {
-    settings.reset();
+    contentful.reset();
   }
 
   @Test

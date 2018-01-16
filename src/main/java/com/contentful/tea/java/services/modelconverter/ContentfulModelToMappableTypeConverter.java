@@ -2,7 +2,7 @@ package com.contentful.tea.java.services.modelconverter;
 
 import com.contentful.java.cda.CDAEntry;
 import com.contentful.tea.java.markdown.CommonmarkMarkdownParser;
-import com.contentful.tea.java.models.Settings;
+import com.contentful.tea.java.services.settings.Settings;
 import com.contentful.tea.java.models.mappable.MappableType;
 import com.contentful.tea.java.services.localization.Keys;
 import com.contentful.tea.java.services.localization.LocalizedStringsProvider;

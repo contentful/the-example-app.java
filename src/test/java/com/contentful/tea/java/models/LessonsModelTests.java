@@ -6,9 +6,11 @@ import com.contentful.tea.java.models.courses.lessons.Lesson;
 import com.contentful.tea.java.models.courses.lessons.modules.CodeModule;
 import com.contentful.tea.java.models.courses.lessons.modules.CopyModule;
 import com.contentful.tea.java.models.courses.lessons.modules.ImageModule;
+import com.contentful.tea.java.services.contentful.Contentful;
 import com.contentful.tea.java.services.modelconverter.ArrayToCourses;
 import com.contentful.tea.java.services.modelconverter.EntryToLandingPage;
 import com.contentful.tea.java.services.modelconverter.EntryToLesson;
+import com.contentful.tea.java.services.settings.Settings;
 import com.contentful.tea.java.utils.http.EnqueueHttpResponse;
 import com.contentful.tea.java.utils.http.EnqueuedHttpResponseTests;
 
@@ -17,9 +19,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MainController.class)
@@ -37,18 +41,18 @@ public class LessonsModelTests extends EnqueuedHttpResponseTests {
   @SuppressWarnings("unused")
   private EntryToLesson lessonConverter;
 
+  @MockBean
+  @SuppressWarnings("unused")
+  private Contentful contentful;
+
   @Autowired
   @SuppressWarnings("unused")
   private Settings settings;
 
   @Before
   public void setup() {
-    settings.setSpaceId("jnzexv31feqf");
-    settings.setDeliveryAccessToken("<DELIVERY_TOKEN>");
-
-    settings.contentfulDeliveryClient = client;
+    given(this.contentful.getCurrentClient()).willReturn(client);
   }
-
 
   @Test
   @EnqueueHttpResponse({"lessons/complete.json", "defaults/space.json"})

@@ -1,6 +1,7 @@
 package com.contentful.tea.java.services.http;
 
-import com.contentful.tea.java.models.Settings;
+import com.contentful.tea.java.services.contentful.Contentful;
+import com.contentful.tea.java.services.settings.Settings;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,10 @@ import javax.servlet.http.HttpSession;
 public class SessionParser {
   @Autowired
   @SuppressWarnings("unused")
+  private Contentful contentful;
+
+  @Autowired
+  @SuppressWarnings("unused")
   private Settings settings;
 
   private final Map<String, Manipulator> manipulatorsByNameMap;
@@ -22,49 +27,58 @@ public class SessionParser {
   public SessionParser() {
     manipulatorsByNameMap = new HashMap<>();
 
-    manipulatorsByNameMap.put(Constants.NAME_API, new Manipulator() {
+    manipulatorsByNameMap.put(Constants.NAME_API, new Manipulator<String>() {
       @Override public String get() {
-        return settings.getApi();
+        return contentful.getApi();
       }
 
       @Override public void set(String value) {
-        settings.setApi(value);
+        contentful.setApi(value);
       }
     });
-    manipulatorsByNameMap.put(Constants.NAME_SPACE_ID, new Manipulator() {
+    manipulatorsByNameMap.put(Constants.NAME_SPACE_ID, new Manipulator<String>() {
       @Override public String get() {
-        return settings.getSpaceId();
+        return contentful.getSpaceId();
       }
 
       @Override public void set(String value) {
-        settings.setSpaceId(value);
+        contentful.setSpaceId(value);
       }
     });
-    manipulatorsByNameMap.put(Constants.NAME_DELIVERY_TOKEN, new Manipulator() {
+    manipulatorsByNameMap.put(Constants.NAME_DELIVERY_TOKEN, new Manipulator<String>() {
       @Override public String get() {
-        return settings.getDeliveryAccessToken();
+        return contentful.getDeliveryAccessToken();
       }
 
       @Override public void set(String value) {
-        settings.setDeliveryAccessToken(value);
+        contentful.setDeliveryAccessToken(value);
       }
     });
-    manipulatorsByNameMap.put(Constants.NAME_PREVIEW_TOKEN, new Manipulator() {
+    manipulatorsByNameMap.put(Constants.NAME_PREVIEW_TOKEN, new Manipulator<String>() {
       @Override public String get() {
-        return settings.getPreviewAccessToken();
+        return contentful.getPreviewAccessToken();
       }
 
       @Override public void set(String value) {
-        settings.setPreviewAccessToken(value);
+        contentful.setPreviewAccessToken(value);
       }
     });
-    manipulatorsByNameMap.put(Constants.NAME_LOCALE, new Manipulator() {
+    manipulatorsByNameMap.put(Constants.NAME_LOCALE, new Manipulator<String>() {
       @Override public String get() {
         return settings.getLocale();
       }
 
       @Override public void set(String value) {
         settings.setLocale(value);
+      }
+    });
+    manipulatorsByNameMap.put(Constants.NAME_EDITORIAL_FEATURES, new Manipulator<Boolean>() {
+      @Override public Boolean get() {
+        return settings.areEditorialFeaturesEnabled();
+      }
+
+      @Override public void set(Boolean value) {
+        settings.setEditorialFeaturesEnabled(value);
       }
     });
   }
@@ -76,7 +90,7 @@ public class SessionParser {
       final Manipulator manipulator = manipulatorsByNameMap.get(name);
 
       if (manipulator != null) {
-        final String value = (String) session.getAttribute(name);
+        final Object value = session.getAttribute(name);
         manipulator.set(value);
       }
     }
@@ -88,9 +102,9 @@ public class SessionParser {
         .forEach(name -> session.setAttribute(name, manipulatorsByNameMap.get(name).get()));
   }
 
-  interface Manipulator {
-    String get();
+  interface Manipulator<T> {
+    T get();
 
-    void set(String value);
+    void set(T value);
   }
 }

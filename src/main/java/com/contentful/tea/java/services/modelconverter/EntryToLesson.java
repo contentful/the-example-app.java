@@ -2,7 +2,7 @@ package com.contentful.tea.java.services.modelconverter;
 
 import com.contentful.java.cda.CDAAsset;
 import com.contentful.java.cda.CDAEntry;
-import com.contentful.tea.java.models.Settings;
+import com.contentful.tea.java.services.settings.Settings;
 import com.contentful.tea.java.models.courses.lessons.Lesson;
 import com.contentful.tea.java.models.courses.lessons.modules.CodeModule;
 import com.contentful.tea.java.models.courses.lessons.modules.CopyModule;

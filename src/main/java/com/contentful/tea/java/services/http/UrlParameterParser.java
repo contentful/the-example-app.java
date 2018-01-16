@@ -1,6 +1,7 @@
 package com.contentful.tea.java.services.http;
 
-import com.contentful.tea.java.models.Settings;
+import com.contentful.tea.java.services.contentful.Contentful;
+import com.contentful.tea.java.services.settings.Settings;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,10 @@ public class UrlParameterParser {
 
   @Autowired
   @SuppressWarnings("unused")
+  private Contentful contentful;
+
+  @Autowired
+  @SuppressWarnings("unused")
   private Settings settings;
 
   private final Map<String, Parser> parsersByNameMap;
@@ -22,12 +27,12 @@ public class UrlParameterParser {
 
     parsersByNameMap.put(Constants.NAME_API, new Parser() {
       @Override public void parse(String value) {
-        settings.setApi(value);
+        contentful.setApi(value);
       }
     });
     parsersByNameMap.put(Constants.NAME_SPACE_ID, new Parser() {
       @Override public void parse(String value) {
-        settings.setSpaceId(value);
+        contentful.setSpaceId(value);
       }
     });
     parsersByNameMap.put(Constants.NAME_LOCALE, new Parser() {
@@ -35,14 +40,19 @@ public class UrlParameterParser {
         settings.setLocale(value);
       }
     });
+    parsersByNameMap.put(Constants.NAME_EDITORIAL_FEATURES, new Parser() {
+      @Override public void parse(String value) {
+        settings.setEditorialFeaturesEnabled(Boolean.valueOf(value));
+      }
+    });
     parsersByNameMap.put(Constants.NAME_DELIVERY_TOKEN, new Parser() {
       @Override public void parse(String value) {
-        settings.setDeliveryAccessToken(value);
+        contentful.setDeliveryAccessToken(value);
       }
     });
     parsersByNameMap.put(Constants.NAME_PREVIEW_TOKEN, new Parser() {
       @Override public void parse(String value) {
-        settings.setPreviewAccessToken(value);
+        contentful.setPreviewAccessToken(value);
       }
     });
   }

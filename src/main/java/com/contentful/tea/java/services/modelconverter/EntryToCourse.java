@@ -144,12 +144,14 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
 
   private List<Category> getCategories(List<CDAEntry> cdaCategories) {
     final List<Category> categories = new ArrayList<>();
-    for (final CDAEntry cdaCategory : cdaCategories) {
-      categories.add(
-          new Category()
-              .setSlug(cdaCategory.getField("slug"))
-              .setTitle(cdaCategory.getField("title"))
-      );
+    if (cdaCategories != null) {
+      for (final CDAEntry cdaCategory : cdaCategories) {
+        categories.add(
+            new Category()
+                .setSlug(cdaCategory.getField("slug"))
+                .setTitle(cdaCategory.getField("title"))
+        );
+      }
     }
     return categories;
   }

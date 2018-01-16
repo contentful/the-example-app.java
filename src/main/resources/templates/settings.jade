@@ -2,12 +2,12 @@ extends layout
 
 include mixins/_breadcrumb
 
-mixin renderErrors (errors)
-  each message in errors
+mixin renderError (error)
+  if error.message
     .form-item__error-wrapper
       svg.form-item__error-icon
           use(xlink:href='/icons/icons.svg#error')
-      .form-item__error-message= message
+      .form-item__error-message= error.message
 
 block content
   .layout-centered-small
@@ -15,42 +15,72 @@ block content
     h1= title
     p #{settingsIntroLabel}
 
-    if success
+    if isSuccessful
       .status-block.status-block--success
         svg.status-block__icon.status-block__icon--success
           use(xlink:href='/icons/icons.svg#success')
         .status-block__content
           .status-block__title #{changesSavedLabel}
 
-    if hasErrors
+    if errors.hasErrors
       .status-block.status-block--error
         svg.status-block__icon.status-block__icon--error
           use(xlink:href='/icons/icons.svg#error')
         .status-block__content
-          .status-block__title #{errorOcurredTitleLabel}
-          .status-block__message #{errorOcurredMessageLabel}
+          .status-block__title #{errorOccurredTitleLabel}
+          .status-block__message #{errorOccurredMessageLabel}
 
-    if space && !hasErrors
+    if spaceName && !errors.hasErrors
       .status-block.status-block--info
         svg.status-block__icon.status-block__icon--info
           use(xlink:href='/icons/icons.svg#info')
         .status-block__content
-          .status-block__message #{connectedToSpaceLabel} “#{space.name}”
+            if !usesCustomCredentials
+              p
+                em #{usingServerCredentialsLabel}
+              p
+                strong #{connectedToSpaceLabel}:
+                br
+                span #{spaceName} (#{spaceId})
+              p
+                strong #{credentialSourceLabel}:
+                br
+                span #{loadedFromLocalFileLabel}
+                 a(href="https://github.com/contentful/the-example-app.nodejs/blob/master/variables.env" target="_blank" rel="noopener") variable.env
+              p
+                em #{overrideConfigLabel}
+            else
+              p
+                em #{usingSessionCredentialsLabel}
+              p
+                strong #{connectedToSpaceLabel}:
+                br
+                span #{spaceName} (#{spaceId})
+
+              form(action='/settings?reset=true' method='POST')
+                p
+                  strong #{applicationCredentialsLabel}:
+                  br
+                  button(type="submit") #{resetCredentialsLabel}
+                  br
+                  a(href='#{deepLinkUrl}' class="status-block__sharelink") #{copyLinkLabel}
+              p
+                em #{overrideConfigLabel}
 
     form(action='/settings' method="POST" class="form")
       .form-item
         input(type="hidden" name="qs" value=queryString)
         label(for="input-space-id") #{spaceIdLabel}
-        input(type="text" name="spaceId" id="input-space-id" value=settings.spaceId)
-        if 'spaceId' in errors
-          +renderErrors(errors.spaceId)
+        input(type="text" name="spaceId" id="input-space-id" value=spaceId)
+        if errors.spaceId
+          +renderError(errors.spaceId)
         .form-item__help-text #{spaceIdHelpText}
 
       .form-item
         label(for="input-delivery-token") Content Delivery API - #{accessTokenLabel}
         input(type="text" name="deliveryToken" id="input-delivery-token" value=settings.deliveryToken)
-        if 'deliveryToken' in errors
-          +renderErrors(errors.deliveryToken)
+        if errors.deliveryToken
+          +renderError(errors.deliveryToken)
         .form-item__help-text
           | #{contentDeliveryApiHelpText}&nbsp;
           a(href='https://www.contentful.com/developers/docs/references/content-delivery-api/' target='_blank' rel='noopener') Content Delivery API.
@@ -58,14 +88,17 @@ block content
       .form-item
         label(for="input-preview-token") Content Preview API - #{accessTokenLabel}
         input(type="text" name="previewToken" id="input-preview-token" value=settings.previewToken)
-        if 'previewToken' in errors
-          +renderErrors(errors.previewToken)
+        if errors.previewToken
+          +renderError(errors.previewToken)
         .form-item__help-text
           | #{contentPreviewApiHelpText}&nbsp;
           a(href='https://www.contentful.com/developers/docs/references/content-preview-api/' target='_blank' rel='noopener') Content Preview API.
 
       .form-item
-        input(type="checkbox" name="editorialFeatures" id="input-editorial-features" checked=settings.editorialFeatures)
+        if editorialFeaturesEnabled
+          input(type="checkbox" name="editorialFeatures" id="input-editorial-features" checked value="true")
+        else
+          input(type="checkbox" name="editorialFeatures" id="input-editorial-features" value="true")
         label(for="input-editorial-features") #{enableEditorialFeaturesLabel}
         .form-item__help-text #{enableEditorialFeaturesHelpText}
 

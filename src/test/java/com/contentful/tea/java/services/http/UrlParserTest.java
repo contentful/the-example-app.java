@@ -1,7 +1,7 @@
 package com.contentful.tea.java.services.http;
 
 import com.contentful.tea.java.MainController;
-import com.contentful.tea.java.models.Settings;
+import com.contentful.tea.java.services.contentful.Contentful;
 
 import org.junit.After;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class UrlParserTest {
 
   @Autowired
   @SuppressWarnings("unused")
-  private Settings settings;
+  private Contentful contentful;
 
   @Autowired
   @SuppressWarnings("unused")
@@ -28,36 +28,36 @@ public class UrlParserTest {
 
   @After
   public void tearDown() {
-    settings.reset();
+    contentful.reset();
   }
 
   @Test
   public void parsingNoParameterDoesNotChangeSettings() {
-    final String before = settings.toString();
+    final String before = contentful.toString();
 
     parser.parseUrlParameter(Collections.emptyMap());
 
-    final String after = settings.toString();
+    final String after = contentful.toString();
     assertThat(before).isEqualTo(after);
   }
 
   @Test
   public void parsingNullParameterDoesNotChangeSettings() {
-    final String before = settings.toString();
+    final String before = contentful.toString();
 
     parser.parseUrlParameter(null);
 
-    final String after = settings.toString();
+    final String after = contentful.toString();
     assertThat(before).isEqualTo(after);
   }
 
   @Test
   public void tokenInUrlChangesTokenInSettings() {
-    final String before = settings.getDeliveryAccessToken();
+    final String before = contentful.getDeliveryAccessToken();
 
     parser.parseUrlParameter(Collections.singletonMap(Constants.NAME_DELIVERY_TOKEN, new String[]{"cda_token"}));
 
-    final String after = settings.getDeliveryAccessToken();
+    final String after = contentful.getDeliveryAccessToken();
     assertThat(before).isNotEqualTo(after);
   }
 }

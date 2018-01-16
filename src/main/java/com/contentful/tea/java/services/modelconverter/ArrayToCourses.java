@@ -94,16 +94,18 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
 
       final CDAEntry course = (CDAEntry) resource;
       final List<CDAEntry> cdaCategories = course.getField("categories");
-      for (final CDAEntry category : cdaCategories) {
-        final String slug = category.getField("slug");
-        if (!categories.containsKey((String) slug)) {
-          categories.put(
-              slug,
-              new Category()
-                  .setSlug(slug)
-                  .setTitle(category.getField("title"))
-                  .setCssClass(selectedCategory.equals(slug) ? "active" : "")
-          );
+      if (cdaCategories != null) {
+        for (final CDAEntry category : cdaCategories) {
+          final String slug = category.getField("slug");
+          if (!categories.containsKey((String) slug)) {
+            categories.put(
+                slug,
+                new Category()
+                    .setSlug(slug)
+                    .setTitle(category.getField("title"))
+                    .setCssClass(selectedCategory.equals(slug) ? "active" : "")
+            );
+          }
         }
       }
     }
@@ -122,18 +124,20 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
       final CDAEntry course = (CDAEntry) resource;
       final CDAAsset image = course.getField("image");
       final Course createdCourse = new Course()
-          .setImageUrl(image.urlForImageWith(http()))
+          .setImageUrl(image != null ? image.urlForImageWith(http()) : "")
           .setTitle(course.getField("title"))
           .setShortDescription(course.getField("description"))
           .setSlug(course.getField("slug"));
 
       final List<CDAEntry> categories = course.getField("categories");
-      for (final CDAEntry category : categories) {
-        createdCourse.addCategory(
-            new Category()
-                .setSlug(category.getField("slug"))
-                .setTitle(category.getField("title"))
-        );
+      if (categories != null) {
+        for (final CDAEntry category : categories) {
+          createdCourse.addCategory(
+              new Category()
+                  .setSlug(category.getField("slug"))
+                  .setTitle(category.getField("title"))
+          );
+        }
       }
 
       courses.add(createdCourse);
@@ -145,9 +149,11 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
   private CDAEntry getCategoryBySlug(CDAEntry course, String slug) {
     final List<CDAEntry> categories = course.getField("categories");
     final List<CDAEntry> list = new ArrayList<>();
-    for (final CDAEntry e : categories) {
-      if (slug.equals(e.getField("slug"))) {
-        list.add(e);
+    if (categories != null) {
+      for (final CDAEntry e : categories) {
+        if (slug.equals(e.getField("slug"))) {
+          list.add(e);
+        }
       }
     }
     return list.size() > 0 ? list.get(0) : null;

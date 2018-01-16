@@ -4,6 +4,8 @@ import com.contentful.tea.java.MainController;
 import com.contentful.tea.java.models.courses.CoursesParameter;
 import com.contentful.tea.java.models.landing.LandingPageParameter;
 import com.contentful.tea.java.services.StaticContentSetter;
+import com.contentful.tea.java.services.contentful.Contentful;
+import com.contentful.tea.java.services.settings.Settings;
 import com.contentful.tea.java.utils.http.EnqueueHttpResponse;
 import com.contentful.tea.java.utils.http.EnqueuedHttpResponseTests;
 
@@ -13,9 +15,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MainController.class)
@@ -29,17 +33,19 @@ public class StaticContentSetterTests extends EnqueuedHttpResponseTests {
   @SuppressWarnings("unused")
   private Settings settings;
 
+  @MockBean
+  @SuppressWarnings("unused")
+  private Contentful contentful;
+
   @Before
   public void setup() {
-    settings.setSpaceId("jnzexv31feqf");
-    settings.setDeliveryAccessToken("<DELIVERY_TOKEN>");
-
-    settings.contentfulDeliveryClient = client;
+    given(this.contentful.getCurrentClient()).willReturn(client);
+    given(this.contentful.getApi()).willReturn(Contentful.API_CDA);
   }
 
   @After
   public void teardown() {
-    settings.reset();
+    contentful.reset();
   }
 
   @Test
