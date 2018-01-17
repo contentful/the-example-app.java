@@ -76,9 +76,6 @@ public class CoursesParameter extends MappableType {
     return Objects.hash(getBase(), getCourses(), getCategories(), getTitle());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "CoursesParameter { " + super.toString() + " "
         + "base = " + getBase() + ", "

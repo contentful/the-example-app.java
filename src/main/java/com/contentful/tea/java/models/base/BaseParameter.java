@@ -59,9 +59,6 @@ public class BaseParameter extends MappableType {
     return Objects.hash(getApi(), getLocales(), getBreadcrumb(), getMeta());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "BaseParameter { " + super.toString() + " "
         + "api = " + getApi() + ", "

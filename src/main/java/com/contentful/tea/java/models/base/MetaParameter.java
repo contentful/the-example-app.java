@@ -410,9 +410,6 @@ public class MetaParameter extends MappableType {
         getWhatIsThisApp());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "Meta { "
         + "allCoursesLabel = " + getAllCoursesLabel() + ", "

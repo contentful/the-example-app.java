@@ -36,7 +36,7 @@ public class ExceptionToErrorParameterTest {
 
   @Before
   public void setup() {
-    contentful.loadDefaults();
+    contentful.loadFromPreferences();
   }
 
   @After

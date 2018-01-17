@@ -137,9 +137,6 @@ public class CourseParameter extends MappableType {
     return Objects.hash(getTableOfContentsLabel(), getSkillLevelLabel(), getCourseOverviewLabel(), getCourseOverviewCssClass(), getOverviewLabel(), getDurationLabel(), getMinutesLabel(), getStartCourseLabel(), getNextLessonLabel(), getCourse());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "CourseParameter { " + super.toString() + " "
         + "durationLabel = " + getDurationLabel() + ", "

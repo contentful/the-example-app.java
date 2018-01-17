@@ -76,9 +76,6 @@ public class CopyModule extends BaseModule {
     return Objects.hash(hasEmphasizeStyle(), getHeadline(), getCopy(), getCtaTitle(), getCtaLink());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "ModuleCopy { " + super.toString() + " "
         + "copy = " + getCopy() + ", "

@@ -33,9 +33,6 @@ public class HighlightedCourseModule extends BaseModule {
     return Objects.hash(getCourse());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "ModuleHighlightedCourse { " + super.toString() + " "
         + "course = " + getCourse() + " "

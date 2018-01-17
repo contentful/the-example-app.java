@@ -283,7 +283,7 @@ public class MainController implements ErrorController {
   @SuppressWarnings("unused")
   public String saveSettings(HttpServletRequest request) {
     try {
-      contentful.reset().loadDefaults();
+      contentful.reset().loadFromPreferences();
       settings.reset();
       sessionParser.loadSession(request.getSession());
       settings.setBaseUrl(request.getRequestURL().toString());
@@ -291,7 +291,7 @@ public class MainController implements ErrorController {
 
       final Settings lastSettings = settings.save();
       final Contentful lastContentful = contentful.save();
-      contentful.reset().loadDefaults();
+      contentful.reset().loadFromPreferences();
       settings.reset();
       settings.setBaseUrl(request.getRequestURL().toString());
       settings.setPath(request.getServletPath());
@@ -368,7 +368,7 @@ public class MainController implements ErrorController {
   }
 
   private void setupRoute(HttpServletRequest request) {
-    contentful.reset().loadDefaults();
+    contentful.reset().loadFromPreferences();
     sessionParser.loadSession(request.getSession());
     urlParameterParser.parseUrlParameter(request.getParameterMap());
     settings.setBaseUrl(request.getRequestURL().toString());

@@ -61,22 +61,22 @@ public class Lesson extends MappableType {
     if (!(o instanceof Lesson)) return false;
     final Lesson lesson = (Lesson) o;
     return Objects.equals(getSlug(), lesson.getSlug()) &&
+        Objects.equals(getTitle(), lesson.getTitle()) &&
         Objects.equals(getModules(), lesson.getModules()) &&
-        Objects.equals(getTitle(), lesson.getTitle());
+        Objects.equals(getCssClass(), lesson.getCssClass());
   }
 
   @Override public int hashCode() {
-    return Objects.hash(getSlug(), getTitle(), getModules());
+
+    return Objects.hash(getSlug(), getTitle(), getModules(), getCssClass());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "Lesson { " + super.toString() + " "
+        + "cssClass = " + getCssClass() + ", "
+        + "modules = " + getModules() + ", "
         + "slug = " + getSlug() + ", "
-        + "title = " + getTitle() + ", "
-        + "modules = " + getModules() + " "
+        + "title = " + getTitle() + " "
         + "}";
   }
 }

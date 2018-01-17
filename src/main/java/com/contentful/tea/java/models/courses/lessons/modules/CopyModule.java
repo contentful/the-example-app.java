@@ -30,9 +30,6 @@ public class CopyModule extends Module {
     return Objects.hash(super.hashCode(), getCopy());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "CopyModule { " + super.toString() + " "
         + "copy = " + getCopy() + " "

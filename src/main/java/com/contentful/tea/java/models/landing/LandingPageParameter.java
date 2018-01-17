@@ -38,4 +38,11 @@ public class LandingPageParameter extends MappableType {
     this.modules.addAll(Arrays.asList(baseModules));
     return this;
   }
+
+  @Override public String toString() {
+    return "LandingPageParameter { " + super.toString() + " "
+        + "base = " + getBase() + ", "
+        + "modules = " + getModules() + " "
+        + "}";
+  }
 }

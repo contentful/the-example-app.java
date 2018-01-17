@@ -84,9 +84,6 @@ public class LocalesParameter extends MappableType {
         getLocaleQuestion());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "Locales { "
         + "currentLocaleCode = " + getCurrentLocaleCode() + ", "

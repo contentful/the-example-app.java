@@ -34,24 +34,6 @@ public class Contentful {
     return this;
   }
 
-  public Contentful loadDefaults() {
-    Properties properties = new Properties();
-
-    try {
-      final InputStream input = Contentful.class.getClassLoader().getResourceAsStream("tea.properties");
-      properties.load(input);
-
-      setSpaceId(properties.getProperty("spaceId", ""));
-      setDeliveryAccessToken(properties.getProperty("deliveryToken", ""));
-      setPreviewAccessToken(properties.getProperty("previewToken", ""));
-
-    } catch (IOException exception) {
-      throw new IllegalStateException("Could not load default settings.", exception);
-    }
-
-    return this;
-  }
-
   public String getApi() {
     return api;
   }
@@ -132,9 +114,6 @@ public class Contentful {
     return this;
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "Contentful { "
         + "api = " + getApi() + ", "
@@ -168,10 +147,30 @@ public class Contentful {
         ;
   }
 
-  public void load(Contentful lastContentful) {
+  public Contentful load(Contentful lastContentful) {
     setApi(lastContentful.getApi());
     setDeliveryAccessToken(lastContentful.getDeliveryAccessToken());
     setPreviewAccessToken(lastContentful.getPreviewAccessToken());
     setSpaceId(lastContentful.getSpaceId());
+    return this;
   }
+
+  public Contentful loadFromPreferences() {
+    final Properties properties = new Properties();
+
+    try {
+      final InputStream input = Contentful.class.getClassLoader().getResourceAsStream("tea.properties");
+      properties.load(input);
+
+      setSpaceId(properties.getProperty("spaceId", ""));
+      setDeliveryAccessToken(properties.getProperty("deliveryToken", ""));
+      setPreviewAccessToken(properties.getProperty("previewToken", ""));
+
+    } catch (IOException exception) {
+      throw new IllegalStateException("Could not load default settings.", exception);
+    }
+
+    return this;
+  }
+
 }

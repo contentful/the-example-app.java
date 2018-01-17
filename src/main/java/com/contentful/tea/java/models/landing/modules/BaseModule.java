@@ -8,4 +8,10 @@ public class BaseModule extends MappableType {
   public BaseModule(String type) {
     this.type = type;
   }
+
+  @Override public String toString() {
+    return "BaseModule { " + super.toString() + " "
+        + "type = " + type + " "
+        + "}";
+  }
 }

@@ -51,9 +51,6 @@ public class HeroImageModule extends BaseModule {
     return Objects.hash(getHeadline(), getBackgroundImageUrl(), getBackgroundImageTitle());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "ModuleHeroImage { " + super.toString() + " "
         + "backgroundImageTitle = " + getBackgroundImageTitle() + ", "

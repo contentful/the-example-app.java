@@ -514,9 +514,6 @@ public class SettingsParameter extends MappableType {
     return Objects.hash(getBase(), getLoadedFromLocalFileUrl(), getLoadedFromLocalFileName(), getAccessTokenLabel(), getChangesSavedLabel(), getConnectedToSpaceLabel(), getContentDeliveryApiHelpText(), getContentPreviewApiHelpText(), getDeliveryToken(), areEditorialFeaturesEnabled(), getEnableEditorialFeaturesHelpText(), getEnableEditorialFeaturesLabel(), getErrorOccurredMessageLabel(), getErrorOccurredTitleLabel(), getPreviewToken(), getSaveSettingsButtonLabel(), getSettingsIntroLabel(), getSpace(), getSpaceId(), getSpaceIdHelpText(), getSpaceIdLabel(), getSpaceName(), isSuccessful(), getTitle(), getErrors(), getApplicationCredentialsLabel(), getCredentialSourceLabel(), getLoadedFromLocalFileLabel(), getOverrideConfigLabel(), getResetCredentialsLabel(), getUsingServerCredentialsLabel(), getUsingSessionCredentialsLabel(), getDeepLinkUrl(), isUsingCustomCredentials(), getCopyLinkLabel());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "SettingsParameter { " + super.toString() + " "
         + "accessTokenLabel = " + getAccessTokenLabel() + ", "

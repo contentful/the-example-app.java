@@ -126,9 +126,6 @@ public class ApiParameter extends MappableType {
         getCurrentApiLabel());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "API { "
         + "apiSwitcherHelp = " + getApiSwitcherHelp() + ", "

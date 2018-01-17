@@ -37,9 +37,6 @@ public class Module extends MappableType {
     return Objects.hash(getTitle());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "Module { " + super.toString() + " "
         + "type = " + getType() + ", "

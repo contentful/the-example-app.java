@@ -16,6 +16,10 @@ public class Settings {
 
   private boolean editorialFeaturesEnabled;
 
+  public Settings() {
+    reset();
+  }
+
   public String getLocale() {
     return locale;
   }
@@ -61,9 +65,6 @@ public class Settings {
     return this;
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "Settings { "
         + "locale = " + getLocale() + ", "
@@ -100,20 +101,21 @@ public class Settings {
         ;
   }
 
-  public void load(Settings lastSettings) {
+  public Settings load(Settings lastSettings) {
     setEditorialFeaturesEnabled(lastSettings.areEditorialFeaturesEnabled());
     setLocale(lastSettings.getLocale());
     setBaseUrl(lastSettings.getBaseUrl());
     setPath(lastSettings.getPath());
     setQueryString(lastSettings.getQueryString());
+    return this;
   }
 
   public Settings reset() {
     setEditorialFeaturesEnabled(false);
     setLocale(DEFAULT_LOCALE);
-    setBaseUrl("");
-    setPath("");
-    setQueryString("");
+    setBaseUrl(null);
+    setPath(null);
+    setQueryString(null);
 
     return this;
   }

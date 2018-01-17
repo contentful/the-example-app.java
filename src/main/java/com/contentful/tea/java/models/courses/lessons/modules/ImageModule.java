@@ -52,9 +52,6 @@ public class ImageModule extends Module {
     return Objects.hash(super.hashCode(), getImageUrl(), getCaption(), getMissingImageLabel());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "ImageModule { " + super.toString() + " "
         + "caption = " + getCaption() + ", "

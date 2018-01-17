@@ -82,9 +82,6 @@ public class BreadcrumbParameter extends MappableType {
     return Objects.hash(getBreadcrumbs());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "BreadcrumbParameter { " + super.toString() + " "
         + "breadcrumbs = " + getBreadcrumbs() + " "

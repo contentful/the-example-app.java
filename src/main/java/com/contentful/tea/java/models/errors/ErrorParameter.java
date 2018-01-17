@@ -172,9 +172,6 @@ public class ErrorParameter extends MappableType {
     return Objects.hash(getBase(), getContentModelChangedErrorLabel(), getDraftOrPublishedErrorLabel(), getError404Route(), getErrorLabel(), getLocaleContentErrorLabel(), getResponseData(), getStack(), getSomethingWentWrongLabel(), getStackTraceErrorLabel(), getStackTraceLabel(), getStatus(), getTryLabel(), getVerifyCredentialsErrorLabel());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "ErrorParameter { " + super.toString() + " "
         + "base = " + getBase() + ", "

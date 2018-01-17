@@ -49,9 +49,6 @@ public class Category extends MappableType {
     return Objects.hash(getCssClass(), getSlug(), getTitle());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "Category { " + super.toString() + " "
         + "cssClass = " + getCssClass() + ", "

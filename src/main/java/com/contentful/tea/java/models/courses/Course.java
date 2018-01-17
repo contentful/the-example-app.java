@@ -174,9 +174,6 @@ public class Course extends MappableType {
     return Objects.hash(getSlug(), getTitle(), getDescription(), getShortDescription(), getImageUrl(), isDraft(), hasPendingChanges(), getCategories(), getLessons(), getDuration(), getCurrentLesson(), getNextLessonSlug());
   }
 
-  /**
-   * @return a human readable string, representing the object.
-   */
   @Override public String toString() {
     return "Course { " + super.toString() + " "
         + "categories = " + getCategories() + ", "
