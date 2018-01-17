@@ -31,9 +31,7 @@ import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -47,6 +45,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import static java.lang.String.format;
 import static org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @ComponentScan
 @Controller
@@ -278,25 +278,7 @@ public class MainController implements ErrorController {
     }
   }
 
-  @GetMapping(value = "/settings")
-  @ResponseBody
-  @SuppressWarnings("unused")
-  public String settings(HttpServletRequest request) {
-    try {
-      setupRoute(request);
-
-      final SettingsParameter parameter = settingsToParameter.convert(null);
-      staticContentSetter.applyContent(parameter.getBase());
-
-      return htmlGenerator.generate("templates/settings.jade", parameter.toMap());
-    } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render settings page.", t);
-    } finally {
-      teardownRoute(request);
-    }
-  }
-
-  @PostMapping(value = "/settings")
+  @RequestMapping(value = "/settings", method = {GET, POST})
   @ResponseBody
   @SuppressWarnings("unused")
   public String saveSettings(HttpServletRequest request) {
@@ -322,6 +304,9 @@ public class MainController implements ErrorController {
         settings.load(lastSettings);
         contentful.load(lastContentful);
       } else {
+        if (request.getParameterMap().size() > 0) {
+          parameter.setSuccessful(true);
+        }
         staticContentSetter.applyContent(parameter.getBase());
       }
 

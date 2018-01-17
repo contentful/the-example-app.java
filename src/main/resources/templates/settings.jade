@@ -15,7 +15,7 @@ block content
     h1= title
     p #{settingsIntroLabel}
 
-    if isSuccessful
+    if successful
       .status-block.status-block--success
         svg.status-block__icon.status-block__icon--success
           use(xlink:href='/icons/icons.svg#success')
@@ -72,14 +72,14 @@ block content
       .form-item
         input(type="hidden" name="qs" value=queryString)
         label(for="input-space-id") #{spaceIdLabel}
-        input(type="text" name="spaceId" id="input-space-id" value=spaceId)
+        input(type="text" name="space_id" id="input-space-id" value=settings.spaceId)
         if errors.spaceId
           +renderError(errors.spaceId)
         .form-item__help-text #{spaceIdHelpText}
 
       .form-item
         label(for="input-delivery-token") Content Delivery API - #{accessTokenLabel}
-        input(type="text" name="deliveryToken" id="input-delivery-token" value=settings.deliveryToken)
+        input(type="text" name="delivery_token" id="input-delivery-token" value=settings.deliveryToken)
         if errors.deliveryToken
           +renderError(errors.deliveryToken)
         .form-item__help-text
@@ -88,7 +88,7 @@ block content
 
       .form-item
         label(for="input-preview-token") Content Preview API - #{accessTokenLabel}
-        input(type="text" name="previewToken" id="input-preview-token" value=settings.previewToken)
+        input(type="text" name="preview_token" id="input-preview-token" value=settings.previewToken)
         if errors.previewToken
           +renderError(errors.previewToken)
         .form-item__help-text
@@ -97,9 +97,9 @@ block content
 
       .form-item
         if editorialFeaturesEnabled
-          input(type="checkbox" name="editorialFeatures" id="input-editorial-features" checked value="true")
+          input(type="checkbox" name="editorial_features" id="input-editorial-features" checked value="true")
         else
-          input(type="checkbox" name="editorialFeatures" id="input-editorial-features" value="true")
+          input(type="checkbox" name="editorial_features" id="input-editorial-features" value="true")
         label(for="input-editorial-features") #{enableEditorialFeaturesLabel}
         .form-item__help-text #{enableEditorialFeaturesHelpText}
 

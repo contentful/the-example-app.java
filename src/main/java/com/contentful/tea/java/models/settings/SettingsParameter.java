@@ -44,9 +44,10 @@ public class SettingsParameter extends MappableType {
     private Error deliveryToken;
     private Error previewToken;
 
+    private boolean hasErrors = false;
 
     public boolean hasErrors() {
-      return spaceId != null || deliveryToken != null || previewToken != null;
+      return hasErrors;
     }
 
     public Error getSpaceId() {
@@ -55,6 +56,9 @@ public class SettingsParameter extends MappableType {
 
     public Errors setSpaceId(Error spaceId) {
       this.spaceId = spaceId;
+      if (spaceId != null) {
+        hasErrors = true;
+      }
       return this;
     }
 
@@ -64,6 +68,9 @@ public class SettingsParameter extends MappableType {
 
     public Errors setDeliveryToken(Error deliveryToken) {
       this.deliveryToken = deliveryToken;
+      if (deliveryToken != null) {
+        hasErrors = true;
+      }
       return this;
     }
 
@@ -73,6 +80,9 @@ public class SettingsParameter extends MappableType {
 
     public Errors setPreviewToken(Error previewToken) {
       this.previewToken = previewToken;
+      if (previewToken != null) {
+        hasErrors = true;
+      }
       return this;
     }
 

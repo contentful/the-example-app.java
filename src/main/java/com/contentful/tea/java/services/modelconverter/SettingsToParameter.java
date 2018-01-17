@@ -55,7 +55,6 @@ public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<
         .setUsingServerCredentialsLabel(t(Keys.usingServerCredentialsLabel))
         .setUsingSessionCredentialsLabel(t(Keys.usingSessionCredentialsLabel))
         .setCopyLinkLabel(t(Keys.copyLinkLabel))
-        .setSuccessful(errors.hasErrors())
         .setDeliveryToken(contentful.getDeliveryAccessToken())
         .setPreviewToken(contentful.getPreviewAccessToken())
         .setSpaceId(contentful.getSpaceId())
