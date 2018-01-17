@@ -10,6 +10,7 @@ public class Settings {
   private static final String DEFAULT_LOCALE = "en-US";
 
   private String queryString;
+  private String baseUrl;
   private String path;
   private String locale = DEFAULT_LOCALE;
 
@@ -51,12 +52,22 @@ public class Settings {
     return this;
   }
 
+  public String getBaseUrl() {
+    return baseUrl;
+  }
+
+  public Settings setBaseUrl(String baseUrl) {
+    this.baseUrl = baseUrl;
+    return this;
+  }
+
   /**
    * @return a human readable string, representing the object.
    */
   @Override public String toString() {
     return "Settings { "
         + "locale = " + getLocale() + ", "
+        + "baseUrl = " + getBaseUrl() + ", "
         + "path = " + getPath() + ", "
         + "queryString = " + getQueryString() + ", "
         + "editorialFeaturesEnabled = " + areEditorialFeaturesEnabled() + " "
@@ -68,19 +79,21 @@ public class Settings {
     if (!(o instanceof Settings)) return false;
     final Settings settings = (Settings) o;
     return Objects.equals(getQueryString(), settings.getQueryString()) &&
+        Objects.equals(getBaseUrl(), settings.getBaseUrl()) &&
         Objects.equals(getPath(), settings.getPath()) &&
         Objects.equals(getLocale(), settings.getLocale()) &&
         Objects.equals(areEditorialFeaturesEnabled(), settings.areEditorialFeaturesEnabled());
   }
 
   @Override public int hashCode() {
-    return Objects.hash(getQueryString(), getPath(), getLocale(), areEditorialFeaturesEnabled());
+    return Objects.hash(getBaseUrl(), getQueryString(), getPath(), getLocale(), areEditorialFeaturesEnabled());
   }
 
   public Settings save() {
     return
         new Settings()
             .setEditorialFeaturesEnabled(areEditorialFeaturesEnabled())
+            .setBaseUrl(getBaseUrl())
             .setLocale(getLocale())
             .setPath(getPath())
             .setQueryString(getQueryString())
@@ -90,6 +103,7 @@ public class Settings {
   public void load(Settings lastSettings) {
     setEditorialFeaturesEnabled(lastSettings.areEditorialFeaturesEnabled());
     setLocale(lastSettings.getLocale());
+    setBaseUrl(lastSettings.getBaseUrl());
     setPath(lastSettings.getPath());
     setQueryString(lastSettings.getQueryString());
   }
@@ -97,6 +111,7 @@ public class Settings {
   public Settings reset() {
     setEditorialFeaturesEnabled(false);
     setLocale(DEFAULT_LOCALE);
+    setBaseUrl("");
     setPath("");
     setQueryString("");
 

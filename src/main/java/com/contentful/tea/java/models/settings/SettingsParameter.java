@@ -103,17 +103,32 @@ public class SettingsParameter extends MappableType {
 
   private BaseParameter base = new BaseParameter();
 
+  private boolean editorialFeaturesEnabled;
+  private boolean successful;
+  private boolean usesCustomCredentials;
+
+  private Errors errors;
+
   private String accessTokenLabel;
+  private String applicationCredentialsLabel;
   private String changesSavedLabel;
   private String connectedToSpaceLabel;
   private String contentDeliveryApiHelpText;
   private String contentPreviewApiHelpText;
+  private String copyLinkLabel;
+  private String credentialSourceLabel;
+  private String deepLinkUrl;
   private String deliveryToken;
   private String enableEditorialFeaturesHelpText;
   private String enableEditorialFeaturesLabel;
   private String errorOccurredMessageLabel;
   private String errorOccurredTitleLabel;
+  private String loadedFromLocalFileLabel;
+  private String loadedFromLocalFileName;
+  private String loadedFromLocalFileUrl;
+  private String overrideConfigLabel;
   private String previewToken;
+  private String resetCredentialsLabel;
   private String saveSettingsButtonLabel;
   private String settingsIntroLabel;
   private String space;
@@ -122,22 +137,8 @@ public class SettingsParameter extends MappableType {
   private String spaceIdLabel;
   private String spaceName;
   private String title;
-
-  private String applicationCredentialsLabel;
-  private String credentialSourceLabel;
-  private String loadedFromLocalFileLabel;
-  private String overrideConfigLabel;
-  private String resetCredentialsLabel;
   private String usingServerCredentialsLabel;
   private String usingSessionCredentialsLabel;
-  private String deepLinkUrl;
-  private boolean usesCustomCredentials;
-
-  private Errors errors;
-//    ${baseUrl}/?space_id=${settings.spaceId}&preview_token=${settings.previewToken}&delivery_token=${settings.deliveryToken}&api=${currentApi.id}${settings.editorialFeatures ? '&enable_editorial_features' : ''}' class="status-block__sharelink") #{copyLinkLabel}
-
-  private boolean editorialFeaturesEnabled;
-  private boolean successful;
 
   public BaseParameter getBase() {
     return base;
@@ -431,23 +432,60 @@ public class SettingsParameter extends MappableType {
     return editorialFeaturesEnabled;
   }
 
+  public String getCopyLinkLabel() {
+    return copyLinkLabel;
+  }
+
+  public SettingsParameter setCopyLinkLabel(String copyLinkLabel) {
+    this.copyLinkLabel = copyLinkLabel;
+    return this;
+  }
+
+  public String getLoadedFromLocalFileUrl() {
+    return loadedFromLocalFileUrl;
+  }
+
+  public SettingsParameter setLoadedFromLocalFileUrl(String loadedFromLocalFileUrl) {
+    this.loadedFromLocalFileUrl = loadedFromLocalFileUrl;
+    return this;
+  }
+
+  public String getLoadedFromLocalFileName() {
+    return loadedFromLocalFileName;
+  }
+
+  public SettingsParameter setLoadedFromLocalFileName(String loadedFromLocalFileName) {
+    this.loadedFromLocalFileName = loadedFromLocalFileName;
+    return this;
+  }
+
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof SettingsParameter)) return false;
     final SettingsParameter that = (SettingsParameter) o;
     return Objects.equals(getBase(), that.getBase()) &&
+        Objects.equals(areEditorialFeaturesEnabled(), that.areEditorialFeaturesEnabled()) &&
         Objects.equals(getAccessTokenLabel(), that.getAccessTokenLabel()) &&
+        Objects.equals(getApplicationCredentialsLabel(), that.getApplicationCredentialsLabel()) &&
         Objects.equals(getChangesSavedLabel(), that.getChangesSavedLabel()) &&
         Objects.equals(getConnectedToSpaceLabel(), that.getConnectedToSpaceLabel()) &&
         Objects.equals(getContentDeliveryApiHelpText(), that.getContentDeliveryApiHelpText()) &&
         Objects.equals(getContentPreviewApiHelpText(), that.getContentPreviewApiHelpText()) &&
+        Objects.equals(getCopyLinkLabel(), that.getCopyLinkLabel()) &&
+        Objects.equals(getCredentialSourceLabel(), that.getCredentialSourceLabel()) &&
+        Objects.equals(getDeepLinkUrl(), that.getDeepLinkUrl()) &&
         Objects.equals(getDeliveryToken(), that.getDeliveryToken()) &&
-        Objects.equals(areEditorialFeaturesEnabled(), that.areEditorialFeaturesEnabled()) &&
         Objects.equals(getEnableEditorialFeaturesHelpText(), that.getEnableEditorialFeaturesHelpText()) &&
         Objects.equals(getEnableEditorialFeaturesLabel(), that.getEnableEditorialFeaturesLabel()) &&
         Objects.equals(getErrorOccurredMessageLabel(), that.getErrorOccurredMessageLabel()) &&
         Objects.equals(getErrorOccurredTitleLabel(), that.getErrorOccurredTitleLabel()) &&
+        Objects.equals(getErrors(), that.getErrors()) &&
+        Objects.equals(getLoadedFromLocalFileLabel(), that.getLoadedFromLocalFileLabel()) &&
+        Objects.equals(getLoadedFromLocalFileName(), that.getLoadedFromLocalFileName()) &&
+        Objects.equals(getLoadedFromLocalFileUrl(), that.getLoadedFromLocalFileUrl()) &&
+        Objects.equals(getOverrideConfigLabel(), that.getOverrideConfigLabel()) &&
         Objects.equals(getPreviewToken(), that.getPreviewToken()) &&
+        Objects.equals(getResetCredentialsLabel(), that.getResetCredentialsLabel()) &&
         Objects.equals(getSaveSettingsButtonLabel(), that.getSaveSettingsButtonLabel()) &&
         Objects.equals(getSettingsIntroLabel(), that.getSettingsIntroLabel()) &&
         Objects.equals(getSpace(), that.getSpace()) &&
@@ -455,22 +493,15 @@ public class SettingsParameter extends MappableType {
         Objects.equals(getSpaceIdHelpText(), that.getSpaceIdHelpText()) &&
         Objects.equals(getSpaceIdLabel(), that.getSpaceIdLabel()) &&
         Objects.equals(getSpaceName(), that.getSpaceName()) &&
-        Objects.equals(isSuccessful(), that.isSuccessful()) &&
         Objects.equals(getTitle(), that.getTitle()) &&
-        Objects.equals(getApplicationCredentialsLabel(), that.getApplicationCredentialsLabel()) &&
-        Objects.equals(getCredentialSourceLabel(), that.getCredentialSourceLabel()) &&
-        Objects.equals(getLoadedFromLocalFileLabel(), that.getLoadedFromLocalFileLabel()) &&
-        Objects.equals(getOverrideConfigLabel(), that.getOverrideConfigLabel()) &&
-        Objects.equals(getResetCredentialsLabel(), that.getResetCredentialsLabel()) &&
         Objects.equals(getUsingServerCredentialsLabel(), that.getUsingServerCredentialsLabel()) &&
         Objects.equals(getUsingSessionCredentialsLabel(), that.getUsingSessionCredentialsLabel()) &&
-        Objects.equals(getDeepLinkUrl(), that.getDeepLinkUrl()) &&
-        Objects.equals(isUsingCustomCredentials(), that.isUsingCustomCredentials()) &&
-        Objects.equals(getErrors(), that.getErrors());
+        Objects.equals(isSuccessful(), that.isSuccessful()) &&
+        Objects.equals(isUsingCustomCredentials(), that.isUsingCustomCredentials());
   }
 
   @Override public int hashCode() {
-    return Objects.hash(getBase(), getAccessTokenLabel(), getChangesSavedLabel(), getConnectedToSpaceLabel(), getContentDeliveryApiHelpText(), getContentPreviewApiHelpText(), getDeliveryToken(), areEditorialFeaturesEnabled(), getEnableEditorialFeaturesHelpText(), getEnableEditorialFeaturesLabel(), getErrorOccurredMessageLabel(), getErrorOccurredTitleLabel(), getPreviewToken(), getSaveSettingsButtonLabel(), getSettingsIntroLabel(), getSpace(), getSpaceId(), getSpaceIdHelpText(), getSpaceIdLabel(), getSpaceName(), isSuccessful(), getTitle(), getErrors(), getApplicationCredentialsLabel(), getCredentialSourceLabel(), getLoadedFromLocalFileLabel(), getOverrideConfigLabel(), getResetCredentialsLabel(), getUsingServerCredentialsLabel(), getUsingSessionCredentialsLabel(), getDeepLinkUrl(), isUsingCustomCredentials());
+    return Objects.hash(getBase(), getLoadedFromLocalFileUrl(), getLoadedFromLocalFileName(), getAccessTokenLabel(), getChangesSavedLabel(), getConnectedToSpaceLabel(), getContentDeliveryApiHelpText(), getContentPreviewApiHelpText(), getDeliveryToken(), areEditorialFeaturesEnabled(), getEnableEditorialFeaturesHelpText(), getEnableEditorialFeaturesLabel(), getErrorOccurredMessageLabel(), getErrorOccurredTitleLabel(), getPreviewToken(), getSaveSettingsButtonLabel(), getSettingsIntroLabel(), getSpace(), getSpaceId(), getSpaceIdHelpText(), getSpaceIdLabel(), getSpaceName(), isSuccessful(), getTitle(), getErrors(), getApplicationCredentialsLabel(), getCredentialSourceLabel(), getLoadedFromLocalFileLabel(), getOverrideConfigLabel(), getResetCredentialsLabel(), getUsingServerCredentialsLabel(), getUsingSessionCredentialsLabel(), getDeepLinkUrl(), isUsingCustomCredentials(), getCopyLinkLabel());
   }
 
   /**
@@ -486,6 +517,7 @@ public class SettingsParameter extends MappableType {
         + "connectedToSpaceLabel = " + getConnectedToSpaceLabel() + ", "
         + "contentDeliveryApiHelpText = " + getContentDeliveryApiHelpText() + ", "
         + "contentPreviewApiHelpText = " + getContentPreviewApiHelpText() + ", "
+        + "copyLinkLabel = " + getCopyLinkLabel() + ", "
         + "credentialSourceLabel = " + getCredentialSourceLabel() + ", "
         + "deepLinkUrl = " + getDeepLinkUrl() + ", "
         + "deliveryToken = " + getDeliveryToken() + ", "
@@ -496,6 +528,8 @@ public class SettingsParameter extends MappableType {
         + "errorOccurredTitleLabel = " + getErrorOccurredTitleLabel() + ", "
         + "errors = " + getErrors() + ", "
         + "loadedFromLocalFileLabel = " + getLoadedFromLocalFileLabel() + ", "
+        + "loadedFromLocalFileName = " + getLoadedFromLocalFileName() + ", "
+        + "loadedFromLocalFileUrl = " + getLoadedFromLocalFileUrl() + ", "
         + "overrideConfigLabel = " + getOverrideConfigLabel() + ", "
         + "previewToken = " + getPreviewToken() + ", "
         + "resetCredentialsLabel = " + getResetCredentialsLabel() + ", "

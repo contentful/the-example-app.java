@@ -304,12 +304,15 @@ public class MainController implements ErrorController {
       contentful.reset().loadDefaults();
       settings.reset();
       sessionParser.loadSession(request.getSession());
+      settings.setBaseUrl(request.getRequestURL().toString());
       settings.setPath(request.getServletPath());
 
       final Settings lastSettings = settings.save();
       final Contentful lastContentful = contentful.save();
       contentful.reset().loadDefaults();
       settings.reset();
+      settings.setBaseUrl(request.getRequestURL().toString());
+      settings.setPath(request.getServletPath());
       urlParameterParser.parseUrlParameter(request.getParameterMap());
 
       final SettingsParameter parameter = settingsToParameter.convert(null);
@@ -383,6 +386,7 @@ public class MainController implements ErrorController {
     contentful.reset().loadDefaults();
     sessionParser.loadSession(request.getSession());
     urlParameterParser.parseUrlParameter(request.getParameterMap());
+    settings.setBaseUrl(request.getRequestURL().toString());
     settings.setPath(request.getServletPath());
   }
 

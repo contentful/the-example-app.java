@@ -35,6 +35,7 @@ block content
         svg.status-block__icon.status-block__icon--info
           use(xlink:href='/icons/icons.svg#info')
         .status-block__content
+          .status-block__message
             if !usesCustomCredentials
               p
                 em #{usingServerCredentialsLabel}
@@ -45,8 +46,8 @@ block content
               p
                 strong #{credentialSourceLabel}:
                 br
-                span #{loadedFromLocalFileLabel}
-                 a(href="https://github.com/contentful/the-example-app.nodejs/blob/master/variables.env" target="_blank" rel="noopener") variable.env
+                span #{loadedFromLocalFileLabel}&nbsp;
+                 a(href="#{loadedFromLocalFileUrl}" target="_blank" rel="noopener") #{loadedFromLocalFileName}
               p
                 em #{overrideConfigLabel}
             else

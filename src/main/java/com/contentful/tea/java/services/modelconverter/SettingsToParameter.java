@@ -16,6 +16,8 @@ import java.util.Properties;
 @Component
 public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<Void, SettingsParameter> {
 
+  private static final String LOCAL_SETTINGS_REFERENCE_IN_TO_GITHUB = "https://github.com/contentful/the-example-app.java/blob/master/src/main/resources/tea.properties";
+  private static final String LOCAL_SETTINGS_REFERENCE_FILE_NAME = "\uD83C\uDF75.properties";
   @Autowired
   @SuppressWarnings("unused")
   private Contentful contentful;
@@ -46,10 +48,13 @@ public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<
         .setApplicationCredentialsLabel(t(Keys.applicationCredentialsLabel))
         .setCredentialSourceLabel(t(Keys.credentialSourceLabel))
         .setLoadedFromLocalFileLabel(t(Keys.loadedFromLocalFileLabel))
+        .setLoadedFromLocalFileUrl(LOCAL_SETTINGS_REFERENCE_IN_TO_GITHUB)
+        .setLoadedFromLocalFileName(LOCAL_SETTINGS_REFERENCE_FILE_NAME)
         .setOverrideConfigLabel(t(Keys.overrideConfigLabel))
         .setResetCredentialsLabel(t(Keys.resetCredentialsLabel))
         .setUsingServerCredentialsLabel(t(Keys.usingServerCredentialsLabel))
         .setUsingSessionCredentialsLabel(t(Keys.usingSessionCredentialsLabel))
+        .setCopyLinkLabel(t(Keys.copyLinkLabel))
         .setSuccessful(errors.hasErrors())
         .setDeliveryToken(contentful.getDeliveryAccessToken())
         .setPreviewToken(contentful.getPreviewAccessToken())
@@ -80,12 +85,12 @@ public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<
   }
 
   private String createDeepLinkUrl() {
-    return ""
-        + "/?space_id=" + contentful.getSpaceId()
+    return settings.getBaseUrl()
+        + "?space_id=" + contentful.getSpaceId()
         + "&preview_token=" + contentful.getPreviewAccessToken()
         + "&delivery_token=" + contentful.getDeliveryAccessToken()
         + "&api=" + contentful.getApi()
-        + "enable_editorial_features=" + settings.areEditorialFeaturesEnabled();
+        + "&enable_editorial_features=" + settings.areEditorialFeaturesEnabled();
   }
 
   private String fetchSpaceName() {
