@@ -19,6 +19,7 @@ import com.contentful.tea.java.services.settings.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 
 import static com.contentful.tea.java.models.base.ApiParameter.CSS_CLASS_ACTIVE_BUTTON;
@@ -137,6 +138,7 @@ public class StaticContentSetter {
     final CDAClient client = contentful.getCurrentClient();
     final CDASpace space = client.fetchSpace();
     final List<CDALocale> locales = space.locales();
+    Collections.reverse(locales);
 
     final LocalesParameter localesParameter = base.getLocales();
     localesParameter
