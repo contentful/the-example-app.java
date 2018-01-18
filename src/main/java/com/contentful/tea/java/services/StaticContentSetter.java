@@ -275,6 +275,7 @@ public class StaticContentSetter {
         .fetch(CDAEntry.class)
         .withContentType("course")
         .where("fields.slug", QueryOperation.IsEqualTo, courseSlug)
+        .where("locale", settings.getLocale())
         .all();
 
     if (courses.total() == 1) {
