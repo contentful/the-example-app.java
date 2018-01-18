@@ -51,9 +51,9 @@ public class ContentfulTests extends EnqueuedHttpResponseTests {
     final Contentful subject = new Contentful().loadFromPreferences();
 
     assertThat(subject.getApi()).isEqualTo(API_CDA);
-    assertThat(subject.getSpaceId()).isEqualTo("jnzexv31feqf");
-    assertThat(subject.getDeliveryAccessToken()).isEqualTo("7c1c321a528a25c351c1ac5f53e6ddc6bcce0712ecebec60817f53b35dd3c42b");
-    assertThat(subject.getPreviewAccessToken()).isEqualTo("4310226db935f0e9b6b34fb9ce6611e2061abe1aab5297fa25bd52af5caa531a");
+    assertThat(subject.getSpaceId()).isEqualTo("qz0n5cdakyl9");
+    assertThat(subject.getDeliveryAccessToken()).isEqualTo("580d5944194846b690dd89b630a1cb98a0eef6a19b860ef71efc37ee8076ddb8");
+    assertThat(subject.getPreviewAccessToken()).isEqualTo("e8fc39d9661c7468d0285a7ff949f7a23539dd2e686fcb7bd84dc01b392d698b");
   }
 
   @Test

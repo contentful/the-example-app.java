@@ -9,40 +9,26 @@ public class BaseParameter extends MappableType {
   private LocalesParameter locales = new LocalesParameter();
   private MetaParameter meta = new MetaParameter();
   private BreadcrumbParameter breadcrumb = new BreadcrumbParameter();
+  private LabelsParameter labels = new LabelsParameter();
 
   public ApiParameter getApi() {
     return api;
-  }
-
-  public BaseParameter setApi(ApiParameter api) {
-    this.api = api;
-    return this;
   }
 
   public LocalesParameter getLocales() {
     return locales;
   }
 
-  public BaseParameter setLocales(LocalesParameter locales) {
-    this.locales = locales;
-    return this;
-  }
-
   public MetaParameter getMeta() {
     return meta;
-  }
-
-  public BaseParameter setMeta(MetaParameter meta) {
-    this.meta = meta;
-    return this;
   }
 
   public BreadcrumbParameter getBreadcrumb() {
     return breadcrumb;
   }
 
-  public void setBreadcrumb(BreadcrumbParameter breadcrumb) {
-    this.breadcrumb = breadcrumb;
+  public LabelsParameter getLabels() {
+    return labels;
   }
 
   @Override public boolean equals(Object o) {
@@ -52,11 +38,12 @@ public class BaseParameter extends MappableType {
     return Objects.equals(getApi(), that.getApi()) &&
         Objects.equals(getLocales(), that.getLocales()) &&
         Objects.equals(getBreadcrumb(), that.getBreadcrumb()) &&
+        Objects.equals(getLabels(), that.getLabels()) &&
         Objects.equals(getMeta(), that.getMeta());
   }
 
   @Override public int hashCode() {
-    return Objects.hash(getApi(), getLocales(), getBreadcrumb(), getMeta());
+    return Objects.hash(getApi(), getLocales(), getLabels(), getBreadcrumb(), getMeta());
   }
 
   @Override public String toString() {
@@ -64,6 +51,7 @@ public class BaseParameter extends MappableType {
         + "api = " + getApi() + ", "
         + "breadcrumb = " + getBreadcrumb() + ", "
         + "locales = " + getLocales() + ", "
+        + "labels = " + getLabels() + ", "
         + "meta = " + getMeta() + " "
         + "}";
   }

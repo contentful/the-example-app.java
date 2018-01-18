@@ -11,8 +11,6 @@ public class LocalesParameter extends MappableType {
   private String currentLocaleCode;
   private String currentLocaleName;
   private List<Locale> locales = new ArrayList<>();
-  private String localeQuestion;
-  private String localeLabel;
 
   public String getCurrentLocaleCode() {
     return currentLocaleCode;
@@ -46,51 +44,27 @@ public class LocalesParameter extends MappableType {
     return this;
   }
 
-  public String getLocaleQuestion() {
-    return localeQuestion;
-  }
-
-  public LocalesParameter setLocaleQuestion(String localeQuestion) {
-    this.localeQuestion = localeQuestion;
-    return this;
-  }
-
-  public String getLocaleLabel() {
-    return localeLabel;
-  }
-
-  public LocalesParameter setLocaleLabel(String localeLabel) {
-    this.localeLabel = localeLabel;
-    return this;
-  }
-
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof LocalesParameter)) return false;
     final LocalesParameter localesParameter1 = (LocalesParameter) o;
     return Objects.equals(getCurrentLocaleCode(), localesParameter1.getCurrentLocaleCode()) &&
         Objects.equals(getCurrentLocaleName(), localesParameter1.getCurrentLocaleName()) &&
-        Objects.equals(getLocales(), localesParameter1.getLocales()) &&
-        Objects.equals(getLocaleLabel(), localesParameter1.getLocaleLabel()) &&
-        Objects.equals(getLocaleQuestion(), localesParameter1.getLocaleQuestion());
+        Objects.equals(getLocales(), localesParameter1.getLocales());
   }
 
   @Override public int hashCode() {
     return Objects.hash(
         getCurrentLocaleCode(),
         getCurrentLocaleName(),
-        getLocales(),
-        getLocaleLabel(),
-        getLocaleQuestion());
+        getLocales());
   }
 
   @Override public String toString() {
     return "Locales { "
         + "currentLocaleCode = " + getCurrentLocaleCode() + ", "
         + "currentLocaleName = " + getCurrentLocaleName() + ", "
-        + "localeQuestion = " + getLocaleQuestion() + ", "
         + "locales = " + getLocales() + " "
-        + "localeLabel = " + getLocaleLabel() + " "
         + "}";
   }
 }

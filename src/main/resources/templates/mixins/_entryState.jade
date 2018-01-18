@@ -1,5 +1,5 @@
-mixin entryState(entry)
-  if entry.draft
-    .pill.pill--draft #{base.meta.draftLabel}
-  if entry.pendingChanges
-    .pill.pill--pending-changes #{base.meta.pendingChangesLabel}
+mixin entryState
+  if base.meta.draft
+    .pill.pill--draft #{base.labels.draftLabel}
+  if base.meta.pendingChanges
+    .pill.pill--pending-changes #{base.labels.pendingChangesLabel}

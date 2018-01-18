@@ -40,7 +40,7 @@ html
               .header__controls
                 .header__controls_group
                   form(action='' method='get')
-                    .header__controls_label API: #{base.api.currentApiLabel}
+                    .header__controls_label API: #{base.labels.currentApiLabel}
                     .header__controls_dropdown
                       .header__controls_help_text #{base.api.apiSwitcherHelp}
                       button.header__controls_button(
@@ -49,7 +49,7 @@ html
                         value='cda'
                         class='!{base.api.cdaButtonCSSClass}'
                       )
-                        | #{base.api.contentDeliveryApiLabel}:
+                        | #{base.labels.contentDeliveryApiLabel}:
                         br
                         span.header__controls_button_help= base.api.contentDeliveryApiHelp
                       button.header__controls_button(
@@ -58,7 +58,7 @@ html
                         value='cpa'
                         class='!{base.api.cpaButtonCSSClass}'
                       )
-                        | #{base.api.contentPreviewApiLabel}:
+                        | #{base.labels.contentPreviewApiLabel}:
                         br
                         span.header__controls_button_help= base.api.contentPreviewApiHelp
                     input(type='hidden' name='locale' value=base.locales.currentLocaleCode)
@@ -66,24 +66,24 @@ html
                 .header__controls_group
                   form(action='' method='get')
                     input(type='hidden' name='api' value=base.api.currentApiId)
-                    .header__controls_label #{base.locales.localeLabel}: #{base.locales.currentLocaleName}
+                    .header__controls_label #{base.labels.localeLabel}: #{base.locales.currentLocaleName}
                     .header__controls_dropdown
                       .header__controls_help_text #{base.locales.localeQuestion}
                       each locale in base.locales.locales
                         button.header__controls_button(type='submit' name='locale' value=locale.code class=locale.cssClass) #{locale.name} (#{locale.code})
               .header__upper-menu
-                a(href='/settings/!{base.meta.queryString}' class='!{base.meta.upperMenuCSSClass}') #{base.meta.settingsLabel}
+                a(href='/settings/!{base.meta.queryString}' class='!{base.meta.upperMenuCSSClass}') #{base.labels.settingsLabel}
           .header__lower-wrapper
             .header__lower.layout-centered
               .header__logo
                 a.header__logo-link(href='/!{base.meta.queryString}')
-                  img(src='/images/the-example-app-logo-java.svg' alt=base.meta.logoAlt)
+                  img(src='/images/the-example-app-logo-java.svg' alt=base.labels.logoAlt)
               nav.header__navigation.main-navigation
                 ul
                   li
-                    a(href='/' class='!{base.meta.homeCSSClass}') #{base.meta.homeLabel}
+                    a(href='/' class='!{base.meta.homeCSSClass}') #{base.labels.homeLabel}
                   li
-                    a(href='/courses' class='!{base.meta.coursesCSSClass}' ) #{base.meta.coursesLabel}
+                    a(href='/courses' class='!{base.meta.coursesCSSClass}' ) #{base.labels.coursesLabel}
       .main__content
         block content
 
@@ -94,9 +94,9 @@ html
               nav.footer__navigation.main-navigation
                 ul
                   li
-                    a(href='!{base.meta.queryString}' class='!{base.meta.homeCSSClass}') #{base.meta.homeLabel}
+                    a(href='!{base.meta.queryString}' class='!{base.meta.homeCSSClass}') #{base.labels.homeLabel}
                   li
-                    a(href='/courses!{base.meta.queryString}' class='!{base.meta.coursesCSSClass}' ) #{base.meta.coursesLabel}
+                    a(href='/courses!{base.meta.queryString}' class='!{base.meta.coursesCSSClass}' ) #{base.labels.coursesLabel}
               .footer__apps
                 //- a(href='#')
                 //-   img(src='/images/badge-app-store.svg')
@@ -108,12 +108,12 @@ html
                   img.footer__disclaimer-logo(src='/images/contentful-logo.svg')
               .footer__disclaimer
                 p.footer__disclaimer-text
-                  | #{base.meta.footerDisclaimer}&nbsp;
-                  a(href='https://github.com/contentful/the-example-app.java' target='_blank' rel='noopener') #{base.meta.viewOnGitHub}
+                  | #{base.labels.footerDisclaimer}&nbsp;
+                  a(href='https://github.com/contentful/the-example-app.java' target='_blank' rel='noopener') #{base.labels.viewOnGitHub}
                   | .&nbsp;
-                  a(href='/imprint/!{queryString}' ) #{base.meta.imprintLabel}
+                  a(href='/imprint/!{base.meta.queryString}' ) #{base.labels.imprintLabel}
                   | .&nbsp;
-                  a(href='https://www.contentful.com/contact/' target='_blank') #{base.meta.contactUsLabel}
+                  a(href='https://www.contentful.com/contact/' target='_blank') #{base.labels.contactUsLabel}
                   | .
               .footer__social
                 p
@@ -129,61 +129,63 @@ html
     section.modal#about-this-modal
       .modal__overlay.close
       .modal__wrapper
-        h1.modal__title #{base.meta.modalTitle}
+        h1.modal__title #{base.labels.modalTitle}
         .modal__content
-          p #{base.meta.modalIntro}&nbsp;
+          p #{base.labels.modalIntro}&nbsp;
             a(href='https://github.com/contentful/the-example-app.java' target='_blank' rel='noopener') GitHub
             | .
           p
             | #{base.meta.modalSpaceIntro}&nbsp;
-            a(href='https://github.com/contentful/content-models/blob/master/the-example-app/README.md ' target='_blank' rel='noopener')=base.meta.modalSpaceLinkLabel
+            a(href='https://github.com/contentful/content-models/blob/master/the-example-app/README.md ' target='_blank' rel='noopener')=base.labels.modalSpaceLinkLabel
             | .
           p #{base.meta.modalPlatforms}
             ul
               li
                 img(src='/images/icon-nodejs.svg')
                 br
-                a(href="https://the-example-app-nodejs.herokuapp.com/" rel="noopener" target="_blank")= base.meta.hostedLabel
+                a(href="https://the-example-app-nodejs.herokuapp.com/" rel="noopener" target="_blank")= base.labels.hostedLabel
                 br
                 a(href="https://github.com/contentful/the-example-app.nodejs" rel="noopener" target="_blank") GitHub
               li
                 img(src='/images/icon-dotnet.svg')
                 br
-                a(href="https://the-example-app-csharp.herokuapp.com/" rel="noopener" target="_blank")= base.meta.hostedLabel
+                a(href="https://the-example-app-csharp.herokuapp.com/" rel="noopener" target="_blank")= base.labels.hostedLabel
                 br
                 a(href="https://github.com/contentful/the-example-app.csharp" rel="noopener" target="_blank") GitHub
               li
                 img(src='/images/icon-ruby.svg')
                 br
-                a(href="https://the-example-app-rb.herokuapp.com/" rel="noopener" target="_blank")= base.meta.hostedLabel
+                a(href="https://the-example-app-rb.herokuapp.com/" rel="noopener" target="_blank")= base.labels.hostedLabel
                 br
                 a(href="https://github.com/contentful/the-example-app.rb" rel="noopener" target="_blank") GitHub
               li
                 img(src='/images/icon-php.svg')
                 br
-                a(href="https://the-example-app-php.herokuapp.com/" rel="noopener" target="_blank")= base.meta.hostedLabel
+                a(href="https://the-example-app-php.herokuapp.com/" rel="noopener" target="_blank")= base.labels.hostedLabel
                 br
                 a(href="https://github.com/contentful/the-example-app.php" rel="noopener" target="_blank") GitHub
               li
                 img(src='/images/icon-python.svg')
                 br
-                a(href="https://the-example-app-py.herokuapp.com/" rel="noopener" target="_blank")= base.meta.hostedLabel
+                a(href="https://the-example-app-py.herokuapp.com/" rel="noopener" target="_blank")= base.labels.hostedLabel
                 br
                 a(href="https://github.com/contentful/the-example-app.py" rel="noopener" target="_blank") GitHub
               li
+                img(src='/images/icon-java.svg')
+                br
+                a(href="https://the-example-app-java.herokuapp.com/" rel="noopener" target="_blank")= base.labels.hostedLabel
+                br
+                a(href="https://github.com/contentful/the-example-app.java" rel="noopener" target="_blank") GitHub
+              li
                 img.inactive(src='/images/icon-swift.svg')
                 br
-                = base.meta.comingSoonLabel
-              li
-                img.inactive(src='/images/icon-java.svg')
-                br
-                = base.meta.comingSoonLabel
+                = base.labels.comingSoonLabel
               li
                 img.inactive(src='/images/icon-android.svg')
                 br
-                = base.meta.comingSoonLabel
+                = base.labels.comingSoonLabel
         .modal__cta-wrapper
-          a(href='#').modal__cta.close #{base.meta.modalCTALabel}
+          a(href='#').modal__cta.close #{base.labels.modalCTALabel}
         .modal__close-wrapper
           a(href='#').modal__close-button.close
             svg

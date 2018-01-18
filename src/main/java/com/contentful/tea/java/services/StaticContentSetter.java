@@ -13,7 +13,7 @@ import com.contentful.tea.java.models.base.Locale;
 import com.contentful.tea.java.models.base.LocalesParameter;
 import com.contentful.tea.java.services.contentful.Contentful;
 import com.contentful.tea.java.services.localization.Keys;
-import com.contentful.tea.java.services.localization.LocalizedStringsProvider;
+import com.contentful.tea.java.services.localization.Localizer;
 import com.contentful.tea.java.services.settings.Settings;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +21,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static com.contentful.tea.java.models.base.ApiParameter.CSS_CLASS_ACTIVE_BUTTON;
 import static com.contentful.tea.java.services.contentful.Contentful.API_CDA;
+import static com.contentful.tea.java.services.contentful.Contentful.API_CPA;
 import static java.lang.String.format;
 
 @Component
@@ -32,7 +34,7 @@ public class StaticContentSetter {
 
   @Autowired
   @SuppressWarnings("unused")
-  private LocalizedStringsProvider localizer;
+  private Localizer localizer;
 
   @Autowired
   @SuppressWarnings("unused")
@@ -61,55 +63,59 @@ public class StaticContentSetter {
   }
 
   private void setStaticContent(BaseParameter base) {
-    base.getApi()
+    base.getLabels()
+        .setAllCoursesLabel(t(Keys.allCoursesLabel))
         .setApiSwitcherHelp(t(Keys.apiSwitcherHelp))
+        .setCategoriesLabel(t(Keys.categoriesLabel))
+        .setComingSoonLabel(t(Keys.comingSoonLabel))
+        .setContactUsLabel(t(Keys.contactUsLabel))
         .setContentDeliveryApiHelp(t(Keys.contentDeliveryApiHelp))
         .setContentDeliveryApiLabel(t(Keys.contentDeliveryApiLabel))
         .setContentPreviewApiHelp(t(Keys.contentPreviewApiHelp))
         .setContentPreviewApiLabel(t(Keys.contentPreviewApiLabel))
-    ;
-
-    base.getMeta()
-        .setAllCoursesLabel(t(Keys.allCoursesLabel))
-        .setCategoriesLabel(t(Keys.categoriesLabel))
-        .setContactUsLabel(t(Keys.contactUsLabel))
         .setCoursesLabel(t(Keys.coursesLabel))
+        .setCurrentApiLabel(t(cpaOrCdaApiLabel()))
         .setDescription(t(Keys.metaDescription))
         .setDraftLabel(t(Keys.draftLabel))
+        .setEditInWebAppLabel(t(Keys.editInTheWebAppLabel))
+        .setEditorialFeaturesHint(t(Keys.editorialFeaturesHint))
         .setFooterDisclaimer(t(Keys.footerDisclaimer))
         .setHomeLabel(t(Keys.homeLabel))
+        .setHostedLabel(t(Keys.hostedLabel))
         .setImageAlt(t(Keys.metaImageAlt))
         .setImageDescription(t(Keys.metaImageDescription))
         .setImprintLabel(t(Keys.imprintLabel))
+        .setLocaleLabel(t(Keys.currentLocaleLabel))
+        .setLocaleQuestion(t(Keys.localeQuestion))
         .setLogoAlt(t(Keys.logoAlt))
         .setModalCTALabel(t(Keys.modalCTALabel))
         .setModalIntro(t(Keys.modalIntroJava))
+        .setModalPlatforms(t(Keys.modalPlatforms))
         .setModalSpaceIntro(t(Keys.modalSpaceIntro))
         .setModalSpaceLinkLabel(t(Keys.modalSpaceLinkLabel))
         .setModalTitle(t(Keys.modalTitleJava))
-        .setModalPlatforms(t(Keys.modalPlatforms))
         .setPendingChangesLabel(t(Keys.pendingChangesLabel))
         .setSettingsLabel(t(Keys.settingsLabel))
         .setTwitterCard(t(Keys.metaTwitterCard))
+        .setViewCourseLabel(t(Keys.viewCourseLabel))
         .setViewOnGitHub(t(Keys.viewOnGithub))
         .setWhatIsThisApp(t(Keys.whatIsThisApp))
-        .setComingSoonLabel(t(Keys.comingSoonLabel))
-        .setHostedLabel(t(Keys.hostedLabel))
-        .setViewCourseLabel(t(Keys.viewCourseLabel));
     ;
+  }
+
+  private Keys cpaOrCdaApiLabel() {
+    return Objects.equals(contentful.getApi(), API_CPA) ? Keys.contentPreviewApiLabel : Keys.contentDeliveryApiLabel;
   }
 
   private void updateApis(BaseParameter base) {
     if (API_CDA.equals(contentful.getApi())) {
       base.getApi()
-          .setCurrentApiLabel(t(Keys.contentDeliveryApiLabel))
           .setCurrentApiId(contentful.getApi())
           .setCpaButtonCSSClass("")
           .setCdaButtonCSSClass(CSS_CLASS_ACTIVE_BUTTON)
       ;
     } else {
       base.getApi()
-          .setCurrentApiLabel(t(Keys.contentPreviewApiLabel))
           .setCurrentApiId(contentful.getApi())
           .setCpaButtonCSSClass(CSS_CLASS_ACTIVE_BUTTON)
           .setCdaButtonCSSClass("")
@@ -142,8 +148,6 @@ public class StaticContentSetter {
 
     final LocalesParameter localesParameter = base.getLocales();
     localesParameter
-        .setLocaleQuestion(t(Keys.localeQuestion))
-        .setLocaleLabel(t(Keys.locale))
         .setCurrentLocaleCode(settings.getLocale());
 
     for (final CDALocale locale : locales) {

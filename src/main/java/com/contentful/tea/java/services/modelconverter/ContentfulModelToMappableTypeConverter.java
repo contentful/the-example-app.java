@@ -2,10 +2,10 @@ package com.contentful.tea.java.services.modelconverter;
 
 import com.contentful.java.cda.CDAEntry;
 import com.contentful.tea.java.markdown.CommonmarkMarkdownParser;
-import com.contentful.tea.java.services.settings.Settings;
 import com.contentful.tea.java.models.mappable.MappableType;
 import com.contentful.tea.java.services.localization.Keys;
-import com.contentful.tea.java.services.localization.LocalizedStringsProvider;
+import com.contentful.tea.java.services.localization.Localizer;
+import com.contentful.tea.java.services.settings.Settings;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
@@ -20,7 +20,7 @@ public abstract class ContentfulModelToMappableTypeConverter<ContentfulModel, Vi
 
   @Autowired
   @SuppressWarnings("unused")
-  protected LocalizedStringsProvider localizer;
+  protected Localizer localizer;
 
   @Autowired
   @SuppressWarnings("unused")

@@ -1,18 +1,18 @@
 include _entryState
 
-mixin editorialFeatures(entry)
-  if settings.editorialFeaturesEnabled
+mixin editorialFeatures
+  if base.meta.editorialFeatures
     .editorial-features
-      if base.api.currentApiId === 'cpa' && (entry.draft || entry.pendingChanges)
+      if base.api.currentApiId === 'cpa' && (base.meta.draft || base.meta.pendingChanges)
         .editorial-features__item
-          +entryState(entry)
+          +entryState
       .editorial-features__item
         a.editorial-features__text(
-          href='https://app.contentful.com/spaces/!{settings.spaceId}/entries/!{entry.sys.id}'
+          href='https://app.contentful.com/spaces/!{base.meta.spaceId}/entries/!{base.meta.contentfulId}'
           target='_blank'
           rel='noopener'
-        ) #{editInTheWebAppLabel}
+        ) #{base.labels.editInTheWebAppLabel}
         .editorial-features__hint-wrapper
           svg.editorial-features__hint-icon
             use(xlink:href='/icons/icons.svg#info')
-          .editorial-features__hint-message #{editorialFeaturesHint}
+          .editorial-features__hint-message #{base.meta.editorialFeaturesHint}

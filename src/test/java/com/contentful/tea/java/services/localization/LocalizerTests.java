@@ -1,8 +1,4 @@
-package com.contentful.tea.java;
-
-import com.contentful.tea.java.services.localization.Keys;
-import com.contentful.tea.java.services.localization.LocalizedStringsFromResourcesProvider;
-import com.contentful.tea.java.services.localization.LocalizedStringsProvider;
+package com.contentful.tea.java.services.localization;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,11 +7,11 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class LocalizerTests {
 
-  private LocalizedStringsProvider localizer;
+  private Localizer localizer;
 
   @Before
   public void setup() {
-    localizer = new LocalizedStringsFromResourcesProvider();
+    localizer = new Localizer();
   }
 
   @Test

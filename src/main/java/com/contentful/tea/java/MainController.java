@@ -15,7 +15,7 @@ import com.contentful.tea.java.services.contentful.Contentful;
 import com.contentful.tea.java.services.http.SessionParser;
 import com.contentful.tea.java.services.http.UrlParameterParser;
 import com.contentful.tea.java.services.localization.Keys;
-import com.contentful.tea.java.services.localization.LocalizedStringsProvider;
+import com.contentful.tea.java.services.localization.Localizer;
 import com.contentful.tea.java.services.modelconverter.ArrayToCourses;
 import com.contentful.tea.java.services.modelconverter.ArrayToCourses.ArrayAndSelectedCategory;
 import com.contentful.tea.java.services.modelconverter.EntryToCourse;
@@ -68,7 +68,7 @@ public class MainController implements ErrorController {
 
   @Autowired
   @SuppressWarnings("unused")
-  private LocalizedStringsProvider localizer;
+  private Localizer localizer;
 
   @Autowired
   @SuppressWarnings("unused")

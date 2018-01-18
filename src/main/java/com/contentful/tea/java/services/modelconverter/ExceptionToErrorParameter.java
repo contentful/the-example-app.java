@@ -4,11 +4,10 @@ import com.contentful.java.cda.CDAHttpException;
 import com.contentful.java.cda.CDAResourceNotFoundException;
 import com.contentful.tea.java.models.base.BaseParameter;
 import com.contentful.tea.java.models.base.Locale;
-import com.contentful.tea.java.models.base.LocalesParameter;
 import com.contentful.tea.java.models.errors.ErrorParameter;
 import com.contentful.tea.java.services.StaticContentSetter;
 import com.contentful.tea.java.services.localization.Keys;
-import com.contentful.tea.java.services.localization.LocalizedStringsProvider;
+import com.contentful.tea.java.services.localization.Localizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
@@ -28,26 +27,22 @@ public class ExceptionToErrorParameter implements Converter<Throwable, ErrorPara
 
   @Autowired
   @SuppressWarnings("unused")
-  private LocalizedStringsProvider localizer;
+  private Localizer localizer;
 
   @Override
   public ErrorParameter convert(Throwable source) {
     final ErrorParameter errorParameter = new ErrorParameter();
     final BaseParameter base = errorParameter.getBase();
     staticContentSetter.applyErrorContent(base);
-    base.setLocales(
-        new LocalesParameter()
-            .setLocaleLabel(t(Keys.locale))
-            .setLocaleQuestion(t(Keys.localeQuestion))
-            .setCurrentLocaleName("U.S. English")
-            .setCurrentLocaleCode("en-US")
-            .addLocale(
-                new Locale()
-                    .setCode("en-US")
-                    .setName("EN-US")
-                    .setCssClass(Locale.CSS_CLASS_ACTIVE))
-    );
-
+    base.getLocales()
+        .setCurrentLocaleName("U.S. English")
+        .setCurrentLocaleCode("en-US")
+        .addLocale(
+            new Locale()
+                .setCode("en-US")
+                .setName("EN-US")
+                .setCssClass(Locale.CSS_CLASS_ACTIVE))
+    ;
 
     return errorParameter
         .setContentModelChangedErrorLabel(t(Keys.contentModelChangedErrorLabel))

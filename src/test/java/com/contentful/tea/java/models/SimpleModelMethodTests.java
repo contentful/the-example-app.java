@@ -85,7 +85,7 @@ public class SimpleModelMethodTests {
   }
 
   @Test public void testLocalesParameterToString() {
-    final LocalesParameter object = new LocalesParameter().setLocaleLabel("TEST-LocalesParameter");
+    final LocalesParameter object = new LocalesParameter().setCurrentLocaleCode("TEST-LocalesParameter");
     assertThat(object.toString()).contains("TEST-LocalesParameter");
     assertThat(object).isNotEqualTo(new LocalesParameter());
     assertThat(object.hashCode()).isNotEqualTo(new LocalesParameter());
@@ -111,11 +111,10 @@ public class SimpleModelMethodTests {
   }
 
   @Test public void testBaseParameterToString() {
-    final BaseParameter object = new BaseParameter()
-        .setLocales(
-            new LocalesParameter()
-                .setLocaleLabel("TEST-BaseParameter")
-        );
+    final BaseParameter object = new BaseParameter();
+    object
+        .getLocales()
+        .setCurrentLocaleName("TEST-BaseParameter");
     assertThat(object.toString()).contains("TEST-BaseParameter");
     assertThat(object).isNotEqualTo(new BaseParameter());
     assertThat(object.hashCode()).isNotEqualTo(new BaseParameter());

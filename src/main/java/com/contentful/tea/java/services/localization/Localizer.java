@@ -17,24 +17,24 @@ import static java.util.Locale.getDefault;
 import static org.apache.commons.io.FileUtils.readFileToString;
 
 @Component
-public class LocalizedStringsFromResourcesProvider implements LocalizedStringsProvider {
+public class Localizer {
 
   @Autowired
   public Settings settings;
 
   private final Map<String, Map<String, String>> localizations = new HashMap<>();
 
-  public LocalizedStringsFromResourcesProvider() {
+  public Localizer() {
     final Gson gson = new GsonBuilder().create();
     populateLocalization(gson, "en-US");
     populateLocalization(gson, "de-DE");
   }
 
-  @Override public String localize(Keys key) {
+  public String localize(Keys key) {
     return localize(settings.getLocale(), key);
   }
 
-  @Override public String localize(String locale, Keys key) {
+  String localize(String locale, Keys key) {
     final Map<String, String> localized = localizations.get(locale);
     if (localized != null) {
       return localized.get(key.name());

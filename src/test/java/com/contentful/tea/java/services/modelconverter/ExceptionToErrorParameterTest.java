@@ -4,7 +4,7 @@ import com.contentful.tea.java.MainController;
 import com.contentful.tea.java.models.errors.ErrorParameter;
 import com.contentful.tea.java.services.contentful.Contentful;
 import com.contentful.tea.java.services.localization.Keys;
-import com.contentful.tea.java.services.localization.LocalizedStringsProvider;
+import com.contentful.tea.java.services.localization.Localizer;
 
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +28,7 @@ public class ExceptionToErrorParameterTest {
 
   @Autowired
   @SuppressWarnings("unused")
-  private LocalizedStringsProvider localizer;
+  private Localizer localizer;
 
   @Autowired
   @SuppressWarnings("unused")
