@@ -135,7 +135,7 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
     Lesson nextLesson = null;
     if (sluggedLesson != null) {
       final int index = lessons.indexOf(sluggedLesson);
-      if (index < lessons.size() - 1 - 1) {
+      if (index + 1 <= lessons.size() - 1) {
         nextLesson = lessons.get(index + 1);
       }
     }
