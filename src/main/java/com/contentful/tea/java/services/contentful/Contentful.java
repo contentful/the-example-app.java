@@ -159,7 +159,7 @@ public class Contentful {
     final Properties properties = new Properties();
 
     try {
-      final InputStream input = Contentful.class.getClassLoader().getResourceAsStream("tea.properties");
+      final InputStream input = Contentful.class.getClassLoader().getResourceAsStream("application.properties");
       properties.load(input);
 
       setSpaceId(properties.getProperty("spaceId", ""));

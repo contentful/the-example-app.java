@@ -2,37 +2,41 @@ package com.contentful.tea.java.html;
 
 import org.springframework.stereotype.Component;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Map;
 
 import de.neuland.jade4j.JadeConfiguration;
 import de.neuland.jade4j.template.JadeTemplate;
 
+import static java.lang.String.format;
+import static java.util.Locale.getDefault;
+
 @Component
 @SuppressWarnings("unused")
 public class JadeHtmlGenerator {
+  private static final String BASE_PATH = "src/main/resources/templates";
   private final JadeConfiguration config;
+  private final String basePath;
 
-  public JadeHtmlGenerator(boolean prettyPrint) {
+  public JadeHtmlGenerator(boolean prettyPrint, String basePath) {
     config = new JadeConfiguration();
     config.setPrettyPrint(prettyPrint);
+
+    this.basePath = basePath;
   }
 
   public JadeHtmlGenerator() {
-    this(true);
+    this(true, BASE_PATH);
   }
 
-  public String generate(String templateFileName, Map<String, Object> templateMappings) throws IOException {
-    final URL resource = getClass().getClassLoader().getResource(templateFileName);
-    if (resource != null) {
-      templateFileName = resource.getFile();
-
-      final JadeTemplate template = config.getTemplate(templateFileName);
+  public String generate(String templateFileName, Map<String, Object> templateMappings) {
+    final String path = format(getDefault(), "%s/%s", basePath, templateFileName);
+    try {
+      final JadeTemplate template = config.getTemplate(path);
       return config.renderTemplate(template, templateMappings);
-    } else {
-      throw new FileNotFoundException(String.format("%s not found", templateFileName));
+    } catch (IOException e) {
+      throw new IllegalStateException(format("Cannot find template '%s' in '%s'.", templateFileName, path), e);
     }
+
   }
 }

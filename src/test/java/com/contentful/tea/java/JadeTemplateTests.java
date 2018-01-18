@@ -45,7 +45,7 @@ public class JadeTemplateTests {
 
   @Before
   public void setup() {
-    generator = new JadeHtmlGenerator();
+    generator = new JadeHtmlGenerator(false, "src/main/resources");
   }
 
   @Test

@@ -11,23 +11,17 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'application'
 apply plugin: 'org.springframework.boot'
 
 group = 'com.contentful.tea.java'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+mainClassName = 'com.contentful.tea.java.MainController'
+
 repositories {
     mavenCentral()
-}
-
-jar {
-    rootSpec.exclude("**/tea.properties")
-    from('.') {
-        include 'gradle.properties'
-        into('META-INF/classes')
-        rename('gradle.properties', 'tea.properties')
-    }
 }
 
 dependencies {

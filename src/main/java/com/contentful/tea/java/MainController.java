@@ -124,7 +124,7 @@ public class MainController implements ErrorController {
 
       staticContentSetter.applyContent(parameter.getBase());
 
-      return htmlGenerator.generate("templates/landingPage.jade", parameter.toMap());
+      return htmlGenerator.generate("landingPage.jade", parameter.toMap());
     } catch (Throwable t) {
       throw new IllegalStateException("Cannot render landing page.", t);
     } finally {
@@ -157,7 +157,7 @@ public class MainController implements ErrorController {
       final CoursesParameter parameter = arrayToCourses.convert(compound);
       staticContentSetter.applyContent(parameter.getBase());
 
-      return htmlGenerator.generate("templates/courses.jade", parameter.toMap());
+      return htmlGenerator.generate("courses.jade", parameter.toMap());
     } catch (Throwable t) {
       throw new IllegalStateException("Cannot render courses page.", t);
     } finally {
@@ -188,7 +188,7 @@ public class MainController implements ErrorController {
       final CoursesParameter parameter = arrayToCourses.convert(compound);
       staticContentSetter.applyContent(parameter.getBase());
 
-      return htmlGenerator.generate("templates/courses.jade", parameter.toMap());
+      return htmlGenerator.generate("courses.jade", parameter.toMap());
     } catch (Throwable t) {
       throw new IllegalStateException("Cannot render '" + slug + "' courses category page.", t);
     } finally {
@@ -228,7 +228,7 @@ public class MainController implements ErrorController {
       final CourseParameter parameter = entryToCourse.convert(compound);
       staticContentSetter.applyContent(parameter.getBase());
 
-      return htmlGenerator.generate("templates/course.jade", parameter.toMap());
+      return htmlGenerator.generate("course.jade", parameter.toMap());
     } catch (Throwable t) {
       throw new IllegalStateException("Cannot render '" + coursesSlug + "' courses page.", t);
     } finally {
@@ -270,7 +270,7 @@ public class MainController implements ErrorController {
       final CourseParameter parameter = entryToCourse.convert(compound);
       staticContentSetter.applyContent(parameter.getBase());
 
-      return htmlGenerator.generate("templates/course.jade", parameter.toMap());
+      return htmlGenerator.generate("course.jade", parameter.toMap());
     } catch (Throwable t) {
       throw new IllegalStateException("Cannot render " + courseSlug + "'s lesson '" + lessonSlug + "' page.", t);
     } finally {
@@ -310,7 +310,7 @@ public class MainController implements ErrorController {
         staticContentSetter.applyContent(parameter.getBase());
       }
 
-      return htmlGenerator.generate("templates/settings.jade", parameter.toMap());
+      return htmlGenerator.generate("settings.jade", parameter.toMap());
     } catch (Throwable t) {
       throw new IllegalStateException("Cannot render settings page.", t);
     } finally {
@@ -328,7 +328,7 @@ public class MainController implements ErrorController {
     final ErrorParameter errorParameter = exceptionToError.convert(serverException);
 
     try {
-      return htmlGenerator.generate("templates/error.jade", errorParameter.toMap());
+      return htmlGenerator.generate("error.jade", errorParameter.toMap());
     } catch (Throwable nestedException) {
       return format(
           "<h1>Nested exception thrown while handling a server exception</h1><br/>\n\n%s while %s<br/>\n\n<!--\n%s\n\nwhile\n\n%s\n-->",
@@ -351,7 +351,7 @@ public class MainController implements ErrorController {
     errorParameter.getBase().getMeta().setTitle(localizer.localize(Keys.errorOccurredTitleLabel));
 
     try {
-      return htmlGenerator.generate("templates/error.jade", errorParameter.toMap());
+      return htmlGenerator.generate("error.jade", errorParameter.toMap());
     } catch (Throwable nestedException) {
       return format(
           "<h1>Nested exception thrown while handling a server exception</h1><br/>\n\n%s while %s<br/>\n\n<!--\n%s\n\nwhile\n\n%s\n-->",

@@ -15,7 +15,7 @@ public class HtmlGeneratorTests {
 
   @Before
   public void setup() {
-    generator = new JadeHtmlGenerator(false);
+    generator = new JadeHtmlGenerator(false, "src/test/resources");
   }
 
   @Test

@@ -7,13 +7,14 @@ import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import static java.lang.String.format;
 import static java.util.Locale.getDefault;
+import static org.apache.commons.io.FileUtils.readFileToString;
 
 @Component
 public class LocalizedStringsFromResourcesProvider implements LocalizedStringsProvider {
@@ -42,13 +43,16 @@ public class LocalizedStringsFromResourcesProvider implements LocalizedStringsPr
     }
   }
 
+  @SuppressWarnings("unchecked")
   private void populateLocalization(Gson gson, String locale) {
-    final String path = format(getDefault(), "locales/json/%s.json", locale);
-    final ClassLoader classLoader = this.getClass().getClassLoader();
-    final InputStream resourceAsStream = classLoader.getResourceAsStream(path);
-    final InputStreamReader reader = new InputStreamReader(resourceAsStream);
-    final Map fromJson = gson.fromJson(reader, Map.class);
+    final String path = format(getDefault(), "src/main/resources/locales/%s.json", locale);
+    try {
+      final String json = readFileToString(new File(path));
+      final Map fromJson = gson.fromJson(json, Map.class);
 
-    localizations.put(locale, fromJson);
+      localizations.put(locale, fromJson);
+    } catch (IOException e) {
+      throw new IllegalStateException(format("Cannot find locale '%s'' in '%s'.", locale, path), e);
+    }
   }
 }
