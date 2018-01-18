@@ -31,6 +31,7 @@ public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<
     final SettingsParameter.Errors errors = checkForErrors();
 
     final SettingsParameter parameter = new SettingsParameter()
+        .setApi(contentful.getApi())
         .setAccessTokenLabel(t(Keys.accessTokenLabel))
         .setChangesSavedLabel(t(Keys.changesSavedLabel))
         .setConnectedToSpaceLabel(t(Keys.connectedToSpaceLabel))
@@ -50,6 +51,7 @@ public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<
         .setLoadedFromLocalFileLabel(t(Keys.loadedFromLocalFileLabel))
         .setLoadedFromLocalFileUrl(LOCAL_SETTINGS_REFERENCE_IN_TO_GITHUB)
         .setLoadedFromLocalFileName(LOCAL_SETTINGS_REFERENCE_FILE_NAME)
+        .setLocale(settings.getLocale())
         .setOverrideConfigLabel(t(Keys.overrideConfigLabel))
         .setResetCredentialsLabel(t(Keys.resetCredentialsLabel))
         .setUsingServerCredentialsLabel(t(Keys.usingServerCredentialsLabel))

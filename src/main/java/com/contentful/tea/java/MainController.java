@@ -31,7 +31,9 @@ import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -45,8 +47,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import static java.lang.String.format;
 import static org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @ComponentScan
 @Controller
@@ -278,10 +278,33 @@ public class MainController implements ErrorController {
     }
   }
 
-  @RequestMapping(value = "/settings", method = {GET, POST})
+  @GetMapping(value = "/settings")
   @ResponseBody
   @SuppressWarnings("unused")
-  public String saveSettings(HttpServletRequest request) {
+  public String settings(HttpServletRequest request) {
+    // url contains parameter?
+    if (request.getParameterMap().size() > 0) {
+      return updateSettings(request);
+    }
+
+    try {
+      setupRoute(request);
+
+      final SettingsParameter parameter = settingsToParameter.convert(null);
+      staticContentSetter.applyContent(parameter.getBase());
+
+      return htmlGenerator.generate("settings.jade", parameter.toMap());
+    } catch (Throwable t) {
+      throw new IllegalStateException("Cannot render settings page.", t);
+    } finally {
+      teardownRoute(request);
+    }
+  }
+
+  @PostMapping(value = "/settings")
+  @ResponseBody
+  @SuppressWarnings("unused")
+  public String updateSettings(HttpServletRequest request) {
     try {
       contentful.reset().loadFromPreferences();
       settings.reset();

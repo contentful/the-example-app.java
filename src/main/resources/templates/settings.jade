@@ -70,7 +70,9 @@ block content
 
     form(action='/settings' method="POST" class="form")
       .form-item
-        input(type="hidden" name="qs" value=queryString)
+        input(type="hidden" name="qs" value=settings.queryString)
+        input(type="hidden" name="api" value=settings.api)
+        input(type="hidden" name="locale" value=settings.locale)
         label(for="input-space-id") #{spaceIdLabel}
         input(type="text" name="space_id" id="input-space-id" value=settings.spaceId)
         if errors.spaceId
