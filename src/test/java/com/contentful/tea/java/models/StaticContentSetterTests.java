@@ -100,12 +100,12 @@ public class StaticContentSetterTests extends EnqueuedHttpResponseTests {
     assertThat(p.getBase().getLocales().getCurrentLocaleName()).isEqualTo("U.S. English");
     assertThat(p.getBase().getLocales().getLocaleQuestion()).isEqualTo("Working with multiple languages? You can query the Content Delivery API for a specific locale.");
     assertThat(p.getBase().getLocales().getLocales()).hasSize(2);
-    assertThat(p.getBase().getLocales().getLocales().get(0).getCode()).isEqualTo("en-US");
-    assertThat(p.getBase().getLocales().getLocales().get(0).getName()).isEqualTo("U.S. English");
-    assertThat(p.getBase().getLocales().getLocales().get(0).getCssClass()).isEqualTo("header__controls_button--active");
-    assertThat(p.getBase().getLocales().getLocales().get(1).getCode()).isEqualTo("de-DE");
-    assertThat(p.getBase().getLocales().getLocales().get(1).getName()).isEqualTo("German (Germany)");
-    assertThat(p.getBase().getLocales().getLocales().get(1).getCssClass()).isEqualTo("");
+    assertThat(p.getBase().getLocales().getLocales().get(0).getCode()).isEqualTo("de-DE");
+    assertThat(p.getBase().getLocales().getLocales().get(0).getName()).isEqualTo("German (Germany)");
+    assertThat(p.getBase().getLocales().getLocales().get(0).getCssClass()).isEqualTo("");
+    assertThat(p.getBase().getLocales().getLocales().get(1).getCode()).isEqualTo("en-US");
+    assertThat(p.getBase().getLocales().getLocales().get(1).getName()).isEqualTo("U.S. English");
+    assertThat(p.getBase().getLocales().getLocales().get(1).getCssClass()).isEqualTo("header__controls_button--active");
   }
 
   @Test
