@@ -17,7 +17,7 @@ import java.util.Properties;
 public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<Void, SettingsParameter> {
 
   private static final String LOCAL_SETTINGS_REFERENCE_IN_TO_GITHUB = "https://github.com/contentful/the-example-app.java/blob/master/src/main/resources/application.properties";
-  private static final String LOCAL_SETTINGS_REFERENCE_FILE_NAME = "\uD83C\uDF75.properties";
+  private static final String LOCAL_SETTINGS_REFERENCE_FILE_NAME = "application.properties";
   @Autowired
   @SuppressWarnings("unused")
   private Contentful contentful;
