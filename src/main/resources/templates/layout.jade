@@ -4,8 +4,8 @@ html
     title: !{base.meta.title} — The Example App
     link(rel='stylesheet', href='/stylesheets/style.css')
     meta(name='viewport' content='width=device-width, initial-scale=1')
-    meta(name='description' content=base.meta.description)
-    meta(name='twitter:card' content=base.meta.twitterCard)
+    meta(name='description' content=base.labels.description)
+    meta(name='twitter:card' content=base.labels.twitterCard)
     meta(property='og:title' content='#{base.meta.title} — The Example App')
     meta(property='og:type' content='article')
     meta(property='og:url' content='http://contentful-example-app-java.herokuapp.com!{base.meta.currentPath}')
@@ -13,8 +13,8 @@ html
     meta(property='og:image:type' content='image/jpeg')
     meta(property='og:image:width' content='1200')
     meta(property='og:image:height' content='1200')
-    meta(property='og:image:alt' content=base.meta.imageAlt)
-    meta(property='og:description' content=base.meta.imageDescription)
+    meta(property='og:image:alt' content=base.labels.imageAlt)
+    meta(property='og:description' content=base.labels.imageDescription)
     link(rel='apple-touch-icon' sizes='120x120' href='/apple-touch-icon.png')
     link(rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png')
     link(rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png')
@@ -31,12 +31,12 @@ html
                 a.header__upper-link#about-this-modal-trigger(href='#')
                   svg.header__upper-icon
                     use(xlink:href='/icons/icons.svg#info')
-                  span #{base.meta.whatIsThisApp}
+                  span #{base.labels.whatIsThisApp}
               .header__upper-copy
                 a.header__upper-link(href='https://github.com/contentful/the-example-app.java' target='_blank' rel='noopener')
                   svg.header__upper-icon
                     use(xlink:href='/icons/icons.svg#github')
-                  | #{base.meta.viewOnGitHub}
+                  | #{base.labels.viewOnGitHub}
               .header__controls
                 .header__controls_group
                   form(action='' method='get')
