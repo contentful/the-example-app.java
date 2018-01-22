@@ -2,13 +2,14 @@ package com.contentful.tea.java.services.modelconverter;
 
 import com.contentful.java.cda.CDAAsset;
 import com.contentful.java.cda.CDAEntry;
-import com.contentful.tea.java.services.settings.Settings;
-import com.contentful.tea.java.models.courses.lessons.Lesson;
+import com.contentful.tea.java.models.courses.lessons.LessonParameter;
 import com.contentful.tea.java.models.courses.lessons.modules.CodeModule;
 import com.contentful.tea.java.models.courses.lessons.modules.CopyModule;
 import com.contentful.tea.java.models.courses.lessons.modules.ImageModule;
 import com.contentful.tea.java.models.courses.lessons.modules.Module;
 import com.contentful.tea.java.services.localization.Keys;
+import com.contentful.tea.java.services.modelenhancers.AddEditorialFeaturesEnhancer;
+import com.contentful.tea.java.services.settings.Settings;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,15 +19,19 @@ import java.util.List;
 import static com.contentful.java.cda.image.ImageOption.https;
 
 @Component
-public class EntryToLesson extends ContentfulModelToMappableTypeConverter<CDAEntry, Lesson> {
+public class EntryToLesson extends ContentfulModelToMappableTypeConverter<CDAEntry, LessonParameter> {
 
   @Autowired
   @SuppressWarnings("unused")
   private Settings settings;
 
+  @Autowired
+  @SuppressWarnings("unused")
+  private AddEditorialFeaturesEnhancer enhancer;
+
   @Override
-  public Lesson convert(CDAEntry cdaLesson) {
-    final Lesson result = new Lesson()
+  public LessonParameter convert(CDAEntry cdaLesson) {
+    final LessonParameter result = new LessonParameter()
         .setSlug(cdaLesson.getField("slug"))
         .setTitle(cdaLesson.getField("title"));
 
@@ -37,6 +42,8 @@ public class EntryToLesson extends ContentfulModelToMappableTypeConverter<CDAEnt
         result.addModule(module);
       }
     }
+
+    enhancer.enhance(cdaLesson, result.getBase());
 
     return result;
   }

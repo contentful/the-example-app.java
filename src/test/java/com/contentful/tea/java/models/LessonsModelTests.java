@@ -2,7 +2,7 @@ package com.contentful.tea.java.models;
 
 import com.contentful.java.cda.CDAEntry;
 import com.contentful.tea.java.MainController;
-import com.contentful.tea.java.models.courses.lessons.Lesson;
+import com.contentful.tea.java.models.courses.lessons.LessonParameter;
 import com.contentful.tea.java.models.courses.lessons.modules.CodeModule;
 import com.contentful.tea.java.models.courses.lessons.modules.CopyModule;
 import com.contentful.tea.java.models.courses.lessons.modules.ImageModule;
@@ -62,7 +62,7 @@ public class LessonsModelTests extends EnqueuedHttpResponseTests {
 
     final CDAEntry cdaLesson = client.fetch(CDAEntry.class).one("2SAYsnajosIkCOWqSmKaio");
 
-    final Lesson lesson = lessonConverter.convert(cdaLesson);
+    final LessonParameter lesson = lessonConverter.convert(cdaLesson);
     assertThat(lesson.getSlug()).isEqualTo("complete_lesson");
     assertThat(lesson.getTitle()).isEqualTo("Complete Lesson > all the modules");
 

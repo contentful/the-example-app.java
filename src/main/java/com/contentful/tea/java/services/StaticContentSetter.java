@@ -23,7 +23,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static com.contentful.tea.java.models.base.ApiParameter.CSS_CLASS_ACTIVE_BUTTON;
 import static com.contentful.tea.java.services.contentful.Contentful.API_CDA;
 import static com.contentful.tea.java.services.contentful.Contentful.API_CPA;
 import static java.lang.String.format;
@@ -31,6 +30,7 @@ import static java.lang.String.format;
 @Component
 public class StaticContentSetter {
   private static final String idRegex = "[-_a-zA-Z0-9]+";
+  private static final String CSS_CLASS_ACTIVE_BUTTON = "header__controls_button--active";
 
   @Autowired
   @SuppressWarnings("unused")
@@ -85,7 +85,7 @@ public class StaticContentSetter {
         .setImageAlt(t(Keys.metaImageAlt))
         .setImageDescription(t(Keys.metaImageDescription))
         .setImprintLabel(t(Keys.imprintLabel))
-        .setLocaleLabel(t(Keys.currentLocaleLabel))
+        .setLocaleLabel(t(Keys.locale))
         .setLocaleQuestion(t(Keys.localeQuestion))
         .setLogoAlt(t(Keys.logoAlt))
         .setModalCTALabel(t(Keys.modalCTALabel))

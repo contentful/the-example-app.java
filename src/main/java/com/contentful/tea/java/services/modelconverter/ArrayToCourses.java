@@ -3,11 +3,15 @@ package com.contentful.tea.java.services.modelconverter;
 import com.contentful.java.cda.CDAAsset;
 import com.contentful.java.cda.CDAEntry;
 import com.contentful.java.cda.CDAResource;
+import com.contentful.tea.java.models.base.BaseParameter;
+import com.contentful.tea.java.models.base.MetaParameter;
 import com.contentful.tea.java.models.courses.Category;
 import com.contentful.tea.java.models.courses.Course;
 import com.contentful.tea.java.models.courses.CoursesParameter;
 import com.contentful.tea.java.services.localization.Keys;
+import com.contentful.tea.java.services.modelenhancers.AddEditorialFeaturesEnhancer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -43,13 +47,22 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
     }
   }
 
+  @Autowired
+  @SuppressWarnings("unused")
+  private AddEditorialFeaturesEnhancer enhancer;
+
   @Override
   public CoursesParameter convert(ArrayAndSelectedCategory compound) {
+    final CoursesParameter parameter = new CoursesParameter();
+
     final String slug = compound.getCategorySlug() == null ? "" : compound.getCategorySlug();
 
     // find slugged category and filter out non slugged courses.
     CDAEntry sluggedCategory = null;
     final List<CDAResource> filteredCourses = new ArrayList<>();
+    final BaseParameter base = parameter.getBase();
+    final MetaParameter meta = base.getMeta();
+
     for (final CDAResource courseResource : compound.getList()) {
       final CDAEntry course = (CDAEntry) courseResource;
       final CDAEntry category = getCategoryBySlug(course, slug);
@@ -57,16 +70,18 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
         filteredCourses.add(course);
         sluggedCategory = category;
       }
+
+      enhancer.enhance(course, base);
+
+      final String collectionUrl = meta.getDeeplinkToContentful().replace(course.id(), "");
+      meta.setDeeplinkToContentful(collectionUrl);
     }
 
     final List<CDAResource> courses = slug.isEmpty() ? compound.getList() : filteredCourses;
     final String categoryName = sluggedCategory != null ? sluggedCategory.getField("title") : "";
     final String title = createTitle(categoryName, courses.size());
 
-    final CoursesParameter parameter = new CoursesParameter();
-    parameter
-        .getBase()
-        .getMeta()
+    meta
         .setTitle(title)
         .setAllCoursesCssClass(slug.isEmpty() ? "active" : "")
     ;

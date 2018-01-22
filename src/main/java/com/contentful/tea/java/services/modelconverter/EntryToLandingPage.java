@@ -8,6 +8,7 @@ import com.contentful.tea.java.models.landing.modules.CopyModule;
 import com.contentful.tea.java.models.landing.modules.HeroImageModule;
 import com.contentful.tea.java.models.landing.modules.HighlightedCourseModule;
 import com.contentful.tea.java.services.localization.Keys;
+import com.contentful.tea.java.services.modelenhancers.AddEditorialFeaturesEnhancer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,12 +22,19 @@ public class EntryToLandingPage extends ContentfulModelToMappableTypeConverter<C
   @SuppressWarnings("unused")
   private EntryToCourse courseConverter;
 
+  @Autowired
+  @SuppressWarnings("unused")
+  private AddEditorialFeaturesEnhancer enhancer;
+
   @Override
   public LandingPageParameter convert(CDAEntry entry) {
     final LandingPageParameter parameter = new LandingPageParameter();
     parameter.getBase().getMeta().setTitle(t(Keys.homeLabel));
 
     addModules(parameter, entry);
+
+    enhancer.enhance(entry, parameter.getBase());
+
     return parameter;
   }
 

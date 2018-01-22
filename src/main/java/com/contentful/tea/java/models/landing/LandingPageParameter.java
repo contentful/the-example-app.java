@@ -18,10 +18,6 @@ public class LandingPageParameter extends MappableType {
     return base;
   }
 
-  public void setBase(BaseParameter base) {
-    this.base = base;
-  }
-
   public List<BaseModule> getModules() {
     return modules;
   }

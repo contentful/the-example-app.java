@@ -15,6 +15,7 @@ public class MetaParameter extends MappableType {
   private String queryString;
   private String title;
   private String upperMenuCSSClass;
+  private String deeplinkToContentful;
 
   public String getAllCoursesCssClass() {
     return allCoursesCssClass;
@@ -79,6 +80,42 @@ public class MetaParameter extends MappableType {
     return this;
   }
 
+  public boolean isDraft() {
+    return draft;
+  }
+
+  public MetaParameter setDraft(boolean draft) {
+    this.draft = draft;
+    return this;
+  }
+
+  public boolean hasEditorialFeatures() {
+    return editorialFeatures;
+  }
+
+  public MetaParameter setEditorialFeatures(boolean editorialFeatures) {
+    this.editorialFeatures = editorialFeatures;
+    return this;
+  }
+
+  public boolean hasPendingChanges() {
+    return pendingChanges;
+  }
+
+  public MetaParameter setPendingChanges(boolean pendingChanges) {
+    this.pendingChanges = pendingChanges;
+    return this;
+  }
+
+  public String getDeeplinkToContentful() {
+    return deeplinkToContentful;
+  }
+
+  public MetaParameter setDeeplinkToContentful(String deeplinkToContentful) {
+    this.deeplinkToContentful = deeplinkToContentful;
+    return this;
+  }
+
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof MetaParameter)) return false;
@@ -89,6 +126,10 @@ public class MetaParameter extends MappableType {
         Objects.equals(getHomeCSSClass(), metaParameter.getHomeCSSClass()) &&
         Objects.equals(getQueryString(), metaParameter.getQueryString()) &&
         Objects.equals(getTitle(), metaParameter.getTitle()) &&
+        Objects.equals(hasEditorialFeatures(), metaParameter.hasEditorialFeatures()) &&
+        Objects.equals(hasPendingChanges(), metaParameter.hasPendingChanges()) &&
+        Objects.equals(isDraft(), metaParameter.isDraft()) &&
+        Objects.equals(getDeeplinkToContentful(), metaParameter.getDeeplinkToContentful()) &&
         Objects.equals(getUpperMenuCSSClass(), metaParameter.getUpperMenuCSSClass());
   }
 
@@ -100,6 +141,7 @@ public class MetaParameter extends MappableType {
         getHomeCSSClass(),
         getQueryString(),
         getTitle(),
+        getDeeplinkToContentful(),
         getUpperMenuCSSClass());
   }
 
@@ -110,7 +152,8 @@ public class MetaParameter extends MappableType {
         + "homeCSSClass = " + getHomeCSSClass() + ", "
         + "queryString = " + getQueryString() + ", "
         + "title = " + getTitle() + ", "
-        + "upperMenuCSSClass = " + getUpperMenuCSSClass() + ", "
+        + "deeplinkToContentful = " + getDeeplinkToContentful() + ", "
+        + "upperMenuCSSClass = " + getUpperMenuCSSClass() + " "
         + "}";
   }
 }

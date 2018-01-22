@@ -6,7 +6,7 @@ import com.contentful.tea.java.models.courses.Category;
 import com.contentful.tea.java.models.courses.Course;
 import com.contentful.tea.java.models.courses.CourseParameter;
 import com.contentful.tea.java.models.courses.CoursesParameter;
-import com.contentful.tea.java.models.courses.lessons.Lesson;
+import com.contentful.tea.java.models.courses.lessons.LessonParameter;
 import com.contentful.tea.java.models.landing.LandingPageParameter;
 import com.contentful.tea.java.models.landing.modules.CopyModule;
 import com.contentful.tea.java.models.landing.modules.HeroImageModule;
@@ -16,9 +16,7 @@ import com.contentful.tea.java.models.mappable.NullHandler;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.contentful.tea.java.utils.TestUtils.assertBaseParameterInHtml;
@@ -27,18 +25,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 public class JadeTemplateTests {
-  private static final List<String> TESTING_NULLABLE_FIELDS = Arrays.asList(
-      "currentLesson", "nextLessonSlug"
-  );
-
   private static final NullHandler TESTING_NULL_HANDLER = field -> {
-    if (TESTING_NULLABLE_FIELDS.contains(field.getName())) {
-      return "";
-    } else {
-      fail("'%s' of '%s' is undefined!", field.getName(), field.getDeclaringClass());
-
-      return "\uD83D\uDE31";
-    }
+    fail("'%s' of '%s' is undefined!", field.getName(), field.getDeclaringClass());
+    return "\uD83D\uDE31";
   };
 
   private JadeHtmlGenerator generator;
@@ -50,7 +39,8 @@ public class JadeTemplateTests {
 
   @Test
   public void testAllFieldsAreSetForLayoutTemplate() throws Exception {
-    final BaseParameter base = createBaseParameter();
+    final BaseParameter base = new BaseParameter();
+    createBaseParameter(base);
 
     final Map<String, Object> baseMap = new HashMap<>();
     baseMap.put("base", base.toMap(TESTING_NULL_HANDLER));
@@ -66,7 +56,7 @@ public class JadeTemplateTests {
   @Test
   public void landingPageTemplateHeroCopyModuleTest() throws Exception {
     final LandingPageParameter parameter = new LandingPageParameter();
-    parameter.setBase(createBaseParameter());
+    createBaseParameter(parameter.getBase());
 
     parameter.addModule(
         new CopyModule()
@@ -97,7 +87,7 @@ public class JadeTemplateTests {
   @Test
   public void landingPageTemplateHighlightedCourseModuleTest() throws Exception {
     final LandingPageParameter parameter = new LandingPageParameter();
-    parameter.setBase(createBaseParameter());
+    createBaseParameter(parameter.getBase());
 
     parameter.addModule(new HighlightedCourseModule()
         .setCourse(
@@ -142,7 +132,7 @@ public class JadeTemplateTests {
   @Test
   public void landingPageTemplateHeroImageModuleTest() throws Exception {
     final LandingPageParameter parameter = new LandingPageParameter();
-    parameter.setBase(createBaseParameter());
+    createBaseParameter(parameter.getBase());
 
     parameter.addModule(new HeroImageModule()
         .setHeadline("TEST-Headline")
@@ -168,7 +158,7 @@ public class JadeTemplateTests {
   @Test
   public void coursesListTemplateTest() throws Exception {
     final CoursesParameter parameter = new CoursesParameter();
-    parameter.setBase(createBaseParameter());
+    createBaseParameter(parameter.getBase());
 
     parameter
         .addCategory(
@@ -201,7 +191,6 @@ public class JadeTemplateTests {
         .doesNotContain("\uD83D\uDE31")
         .contains("TEST-Courses-Category-Slug")
         .contains("TEST-Courses-Category-Title")
-        .contains("TEST-setAllCoursesCSSClass")
         .contains("TEST-Category-Slug")
         .contains("TEST-Category-Title")
         .contains("Test-Course-Short-Description")
@@ -214,7 +203,18 @@ public class JadeTemplateTests {
   @Test
   public void courseTemplateTest() throws Exception {
     final CourseParameter parameter = new CourseParameter();
-    parameter.setBase(createBaseParameter());
+    createBaseParameter(parameter.getBase());
+
+    final LessonParameter testLesson = new LessonParameter()
+        .setSlug("TEST-lesson-slug")
+        .setTitle("TEST-lesson-title")
+        .setCssClass("TEST-lesson-css")
+        .addModule(
+            new com.contentful.tea.java.models.courses.lessons.modules.CopyModule()
+                .setCopy("TEST-lesson-module-copy")
+                .setTitle("TEST-lesson-module-title")
+        );
+    createBaseParameter(testLesson.getBase());
 
     parameter
         .setDurationLabel("TEST-setDurationLabel")
@@ -234,18 +234,10 @@ public class JadeTemplateTests {
                         .setCssClass("TEST-category-slug")
                 )
                 .addLesson(
-                    new Lesson()
-                        .setSlug("TEST-lesson-slug")
-                        .setTitle("TEST-lesson-title")
-                        .setCssClass("TEST-lesson-css")
-                        .addModule(
-                            new com.contentful.tea.java.models.courses.lessons.modules.CopyModule()
-                                .setCopy("TEST-lesson-module-copy")
-                                .setTitle("TEST-lesson-module-title")
-                        )
+                    testLesson
                 )
-            .setCurrentLesson(null)
-            .setNextLessonSlug(null)
+                .setCurrentLesson(testLesson)
+                .setNextLessonSlug("TEST-Nextlesson")
         )
         .setMinutesLabel("TEST-setMinutesLabel")
         .setOverviewLabel("TEST-setOverviewLabel")
@@ -257,6 +249,7 @@ public class JadeTemplateTests {
         .setNextLessonLabel("TEST-nextLessonLabel")
     ;
 
+
     final String generatedHtml = generator
         .generate(
             "templates/course.jade",
@@ -267,27 +260,13 @@ public class JadeTemplateTests {
     assertBaseParameterInHtml(generatedHtml);
     assertThat(generatedHtml)
         .doesNotContain("\uD83D\uDE31")
-        .contains("TEST-setDurationLabel")
-        .contains("42")
-        .contains("TEST-skill-level")
         .contains("TEST-setSlug")
         .contains("TEST-setTitle")
         .contains("TEST-lesson-slug")
         .contains("TEST-lesson-title")
         .contains("TEST-lesson-css")
-        .contains("TEST-setMinutesLabel")
-        .contains("TEST-setOverviewLabel")
-        .contains("TEST-setSkillLevelLabel")
-        .contains("TEST-setStartCourseLabel")
-        .contains("TEST-setTableOfContentsLabel")
-        .contains("TEST-setCourseOverviewLabel")
         .contains("TEST-setCourseOverviewCssClass")
-        .doesNotContain("TEST-setCssClass")
-        .doesNotContain("TEST-category-title")
-        .doesNotContain("TEST-category-slug")
-        .doesNotContain("TEST-setShortDescription")
-        .doesNotContain("TEST-setImageUrl")
-        .doesNotContain("TEST-nextLessonLabel")
+        .contains("TEST-nextLessonLabel")
     ;
   }
 }

@@ -2,6 +2,7 @@ extends layout
 
 include mixins/_breadcrumb
 include mixins/_courseCard
+include mixins/_editorialFeatures
 
 block content
   .layout-no-sidebar
@@ -21,6 +22,7 @@ block content
     section.layout-sidebar__content
       .courses
         h1= title
+        +editorialFeatures(course)
         .grid-list
           each course in courses
             .grid-list__item

@@ -20,11 +20,6 @@ public class CoursesParameter extends MappableType {
     return base;
   }
 
-  public CoursesParameter setBase(BaseParameter base) {
-    this.base = base;
-    return this;
-  }
-
   public List<Course> getCourses() {
     return courses;
   }

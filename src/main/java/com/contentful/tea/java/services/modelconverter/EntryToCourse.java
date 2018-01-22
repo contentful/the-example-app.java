@@ -2,11 +2,13 @@ package com.contentful.tea.java.services.modelconverter;
 
 import com.contentful.java.cda.CDAAsset;
 import com.contentful.java.cda.CDAEntry;
+import com.contentful.tea.java.models.base.MetaParameter;
 import com.contentful.tea.java.models.courses.Category;
 import com.contentful.tea.java.models.courses.Course;
 import com.contentful.tea.java.models.courses.CourseParameter;
-import com.contentful.tea.java.models.courses.lessons.Lesson;
+import com.contentful.tea.java.models.courses.lessons.LessonParameter;
 import com.contentful.tea.java.services.localization.Keys;
+import com.contentful.tea.java.services.modelenhancers.AddEditorialFeaturesEnhancer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -68,6 +70,10 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
   @SuppressWarnings("unused")
   private EntryToLesson entryToLesson;
 
+  @Autowired
+  @SuppressWarnings("unused")
+  private AddEditorialFeaturesEnhancer enhancer;
+
   @Override
   public CourseParameter convert(EntryToCourse.Compound compound) {
     final CDAEntry course = compound.getCourse();
@@ -75,11 +81,11 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
     final List<Category> categories = getCategories(cdaCategories);
 
     final List<CDAEntry> cdaLessons = course.getField("lessons");
-    final List<Lesson> lessons = new ArrayList<>();
-    Lesson sluggedLesson = null;
+    final List<LessonParameter> lessons = new ArrayList<>();
+    LessonParameter sluggedLesson = null;
     final Set<String> visitedLessons = compound.getVisitedLessons() == null ? new HashSet<>() : compound.getVisitedLessons();
     for (final CDAEntry cdaLesson : cdaLessons) {
-      final Lesson lesson = entryToLesson.convert(cdaLesson);
+      final LessonParameter lesson = entryToLesson.convert(cdaLesson);
       final boolean matchingSlug = Objects.equals(compound.getLessonSlug(), lesson.getSlug());
       if (matchingSlug) {
         sluggedLesson = lesson;
@@ -90,7 +96,7 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
       lessons.add(lesson);
     }
 
-    final Lesson nextLesson = getNextLesson(lessons, sluggedLesson);
+    final LessonParameter nextLesson = getNextLesson(lessons, sluggedLesson);
 
     final CDAAsset image = course.getField("image");
     final CourseParameter courseParameter = new CourseParameter();
@@ -104,7 +110,7 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
     final String visited = visitedLessons.contains("/") ? "visited" : "";
     final String overviewCssClass = String.format("%s %s", active, visited);
 
-    return courseParameter
+    courseParameter
         .setDurationLabel(t(Keys.durationLabel))
         .setStartCourseLabel(t(Keys.startCourseLabel))
         .setMinutesLabel(t(Keys.minutesLabel))
@@ -129,10 +135,22 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
             .setNextLessonSlug(nextLesson != null ? nextLesson.getSlug() : null)
             .setCurrentLesson(sluggedLesson)
         );
+
+    enhancer.enhance(course, courseParameter.getBase());
+
+    if (sluggedLesson != null) {
+      final MetaParameter sluggedMeta = sluggedLesson.getBase().getMeta();
+      final MetaParameter courseMeta = courseParameter.getBase().getMeta();
+      courseMeta.setPendingChanges(sluggedMeta.hasPendingChanges());
+      courseMeta.setDraft(sluggedMeta.isDraft());
+      courseMeta.setDeeplinkToContentful(sluggedMeta.getDeeplinkToContentful());
+    }
+
+    return courseParameter;
   }
 
-  private Lesson getNextLesson(List<Lesson> lessons, Lesson sluggedLesson) {
-    Lesson nextLesson = null;
+  private LessonParameter getNextLesson(List<LessonParameter> lessons, LessonParameter sluggedLesson) {
+    LessonParameter nextLesson = null;
     if (sluggedLesson != null) {
       final int index = lessons.indexOf(sluggedLesson);
       if (index + 1 <= lessons.size() - 1) {

@@ -1,5 +1,6 @@
 package com.contentful.tea.java.models.courses.lessons;
 
+import com.contentful.tea.java.models.base.BaseParameter;
 import com.contentful.tea.java.models.courses.lessons.modules.Module;
 import com.contentful.tea.java.models.mappable.MappableType;
 
@@ -8,18 +9,24 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Lesson extends MappableType {
+public class LessonParameter extends MappableType {
+
+  public BaseParameter base = new BaseParameter();
 
   private String slug;
   private String title;
   private List<Module> modules = new ArrayList<>();
   private String cssClass;
 
+  public BaseParameter getBase() {
+    return base;
+  }
+
   public String getSlug() {
     return slug;
   }
 
-  public Lesson setSlug(String slug) {
+  public LessonParameter setSlug(String slug) {
     this.slug = slug;
     return this;
   }
@@ -28,7 +35,7 @@ public class Lesson extends MappableType {
     return cssClass;
   }
 
-  public Lesson setCssClass(String cssClass) {
+  public LessonParameter setCssClass(String cssClass) {
     this.cssClass = cssClass;
     return this;
   }
@@ -37,7 +44,7 @@ public class Lesson extends MappableType {
     return title;
   }
 
-  public Lesson setTitle(String title) {
+  public LessonParameter setTitle(String title) {
     this.title = title;
     return this;
   }
@@ -46,20 +53,20 @@ public class Lesson extends MappableType {
     return modules;
   }
 
-  public Lesson addModule(Module... modules) {
+  public LessonParameter addModule(Module... modules) {
     this.modules.addAll(Arrays.asList(modules));
     return this;
   }
 
-  public Lesson setModules(List<Module> modules) {
+  public LessonParameter setModules(List<Module> modules) {
     this.modules = modules;
     return this;
   }
 
   @Override public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Lesson)) return false;
-    final Lesson lesson = (Lesson) o;
+    if (!(o instanceof LessonParameter)) return false;
+    final LessonParameter lesson = (LessonParameter) o;
     return Objects.equals(getSlug(), lesson.getSlug()) &&
         Objects.equals(getTitle(), lesson.getTitle()) &&
         Objects.equals(getModules(), lesson.getModules()) &&

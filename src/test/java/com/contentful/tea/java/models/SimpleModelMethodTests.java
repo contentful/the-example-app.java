@@ -10,7 +10,7 @@ import com.contentful.tea.java.models.courses.Category;
 import com.contentful.tea.java.models.courses.Course;
 import com.contentful.tea.java.models.courses.CourseParameter;
 import com.contentful.tea.java.models.courses.CoursesParameter;
-import com.contentful.tea.java.models.courses.lessons.Lesson;
+import com.contentful.tea.java.models.courses.lessons.LessonParameter;
 import com.contentful.tea.java.models.courses.lessons.modules.CodeModule;
 import com.contentful.tea.java.models.courses.lessons.modules.ImageModule;
 import com.contentful.tea.java.models.errors.ErrorParameter;
@@ -29,6 +29,7 @@ public class SimpleModelMethodTests {
     assertThat(object.toString()).contains("TEST-SettingsParameter");
     assertThat(object).isNotEqualTo(new SettingsParameter());
     assertThat(object.hashCode()).isNotEqualTo(new SettingsParameter());
+    assertThat(new SettingsParameter().toString()).isEqualTo(new SettingsParameter().toString());
   }
 
   @Test public void testLandingPageParameterToString() {
@@ -146,10 +147,10 @@ public class SimpleModelMethodTests {
   }
 
   @Test public void testLessonToString() {
-    final Lesson object = new Lesson().setCssClass("TEST-Lesson");
+    final LessonParameter object = new LessonParameter().setCssClass("TEST-Lesson");
     assertThat(object.toString()).contains("TEST-Lesson");
-    assertThat(object).isNotEqualTo(new Lesson());
-    assertThat(object.hashCode()).isNotEqualTo(new Lesson());
+    assertThat(object).isNotEqualTo(new LessonParameter());
+    assertThat(object.hashCode()).isNotEqualTo(new LessonParameter());
   }
 
   @Test public void testImageModuleToString() {

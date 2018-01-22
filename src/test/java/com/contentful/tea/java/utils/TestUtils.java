@@ -6,8 +6,7 @@ import com.contentful.tea.java.models.base.Locale;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestUtils {
-  public static BaseParameter createBaseParameter() {
-    final BaseParameter base = new BaseParameter();
+  public static void createBaseParameter(BaseParameter base) {
     base.getApi()
         .setCdaButtonCSSClass("TEST-setCdaButtonCSSClass")
         .setCpaButtonCSSClass("TEST-setCpaButtonCSSClass")
@@ -22,6 +21,7 @@ public class TestUtils {
         .setQueryString("TEST-setQueryString")
         .setTitle("TEST-setTitle")
         .setUpperMenuCSSClass("TEST-setUpperMenuCSSClass")
+        .setDeeplinkToContentful("TEST-setDeeplinkToContentful")
     ;
 
     base.getLocales()
@@ -39,7 +39,46 @@ public class TestUtils {
                 .setName("\uD83C\uDDE9\uD83C\uDDEA")
                 .setCssClass("active")
         );
-    return base;
+
+    base
+        .getLabels()
+        .setAllCoursesLabel("TEST-setAllCoursesLabel")
+        .setApiSwitcherHelp("TEST-setApiSwitcherHelp")
+        .setCategoriesLabel("TEST-setCategoriesLabel")
+        .setComingSoonLabel("TEST-setComingSoonLabel")
+        .setContactUsLabel("TEST-setContactUsLabel")
+        .setContentDeliveryApiHelp("TEST-setContentDeliveryApiHelp")
+        .setContentDeliveryApiLabel("TEST-setContentDeliveryApiLabel")
+        .setContentPreviewApiHelp("TEST-setContentPreviewApiHelp")
+        .setContentPreviewApiLabel("TEST-setContentPreviewApiLabel")
+        .setCoursesLabel("TEST-setCoursesLabel")
+        .setCurrentApiLabel("TEST-setCurrentApiLabel")
+        .setDescription("TEST-setDescription")
+        .setDraftLabel("TEST-setDraftLabel")
+        .setEditInWebAppLabel("TEST-setEditInWebAppLabel")
+        .setEditorialFeaturesHint("TEST-setEditorialFeaturesHint")
+        .setFooterDisclaimer("TEST-setFooterDisclaimer")
+        .setHomeLabel("TEST-setHomeLabel")
+        .setHostedLabel("TEST-setHostedLabel")
+        .setImageAlt("TEST-setImageAlt")
+        .setImageDescription("TEST-setImageDescription")
+        .setImprintLabel("TEST-setImprintLabel")
+        .setLocaleLabel("TEST-setLocaleLabel")
+        .setLocaleQuestion("TEST-setLocaleQuestion")
+        .setLogoAlt("TEST-setLogoAlt")
+        .setModalCTALabel("TEST-setModalCTALabel")
+        .setModalIntro("TEST-setModalIntro")
+        .setModalPlatforms("TEST-setModalPlatforms")
+        .setModalSpaceIntro("TEST-setModalSpaceIntro")
+        .setModalSpaceLinkLabel("TEST-setModalSpaceLinkLabel")
+        .setModalTitle("TEST-setModalTitle")
+        .setPendingChangesLabel("TEST-setPendingChangesLabel")
+        .setSettingsLabel("TEST-setSettingsLabel")
+        .setTwitterCard("TEST-setTwitterCard")
+        .setViewCourseLabel("TEST-setViewCourseLabel")
+        .setViewOnGitHub("TEST-setViewOnGitHub")
+        .setWhatIsThisApp("TEST-setWhatIsThisApp")
+    ;
   }
 
   public static void assertBaseParameterInHtml(String generatedHtml) {

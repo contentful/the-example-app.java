@@ -22,7 +22,7 @@ public class MappableType {
     findMappableSuperFields(this.getClass().getSuperclass(), fields);
 
     for (final Field field : fields) {
-      if (!field.isSynthetic()) {
+      if (!field.isSynthetic() && !isAllUpperCase(field)) {
         field.setAccessible(true);
         Object value = null;
         try {
@@ -48,6 +48,10 @@ public class MappableType {
     }
 
     return map;
+  }
+
+  private boolean isAllUpperCase(Field field) {
+    return field.getName().toUpperCase().equals(field.getName());
   }
 
   private Map<String, Object>[] mapArray(MappableType[] mappableArray, NullHandler nullHandler) {

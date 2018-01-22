@@ -42,7 +42,7 @@ html
                   form(action='' method='get')
                     .header__controls_label API: #{base.labels.currentApiLabel}
                     .header__controls_dropdown
-                      .header__controls_help_text #{base.api.apiSwitcherHelp}
+                      .header__controls_help_text #{base.labels.apiSwitcherHelp}
                       button.header__controls_button(
                         type='submit'
                         name='api'
@@ -51,7 +51,7 @@ html
                       )
                         | #{base.labels.contentDeliveryApiLabel}:
                         br
-                        span.header__controls_button_help= base.api.contentDeliveryApiHelp
+                        span.header__controls_button_help= base.labels.contentDeliveryApiHelp
                       button.header__controls_button(
                         type='submit'
                         name='api'
@@ -60,7 +60,7 @@ html
                       )
                         | #{base.labels.contentPreviewApiLabel}:
                         br
-                        span.header__controls_button_help= base.api.contentPreviewApiHelp
+                        span.header__controls_button_help= base.labels.contentPreviewApiHelp
                     input(type='hidden' name='locale' value=base.locales.currentLocaleCode)
 
                 .header__controls_group
@@ -68,7 +68,7 @@ html
                     input(type='hidden' name='api' value=base.api.currentApiId)
                     .header__controls_label #{base.labels.localeLabel}: #{base.locales.currentLocaleName}
                     .header__controls_dropdown
-                      .header__controls_help_text #{base.locales.localeQuestion}
+                      .header__controls_help_text #{base.labels.localeQuestion}
                       each locale in base.locales.locales
                         button.header__controls_button(type='submit' name='locale' value=locale.code class=locale.cssClass) #{locale.name} (#{locale.code})
               .header__upper-menu

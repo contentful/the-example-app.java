@@ -3,16 +3,16 @@ include _entryState
 mixin editorialFeatures
   if base.meta.editorialFeatures
     .editorial-features
-      if base.api.currentApiId === 'cpa' && (base.meta.draft || base.meta.pendingChanges)
+      if base.meta.draft || base.meta.pendingChanges
         .editorial-features__item
           +entryState
       .editorial-features__item
         a.editorial-features__text(
-          href='https://app.contentful.com/spaces/!{base.meta.spaceId}/entries/!{base.meta.contentfulId}'
+          href='!{base.meta.deeplinkToContentful}'
           target='_blank'
           rel='noopener'
-        ) #{base.labels.editInTheWebAppLabel}
+        ) #{base.labels.editInWebAppLabel}
         .editorial-features__hint-wrapper
           svg.editorial-features__hint-icon
             use(xlink:href='/icons/icons.svg#info')
-          .editorial-features__hint-message #{base.meta.editorialFeaturesHint}
+          .editorial-features__hint-message #{base.labels.editorialFeaturesHint}

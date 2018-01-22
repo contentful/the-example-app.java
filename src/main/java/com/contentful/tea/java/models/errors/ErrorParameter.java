@@ -26,11 +26,6 @@ public class ErrorParameter extends MappableType {
     return base;
   }
 
-  public ErrorParameter setBase(BaseParameter base) {
-    this.base = base;
-    return this;
-  }
-
   public String getContentModelChangedErrorLabel() {
     return contentModelChangedErrorLabel;
   }

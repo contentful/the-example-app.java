@@ -1,6 +1,6 @@
 package com.contentful.tea.java.models.courses;
 
-import com.contentful.tea.java.models.courses.lessons.Lesson;
+import com.contentful.tea.java.models.courses.lessons.LessonParameter;
 import com.contentful.tea.java.models.mappable.MappableType;
 
 import java.util.ArrayList;
@@ -14,8 +14,8 @@ public class Course extends MappableType {
   private boolean pendingChanges;
   private int duration;
   private List<Category> categories = new ArrayList<>();
-  private List<Lesson> lessons = new ArrayList<>();
-  private Lesson currentLesson;
+  private List<LessonParameter> lessons = new ArrayList<>();
+  private LessonParameter currentLesson;
   private String nextLessonSlug;
   private String skillLevel;
   private String imageUrl;
@@ -96,16 +96,16 @@ public class Course extends MappableType {
     return this;
   }
 
-  public List<Lesson> getLessons() {
+  public List<LessonParameter> getLessons() {
     return lessons;
   }
 
-  public Course addLesson(Lesson... lessons) {
+  public Course addLesson(LessonParameter... lessons) {
     this.lessons.addAll(Arrays.asList(lessons));
     return this;
   }
 
-  public Course setLessons(List<Lesson> lessons) {
+  public Course setLessons(List<LessonParameter> lessons) {
     this.lessons = lessons;
     return this;
   }
@@ -133,11 +133,11 @@ public class Course extends MappableType {
     return this;
   }
 
-  public Lesson getCurrentLesson() {
+  public LessonParameter getCurrentLesson() {
     return currentLesson;
   }
 
-  public Course setCurrentLesson(Lesson currentLesson) {
+  public Course setCurrentLesson(LessonParameter currentLesson) {
     this.currentLesson = currentLesson;
     return this;
   }
