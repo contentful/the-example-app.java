@@ -1,5 +1,6 @@
 package com.contentful.tea.java.services.modelconverter;
 
+import com.contentful.java.cda.CDAArray;
 import com.contentful.java.cda.CDAAsset;
 import com.contentful.java.cda.CDAEntry;
 import com.contentful.java.cda.CDAResource;
@@ -8,6 +9,7 @@ import com.contentful.tea.java.models.base.MetaParameter;
 import com.contentful.tea.java.models.courses.Category;
 import com.contentful.tea.java.models.courses.Course;
 import com.contentful.tea.java.models.courses.CoursesParameter;
+import com.contentful.tea.java.services.contentful.Contentful;
 import com.contentful.tea.java.services.localization.Keys;
 import com.contentful.tea.java.services.modelenhancers.AddEditorialFeaturesEnhancer;
 
@@ -49,6 +51,10 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
 
   @Autowired
   @SuppressWarnings("unused")
+  private Contentful contentful;
+
+  @Autowired
+  @SuppressWarnings("unused")
   private AddEditorialFeaturesEnhancer enhancer;
 
   @Override
@@ -87,7 +93,7 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
     ;
 
     parameter
-        .setCategories(createCategories(courses, slug))
+        .setCategories(createCategories(slug))
         .setCourses(createCourses(courses))
         .setTitle(title)
     ;
@@ -99,29 +105,30 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
     return String.format("%s (%d)", categoryName.isEmpty() ? t(Keys.allCoursesLabel) : categoryName, total);
   }
 
-  private List<Category> createCategories(List<CDAResource> courses, String selectedCategory) {
+  private List<Category> createCategories(String selectedCategory) {
     final Map<String, Category> categories = new HashMap<>();
 
-    for (final CDAResource resource : courses) {
+    final CDAArray courses = contentful
+        .getCurrentClient()
+        .fetch(CDAEntry.class)
+        .withContentType("category")
+        .all();
+
+    for (final CDAResource resource : courses.items()) {
       if (!(resource instanceof CDAEntry)) {
-        throw new IllegalStateException("Courses found of non entry type");
+        throw new IllegalStateException("Categories did not result in an entry type.");
       }
 
-      final CDAEntry course = (CDAEntry) resource;
-      final List<CDAEntry> cdaCategories = course.getField("categories");
-      if (cdaCategories != null) {
-        for (final CDAEntry category : cdaCategories) {
-          final String slug = category.getField("slug");
-          if (!categories.containsKey((String) slug)) {
-            categories.put(
-                slug,
-                new Category()
-                    .setSlug(slug)
-                    .setTitle(category.getField("title"))
-                    .setCssClass(selectedCategory.equals(slug) ? "active" : "")
-            );
-          }
-        }
+      final CDAEntry category = (CDAEntry) resource;
+      final String slug = category.getField("slug");
+      if (!categories.containsKey((String) slug)) {
+        categories.put(
+            slug,
+            new Category()
+                .setSlug(slug)
+                .setTitle(category.getField("title"))
+                .setCssClass(selectedCategory.equals(slug) ? "active" : "")
+        );
       }
     }
 
