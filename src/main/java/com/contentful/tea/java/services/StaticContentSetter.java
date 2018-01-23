@@ -144,7 +144,6 @@ public class StaticContentSetter {
     final CDAClient client = contentful.getCurrentClient();
     final CDASpace space = client.fetchSpace();
     final List<CDALocale> locales = space.locales();
-    Collections.reverse(locales);
 
     final LocalesParameter localesParameter = base.getLocales();
     localesParameter

@@ -1,0 +1,66 @@
+{
+    "items": [
+        {
+            "fields": {
+                "slug": "application-development",
+                "title": "Application Development"
+            },
+            "sys": {
+                "contentType": {
+                    "sys": {
+                        "id": "category",
+                        "linkType": "ContentType",
+                        "type": "Link"
+                    }
+                },
+                "createdAt": "2017-12-11T12:13:56.738Z",
+                "id": "7JhDodrNmwmwGmQqiACW4",
+                "locale": "en-US",
+                "revision": 1,
+                "space": {
+                    "sys": {
+                        "id": "jnzexv31feqf",
+                        "linkType": "Space",
+                        "type": "Link"
+                    }
+                },
+                "type": "Entry",
+                "updatedAt": "2017-12-11T12:13:56.738Z"
+            }
+        },
+        {
+            "fields": {
+                "slug": "getting-started",
+                "title": "Getting started"
+            },
+            "sys": {
+                "contentType": {
+                    "sys": {
+                        "id": "category",
+                        "linkType": "ContentType",
+                        "type": "Link"
+                    }
+                },
+                "createdAt": "2017-12-11T12:14:08.115Z",
+                "id": "6ucY5w3oswEU6EYSCEi0C8",
+                "locale": "en-US",
+                "revision": 1,
+                "space": {
+                    "sys": {
+                        "id": "jnzexv31feqf",
+                        "linkType": "Space",
+                        "type": "Link"
+                    }
+                },
+                "type": "Entry",
+                "updatedAt": "2017-12-11T12:14:08.115Z"
+            }
+        }
+    ],
+    "limit": 100,
+    "skip": 0,
+    "sys": {
+        "type": "Array"
+    },
+    "total": 2
+}

@@ -96,7 +96,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"models/courses.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"models/courses.json", "models/categories.json", "defaults/space.json"})
   public void allCoursesTest() {
     settings.setPath("/courses");
     settings.setQueryString("");
@@ -125,7 +125,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"courses/one_category.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"courses/one_category.json", "models/categories.json", "defaults/space.json"})
   public void courseCategoryTest() {
     settings.setPath("/courses/categories/application-development");
     settings.setQueryString("");

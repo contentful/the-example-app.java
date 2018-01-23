@@ -1,16 +1,16 @@
 {
     "locales": [
         {
-            "code": "en-US",
-            "default": true,
-            "fallbackCode": null,
-            "name": "U.S. English"
-        },
-        {
             "code": "de-DE",
             "default": false,
             "fallbackCode": "en-US",
             "name": "German (Germany)"
+        },
+        {
+            "code": "en-US",
+            "default": true,
+            "fallbackCode": null,
+            "name": "U.S. English"
         }
     ],
     "name": "[QA] The example app space v1",
