@@ -30,9 +30,29 @@ public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<
 
     final SettingsParameter.Errors errors = checkForErrors();
 
-    final SettingsParameter parameter = new SettingsParameter()
-        .setAccessTokenLabel(t(Keys.accessTokenLabel))
+    final SettingsParameter parameter = new SettingsParameter();
+    setStaticLabels(parameter)
+        .setLoadedFromLocalFileName(LOCAL_SETTINGS_REFERENCE_FILE_NAME)
+        .setLoadedFromLocalFileUrl(LOCAL_SETTINGS_REFERENCE_IN_TO_GITHUB)
+        .setDeepLinkUrl(createDeepLinkUrl())
         .setApi(contentful.getApi())
+        .setDeliveryToken(contentful.getDeliveryAccessToken())
+        .setEditorialFeaturesEnabled(settings.areEditorialFeaturesEnabled())
+        .setErrors(errors)
+        .setLocale(settings.getLocale())
+        .setPreviewToken(contentful.getPreviewAccessToken())
+        .setSpaceId(contentful.getSpaceId())
+        .setSpaceName(fetchSpaceName())
+        .setUsesCustomCredentials(isUsingCustomCredentials())
+    ;
+    return parameter;
+  }
+
+  public SettingsParameter setStaticLabels(SettingsParameter parameter) {
+    parameter.getBase().getMeta().setTitle(t(Keys.settingsLabel));
+
+    return parameter
+        .setAccessTokenLabel(t(Keys.accessTokenLabel))
         .setApplicationCredentialsLabel(t(Keys.applicationCredentialsLabel))
         .setChangesSavedLabel(t(Keys.changesSavedLabel))
         .setConnectedToSpaceLabel(t(Keys.connectedToSpaceLabel))
@@ -40,37 +60,23 @@ public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<
         .setContentPreviewApiHelpText(t(Keys.contentPreviewApiHelpText))
         .setCopyLinkLabel(t(Keys.copyLinkLabel))
         .setCredentialSourceLabel(t(Keys.credentialSourceLabel))
-        .setDeepLinkUrl(createDeepLinkUrl())
-        .setDeliveryToken(contentful.getDeliveryAccessToken())
         .setDeliveryTokenLabel(t(Keys.cdaAccessTokenLabel))
-        .setEditorialFeaturesEnabled(settings.areEditorialFeaturesEnabled())
         .setEnableEditorialFeaturesHelpText(t(Keys.enableEditorialFeaturesHelpText))
         .setEnableEditorialFeaturesLabel(t(Keys.enableEditorialFeaturesLabel))
         .setErrorOccurredMessageLabel(t(Keys.errorOccurredMessageLabel))
         .setErrorOccurredTitleLabel(t(Keys.errorOccurredTitleLabel))
-        .setErrors(errors)
         .setLoadedFromLocalFileLabel(t(Keys.loadedFromLocalFileLabel))
-        .setLoadedFromLocalFileName(LOCAL_SETTINGS_REFERENCE_FILE_NAME)
-        .setLoadedFromLocalFileUrl(LOCAL_SETTINGS_REFERENCE_IN_TO_GITHUB)
-        .setLocale(settings.getLocale())
         .setOverrideConfigLabel(t(Keys.overrideConfigLabel))
-        .setPreviewToken(contentful.getPreviewAccessToken())
         .setPreviewTokenLabel(t(Keys.cpaAccessTokenLabel))
         .setResetCredentialsLabel(t(Keys.resetCredentialsLabel))
         .setSaveSettingsButtonLabel(t(Keys.saveSettingsButtonLabel))
         .setSettingsIntroLabel(t(Keys.settingsIntroLabel))
-        .setSpaceId(contentful.getSpaceId())
         .setSpaceIdHelpText(t(Keys.spaceIdHelpText))
         .setSpaceIdLabel(t(Keys.spaceIdLabel))
-        .setSpaceName(fetchSpaceName())
         .setTitle(t(Keys.settingsLabel))
-        .setUsesCustomCredentials(isUsingCustomCredentials())
         .setUsingServerCredentialsLabel(t(Keys.usingServerCredentialsLabel))
-        .setUsingSessionCredentialsLabel(t(Keys.usingSessionCredentialsLabel));
-
-    parameter.getBase().getMeta().setTitle(t(Keys.settingsLabel));
-
-    return parameter;
+        .setUsingSessionCredentialsLabel(t(Keys.usingSessionCredentialsLabel))
+        ;
   }
 
   private boolean isUsingCustomCredentials() {
@@ -106,10 +112,9 @@ public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<
 
   private SettingsParameter.Errors checkForErrors() {
     final String lastApi = contentful.getApi();
+    final SettingsParameter.Errors errors = new SettingsParameter.Errors();
 
     try {
-      final SettingsParameter.Errors errors = new SettingsParameter.Errors();
-
       contentful.setApi(Contentful.API_CDA);
       try {
         contentful.getCurrentClient().fetchSpace();
@@ -117,11 +122,13 @@ public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<
         switch (e.responseCode()) {
           default:
           case 401:
-            errors.setDeliveryToken(new SettingsParameter.Errors.Error().setMessage(t(Keys.spaceOrTokenInvalid)));
-            return errors;
+            errors.setDeliveryToken(new SettingsParameter.Errors.Error().setMessage(t(Keys.deliveryKeyInvalidLabel)));
+            break;
           case 404:
             errors.setSpaceId(new SettingsParameter.Errors.Error().setMessage(t(Keys.spaceOrTokenInvalid)));
-            return errors;
+            errors.setDeliveryToken(new SettingsParameter.Errors.Error().setMessage(t(Keys.deliveryKeyInvalidLabel)));
+            errors.setPreviewToken(new SettingsParameter.Errors.Error().setMessage(t(Keys.previewKeyInvalidLabel)));
+            break;
         }
       }
 
@@ -132,17 +139,25 @@ public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<
         switch (e.responseCode()) {
           default:
           case 401:
-            errors.setPreviewToken(new SettingsParameter.Errors.Error().setMessage(t(Keys.spaceOrTokenInvalid)));
-            return errors;
+            errors.setPreviewToken(new SettingsParameter.Errors.Error().setMessage(t(Keys.previewKeyInvalidLabel)));
+            break;
           case 404:
             errors.setSpaceId(new SettingsParameter.Errors.Error().setMessage(t(Keys.spaceOrTokenInvalid)));
-            return errors;
+            errors.setDeliveryToken(new SettingsParameter.Errors.Error().setMessage(t(Keys.deliveryKeyInvalidLabel)));
+            errors.setPreviewToken(new SettingsParameter.Errors.Error().setMessage(t(Keys.previewKeyInvalidLabel)));
+            break;
         }
       }
 
       return errors;
+    } catch (Throwable t) {
+      errors.setSpaceId(new SettingsParameter.Errors.Error().setMessage(t(Keys.spaceOrTokenInvalid)));
+      errors.setDeliveryToken(new SettingsParameter.Errors.Error().setMessage(t(Keys.deliveryKeyInvalidLabel)));
+      errors.setPreviewToken(new SettingsParameter.Errors.Error().setMessage(t(Keys.previewKeyInvalidLabel)));
     } finally {
       contentful.setApi(lastApi);
     }
+
+    return errors;
   }
 }

@@ -117,7 +117,7 @@ public class SettingsParameter extends MappableType {
   private boolean successful;
   private boolean usesCustomCredentials;
 
-  private Errors errors;
+  private Errors errors = new Errors();
 
   private String accessTokenLabel;
   private String api;

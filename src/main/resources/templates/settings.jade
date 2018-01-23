@@ -30,7 +30,7 @@ block content
           .status-block__title #{errorOccurredTitleLabel}
           .status-block__message #{errorOccurredMessageLabel}
 
-    if spaceName && !errors.hasErrors
+    if !errors.hasErrors
       .status-block.status-block--info
         svg.status-block__icon.status-block__icon--info
           use(xlink:href='/icons/icons.svg#info')
@@ -71,14 +71,14 @@ block content
     form(action='/settings!{base.meta.queryString}' method="POST" class="form")
       .form-item
         label(for="input-space-id") #{spaceIdLabel}
-        input(type="text" name="space_id" id="input-space-id" value=settings.spaceId)
+        input(type="text" name="space_id" id="input-space-id" required value=settings.spaceId)
         if errors.spaceId
           +renderError(errors.spaceId)
         .form-item__help-text #{spaceIdHelpText}
 
       .form-item
         label(for="input-delivery-token") #{deliveryTokenLabel}
-        input(type="text" name="delivery_token" id="input-delivery-token" value=settings.deliveryToken)
+        input(type="text" name="delivery_token" id="input-delivery-token" required value=settings.deliveryToken)
         if errors.deliveryToken
           +renderError(errors.deliveryToken)
         .form-item__help-text
@@ -87,7 +87,7 @@ block content
 
       .form-item
         label(for="input-preview-token") #{previewTokenLabel}
-        input(type="text" name="preview_token" id="input-preview-token" value=settings.previewToken)
+        input(type="text" name="preview_token" id="input-preview-token" required value=settings.previewToken)
         if errors.previewToken
           +renderError(errors.previewToken)
         .form-item__help-text

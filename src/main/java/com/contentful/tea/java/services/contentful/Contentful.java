@@ -86,9 +86,7 @@ public class Contentful {
   }
 
   public Contentful setDeliveryAccessToken(String deliveryAccessToken) {
-    if (deliveryAccessToken != null && deliveryAccessToken.length() > 0) {
-      this.deliveryAccessToken = deliveryAccessToken;
-    }
+    this.deliveryAccessToken = deliveryAccessToken;
     return this;
   }
 
@@ -97,9 +95,7 @@ public class Contentful {
   }
 
   public Contentful setPreviewAccessToken(String previewAccessToken) {
-    if (previewAccessToken != null && previewAccessToken.length() > 0) {
-      this.previewAccessToken = previewAccessToken;
-    }
+    this.previewAccessToken = previewAccessToken;
     return this;
   }
 
@@ -108,9 +104,7 @@ public class Contentful {
   }
 
   public Contentful setSpaceId(String spaceId) {
-    if (spaceId != null && spaceId.length() > 0) {
-      this.spaceId = spaceId;
-    }
+    this.spaceId = spaceId;
     return this;
   }
 

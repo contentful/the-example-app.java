@@ -10,6 +10,7 @@ import com.contentful.tea.java.models.courses.CoursesParameter;
 import com.contentful.tea.java.models.errors.ErrorParameter;
 import com.contentful.tea.java.models.landing.LandingPageParameter;
 import com.contentful.tea.java.models.settings.SettingsParameter;
+import com.contentful.tea.java.models.settings.SettingsParameter.Errors;
 import com.contentful.tea.java.services.StaticContentSetter;
 import com.contentful.tea.java.services.contentful.Contentful;
 import com.contentful.tea.java.services.http.SessionParser;
@@ -318,12 +319,33 @@ public class MainController implements ErrorController {
       settings.reset();
       settings.setBaseUrl(request.getRequestURL().toString());
       settings.setPath(request.getServletPath());
-      urlParameterParser.parseUrlParameter(request.getParameterMap());
 
-      final SettingsParameter parameter = settingsToParameter.convert(null);
+      SettingsParameter parameter = new SettingsParameter();
+      try {
+        urlParameterParser.parseUrlParameter(request.getParameterMap());
+        parameter = settingsToParameter.convert(null);
+      } catch (Throwable t) {
+
+        parameter
+            .setErrors(
+                parameter.getErrors()
+                    .setSpaceId(
+                        new Errors.Error()
+                            .setMessage(
+                                localizer.localize(Keys.spaceOrTokenInvalid)
+                            )
+                    )
+            );
+      }
 
       if (parameter.getErrors().hasErrors()) {
         staticContentSetter.applyErrorContent(parameter.getBase());
+        settingsToParameter.setStaticLabels(parameter);
+        parameter
+            .setDeliveryToken(contentful.getDeliveryAccessToken())
+            .setPreviewToken(contentful.getPreviewAccessToken())
+            .setSpaceId(contentful.getSpaceId());
+
         settings.load(lastSettings);
         contentful.load(lastContentful);
       } else {
