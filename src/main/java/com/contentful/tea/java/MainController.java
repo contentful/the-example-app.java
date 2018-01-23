@@ -165,11 +165,11 @@ public class MainController implements ErrorController {
     }
   }
 
-  @RequestMapping("/courses/categories/{slug}")
+  @RequestMapping({"/courses/categories/{slug}", "/courses/categories"})
   @ResponseBody
   @SuppressWarnings("unused")
   public String coursesCategory(HttpServletRequest request,
-                                @PathVariable("slug") String slug) {
+                                @PathVariable(value = "slug", required = false) String slug) {
     try {
       setupRoute(request);
 
@@ -392,6 +392,7 @@ public class MainController implements ErrorController {
 
   private void setupRoute(HttpServletRequest request) {
     contentful.reset().loadFromPreferences();
+    settings.reset();
     sessionParser.loadSession(request.getSession());
     urlParameterParser.parseUrlParameter(request.getParameterMap());
     settings.setBaseUrl(request.getRequestURL().toString());
