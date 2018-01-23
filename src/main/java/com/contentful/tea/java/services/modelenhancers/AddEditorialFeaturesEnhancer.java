@@ -48,7 +48,7 @@ public class AddEditorialFeaturesEnhancer {
         .setDeeplinkToContentful(generateDeeplinkToContentful(entry));
   }
 
-  private String generateDeeplinkToContentful(CDAEntry entry) {
+  String generateDeeplinkToContentful(CDAEntry entry) {
     final String spaceId = contentful.getSpaceId();
     final String entryId = entry.id();
     final String contentTypeId = entry.contentType().id();

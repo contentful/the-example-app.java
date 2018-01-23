@@ -26,16 +26,6 @@ public class SessionParser {
 
   public SessionParser() {
     manipulatorsByNameMap = new HashMap<>();
-
-    manipulatorsByNameMap.put(Constants.NAME_API, new Manipulator<String>() {
-      @Override public String get() {
-        return contentful.getApi();
-      }
-
-      @Override public void set(String value) {
-        contentful.setApi(value);
-      }
-    });
     manipulatorsByNameMap.put(Constants.NAME_SPACE_ID, new Manipulator<String>() {
       @Override public String get() {
         return contentful.getSpaceId();
@@ -61,15 +51,6 @@ public class SessionParser {
 
       @Override public void set(String value) {
         contentful.setPreviewAccessToken(value);
-      }
-    });
-    manipulatorsByNameMap.put(Constants.NAME_LOCALE, new Manipulator<String>() {
-      @Override public String get() {
-        return settings.getLocale();
-      }
-
-      @Override public void set(String value) {
-        settings.setLocale(value);
       }
     });
     manipulatorsByNameMap.put(Constants.NAME_EDITORIAL_FEATURES, new Manipulator<Boolean>() {

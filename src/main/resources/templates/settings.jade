@@ -68,9 +68,9 @@ block content
               p
                 em #{overrideConfigLabel}
 
-    form(action='/settings' method="POST" class="form")
+    form(action='/settings!{base.meta.queryString}' method="POST" class="form")
       .form-item
-        input(type="hidden" name="qs" value=settings.queryString)
+        input(type="hidden" name="qs" value=base.meta.queryString)
         input(type="hidden" name="api" value=settings.api)
         input(type="hidden" name="locale" value=settings.locale)
         label(for="input-space-id") #{spaceIdLabel}

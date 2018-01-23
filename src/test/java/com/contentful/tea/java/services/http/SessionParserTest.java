@@ -18,10 +18,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import static com.contentful.tea.java.services.http.Constants.NAME_API;
 import static com.contentful.tea.java.services.http.Constants.NAME_DELIVERY_TOKEN;
 import static com.contentful.tea.java.services.http.Constants.NAME_EDITORIAL_FEATURES;
-import static com.contentful.tea.java.services.http.Constants.NAME_LOCALE;
 import static com.contentful.tea.java.services.http.Constants.NAME_PREVIEW_TOKEN;
 import static com.contentful.tea.java.services.http.Constants.NAME_SPACE_ID;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -51,17 +49,13 @@ public class SessionParserTest {
   public void parserLoadsSession() {
     final HttpSession session = new MockHttpSession();
 
-    session.setAttribute(NAME_API, Contentful.API_CDA);
     session.setAttribute(NAME_SPACE_ID, "spaceId");
-    session.setAttribute(NAME_LOCALE, "locale");
     session.setAttribute(NAME_DELIVERY_TOKEN, "cdaToken");
     session.setAttribute(NAME_PREVIEW_TOKEN, "cpaToken");
 
     parser.loadSession(session);
 
-    assertThat(contentful.getApi()).isEqualTo(Contentful.API_CDA);
     assertThat(contentful.getSpaceId()).isEqualTo("spaceId");
-    assertThat(settings.getLocale()).isEqualTo("locale");
     assertThat(contentful.getDeliveryAccessToken()).isEqualTo("cdaToken");
     assertThat(contentful.getPreviewAccessToken()).isEqualTo("cpaToken");
   }
@@ -69,13 +63,9 @@ public class SessionParserTest {
   @Test
   public void parserSavesSession() {
     contentful
-        .setApi(Contentful.API_CPA)
         .setSpaceId("spaceId")
         .setDeliveryAccessToken("cdaToken")
         .setPreviewAccessToken("cpaToken");
-
-    settings.setLocale("locale");
-
 
     final HttpSession session = new MockHttpSession();
     parser.saveSession(session);
@@ -85,11 +75,11 @@ public class SessionParserTest {
 
     final String[] names = attributes.keySet().toArray(new String[attributes.size()]);
     assertThat(names)
-        .containsExactlyInAnyOrder(NAME_API, NAME_DELIVERY_TOKEN, NAME_PREVIEW_TOKEN, NAME_SPACE_ID, NAME_LOCALE, NAME_EDITORIAL_FEATURES);
+        .containsExactlyInAnyOrder(NAME_DELIVERY_TOKEN, NAME_PREVIEW_TOKEN, NAME_SPACE_ID, NAME_EDITORIAL_FEATURES);
 
     final Object[] values = attributes.values().toArray();
     assertThat(values)
-        .containsExactlyInAnyOrder("spaceId", "locale", "cdaToken", "cpaToken", Contentful.API_CPA, false);
+        .containsExactlyInAnyOrder("spaceId", "cdaToken", "cpaToken", false);
   }
 
   private Map<String, Object> extractAttributesIntoMap(HttpSession session) {

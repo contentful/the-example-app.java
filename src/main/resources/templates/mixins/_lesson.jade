@@ -23,5 +23,5 @@ mixin lesson(lesson, course, nextLessonSlug)
             span #{lessonModuleErrorBody}
             strong  #{module.sys.id}
     if nextLessonSlug
-      a.lesson__cta.cta(href='/courses/!{course.slug}/lessons/!{nextLessonSlug}!{queryString}') #{nextLessonLabel}
+      a.lesson__cta.cta(href='/courses/!{course.slug}/lessons/!{nextLessonSlug}!{base.meta.queryString}') #{nextLessonLabel}
 

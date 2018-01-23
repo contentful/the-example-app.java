@@ -6,11 +6,11 @@ mixin courseCard(course = {fields: {title: '', description: '', categories: [], 
       if(course.categories)
         each category in course.categories
           .course-card__category
-            a.course-card__category-link(href='/courses/categories/!{category.slug}!{queryString}') #{category.title}
+            a.course-card__category-link(href='/courses/categories/!{category.slug}!{base.meta.queryString}') #{category.title}
     h2.course-card__title
-      a(href='/courses/!{course.slug}!{queryString}')= course.title
+      a(href='/courses/!{course.slug}!{base.meta.queryString}')= course.title
       if (course.draft || course.pendingChanges)
         +entryState(course)
     p.course-card__description= course.shortDescription
     .course-card__link-wrapper
-      a.course-card__link(href='/courses/!{course.slug}!{queryString}') #{base.labels.viewCourseLabel}
+      a.course-card__link(href='/courses/!{course.slug}!{base.meta.queryString}') #{base.labels.viewCourseLabel}

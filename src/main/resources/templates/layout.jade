@@ -72,7 +72,7 @@ html
                       each locale in base.locales.locales
                         button.header__controls_button(type='submit' name='locale' value=locale.code class=locale.cssClass) #{locale.name} (#{locale.code})
               .header__upper-menu
-                a(href='/settings/!{base.meta.queryString}' class='!{base.meta.upperMenuCSSClass}') #{base.labels.settingsLabel}
+                a(href='/settings!{base.meta.queryString}' class='!{base.meta.upperMenuCSSClass}') #{base.labels.settingsLabel}
           .header__lower-wrapper
             .header__lower.layout-centered
               .header__logo
@@ -81,9 +81,9 @@ html
               nav.header__navigation.main-navigation
                 ul
                   li
-                    a(href='/' class='!{base.meta.homeCSSClass}') #{base.labels.homeLabel}
+                    a(href='/!{base.meta.queryString}' class='!{base.meta.homeCSSClass}') #{base.labels.homeLabel}
                   li
-                    a(href='/courses' class='!{base.meta.coursesCSSClass}' ) #{base.labels.coursesLabel}
+                    a(href='/courses!{base.meta.queryString}' class='!{base.meta.coursesCSSClass}' ) #{base.labels.coursesLabel}
       .main__content
         block content
 
@@ -94,7 +94,7 @@ html
               nav.footer__navigation.main-navigation
                 ul
                   li
-                    a(href='!{base.meta.queryString}' class='!{base.meta.homeCSSClass}') #{base.labels.homeLabel}
+                    a(href='/!{base.meta.queryString}' class='!{base.meta.homeCSSClass}') #{base.labels.homeLabel}
                   li
                     a(href='/courses!{base.meta.queryString}' class='!{base.meta.coursesCSSClass}' ) #{base.labels.coursesLabel}
               .footer__apps
@@ -135,10 +135,10 @@ html
             a(href='https://github.com/contentful/the-example-app.java' target='_blank' rel='noopener') GitHub
             | .
           p
-            | #{base.meta.modalSpaceIntro}&nbsp;
+            | #{base.labels.modalSpaceIntro}&nbsp;
             a(href='https://github.com/contentful/content-models/blob/master/the-example-app/README.md ' target='_blank' rel='noopener')=base.labels.modalSpaceLinkLabel
             | .
-          p #{base.meta.modalPlatforms}
+          p #{base.labels.modalPlatforms}
             ul
               li
                 img(src='/images/icon-nodejs.svg')

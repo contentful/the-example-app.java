@@ -15,11 +15,11 @@ block content
         .table-of-contents
           .table-of-contents__list
             .table-of-contents__item
-              a(href='/courses/!{course.slug}!{queryString}' class='table-of-contents__link !{courseOverviewCssClass}') !{courseOverviewLabel}
+              a(href='/courses/!{course.slug}!{base.meta.queryString}' class='table-of-contents__link !{courseOverviewCssClass}') !{courseOverviewLabel}
             each lesson in course.lessons
               if lesson
                 .table-of-contents__item
-                  a(href='/courses/!{course.slug}/lessons/!{lesson.slug}!{queryString}' class='table-of-contents__link !{lesson.cssClass}') !{lesson.title}
+                  a(href='/courses/!{course.slug}/lessons/!{lesson.slug}!{base.meta.queryString}' class='table-of-contents__link !{lesson.cssClass}') !{lesson.title}
     section.layout-sidebar__content
       if course.currentLesson
         +lesson(course.currentLesson, course, course.nextLessonSlug)
@@ -40,5 +40,5 @@ block content
                   use(xlink:href='/icons/icons.svg#skill-level')
                 .course__overview-value #{skillLevelLabel}: #{course.skillLevel}
             .course__overview-cta-wrapper
-              a.course__overview-cta.cta(href='/courses/!{course.slug}/lessons/!{course.lessons[0].slug}!{queryString}') #{startCourseLabel}
+              a.course__overview-cta.cta(href='/courses/!{course.slug}/lessons/!{course.lessons[0].slug}!{base.meta.queryString}') #{startCourseLabel}
           .course__description !{course.description}

@@ -4,4 +4,4 @@ mixin breadcrumb
       ul
         each breadcrumb in base.breadcrumb.breadcrumbs
           li
-            a(href='!{breadcrumb.url}!{queryString}') #{breadcrumb.label}
+            a(href='!{breadcrumb.url}!{base.meta.queryString}') #{breadcrumb.label}
