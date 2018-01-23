@@ -40,9 +40,16 @@ public class ExceptionToErrorParameter implements Converter<Throwable, ErrorPara
         .addLocale(
             new Locale()
                 .setCode("en-US")
-                .setName("EN-US")
-                .setCssClass(Locale.CSS_CLASS_ACTIVE))
+                .setName("U.S. English")
+                .setCssClass(Locale.CSS_CLASS_ACTIVE),
+            new Locale()
+                .setCode("de-DE")
+                .setName("Germany (Germany)")
+                .setCssClass("")
+        )
     ;
+
+    base.getMeta().setTitle(t(Keys.errorOccurredTitleLabel));
 
     return errorParameter
         .setContentModelChangedErrorLabel(t(Keys.contentModelChangedErrorLabel))
