@@ -70,9 +70,6 @@ block content
 
     form(action='/settings!{base.meta.queryString}' method="POST" class="form")
       .form-item
-        input(type="hidden" name="qs" value=base.meta.queryString)
-        input(type="hidden" name="api" value=settings.api)
-        input(type="hidden" name="locale" value=settings.locale)
         label(for="input-space-id") #{spaceIdLabel}
         input(type="text" name="space_id" id="input-space-id" value=settings.spaceId)
         if errors.spaceId
@@ -80,7 +77,7 @@ block content
         .form-item__help-text #{spaceIdHelpText}
 
       .form-item
-        label(for="input-delivery-token") Content Delivery API - #{accessTokenLabel}
+        label(for="input-delivery-token") #{deliveryTokenLabel}
         input(type="text" name="delivery_token" id="input-delivery-token" value=settings.deliveryToken)
         if errors.deliveryToken
           +renderError(errors.deliveryToken)
@@ -89,7 +86,7 @@ block content
           a(href='https://www.contentful.com/developers/docs/references/content-delivery-api/' target='_blank' rel='noopener') Content Delivery API.
 
       .form-item
-        label(for="input-preview-token") Content Preview API - #{accessTokenLabel}
+        label(for="input-preview-token") #{previewTokenLabel}
         input(type="text" name="preview_token" id="input-preview-token" value=settings.previewToken)
         if errors.previewToken
           +renderError(errors.previewToken)

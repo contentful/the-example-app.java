@@ -130,6 +130,7 @@ public class SettingsParameter extends MappableType {
   private String credentialSourceLabel;
   private String deepLinkUrl;
   private String deliveryToken;
+  private String deliveryTokenLabel;
   private String enableEditorialFeaturesHelpText;
   private String enableEditorialFeaturesLabel;
   private String errorOccurredMessageLabel;
@@ -140,6 +141,7 @@ public class SettingsParameter extends MappableType {
   private String locale;
   private String overrideConfigLabel;
   private String previewToken;
+  private String previewTokenLabel;
   private String resetCredentialsLabel;
   private String saveSettingsButtonLabel;
   private String settingsIntroLabel;
@@ -479,6 +481,24 @@ public class SettingsParameter extends MappableType {
     return this;
   }
 
+  public String getDeliveryTokenLabel() {
+    return deliveryTokenLabel;
+  }
+
+  public SettingsParameter setDeliveryTokenLabel(String deliveryTokenLabel) {
+    this.deliveryTokenLabel = deliveryTokenLabel;
+    return this;
+  }
+
+  public String getPreviewTokenLabel() {
+    return previewTokenLabel;
+  }
+
+  public SettingsParameter setPreviewTokenLabel(String previewTokenLabel) {
+    this.previewTokenLabel = previewTokenLabel;
+    return this;
+  }
+
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof SettingsParameter)) return false;
@@ -496,6 +516,7 @@ public class SettingsParameter extends MappableType {
         Objects.equals(getCredentialSourceLabel(), that.getCredentialSourceLabel()) &&
         Objects.equals(getDeepLinkUrl(), that.getDeepLinkUrl()) &&
         Objects.equals(getDeliveryToken(), that.getDeliveryToken()) &&
+        Objects.equals(getDeliveryTokenLabel(), that.getDeliveryTokenLabel()) &&
         Objects.equals(getEnableEditorialFeaturesHelpText(), that.getEnableEditorialFeaturesHelpText()) &&
         Objects.equals(getEnableEditorialFeaturesLabel(), that.getEnableEditorialFeaturesLabel()) &&
         Objects.equals(getErrorOccurredMessageLabel(), that.getErrorOccurredMessageLabel()) &&
@@ -507,6 +528,7 @@ public class SettingsParameter extends MappableType {
         Objects.equals(getLocale(), that.getLocale()) &&
         Objects.equals(getOverrideConfigLabel(), that.getOverrideConfigLabel()) &&
         Objects.equals(getPreviewToken(), that.getPreviewToken()) &&
+        Objects.equals(getPreviewTokenLabel(), that.getPreviewTokenLabel()) &&
         Objects.equals(getResetCredentialsLabel(), that.getResetCredentialsLabel()) &&
         Objects.equals(getSaveSettingsButtonLabel(), that.getSaveSettingsButtonLabel()) &&
         Objects.equals(getSettingsIntroLabel(), that.getSettingsIntroLabel()) &&
@@ -522,7 +544,7 @@ public class SettingsParameter extends MappableType {
   }
 
   @Override public int hashCode() {
-    return Objects.hash(getBase(), getApi(), getLoadedFromLocalFileUrl(), getLoadedFromLocalFileName(), getAccessTokenLabel(), getChangesSavedLabel(), getConnectedToSpaceLabel(), getContentDeliveryApiHelpText(), getContentPreviewApiHelpText(), getDeliveryToken(), areEditorialFeaturesEnabled(), getEnableEditorialFeaturesHelpText(), getEnableEditorialFeaturesLabel(), getErrorOccurredMessageLabel(), getErrorOccurredTitleLabel(), getPreviewToken(), getSaveSettingsButtonLabel(), getSettingsIntroLabel(), getSpaceId(), getSpaceIdHelpText(), getSpaceIdLabel(), getSpaceName(), isSuccessful(), getTitle(), getErrors(), getApplicationCredentialsLabel(), getCredentialSourceLabel(), getLoadedFromLocalFileLabel(), getLocale(), getOverrideConfigLabel(), getResetCredentialsLabel(), getUsingServerCredentialsLabel(), getUsingSessionCredentialsLabel(), getDeepLinkUrl(), isUsingCustomCredentials(), getCopyLinkLabel());
+    return Objects.hash(getBase(), getApi(), getLoadedFromLocalFileUrl(), getLoadedFromLocalFileName(), getAccessTokenLabel(), getChangesSavedLabel(), getConnectedToSpaceLabel(), getContentDeliveryApiHelpText(), getContentPreviewApiHelpText(), getDeliveryToken(), getDeliveryTokenLabel(), areEditorialFeaturesEnabled(), getEnableEditorialFeaturesHelpText(), getEnableEditorialFeaturesLabel(), getErrorOccurredMessageLabel(), getErrorOccurredTitleLabel(), getPreviewToken(), getPreviewTokenLabel(), getSaveSettingsButtonLabel(), getSettingsIntroLabel(), getSpaceId(), getSpaceIdHelpText(), getSpaceIdLabel(), getSpaceName(), isSuccessful(), getTitle(), getErrors(), getApplicationCredentialsLabel(), getCredentialSourceLabel(), getLoadedFromLocalFileLabel(), getLocale(), getOverrideConfigLabel(), getResetCredentialsLabel(), getUsingServerCredentialsLabel(), getUsingSessionCredentialsLabel(), getDeepLinkUrl(), isUsingCustomCredentials(), getCopyLinkLabel());
   }
 
   @Override public String toString() {
@@ -540,6 +562,7 @@ public class SettingsParameter extends MappableType {
         + "credentialSourceLabel = " + getCredentialSourceLabel() + ", "
         + "deepLinkUrl = " + getDeepLinkUrl() + ", "
         + "deliveryToken = " + getDeliveryToken() + ", "
+        + "deliveryTokenLabel = " + getDeliveryTokenLabel() + ", "
         + "editorialFeaturesEnabled = " + isEditorialFeaturesEnabled() + ", "
         + "enableEditorialFeaturesHelpText = " + getEnableEditorialFeaturesHelpText() + ", "
         + "enableEditorialFeaturesLabel = " + getEnableEditorialFeaturesLabel() + ", "
@@ -552,6 +575,7 @@ public class SettingsParameter extends MappableType {
         + "locale = " + getLocale() + ", "
         + "overrideConfigLabel = " + getOverrideConfigLabel() + ", "
         + "previewToken = " + getPreviewToken() + ", "
+        + "previewTokenLabel = " + getPreviewTokenLabel() + ", "
         + "resetCredentialsLabel = " + getResetCredentialsLabel() + ", "
         + "saveSettingsButtonLabel = " + getSaveSettingsButtonLabel() + ", "
         + "settingsIntroLabel = " + getSettingsIntroLabel() + ", "
