@@ -51,6 +51,7 @@ public class Contentful {
           .builder()
           .setSpace(getSpaceId())
           .setToken(getDeliveryAccessToken())
+          .setApplication(getApplicationName(), getVersionString())
           .build();
     }
 
@@ -63,6 +64,7 @@ public class Contentful {
           .builder()
           .setSpace(getSpaceId())
           .setToken(getPreviewAccessToken())
+          .setApplication(getApplicationName(), getVersionString())
           .preview()
           .build();
     }
@@ -165,6 +167,30 @@ public class Contentful {
     }
 
     return this;
+  }
+
+  public String getVersionString() {
+    final Properties properties = new Properties();
+    final InputStream input = getClass().getClassLoader().getResourceAsStream("application.properties");
+    try {
+      properties.load(input);
+    } catch (IOException e) {
+      return "0.0.0-INVALID";
+    }
+
+    return properties.getProperty("version", "0.0.1-INVALID");
+  }
+
+  private String getApplicationName() {
+    final Properties properties = new Properties();
+    final InputStream input = getClass().getClassLoader().getResourceAsStream("application.properties");
+    try {
+      properties.load(input);
+    } catch (IOException e) {
+      return "INVALID_APP";
+    }
+
+    return properties.getProperty("application", "INVALID_APP");
   }
 
 }

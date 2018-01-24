@@ -15,7 +15,7 @@ apply plugin: 'application'
 apply plugin: 'org.springframework.boot'
 
 group = 'com.contentful.tea.java'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 sourceCompatibility = 1.8
 
 mainClassName = 'com.contentful.tea.java.MainController'
