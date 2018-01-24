@@ -22,6 +22,7 @@ public class TestUtils {
         .setTitle("TEST-setTitle")
         .setUpperMenuCSSClass("TEST-setUpperMenuCSSClass")
         .setDeeplinkToContentful("TEST-setDeeplinkToContentful")
+        .setAllPlatformsQueryString("TEST-allPlatformsQueryString")
     ;
 
     base.getLocales()

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static com.contentful.tea.java.services.contentful.Contentful.API_CDA;
 import static com.contentful.tea.java.services.contentful.Contentful.API_CPA;
@@ -31,43 +30,57 @@ public class UrlParameterParser {
   @SuppressWarnings("unused")
   private Settings settings;
 
-  private final Map<String, Parser> parsersByNameMap;
+  private final Map<String, Manipulator> manipulatorsByNameMap;
 
   public UrlParameterParser() {
-    parsersByNameMap = new HashMap<>();
+    manipulatorsByNameMap = new HashMap<>();
 
-    parsersByNameMap.put(Constants.NAME_API, new Parser() {
-      @Override public void parse(String value) {
+    manipulatorsByNameMap.put(Constants.NAME_API, new Manipulator() {
+      @Override public void fromUrlParameterValueToApp(String value) {
         switch (value) {
           case API_CPA:
           case API_CDA:
             contentful.setApi(value);
-            addToQueryString(Constants.NAME_API, value);
+            final String queryString = addToQueryString(settings.getQueryString(), Constants.NAME_API, value);
+            settings.setQueryString(queryString);
             break;
           default:
             throw new IllegalStateException("API cannot be of value '" + value + "'. Only '" + API_CDA + "' and '" + API_CPA + "' are allowed.");
         }
       }
+
+      @Override public String fromAppToUrlParameterValue() {
+        return contentful.getApi();
+      }
     });
-    parsersByNameMap.put(Constants.NAME_SPACE_ID, new Parser() {
-      @Override public void parse(String value) {
+    manipulatorsByNameMap.put(Constants.NAME_LOCALE, new Manipulator() {
+      @Override public void fromUrlParameterValueToApp(String value) {
+        settings.setLocale(value);
+        final String queryString = addToQueryString(settings.getQueryString(), Constants.NAME_LOCALE, value);
+        settings.setQueryString(queryString);
+        if (value == null || value.isEmpty()) {
+          throw new IllegalStateException("Locale cannot be empty!");
+        }
+      }
+
+      @Override public String fromAppToUrlParameterValue() {
+        return settings.getLocale();
+      }
+    });
+    manipulatorsByNameMap.put(Constants.NAME_SPACE_ID, new Manipulator() {
+      @Override public void fromUrlParameterValueToApp(String value) {
         contentful.setSpaceId(value);
         if (value == null || value.isEmpty()) {
           throw new IllegalStateException("Spaceid cannot be empty!");
         }
       }
-    });
-    parsersByNameMap.put(Constants.NAME_LOCALE, new Parser() {
-      @Override public void parse(String value) {
-        settings.setLocale(value);
-        addToQueryString(Constants.NAME_LOCALE, value);
-        if (value == null || value.isEmpty()) {
-          throw new IllegalStateException("Locale cannot be empty!");
-        }
+
+      @Override public String fromAppToUrlParameterValue() {
+        return contentful.getSpaceId();
       }
     });
-    parsersByNameMap.put(Constants.NAME_EDITORIAL_FEATURES, new Parser() {
-      @Override public void parse(String value) {
+    manipulatorsByNameMap.put(Constants.NAME_EDITORIAL_FEATURES, new Manipulator() {
+      @Override public void fromUrlParameterValueToApp(String value) {
         switch (value) {
           case "true":
           case "false":
@@ -77,35 +90,47 @@ public class UrlParameterParser {
             throw new IllegalStateException("Editorial features cannot set to '" + value + "'. Only 'true' and 'false' are allowed.");
         }
       }
+
+      @Override public String fromAppToUrlParameterValue() {
+        return Boolean.toString(settings.areEditorialFeaturesEnabled());
+      }
     });
-    parsersByNameMap.put(Constants.NAME_DELIVERY_TOKEN, new Parser() {
-      @Override public void parse(String value) {
+    manipulatorsByNameMap.put(Constants.NAME_DELIVERY_TOKEN, new Manipulator() {
+      @Override public void fromUrlParameterValueToApp(String value) {
         contentful.setDeliveryAccessToken(value);
         if (value == null || value.isEmpty()) {
           throw new IllegalStateException("Delivery token cannot be empty!");
         }
       }
+
+      @Override public String fromAppToUrlParameterValue() {
+        return contentful.getDeliveryAccessToken();
+      }
     });
-    parsersByNameMap.put(Constants.NAME_PREVIEW_TOKEN, new Parser() {
-      @Override public void parse(String value) {
+    manipulatorsByNameMap.put(Constants.NAME_PREVIEW_TOKEN, new Manipulator() {
+      @Override public void fromUrlParameterValueToApp(String value) {
         contentful.setPreviewAccessToken(value);
         if (value == null || value.isEmpty()) {
           throw new IllegalStateException("Preview token cannot be empty!");
         }
       }
+
+      @Override public String fromAppToUrlParameterValue() {
+        return contentful.getPreviewAccessToken();
+      }
     });
   }
 
-  public void parseUrlParameter(Map<String, String[]> urlParameterMap) {
+  public void urlParameterToApp(Map<String, String[]> urlParameterMap) {
     if (urlParameterMap != null) {
       List<IllegalStateException> exceptions = new ArrayList<>();
 
       for (final String urlParameterKey : urlParameterMap.keySet()) {
-        if (parsersByNameMap.containsKey(urlParameterKey)) {
+        if (manipulatorsByNameMap.containsKey(urlParameterKey)) {
           final String[] values = urlParameterMap.get(urlParameterKey);
           for (final String value : values) {
             try {
-              parsersByNameMap.get(urlParameterKey).parse(value);
+              manipulatorsByNameMap.get(urlParameterKey).fromUrlParameterValueToApp(value);
             } catch (IllegalStateException e) {
               exceptions.add(e);
             }
@@ -120,8 +145,20 @@ public class UrlParameterParser {
     }
   }
 
-  void addToQueryString(String name, String value) {
-    String query = settings.getQueryString();
+  public String appToUrlParameter() {
+    String result = "";
+
+    for (final Map.Entry<String, Manipulator> e : manipulatorsByNameMap.entrySet()) {
+      final String value = e.getValue().fromAppToUrlParameterValue();
+      if (value != null && !value.isEmpty() && !"false".equals(value)) {
+        result = addToQueryString(result, e.getKey(), value);
+      }
+    }
+
+    return result;
+  }
+
+  String addToQueryString(String query, String name, String value) {
     if (query == null) {
       query = "";
     }
@@ -151,10 +188,12 @@ public class UrlParameterParser {
         .reduce((result, element) -> result += "&" + element)
         .get();
 
-    settings.setQueryString(urlParameters.size() > 0 ? "?" + queryString : "");
+    return urlParameters.size() > 0 ? "?" + queryString : "";
   }
 
-  abstract class Parser {
-    public abstract void parse(String value);
+  abstract class Manipulator {
+    public abstract void fromUrlParameterValueToApp(String value);
+
+    public abstract String fromAppToUrlParameterValue();
   }
 }

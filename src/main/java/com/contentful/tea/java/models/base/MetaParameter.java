@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class MetaParameter extends MappableType {
   private String allCoursesCssClass;
+  private String allPlatformsQueryString;
   private String coursesCSSClass;
   private String currentPath;
   private boolean draft;
@@ -116,11 +117,21 @@ public class MetaParameter extends MappableType {
     return this;
   }
 
+  public String getAllPlatformsQueryString() {
+    return allPlatformsQueryString;
+  }
+
+  public MetaParameter setAllPlatformsQueryString(String allPlatformsQueryString) {
+    this.allPlatformsQueryString = allPlatformsQueryString;
+    return this;
+  }
+
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof MetaParameter)) return false;
     final MetaParameter metaParameter = (MetaParameter) o;
     return Objects.equals(getAllCoursesCssClass(), metaParameter.getAllCoursesCssClass()) &&
+        Objects.equals(getAllPlatformsQueryString(), metaParameter.getAllPlatformsQueryString()) &&
         Objects.equals(getCoursesCSSClass(), metaParameter.getCoursesCSSClass()) &&
         Objects.equals(getCurrentPath(), metaParameter.getCurrentPath()) &&
         Objects.equals(getHomeCSSClass(), metaParameter.getHomeCSSClass()) &&
@@ -136,6 +147,7 @@ public class MetaParameter extends MappableType {
   @Override public int hashCode() {
     return Objects.hash(
         getAllCoursesCssClass(),
+        getAllPlatformsQueryString(),
         getCoursesCSSClass(),
         getCurrentPath(),
         getHomeCSSClass(),
@@ -147,6 +159,8 @@ public class MetaParameter extends MappableType {
 
   @Override public String toString() {
     return "Meta { "
+        + "allCoursesCssClass = " + getAllCoursesCssClass() + ", "
+        + "allPlatformsQueryString = " + getAllPlatformsQueryString() + ", "
         + "coursesCSSClass = " + getCoursesCSSClass() + ", "
         + "currentPath = " + getCurrentPath() + ", "
         + "homeCSSClass = " + getHomeCSSClass() + ", "

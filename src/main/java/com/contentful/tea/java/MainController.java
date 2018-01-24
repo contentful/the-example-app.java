@@ -322,7 +322,7 @@ public class MainController implements ErrorController {
 
       SettingsParameter parameter = new SettingsParameter();
       try {
-        urlParameterParser.parseUrlParameter(request.getParameterMap());
+        urlParameterParser.urlParameterToApp(request.getParameterMap());
         parameter = settingsToParameter.convert(null);
       } catch (Throwable t) {
 
@@ -416,7 +416,7 @@ public class MainController implements ErrorController {
     contentful.reset().loadFromPreferences();
     settings.reset();
     sessionParser.loadSession(request.getSession());
-    urlParameterParser.parseUrlParameter(request.getParameterMap());
+    urlParameterParser.urlParameterToApp(request.getParameterMap());
     settings.setBaseUrl(request.getRequestURL().toString());
     settings.setPath(request.getServletPath());
   }

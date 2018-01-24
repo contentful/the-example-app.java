@@ -12,6 +12,7 @@ import com.contentful.tea.java.models.base.BreadcrumbParameter;
 import com.contentful.tea.java.models.base.Locale;
 import com.contentful.tea.java.models.base.LocalesParameter;
 import com.contentful.tea.java.services.contentful.Contentful;
+import com.contentful.tea.java.services.http.UrlParameterParser;
 import com.contentful.tea.java.services.localization.Keys;
 import com.contentful.tea.java.services.localization.Localizer;
 import com.contentful.tea.java.services.settings.Settings;
@@ -19,7 +20,6 @@ import com.contentful.tea.java.services.settings.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,21 +48,25 @@ public class StaticContentSetter {
   @SuppressWarnings("unused")
   private Settings settings;
 
+  @Autowired
+  @SuppressWarnings("unused")
+  private UrlParameterParser urlParameterParser;
+
   public void applyContent(BaseParameter base) {
-    setStaticContent(base);
+    updateLabels(base);
     updateBreadcrumbs(base);
     updateApis(base);
-    updateTitle(base);
+    updateHeadersAndTitle(base);
     updateLocales(base);
   }
 
   public void applyErrorContent(BaseParameter base) {
-    setStaticContent(base);
+    updateLabels(base);
     updateApis(base);
-    updateTitle(base);
+    updateHeadersAndTitle(base);
   }
 
-  private void setStaticContent(BaseParameter base) {
+  private void updateLabels(BaseParameter base) {
     base.getLabels()
         .setAllCoursesLabel(t(Keys.allCoursesLabel))
         .setApiSwitcherHelp(t(Keys.apiSwitcherHelp))
@@ -123,10 +127,12 @@ public class StaticContentSetter {
     }
   }
 
-  private void updateTitle(BaseParameter base) {
+  private void updateHeadersAndTitle(BaseParameter base) {
     base.getMeta()
         .setQueryString(settings.getQueryString())
-        .setCurrentPath(settings.getPath());
+        .setCurrentPath(settings.getPath())
+        .setAllPlatformsQueryString(getAllPlatformsQueryString())
+    ;
 
     if (settings.getPath() != null && settings.getPath().length() > 0) {
       base.getMeta()
@@ -138,6 +144,10 @@ public class StaticContentSetter {
           .getMeta()
           .setHomeCSSClass("active");
     }
+  }
+
+  private String getAllPlatformsQueryString() {
+    return urlParameterParser.appToUrlParameter();
   }
 
   private void updateLocales(BaseParameter base) {

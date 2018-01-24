@@ -9,7 +9,7 @@ html
     meta(property='og:title' content='#{base.meta.title} — The Example App')
     meta(property='og:type' content='article')
     meta(property='og:url' content='http://contentful-example-app-java.herokuapp.com!{base.meta.currentPath}')
-    meta(property='og:image' content='http://contentful-example-app-java.herokuapp.com/og-image.jpg')
+    meta(property='og:image' content='http://contentful-example-app-java.herokuapp.com!{base.meta.allPlatformsQueryString}og-image.jpg')
     meta(property='og:image:type' content='image/jpeg')
     meta(property='og:image:width' content='1200')
     meta(property='og:image:height' content='1200')
@@ -143,37 +143,37 @@ html
               li
                 img(src='/images/icon-nodejs.svg')
                 br
-                a(href="https://the-example-app-nodejs.herokuapp.com/" rel="noopener" target="_blank")= base.labels.hostedLabel
+                a(href="https://the-example-app-nodejs.herokuapp.com!{base.meta.allPlatformsQueryString}" rel="noopener" target="_blank")= base.labels.hostedLabel
                 br
                 a(href="https://github.com/contentful/the-example-app.nodejs" rel="noopener" target="_blank") GitHub
               li
                 img(src='/images/icon-dotnet.svg')
                 br
-                a(href="https://the-example-app-csharp.herokuapp.com/" rel="noopener" target="_blank")= base.labels.hostedLabel
+                a(href="https://the-example-app-csharp.herokuapp.com!{base.meta.allPlatformsQueryString}" rel="noopener" target="_blank")= base.labels.hostedLabel
                 br
                 a(href="https://github.com/contentful/the-example-app.csharp" rel="noopener" target="_blank") GitHub
               li
                 img(src='/images/icon-ruby.svg')
                 br
-                a(href="https://the-example-app-rb.herokuapp.com/" rel="noopener" target="_blank")= base.labels.hostedLabel
+                a(href="https://the-example-app-rb.herokuapp.com!{base.meta.allPlatformsQueryString}" rel="noopener" target="_blank")= base.labels.hostedLabel
                 br
                 a(href="https://github.com/contentful/the-example-app.rb" rel="noopener" target="_blank") GitHub
               li
                 img(src='/images/icon-php.svg')
                 br
-                a(href="https://the-example-app-php.herokuapp.com/" rel="noopener" target="_blank")= base.labels.hostedLabel
+                a(href="https://the-example-app-php.herokuapp.com!{base.meta.allPlatformsQueryString}" rel="noopener" target="_blank")= base.labels.hostedLabel
                 br
                 a(href="https://github.com/contentful/the-example-app.php" rel="noopener" target="_blank") GitHub
               li
                 img(src='/images/icon-python.svg')
                 br
-                a(href="https://the-example-app-py.herokuapp.com/" rel="noopener" target="_blank")= base.labels.hostedLabel
+                a(href="https://the-example-app-py.herokuapp.com!{base.meta.allPlatformsQueryString}" rel="noopener" target="_blank")= base.labels.hostedLabel
                 br
                 a(href="https://github.com/contentful/the-example-app.py" rel="noopener" target="_blank") GitHub
               li
                 img(src='/images/icon-java.svg')
                 br
-                a(href="https://the-example-app-java.herokuapp.com/" rel="noopener" target="_blank")= base.labels.hostedLabel
+                a(href="https://the-example-app-java.herokuapp.com!{base.meta.allPlatformsQueryString}" rel="noopener" target="_blank")= base.labels.hostedLabel
                 br
                 a(href="https://github.com/contentful/the-example-app.java" rel="noopener" target="_blank") GitHub
               li

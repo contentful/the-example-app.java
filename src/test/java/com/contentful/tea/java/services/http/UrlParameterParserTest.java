@@ -11,8 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MainController.class)
@@ -30,30 +30,35 @@ public class UrlParameterParserTest {
   private UrlParameterParser parser;
 
   @Test
-  public void addOneParameterToEmptyQueryString() {
-    given(settings.getQueryString()).willReturn("");
+  public void klingonLocaleGetsSavedAsUrlParameter() {
+    given(settings.getLocale()).willReturn("tlh");
 
-    parser.addToQueryString("name", "value");
+    final String subject = parser.appToUrlParameter();
 
-    then(settings).should().setQueryString("?name=value");
+    assertThat(subject).isEqualTo("?locale=tlh");
   }
 
   @Test
-  public void addTwoParameterToEmptyQueryString() {
-    given(settings.getQueryString()).willReturn("?firstName=firstValue");
+  public void twoParametersGetSavedAsUrl() {
+    given(settings.getLocale()).willReturn("tlh");
+    given(contentful.getApi()).willReturn("rest");
 
-    parser.addToQueryString("secondName", "secondValue");
+    final String subject = parser.appToUrlParameter();
 
-    then(settings).should().setQueryString("?firstName=firstValue&secondName=secondValue");
+    assertThat(subject).isEqualTo("?api=rest&locale=tlh");
   }
 
   @Test
-  public void updatesUrlValueIfAlreadySet() {
-    given(settings.getQueryString()).willReturn("?name=firstValue");
+  public void allParametersGetSavedAndNotMore() {
+    given(settings.getLocale()).willReturn("tlh");
+    given(settings.areEditorialFeaturesEnabled()).willReturn(true);
+    given(contentful.getApi()).willReturn("rest");
+    given(contentful.getDeliveryAccessToken()).willReturn("delivery");
+    given(contentful.getPreviewAccessToken()).willReturn("preview");
+    given(contentful.getSpaceId()).willReturn("space");
 
-    parser.addToQueryString("name", "secondValue");
+    final String subject = parser.appToUrlParameter();
 
-    then(settings).should().setQueryString("?name=secondValue");
+    assertThat(subject).isEqualTo("?preview_token=preview&delivery_token=delivery&editorial_features=true&api=rest&locale=tlh&space_id=space");
   }
-
 }
