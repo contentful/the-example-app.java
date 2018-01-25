@@ -11,6 +11,7 @@ import java.util.Properties;
 
 @Component
 public class Contentful {
+  private static final String ENVIRONMENT_OVERWRITE_HOST = "CONTENTFUL_DELIVERY_API_HOST";
 
   public static final String API_CDA = "cda";
   public static final String API_CPA = "cpa";
@@ -57,14 +58,9 @@ public class Contentful {
 
   private CDAClient getContentfulPreviewClient() {
     if (contentfulPreviewClient == null) {
-      final CDAClient.Builder previewBuilder = createContentfulBuilder()
+      contentfulPreviewClient = createContentfulBuilder()
           .setToken(getPreviewAccessToken())
-          .preview();
-
-      // .preview updates host, so we have to reset it if changed …
-      checkIfDifferentHostProvidedByEnvironment(previewBuilder);
-
-      contentfulPreviewClient = previewBuilder.build();
+          .build();
     }
 
     return contentfulPreviewClient;
@@ -76,14 +72,24 @@ public class Contentful {
         .setSpace(getSpaceId())
         .setApplication(getApplicationName(), getVersionString());
 
+    if (getApi().equals(API_CPA)) {
+      builder.preview();
+    }
+
     checkIfDifferentHostProvidedByEnvironment(builder);
 
     return builder;
   }
 
   private void checkIfDifferentHostProvidedByEnvironment(CDAClient.Builder builder) {
-    final String overwriteHost = System.getenv("OVERWRITE_TEA_HOST");
+
+    String overwriteHost = System.getenv(ENVIRONMENT_OVERWRITE_HOST);
     if (overwriteHost != null && !overwriteHost.isEmpty()) {
+      if (getApi().equals(API_CPA)) {
+        overwriteHost = overwriteHost.replace("cdn", "preview");
+      }
+
+      System.out.println("Overwriting host with '" + overwriteHost + "'.");
       builder.setEndpoint(overwriteHost);
     }
   }
