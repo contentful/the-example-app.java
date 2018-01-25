@@ -94,6 +94,10 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
       lessons.add(lesson);
     }
 
+    if (compound.getLessonSlug() != null && sluggedLesson == null) {
+      throw new IllegalStateException("Could not find slug '" + compound.getLessonSlug() + "'.");
+    }
+
     final LessonParameter nextLesson = getNextLesson(lessons, sluggedLesson);
 
     final CDAAsset image = course.getField("image");
