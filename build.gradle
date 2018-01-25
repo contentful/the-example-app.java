@@ -25,7 +25,11 @@ repositories {
 }
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-web:1.5.8.RELEASE'
+    compile 'org.springframework:spring-core'
+    compile 'org.springframework:spring-webmvc'
+    compile 'org.springframework.boot:spring-boot-starter-data-rest:1.5.8.RELEASE'
+    compile 'org.springframework.boot:spring-boot-devtools:1.5.8.RELEASE'
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
     compile 'com.atlassian.commonmark:commonmark:0.10.0'
     compile 'de.neuland-bfi:jade4j:1.2.7'
 
