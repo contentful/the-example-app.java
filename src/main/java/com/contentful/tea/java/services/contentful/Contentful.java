@@ -47,11 +47,8 @@ public class Contentful {
 
   private CDAClient getContentfulDeliveryClient() {
     if (contentfulDeliveryClient == null) {
-      contentfulDeliveryClient = CDAClient
-          .builder()
-          .setSpace(getSpaceId())
+      contentfulDeliveryClient = createContentfulBuilder()
           .setToken(getDeliveryAccessToken())
-          .setApplication(getApplicationName(), getVersionString())
           .build();
     }
 
@@ -60,16 +57,35 @@ public class Contentful {
 
   private CDAClient getContentfulPreviewClient() {
     if (contentfulPreviewClient == null) {
-      contentfulPreviewClient = CDAClient
-          .builder()
-          .setSpace(getSpaceId())
+      final CDAClient.Builder previewBuilder = createContentfulBuilder()
           .setToken(getPreviewAccessToken())
-          .setApplication(getApplicationName(), getVersionString())
-          .preview()
-          .build();
+          .preview();
+
+      // .preview updates host, so we have to reset it if changed …
+      checkIfDifferentHostProvidedByEnvironment(previewBuilder);
+
+      contentfulPreviewClient = previewBuilder.build();
     }
 
     return contentfulPreviewClient;
+  }
+
+  private CDAClient.Builder createContentfulBuilder() {
+    final CDAClient.Builder builder = CDAClient
+        .builder()
+        .setSpace(getSpaceId())
+        .setApplication(getApplicationName(), getVersionString());
+
+    checkIfDifferentHostProvidedByEnvironment(builder);
+
+    return builder;
+  }
+
+  private void checkIfDifferentHostProvidedByEnvironment(CDAClient.Builder builder) {
+    final String overwriteHost = System.getenv("OVERWRITE_TEA_HOST");
+    if (overwriteHost != null && !overwriteHost.isEmpty()) {
+      builder.setEndpoint(overwriteHost);
+    }
   }
 
   public CDAClient getCurrentClient() {
