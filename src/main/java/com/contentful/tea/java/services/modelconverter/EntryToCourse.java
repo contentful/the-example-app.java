@@ -19,8 +19,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import static com.contentful.java.cda.image.ImageOption.http;
-
 @Component
 public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryToCourse.Compound, CourseParameter> {
   public static class Compound {
@@ -122,7 +120,7 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
         .setNextLessonLabel(t(Keys.nextLessonLabel))
         .setCourse(new Course()
             .setCategories(categories)
-            .setImageUrl(image.urlForImageWith(http()))
+            .setImageUrl(image.url())
             .setDescription(m(course.getField("description")))
             .setShortDescription(course.getField("shortDescription"))
             .setTitle(course.getField("title"))

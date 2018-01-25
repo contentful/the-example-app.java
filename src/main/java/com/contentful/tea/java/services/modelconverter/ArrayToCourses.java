@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.contentful.java.cda.image.ImageOption.http;
-
 @Component
 public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<ArrayToCourses.ArrayAndSelectedCategory, CoursesParameter> {
 
@@ -147,7 +145,7 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
       final CDAEntry course = (CDAEntry) resource;
       final CDAAsset image = course.getField("image");
       final Course createdCourse = new Course()
-          .setImageUrl(image != null ? image.urlForImageWith(http()) : "")
+          .setImageUrl(image != null ? image.url() : "")
           .setTitle(course.getField("title"))
           .setShortDescription(course.getField("description"))
           .setSlug(course.getField("slug"));

@@ -116,7 +116,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
 
     assertThat(p.getCourses()).hasSize(5);
     assertThat(p.getCourses().get(3).getTitle()).isEqualTo("How the example app is built");
-    assertThat(p.getCourses().get(3).getImageUrl()).isEqualTo("http://images.contentful.com/jnzexv31feqf/2KUZRfRHgk8Q8MqOYaa4aA/142bb20449dedbe70bd039d214dab2e3/Contentful_Architecture_101.jpg");
+    assertThat(p.getCourses().get(3).getImageUrl()).isEqualTo("//images.contentful.com/jnzexv31feqf/2KUZRfRHgk8Q8MqOYaa4aA/142bb20449dedbe70bd039d214dab2e3/Contentful_Architecture_101.jpg");
     assertThat(p.getCourses().get(3).getShortDescription()).isEqualTo("By looking at the code of the example app, you will get a sense of how to use a Contentful SDK in your programming language. For any third-party dependency, refer to its documentation.");
     assertThat(p.getCourses().get(3).getSlug()).isEqualTo("how-the-example-app-is-built");
     assertThat(p.getCourses().get(3).getCategories()).hasSize(1);
@@ -145,7 +145,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
 
     assertThat(p.getCourses()).hasSize(2);
     assertThat(p.getCourses().get(0).getTitle()).isEqualTo("How the example app is built");
-    assertThat(p.getCourses().get(0).getImageUrl()).isEqualTo("http://images.contentful.com/jnzexv31feqf/2KUZRfRHgk8Q8MqOYaa4aA/142bb20449dedbe70bd039d214dab2e3/Contentful_Architecture_101.jpg");
+    assertThat(p.getCourses().get(0).getImageUrl()).isEqualTo("//images.contentful.com/jnzexv31feqf/2KUZRfRHgk8Q8MqOYaa4aA/142bb20449dedbe70bd039d214dab2e3/Contentful_Architecture_101.jpg");
     assertThat(p.getCourses().get(0).getShortDescription()).isEqualTo("By looking at the code of the example app, you will get a sense of how to use a Contentful SDK in your programming language. For any third-party dependency, refer to its documentation.");
     assertThat(p.getCourses().get(0).getSlug()).isEqualTo("how-the-example-app-is-built");
     assertThat(p.getCourses().get(0).getCategories()).hasSize(1);
@@ -171,7 +171,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
     assertThat(course.getCategories().get(0).getSlug()).isEqualTo("application-development");
     assertThat(course.getCategories().get(0).getTitle()).isEqualTo("Application Development");
     assertThat(course.getDuration()).isEqualTo(5);
-    assertThat(course.getImageUrl()).isEqualTo("http://images.contentful.com/jnzexv31feqf/2KUZRfRHgk8Q8MqOYaa4aA/142bb20449dedbe70bd039d214dab2e3/Contentful_Architecture_101.jpg");
+    assertThat(course.getImageUrl()).isEqualTo("//images.contentful.com/jnzexv31feqf/2KUZRfRHgk8Q8MqOYaa4aA/142bb20449dedbe70bd039d214dab2e3/Contentful_Architecture_101.jpg");
     assertThat(course.getShortDescription()).isEqualTo("Learn about best practices when building an application.");
     assertThat(course.getSkillLevel()).isEqualTo("Beginner");
 

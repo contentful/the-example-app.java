@@ -120,7 +120,7 @@ public class HomeTests extends EnqueuedHttpResponseTests {
 
     assertThat(p.getCourses()).hasSize(5);
     assertThat(p.getCourses().get(3).getTitle()).isEqualTo("How the example app is built");
-    assertThat(p.getCourses().get(3).getImageUrl()).isEqualTo("http://images.contentful.com/jnzexv31feqf/2KUZRfRHgk8Q8MqOYaa4aA/142bb20449dedbe70bd039d214dab2e3/Contentful_Architecture_101.jpg");
+    assertThat(p.getCourses().get(3).getImageUrl()).isEqualTo("//images.contentful.com/jnzexv31feqf/2KUZRfRHgk8Q8MqOYaa4aA/142bb20449dedbe70bd039d214dab2e3/Contentful_Architecture_101.jpg");
     assertThat(p.getCourses().get(3).getShortDescription()).isEqualTo("By looking at the code of the example app, you will get a sense of how to use a Contentful SDK in your programming language. For any third-party dependency, refer to its documentation.");
     assertThat(p.getCourses().get(3).getSlug()).isEqualTo("how-the-example-app-is-built");
     assertThat(p.getCourses().get(3).getCategories()).hasSize(1);
