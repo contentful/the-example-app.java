@@ -8,6 +8,7 @@ import com.contentful.tea.java.html.JadeHtmlGenerator;
 import com.contentful.tea.java.models.courses.CourseParameter;
 import com.contentful.tea.java.models.courses.CoursesParameter;
 import com.contentful.tea.java.models.errors.ErrorParameter;
+import com.contentful.tea.java.models.imprint.ImprintParameter;
 import com.contentful.tea.java.models.landing.LandingPageParameter;
 import com.contentful.tea.java.models.settings.SettingsParameter;
 import com.contentful.tea.java.models.settings.SettingsParameter.Errors;
@@ -22,7 +23,8 @@ import com.contentful.tea.java.services.modelconverter.ArrayToCourses.ArrayAndSe
 import com.contentful.tea.java.services.modelconverter.EntryToCourse;
 import com.contentful.tea.java.services.modelconverter.EntryToLandingPage;
 import com.contentful.tea.java.services.modelconverter.ExceptionToErrorParameter;
-import com.contentful.tea.java.services.modelconverter.SettingsToParameter;
+import com.contentful.tea.java.services.modelcreators.ImprintCreator;
+import com.contentful.tea.java.services.modelcreators.SettingsCreator;
 import com.contentful.tea.java.services.settings.Settings;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +100,11 @@ public class MainController implements ErrorController {
 
   @Autowired
   @SuppressWarnings("unused")
-  private SettingsToParameter settingsToParameter;
+  private SettingsCreator settingsCreator;
+
+  @Autowired
+  @SuppressWarnings("unused")
+  private ImprintCreator imprintCreator;
 
   @Autowired
   @SuppressWarnings("unused")
@@ -275,6 +281,23 @@ public class MainController implements ErrorController {
     }
   }
 
+  @RequestMapping(value = "/imprint", produces = "text/html")
+  @SuppressWarnings("unused")
+  public String imprint(HttpServletRequest request) {
+    try {
+      setupRoute(request);
+
+      final ImprintParameter parameter = imprintCreator.create();
+      staticContentSetter.applyContent(parameter.getBase());
+
+      return htmlGenerator.generate("imprint.jade", parameter.toMap());
+    } catch (Throwable t) {
+      throw new IllegalStateException("Cannot render imprint page.", t);
+    } finally {
+      teardownRoute(request);
+    }
+  }
+
   @GetMapping(value = "/settings", produces = "text/html")
   @SuppressWarnings("unused")
   public String settings(HttpServletRequest request) {
@@ -286,7 +309,7 @@ public class MainController implements ErrorController {
     try {
       setupRoute(request);
 
-      final SettingsParameter parameter = settingsToParameter.convert(null);
+      final SettingsParameter parameter = settingsCreator.create();
       staticContentSetter.applyContent(parameter.getBase());
 
       return htmlGenerator.generate("settings.jade", parameter.toMap());
@@ -317,7 +340,7 @@ public class MainController implements ErrorController {
       SettingsParameter parameter = new SettingsParameter();
       try {
         urlParameterParser.urlParameterToApp(request.getParameterMap());
-        parameter = settingsToParameter.convert(null);
+        parameter = settingsCreator.create();
       } catch (Throwable t) {
 
         parameter
@@ -334,7 +357,7 @@ public class MainController implements ErrorController {
 
       if (parameter.getErrors().hasErrors()) {
         staticContentSetter.applyErrorContent(parameter.getBase());
-        settingsToParameter.setStaticLabels(parameter);
+        settingsCreator.setStaticLabels(parameter);
         parameter
             .setDeliveryToken(contentful.getDeliveryAccessToken())
             .setPreviewToken(contentful.getPreviewAccessToken())

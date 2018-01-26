@@ -1,10 +1,6 @@
 extends layout
 
 include mixins/_breadcrumb
-include mixins/_editorialFeatures
-include mixins/_moduleCopy
-include mixins/_moduleHeroImage
-include mixins/_moduleHighlightedCourse
 
 block content
   .layout-centered
@@ -13,22 +9,22 @@ block content
     table
       tbody
         tr
-          th #{base.labels.companyLabel}:
+          th #{companyLabel}:
           td Contentful GmbH
         tr
-          th #{base.labels.officeLabel}:
+          th #{officeLabel}:
           td
             | Ritterstr. 12-14
             br
             |  10969 Berlin
             br
-            |  #{base.labels.germanyLabel}
+            |  #{germanyLabel}
         tr
-          th #{base.labels.registrationCourtLabel}:
+          th #{registrationCourtLabel}:
           td Berlin-Charlottenburg HRB 155607 B
         tr
-          th #{base.labels.managingDirectorLabel}:
+          th #{managingDirectorLabel}:
           td Sascha Konietzke
         tr
-          th #{base.labels.vatNumberLabel}:
+          th #{vatNumberLabel}:
           td DE275148225

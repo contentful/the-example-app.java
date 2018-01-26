@@ -1,9 +1,11 @@
-package com.contentful.tea.java.services.modelconverter;
+package com.contentful.tea.java.services.modelcreators;
 
 import com.contentful.java.cda.CDAHttpException;
+import com.contentful.tea.java.markdown.CommonmarkMarkdownParser;
 import com.contentful.tea.java.models.settings.SettingsParameter;
 import com.contentful.tea.java.services.contentful.Contentful;
 import com.contentful.tea.java.services.localization.Keys;
+import com.contentful.tea.java.services.localization.Localizer;
 import com.contentful.tea.java.services.settings.Settings;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,18 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @Component
-public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<Void, SettingsParameter> {
-
+public class SettingsCreator {
   private static final String LOCAL_SETTINGS_REFERENCE_IN_TO_GITHUB = "https://github.com/contentful/the-example-app.java/blob/master/src/main/resources/application.properties";
   private static final String LOCAL_SETTINGS_REFERENCE_FILE_NAME = "application.properties";
+
+  @Autowired
+  @SuppressWarnings("unused")
+  private Localizer localizer;
+
+  @Autowired
+  @SuppressWarnings("unused")
+  private CommonmarkMarkdownParser markdown;
+
   @Autowired
   @SuppressWarnings("unused")
   private Contentful contentful;
@@ -26,7 +36,7 @@ public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<
   @SuppressWarnings("unused")
   private Settings settings;
 
-  @Override public SettingsParameter convert(Void v) {
+  public SettingsParameter create() {
 
     final SettingsParameter.Errors errors = checkForErrors();
 
@@ -80,7 +90,7 @@ public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<
   }
 
   private boolean isUsingCustomCredentials() {
-    final InputStream input = SettingsToParameter.class.getClassLoader().getResourceAsStream("application.properties");
+    final InputStream input = SettingsCreator.class.getClassLoader().getResourceAsStream("application.properties");
     final Properties properties = new Properties();
     try {
       properties.load(input);
@@ -159,5 +169,13 @@ public class SettingsToParameter extends ContentfulModelToMappableTypeConverter<
     }
 
     return errors;
+  }
+
+  protected String t(Keys translateKey) {
+    return localizer.localize(translateKey);
+  }
+
+  protected String m(String raw) {
+    return markdown.parse(raw);
   }
 }
