@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @Component
 public class SessionParser {
+  private static final int TIME_48_HOURS = 48 * 60 * 60;
   @Autowired
   @SuppressWarnings("unused")
   private Contentful contentful;
@@ -75,6 +76,8 @@ public class SessionParser {
         manipulator.set(value);
       }
     }
+
+    session.setMaxInactiveInterval(TIME_48_HOURS);
   }
 
   public void saveSession(HttpSession session) {
