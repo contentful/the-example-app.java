@@ -81,6 +81,10 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
       meta.setDeeplinkToContentful(collectionUrl);
     }
 
+    if (compound.getCategorySlug() != null && !compound.getCategorySlug().isEmpty() && sluggedCategory == null) {
+      throw new IllegalStateException("No courses for slug '" + slug + "' found.");
+    }
+
     final List<CDAResource> courses = slug.isEmpty() ? compound.getList() : filteredCourses;
     final String categoryName = sluggedCategory != null ? sluggedCategory.getField("title") : "";
     final String title = createTitle(categoryName, courses.size());
