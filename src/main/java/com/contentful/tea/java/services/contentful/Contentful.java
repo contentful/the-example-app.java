@@ -22,6 +22,9 @@ public class Contentful {
   private String deliveryAccessToken;
   private String previewAccessToken;
 
+  private Boolean doesRunOnProductionCachedValue = null;
+  private String customHostCachedValue = null;
+
   CDAClient contentfulDeliveryClient;
   CDAClient contentfulPreviewClient;
 
@@ -215,4 +218,19 @@ public class Contentful {
     return properties.getProperty("application", "INVALID_APP");
   }
 
+  public boolean runsOnProduction() {
+    if (doesRunOnProductionCachedValue == null) {
+      doesRunOnProductionCachedValue = System.getenv("DYNO") != null && getOverwrittenHost().isEmpty();
+    }
+
+    return doesRunOnProductionCachedValue;
+  }
+
+  private String getOverwrittenHost() {
+    if (customHostCachedValue == null) {
+      customHostCachedValue = System.getenv(ENVIRONMENT_OVERWRITE_HOST);
+    }
+
+    return customHostCachedValue == null ? "" : customHostCachedValue;
+  }
 }

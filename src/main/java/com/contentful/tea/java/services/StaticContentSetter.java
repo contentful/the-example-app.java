@@ -132,6 +132,7 @@ public class StaticContentSetter {
         .setQueryString(settings.getQueryString())
         .setCurrentPath(settings.getPath())
         .setAllPlatformsQueryString(getAllPlatformsQueryString())
+        .setAnalytics(hasAnalytics())
     ;
 
     if (settings.getPath() != null && settings.getPath().length() > 0) {
@@ -148,6 +149,10 @@ public class StaticContentSetter {
 
   private String getAllPlatformsQueryString() {
     return urlParameterParser.appToUrlParameter();
+  }
+
+  private boolean hasAnalytics() {
+    return contentful.runsOnProduction();
   }
 
   private void updateLocales(BaseParameter base) {

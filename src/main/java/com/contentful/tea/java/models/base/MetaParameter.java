@@ -5,6 +5,7 @@ import com.contentful.tea.java.models.mappable.MappableType;
 import java.util.Objects;
 
 public class MetaParameter extends MappableType {
+  private boolean analytics;
   private String allCoursesCssClass;
   private String allPlatformsQueryString;
   private String coursesCSSClass;
@@ -17,6 +18,15 @@ public class MetaParameter extends MappableType {
   private String title;
   private String upperMenuCSSClass;
   private String deeplinkToContentful;
+
+  public boolean hasAnalytics() {
+    return analytics;
+  }
+
+  public MetaParameter setAnalytics(boolean analytics) {
+    this.analytics = analytics;
+    return this;
+  }
 
   public String getAllCoursesCssClass() {
     return allCoursesCssClass;
@@ -130,7 +140,8 @@ public class MetaParameter extends MappableType {
     if (this == o) return true;
     if (!(o instanceof MetaParameter)) return false;
     final MetaParameter metaParameter = (MetaParameter) o;
-    return Objects.equals(getAllCoursesCssClass(), metaParameter.getAllCoursesCssClass()) &&
+    return Objects.equals(hasAnalytics(), metaParameter.hasAnalytics()) &&
+        Objects.equals(getAllCoursesCssClass(), metaParameter.getAllCoursesCssClass()) &&
         Objects.equals(getAllPlatformsQueryString(), metaParameter.getAllPlatformsQueryString()) &&
         Objects.equals(getCoursesCSSClass(), metaParameter.getCoursesCSSClass()) &&
         Objects.equals(getCurrentPath(), metaParameter.getCurrentPath()) &&
@@ -146,6 +157,7 @@ public class MetaParameter extends MappableType {
 
   @Override public int hashCode() {
     return Objects.hash(
+        hasAnalytics(),
         getAllCoursesCssClass(),
         getAllPlatformsQueryString(),
         getCoursesCSSClass(),
@@ -159,6 +171,7 @@ public class MetaParameter extends MappableType {
 
   @Override public String toString() {
     return "Meta { "
+        + "hasAnalytics = " + hasAnalytics() + ", "
         + "allCoursesCssClass = " + getAllCoursesCssClass() + ", "
         + "allPlatformsQueryString = " + getAllPlatformsQueryString() + ", "
         + "coursesCSSClass = " + getCoursesCSSClass() + ", "
