@@ -26,7 +26,7 @@ public class JadeHtmlGenerator {
   }
 
   public JadeHtmlGenerator() {
-    this(true, BASE_PATH);
+    this(false, BASE_PATH);
   }
 
   public String generate(String templateFileName, Map<String, Object> templateMappings) {
