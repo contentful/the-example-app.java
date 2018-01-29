@@ -8,7 +8,7 @@ The Java example app teaches the very basics of how to work with Contentful:
 
 The app demonstrates how decoupling content from its presentation enables greater flexibility and facilitates shipping higher quality software more quickly.
 
-![screenshot](/src/main/resources/static/screenshots/hello-world.png)
+![screenshot](https://images.contentful.com/88dyiqcr7go8/1ITbJQboPGmAOcEegiw20y/a9a045dff5be48bb6c09c375d33a2ed5/the-example-app-java.herokuapp.com.png)
 
 You can see a hosted version of `The Java example app` on <a href="https://the-example-app-java.herokuapp.com/" target="_blank">Heroku</a>.
 
