@@ -1,5 +1,7 @@
 ## The Java example app
 
+[![CircleCI](https://circleci.com/gh/contentful/the-example-app.java.svg?style=svg)](https://circleci.com/gh/contentful/the-example-app.java)
+
 The Java example app teaches the very basics of how to work with Contentful:
 
 - consume content from the Contentful Delivery and Preview APIs
