@@ -1,0 +1,23 @@
+version: 2
+jobs:
+   build:
+     docker:
+       - image: circleci/java:8
+     steps:
+      - checkout
+      - run:
+          name: Build The Example App Java
+          command: ./gradlew build -x test
+      - run:
+          name: Test The Example App Java
+          command: ./gradlew test
+      - run:
+          name: Save test results 
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit    
