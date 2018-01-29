@@ -1,6 +1,6 @@
-## The java example app
+## The Java example app
 
-The java example app teaches the very basics of how to work with Contentful:
+The Java example app teaches the very basics of how to work with Contentful:
 
 - consume content from the Contentful Delivery and Preview APIs
 - model content
@@ -10,7 +10,7 @@ The app demonstrates how decoupling content from its presentation enables greate
 
 ![screenshot](/src/main/resources/static/screenshots/hello-world.png)
 
-You can see a hosted version of `The java example app` on <a href="https://the-example-app-java.herokuapp.com/" target="_blank">Heroku</a>.
+You can see a hosted version of `The Java example app` on <a href="https://the-example-app-java.herokuapp.com/" target="_blank">Heroku</a>.
 
 ## What is Contentful?
 
@@ -68,7 +68,7 @@ spaceId=qz0n5cdakyl9
 deliveryToken=580d5944194846b690dd89b630a1cb98a0eef6a19b860ef71efc37ee8076ddb8
 previewToken=e8fc39d9661c7468d0285a7ff949f7a23539dd2e686fcb7bd84dc01b392d698b
 version=1.0.0
-application=The example java app
+application=The example Java app
 ```
 
 Step 7: To start the server, run the following
