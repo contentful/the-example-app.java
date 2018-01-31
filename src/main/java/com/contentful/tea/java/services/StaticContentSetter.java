@@ -249,7 +249,7 @@ public class StaticContentSetter {
   }
 
   private void checkAndAddSpecificLesson(BaseParameter base, String path, BreadcrumbParameter breadcrumb) {
-    if (path.matches("/courses/" + idRegex + "/lessons/" + idRegex)) {
+    if (path.matches("/courses/" + idRegex + "/lessons(/" + idRegex + ")?")) {
       final String[] split = path.split("/");
 
       final String courseSlug = split[2];
@@ -259,11 +259,16 @@ public class StaticContentSetter {
               .setUrl(format("/courses/%s", courseSlug)),
           new BreadcrumbParameter.Breadcrumb()
               .setLabel(t(Keys.lessonsLabel))
-              .setUrl(format("/courses/%s/lessons", courseSlug)),
-          new BreadcrumbParameter.Breadcrumb()
-              .setLabel(base.getMeta().getTitle())
-              .setUrl(path)
+              .setUrl(format("/courses/%s/lessons", courseSlug))
       );
+
+      if (split.length == 5) {
+        breadcrumb.addBreadcrumb(
+            new BreadcrumbParameter.Breadcrumb()
+                .setLabel(base.getMeta().getTitle())
+                .setUrl(path)
+        );
+      }
     }
   }
 

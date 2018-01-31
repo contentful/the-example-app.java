@@ -158,6 +158,28 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
 
   @Test
   @EnqueueHttpResponse({"courses/one.json", "defaults/space.json"})
+  public void generalCourseLessonBreadcrumb() {
+    settings.setPath("/courses/something_meaty/lessons");
+    settings.setQueryString("");
+
+    final CoursesParameter p = new CoursesParameter();
+    p.getBase().getMeta().setTitle("Beef is the best");
+    setter.applyContent(p.getBase());
+
+    final List<BreadcrumbParameter.Breadcrumb> breadcrumbs = p.getBase().getBreadcrumb().getBreadcrumbs();
+    assertThat(breadcrumbs).hasSize(4);
+    assertThat(breadcrumbs.get(0).getLabel()).isEqualTo("Home");
+    assertThat(breadcrumbs.get(0).getUrl()).isEqualTo("/");
+    assertThat(breadcrumbs.get(1).getLabel()).isEqualTo("Courses");
+    assertThat(breadcrumbs.get(1).getUrl()).isEqualTo("/courses");
+    assertThat(breadcrumbs.get(2).getLabel()).isEqualTo("How the example app is built");
+    assertThat(breadcrumbs.get(2).getUrl()).isEqualTo("/courses/something_meaty");
+    assertThat(breadcrumbs.get(3).getLabel()).isEqualTo("Lessons");
+    assertThat(breadcrumbs.get(3).getUrl()).isEqualTo("/courses/something_meaty/lessons");
+  }
+
+  @Test
+  @EnqueueHttpResponse({"courses/one.json", "defaults/space.json"})
   public void settingsBreadcrumb() {
     settings.setPath("/settings");
     settings.setQueryString("");
