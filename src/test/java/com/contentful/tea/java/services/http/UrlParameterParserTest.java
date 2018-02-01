@@ -59,6 +59,19 @@ public class UrlParameterParserTest {
 
     final String subject = parser.appToUrlParameter();
 
-    assertThat(subject).isEqualTo("?preview_token=preview&delivery_token=delivery&editorial_features=true&api=rest&locale=tlh&space_id=space");
+    assertThat(subject).isEqualTo("?enable_editorial_features&delivery_token=delivery&preview_token=preview&api=rest&locale=tlh&space_id=space");
+  }
+
+  @Test
+  public void enableEditorialFeaturesIsSpecial() {
+    given(settings.areEditorialFeaturesEnabled()).willReturn(true);
+
+    String subject = parser.appToUrlParameter();
+    assertThat(subject).isEqualTo("?enable_editorial_features");
+
+    given(settings.areEditorialFeaturesEnabled()).willReturn(false);
+
+    subject = parser.appToUrlParameter();
+    assertThat(subject).isEqualTo("");
   }
 }

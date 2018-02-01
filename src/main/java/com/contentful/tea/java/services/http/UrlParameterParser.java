@@ -14,6 +14,7 @@ import java.util.Map;
 
 import static com.contentful.tea.java.services.contentful.Contentful.API_CDA;
 import static com.contentful.tea.java.services.contentful.Contentful.API_CPA;
+import static com.contentful.tea.java.services.http.Constants.NAME_EDITORIAL_FEATURES;
 import static java.lang.String.join;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
@@ -79,7 +80,7 @@ public class UrlParameterParser {
         return contentful.getSpaceId();
       }
     });
-    manipulatorsByNameMap.put(Constants.NAME_EDITORIAL_FEATURES, new Manipulator() {
+    manipulatorsByNameMap.put(NAME_EDITORIAL_FEATURES, new Manipulator() {
       @Override public void fromUrlParameterValueToApp(String value) {
         switch (value) {
           case "true":
@@ -123,6 +124,7 @@ public class UrlParameterParser {
 
   public void urlParameterToApp(Map<String, String[]> urlParameterMap) {
     if (urlParameterMap != null) {
+      urlParameterMap = explodeParameters(urlParameterMap);
       List<IllegalStateException> exceptions = new ArrayList<>();
 
       for (final String urlParameterKey : urlParameterMap.keySet()) {
@@ -145,6 +147,16 @@ public class UrlParameterParser {
     }
   }
 
+  private Map<String, String[]> explodeParameters(Map<String, String[]> urlParameterMap) {
+    final HashMap<String, String[]> parameters = new HashMap<>(urlParameterMap);
+
+      parameters.put(NAME_EDITORIAL_FEATURES, new String[]{
+          Boolean.toString(parameters.containsKey(NAME_EDITORIAL_FEATURES))
+      });
+
+    return parameters;
+  }
+
   public String appToUrlParameter() {
     String result = "";
 
@@ -155,7 +167,11 @@ public class UrlParameterParser {
       }
     }
 
-    return result;
+    return implodeParameters(result);
+  }
+
+  private String implodeParameters(String result) {
+    return result.replace("=true", "").replaceAll("[-_a-z]+=false", "");
   }
 
   String addToQueryString(String query, String name, String value) {
