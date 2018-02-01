@@ -5,7 +5,7 @@ import com.contentful.tea.java.models.mappable.MappableType;
 import java.util.Objects;
 
 public class MetaParameter extends MappableType {
-  private boolean analytics;
+  private AnalyticsParameter analytics;
   private String allCoursesCssClass;
   private String allPlatformsQueryString;
   private String coursesCSSClass;
@@ -19,11 +19,11 @@ public class MetaParameter extends MappableType {
   private String upperMenuCSSClass;
   private String deeplinkToContentful;
 
-  public boolean hasAnalytics() {
+  public AnalyticsParameter getAnalytics() {
     return analytics;
   }
 
-  public MetaParameter setAnalytics(boolean analytics) {
+  public MetaParameter setAnalytics(AnalyticsParameter analytics) {
     this.analytics = analytics;
     return this;
   }
@@ -140,7 +140,7 @@ public class MetaParameter extends MappableType {
     if (this == o) return true;
     if (!(o instanceof MetaParameter)) return false;
     final MetaParameter metaParameter = (MetaParameter) o;
-    return Objects.equals(hasAnalytics(), metaParameter.hasAnalytics()) &&
+    return Objects.equals(getAnalytics(), metaParameter.getAnalytics()) &&
         Objects.equals(getAllCoursesCssClass(), metaParameter.getAllCoursesCssClass()) &&
         Objects.equals(getAllPlatformsQueryString(), metaParameter.getAllPlatformsQueryString()) &&
         Objects.equals(getCoursesCSSClass(), metaParameter.getCoursesCSSClass()) &&
@@ -157,7 +157,7 @@ public class MetaParameter extends MappableType {
 
   @Override public int hashCode() {
     return Objects.hash(
-        hasAnalytics(),
+        getAnalytics(),
         getAllCoursesCssClass(),
         getAllPlatformsQueryString(),
         getCoursesCSSClass(),
@@ -171,7 +171,7 @@ public class MetaParameter extends MappableType {
 
   @Override public String toString() {
     return "Meta { "
-        + "hasAnalytics = " + hasAnalytics() + ", "
+        + "analytics = " + getAnalytics() + ", "
         + "allCoursesCssClass = " + getAllCoursesCssClass() + ", "
         + "allPlatformsQueryString = " + getAllPlatformsQueryString() + ", "
         + "coursesCSSClass = " + getCoursesCSSClass() + ", "

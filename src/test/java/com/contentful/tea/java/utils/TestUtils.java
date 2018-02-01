@@ -1,5 +1,6 @@
 package com.contentful.tea.java.utils;
 
+import com.contentful.tea.java.models.base.AnalyticsParameter;
 import com.contentful.tea.java.models.base.BaseParameter;
 import com.contentful.tea.java.models.base.Locale;
 
@@ -23,6 +24,7 @@ public class TestUtils {
         .setUpperMenuCSSClass("TEST-setUpperMenuCSSClass")
         .setDeeplinkToContentful("TEST-setDeeplinkToContentful")
         .setAllPlatformsQueryString("TEST-allPlatformsQueryString")
+        .setAnalytics(new AnalyticsParameter().setSpaceId("TEST-spaceID"))
     ;
 
     base.getLocales()
@@ -103,6 +105,7 @@ public class TestUtils {
         .contains("TEST-setHomeCSSClass")
         .contains("TEST-setQueryString")
         .contains("TEST-setUpperMenuCSSClass")
+        .contains("TEST-spaceID")
     ;
   }
 }
