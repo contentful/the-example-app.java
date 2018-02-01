@@ -7,6 +7,7 @@ import com.contentful.java.cda.CDALocale;
 import com.contentful.java.cda.CDASpace;
 import com.contentful.java.cda.QueryOperation;
 import com.contentful.tea.java.markdown.MarkdownParser;
+import com.contentful.tea.java.models.base.AnalyticsParameter;
 import com.contentful.tea.java.models.base.BaseParameter;
 import com.contentful.tea.java.models.base.BreadcrumbParameter;
 import com.contentful.tea.java.models.base.Locale;
@@ -132,7 +133,7 @@ public class StaticContentSetter {
         .setQueryString(settings.getQueryString())
         .setCurrentPath(settings.getPath())
         .setAllPlatformsQueryString(getAllPlatformsQueryString())
-        .setAnalytics(hasAnalytics())
+        .setAnalytics(hasAnalytics() ? new AnalyticsParameter().setSpaceId(contentful.getSpaceId()) : null)
     ;
 
     if (settings.getPath() != null && settings.getPath().length() > 0) {
