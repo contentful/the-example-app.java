@@ -229,7 +229,7 @@ html
           snowplow('trackSelfDescribingEvent', {
             schema: 'iglu:com.contentful/app_the_example_app_open/jsonschema/1-0-0',
             data: {
-              '#{base.meta.analytics.spaceId}',
+              space_id: '#{base.meta.analytics.spaceId}',
               sdk_language_used: 'java',
               app_framework: 'spring boot'
             }
