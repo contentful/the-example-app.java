@@ -89,7 +89,7 @@ public class TestUtils {
         .doesNotContain("\uD83D\uDE31")
         .doesNotContain("!{")
         .doesNotContain("#{")
-        .contains("<meta property=\"og:url\" content=\"http://contentful-example-app-java.herokuapp.com/TEST-setCurrentPath\">")
+        .contains("<meta property=\"og:url\" content=\"http://contentful-example-app-java.contentful.com/TEST-setCurrentPath\">")
         .contains("\uD83C\uDDE9\uD83C\uDDEA")
         .contains("\uD83C\uDDFA\uD83C\uDDF8")
         .contains("active")
