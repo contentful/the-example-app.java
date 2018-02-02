@@ -50,6 +50,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
   @After
   public void shutDown() {
     contentful.reset();
+    settings.reset();
   }
 
   @Test

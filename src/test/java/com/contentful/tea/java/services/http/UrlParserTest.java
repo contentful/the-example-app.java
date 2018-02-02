@@ -43,6 +43,7 @@ public class UrlParserTest {
   @After
   public void tearDown() {
     contentful.reset();
+    settings.reset();
   }
 
   @Test

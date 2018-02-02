@@ -48,6 +48,12 @@ public class StaticContentSetterTests extends EnqueuedHttpResponseTests {
     contentful.reset();
   }
 
+  @After
+  public void tearDown() {
+    contentful.reset();
+    settings.reset();
+  }
+
   @Test
   @EnqueueHttpResponse({"home/main.json", "defaults/space.json"})
   public void homeRouteSetsStaticContent() {

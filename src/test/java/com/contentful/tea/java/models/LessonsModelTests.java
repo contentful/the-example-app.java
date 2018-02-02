@@ -14,6 +14,7 @@ import com.contentful.tea.java.services.settings.Settings;
 import com.contentful.tea.java.utils.http.EnqueueHttpResponse;
 import com.contentful.tea.java.utils.http.EnqueuedHttpResponseTests;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,6 +53,12 @@ public class LessonsModelTests extends EnqueuedHttpResponseTests {
   @Before
   public void setup() {
     given(this.contentful.getCurrentClient()).willReturn(client);
+  }
+
+  @After
+  public void tearDown() {
+    contentful.reset();
+    settings.reset();
   }
 
   @Test
