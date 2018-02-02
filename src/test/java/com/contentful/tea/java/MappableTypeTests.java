@@ -1,8 +1,6 @@
 package com.contentful.tea.java;
 
 import com.contentful.tea.java.models.base.BaseParameter;
-import com.contentful.tea.java.models.courses.Course;
-import com.contentful.tea.java.models.landing.modules.HighlightedCourseModule;
 import com.contentful.tea.java.models.mappable.MappableType;
 
 import org.junit.Test;

@@ -43,6 +43,7 @@ public class SessionParserTest {
   @After
   public void teardown() {
     contentful.reset();
+    settings.reset();
   }
 
   @Test
