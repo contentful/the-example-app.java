@@ -124,6 +124,7 @@ public class UrlParameterParser {
   public void urlParameterToApp(Map<String, String[]> urlParameterMap) {
     if (urlParameterMap != null) {
       List<IllegalStateException> exceptions = new ArrayList<>();
+      urlParameterMap = explodeParameters(urlParameterMap);
 
       for (final String urlParameterKey : urlParameterMap.keySet()) {
         if (manipulatorsByNameMap.containsKey(urlParameterKey)) {
@@ -145,6 +146,22 @@ public class UrlParameterParser {
     }
   }
 
+  private Map<String, String[]> explodeParameters(Map<String, String[]> urlParameterMap) {
+    final Map<String, String[]> result = new HashMap<>(urlParameterMap.size());
+
+    for (final String key : urlParameterMap.keySet()) {
+      final String[] values = urlParameterMap.get(key);
+
+      if (values == null || values.length == 0 || values[0] == null || values[0].isEmpty()) {
+        result.put(key, new String[]{"true"});
+      } else {
+        result.put(key, values);
+      }
+    }
+
+    return result;
+  }
+
   public String appToUrlParameter() {
     String result = "";
 
@@ -155,7 +172,13 @@ public class UrlParameterParser {
       }
     }
 
+    result = implodeOptions(result);
+
     return result;
+  }
+
+  private String implodeOptions(String result) {
+    return result.replace("=true", "");
   }
 
   String addToQueryString(String query, String name, String value) {
