@@ -12,6 +12,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import static com.contentful.tea.java.services.http.Constants.EDITORIAL_FEATURES_DISABLED;
+import static com.contentful.tea.java.services.http.Constants.EDITORIAL_FEATURES_ENABLED;
+
 @Component
 public class SessionParser {
   private static final int TIME_48_HOURS = 48 * 60 * 60;
@@ -54,13 +57,13 @@ public class SessionParser {
         contentful.setPreviewAccessToken(value);
       }
     });
-    manipulatorsByNameMap.put(Constants.NAME_EDITORIAL_FEATURES, new Manipulator<Boolean>() {
-      @Override public Boolean get() {
-        return settings.areEditorialFeaturesEnabled();
+    manipulatorsByNameMap.put(Constants.NAME_EDITORIAL_FEATURES, new Manipulator<String>() {
+      @Override public String get() {
+        return settings.areEditorialFeaturesEnabled() ? EDITORIAL_FEATURES_ENABLED : EDITORIAL_FEATURES_DISABLED;
       }
 
-      @Override public void set(Boolean value) {
-        settings.setEditorialFeaturesEnabled(value);
+      @Override public void set(String value) {
+        settings.setEditorialFeaturesEnabled(value != null && value.toLowerCase().equals(EDITORIAL_FEATURES_ENABLED));
       }
     });
   }

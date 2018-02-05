@@ -81,7 +81,7 @@ Step 7: To start the server, run the following
 
 Final Step:
 
-Open [http://localhost:8080?editorial_features=true](http://localhost:8080?editorial_features=true) and take a look around. This URL flag adds an _Edit_ button in the app on every editable piece of content which will take you back to Contentful web app where you can make changes. It also adds _Draft_ and _Pending Changes_ status indicators to all content if relevant.
+Open [http://localhost:8080?editorial_features=enabled](http://localhost:8080?editorial_features=enabled) and take a look around. This URL flag adds an _Edit_ button in the app on every editable piece of content which will take you back to Contentful web app where you can make changes. It also adds _Draft_ and _Pending Changes_ status indicators to all content if relevant.
 
 ## Deploy to Heroku
 You can also deploy this app to Heroku:

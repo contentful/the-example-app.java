@@ -59,20 +59,24 @@ public class UrlParameterParserTest {
 
     final String subject = parser.appToUrlParameter();
 
-    assertThat(subject).isEqualTo("?enable_editorial_features&delivery_token=delivery&preview_token=preview&api=rest&locale=tlh&space_id=space");
+    assertThat(subject).isEqualTo("?preview_token=preview&delivery_token=delivery&editorial_features=enabled&api=rest&locale=tlh&space_id=space");
   }
 
   @Test
-  public void dontSendEditorialFeaturesIfTheyAreFalse() {
-    given(settings.getLocale()).willReturn("tlh");
+  public void editorialFeaturesCanGetDisabled() {
     given(settings.areEditorialFeaturesEnabled()).willReturn(false);
-    given(contentful.getApi()).willReturn("rest");
-    given(contentful.getDeliveryAccessToken()).willReturn("delivery");
-    given(contentful.getPreviewAccessToken()).willReturn("preview");
-    given(contentful.getSpaceId()).willReturn("space");
 
     final String subject = parser.appToUrlParameter();
 
-    assertThat(subject).isEqualTo("?delivery_token=delivery&preview_token=preview&api=rest&locale=tlh&space_id=space");
+    assertThat(subject).isEqualTo("");
+  }
+
+  @Test
+  public void editorialFeaturesCanGetEnabled() {
+    given(settings.areEditorialFeaturesEnabled()).willReturn(true);
+
+    final String subject = parser.appToUrlParameter();
+
+    assertThat(subject).isEqualTo("?editorial_features=enabled");
   }
 }

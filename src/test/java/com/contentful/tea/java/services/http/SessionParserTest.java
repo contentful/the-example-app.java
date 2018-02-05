@@ -80,7 +80,7 @@ public class SessionParserTest {
 
     final Object[] values = attributes.values().toArray();
     assertThat(values)
-        .containsExactlyInAnyOrder("spaceId", "cdaToken", "cpaToken", false);
+        .containsExactlyInAnyOrder("spaceId", "cdaToken", "cpaToken", "disabled");
   }
 
   private Map<String, Object> extractAttributesIntoMap(HttpSession session) {

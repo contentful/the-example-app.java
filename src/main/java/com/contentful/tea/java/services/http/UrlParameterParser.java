@@ -14,6 +14,8 @@ import java.util.Map;
 
 import static com.contentful.tea.java.services.contentful.Contentful.API_CDA;
 import static com.contentful.tea.java.services.contentful.Contentful.API_CPA;
+import static com.contentful.tea.java.services.http.Constants.EDITORIAL_FEATURES_DISABLED;
+import static com.contentful.tea.java.services.http.Constants.EDITORIAL_FEATURES_ENABLED;
 import static java.lang.String.join;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
@@ -82,17 +84,21 @@ public class UrlParameterParser {
     manipulatorsByNameMap.put(Constants.NAME_EDITORIAL_FEATURES, new Manipulator() {
       @Override public void fromUrlParameterValueToApp(String value) {
         switch (value) {
-          case "true":
-          case "false":
-            settings.setEditorialFeaturesEnabled(Boolean.valueOf(value));
+          case EDITORIAL_FEATURES_ENABLED:
+            settings.setEditorialFeaturesEnabled(true);
             break;
           default:
-            throw new IllegalStateException("Editorial features cannot set to '" + value + "'. Only 'true' and 'false' are allowed.");
+            settings.setEditorialFeaturesEnabled(false);
+            break;
         }
       }
 
       @Override public String fromAppToUrlParameterValue() {
-        return Boolean.toString(settings.areEditorialFeaturesEnabled());
+        if (settings.areEditorialFeaturesEnabled()) {
+          return EDITORIAL_FEATURES_ENABLED;
+        } else {
+          return null;
+        }
       }
     });
     manipulatorsByNameMap.put(Constants.NAME_DELIVERY_TOKEN, new Manipulator() {
@@ -126,8 +132,8 @@ public class UrlParameterParser {
       List<IllegalStateException> exceptions = new ArrayList<>();
 
       for (final String urlParameterKey : urlParameterMap.keySet()) {
+        final String[] values = urlParameterMap.get(urlParameterKey);
         if (manipulatorsByNameMap.containsKey(urlParameterKey)) {
-          final String[] values = urlParameterMap.get(urlParameterKey);
           for (final String value : values) {
             try {
               manipulatorsByNameMap.get(urlParameterKey).fromUrlParameterValueToApp(value);
@@ -135,6 +141,8 @@ public class UrlParameterParser {
               exceptions.add(e);
             }
           }
+        } else {
+          System.err.println("Undefined parameter found: '" + urlParameterKey + "': '" + values + "'. Ignorring it.");
         }
       }
 
