@@ -87,7 +87,7 @@ public class UrlParserTest {
     map.put(NAME_LOCALE, new String[]{"TEST_NAME_LOCALE"});
     map.put(NAME_DELIVERY_TOKEN, new String[]{"TEST_NAME_DELIVERY_TOKEN"});
     map.put(NAME_PREVIEW_TOKEN, new String[]{"TEST_NAME_PREVIEW_TOKEN"});
-    map.put(NAME_EDITORIAL_FEATURES, new String[]{"true"});
+    map.put(NAME_EDITORIAL_FEATURES, new String[]{"enabled"});
 
     parser.urlParameterToApp(map);
 

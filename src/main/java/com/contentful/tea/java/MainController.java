@@ -342,7 +342,6 @@ public class MainController implements ErrorController {
         urlParameterParser.urlParameterToApp(request.getParameterMap());
         parameter = settingsCreator.create();
       } catch (Throwable t) {
-
         parameter
             .setErrors(
                 parameter.getErrors()
