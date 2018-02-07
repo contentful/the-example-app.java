@@ -12,6 +12,9 @@ import java.util.Properties;
 @Component
 public class Contentful {
   private static final String ENVIRONMENT_OVERWRITE_HOST = "CONTENTFUL_DELIVERY_API_HOST";
+  private static final String ENVIRONMENT_OVERWRITE_DELIVERY_TOKEN = "CONTENTFUL_DELIVERY_TOKEN";
+  private static final String ENVIRONMENT_OVERWRITE_PREVIEW_TOKEN = "CONTENTFUL_PREVIEW_TOKEN";
+  private static final String ENVIRONMENT_OVERWRITE_SPACE_ID = "CONTENTFUL_SPACE_ID";
 
   public static final String API_CDA = "cda";
   public static final String API_CPA = "cpa";
@@ -79,12 +82,12 @@ public class Contentful {
       builder.preview();
     }
 
-    checkIfDifferentHostProvidedByEnvironment(builder);
+    checkIfDifferentCredentialsProvidedByEnvironment(builder);
 
     return builder;
   }
 
-  private void checkIfDifferentHostProvidedByEnvironment(CDAClient.Builder builder) {
+  private void checkIfDifferentCredentialsProvidedByEnvironment(CDAClient.Builder builder) {
 
     String overwriteHost = System.getenv(ENVIRONMENT_OVERWRITE_HOST);
     if (overwriteHost != null && !overwriteHost.isEmpty()) {
@@ -94,6 +97,25 @@ public class Contentful {
 
       System.out.println("Overwriting host with '" + overwriteHost + "'.");
       builder.setEndpoint(overwriteHost);
+    }
+
+    final String spaceId = System.getenv(ENVIRONMENT_OVERWRITE_SPACE_ID);
+    if (spaceId != null && !spaceId.isEmpty()) {
+      builder.setSpace(spaceId);
+      setSpaceId(spaceId);
+      System.out.println("Overwriting space id with '" + spaceId + "'.");
+    }
+
+    final String overwriteDeliveryToken = System.getenv(ENVIRONMENT_OVERWRITE_DELIVERY_TOKEN);
+    if (overwriteDeliveryToken != null && !overwriteDeliveryToken.isEmpty()) {
+      setDeliveryAccessToken(overwriteDeliveryToken);
+      System.out.println("Overwriting delivery token with '" + overwriteDeliveryToken+ "'.");
+    }
+
+    final String overwritePreviewToken = System.getenv(ENVIRONMENT_OVERWRITE_PREVIEW_TOKEN);
+    if (overwritePreviewToken != null && !overwritePreviewToken.isEmpty()) {
+      setPreviewAccessToken(overwritePreviewToken);
+      System.out.println("Overwriting preview token with '" + overwritePreviewToken + "'.");
     }
   }
 
@@ -135,7 +157,8 @@ public class Contentful {
     return this;
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return "Contentful { "
         + "api = " + getApi() + ", "
         + "deliveryAccessToken = " + getDeliveryAccessToken() + ", "
@@ -145,7 +168,8 @@ public class Contentful {
         + "}";
   }
 
-  @Override public boolean equals(Object o) {
+  @Override
+  public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof Contentful)) return false;
     final Contentful settings = (Contentful) o;
@@ -155,7 +179,8 @@ public class Contentful {
         Objects.equals(getPreviewAccessToken(), settings.getPreviewAccessToken());
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     return Objects.hash(getApi(), getSpaceId(), getDeliveryAccessToken(), getPreviewAccessToken());
   }
 
