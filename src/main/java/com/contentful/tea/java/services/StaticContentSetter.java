@@ -149,7 +149,11 @@ public class StaticContentSetter {
   }
 
   private String getAllPlatformsQueryString() {
-    return urlParameterParser.appToUrlParameter();
+    if (contentful.isUsingCustomCredentials()) {
+      return urlParameterParser.appToUrlParameter();
+    } else {
+      return "";
+    }
   }
 
   private boolean hasAnalytics() {

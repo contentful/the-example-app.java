@@ -1,6 +1,7 @@
 package com.contentful.tea.java.services.contentful;
 
 import com.contentful.java.cda.CDAClient;
+import com.contentful.tea.java.services.modelcreators.SettingsCreator;
 
 import org.springframework.stereotype.Component;
 
@@ -233,4 +234,19 @@ public class Contentful {
 
     return customHostCachedValue == null ? "" : customHostCachedValue;
   }
+
+  public boolean isUsingCustomCredentials() {
+    final InputStream input = SettingsCreator.class.getClassLoader().getResourceAsStream("application.properties");
+    final Properties properties = new Properties();
+    try {
+      properties.load(input);
+
+      return !getSpaceId().equals(properties.getProperty("spaceId", ""))
+          || !getDeliveryAccessToken().equals(properties.getProperty("deliveryToken", ""))
+          || !getPreviewAccessToken().equals(properties.getProperty("previewToken", ""));
+    } catch (IOException e) {
+      return true;
+    }
+  }
+
 }
