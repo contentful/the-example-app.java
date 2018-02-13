@@ -53,7 +53,7 @@ public class SettingsCreator {
         .setPreviewToken(contentful.getPreviewAccessToken())
         .setSpaceId(contentful.getSpaceId())
         .setSpaceName(fetchSpaceName())
-        .setUsesCustomCredentials(isUsingCustomCredentials())
+        .setUsesCustomCredentials(contentful.isUsingCustomCredentials())
     ;
     return parameter;
   }
@@ -87,20 +87,6 @@ public class SettingsCreator {
         .setUsingServerCredentialsLabel(t(Keys.usingServerCredentialsLabel))
         .setUsingSessionCredentialsLabel(t(Keys.usingSessionCredentialsLabel))
         ;
-  }
-
-  private boolean isUsingCustomCredentials() {
-    final InputStream input = SettingsCreator.class.getClassLoader().getResourceAsStream("application.properties");
-    final Properties properties = new Properties();
-    try {
-      properties.load(input);
-
-      return !contentful.getSpaceId().equals(properties.getProperty("spaceId", ""))
-          || !contentful.getDeliveryAccessToken().equals(properties.getProperty("deliveryToken", ""))
-          || !contentful.getPreviewAccessToken().equals(properties.getProperty("previewToken", ""));
-    } catch (IOException e) {
-      return true;
-    }
   }
 
   private String createDeepLinkUrl() {

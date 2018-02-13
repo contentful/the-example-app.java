@@ -1,6 +1,7 @@
 package com.contentful.tea.java.models;
 
 import com.contentful.tea.java.MainController;
+import com.contentful.tea.java.models.base.BaseParameter;
 import com.contentful.tea.java.models.courses.CoursesParameter;
 import com.contentful.tea.java.models.landing.LandingPageParameter;
 import com.contentful.tea.java.services.StaticContentSetter;
@@ -84,6 +85,18 @@ public class StaticContentSetterTests extends EnqueuedHttpResponseTests {
     assertThat(p.getBase().getLocales().getLocales().get(1).getCode()).isEqualTo("en-US");
     assertThat(p.getBase().getLocales().getLocales().get(1).getName()).isEqualTo("U.S. English");
     assertThat(p.getBase().getLocales().getLocales().get(1).getCssClass()).isEqualTo("header__controls_button--active");
+  }
+
+  @Test
+  @EnqueueHttpResponse({"home/main.json", "defaults/space.json"})
+  public void nonDefaultSettingsResultInQueryStringForAllApps() {
+    given(contentful.isUsingCustomCredentials()).willReturn(true);
+    given(contentful.getSpaceId()).willReturn("ThisIsNotASpaceId");
+
+    final BaseParameter base = new BaseParameter();
+    setter.applyContent(base);
+
+    assertThat(base.getMeta().getAllPlatformsQueryString()).contains("space_id=ThisIsNotASpaceId");
   }
 
   @Test
