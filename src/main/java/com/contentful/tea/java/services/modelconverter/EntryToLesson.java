@@ -8,7 +8,7 @@ import com.contentful.tea.java.models.courses.lessons.modules.CopyModule;
 import com.contentful.tea.java.models.courses.lessons.modules.ImageModule;
 import com.contentful.tea.java.models.courses.lessons.modules.Module;
 import com.contentful.tea.java.services.localization.Keys;
-import com.contentful.tea.java.services.modelenhancers.AddEditorialFeaturesEnhancer;
+import com.contentful.tea.java.services.modelenhancers.EditorialFeaturesEnhancer;
 import com.contentful.tea.java.services.settings.Settings;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class EntryToLesson extends ContentfulModelToMappableTypeConverter<CDAEnt
 
   @Autowired
   @SuppressWarnings("unused")
-  private AddEditorialFeaturesEnhancer enhancer;
+  private EditorialFeaturesEnhancer enhancer;
 
   @Override
   public LessonParameter convert(CDAEntry cdaLesson) {
@@ -40,6 +40,13 @@ public class EntryToLesson extends ContentfulModelToMappableTypeConverter<CDAEnt
       final Module module = createModule(cdaModule);
       if (module != null) {
         result.addModule(module);
+      }
+
+      if (enhancer.isPending(cdaModule)) {
+        result.getBase().getMeta().setPendingChanges(true);
+      }
+      if (enhancer.isDraft(cdaModule)) {
+        result.getBase().getMeta().setDraft(true);
       }
     }
 

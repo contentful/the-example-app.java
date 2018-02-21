@@ -8,12 +8,13 @@ import com.contentful.tea.java.models.courses.Course;
 import com.contentful.tea.java.models.courses.CourseParameter;
 import com.contentful.tea.java.models.courses.lessons.LessonParameter;
 import com.contentful.tea.java.services.localization.Keys;
-import com.contentful.tea.java.services.modelenhancers.AddEditorialFeaturesEnhancer;
+import com.contentful.tea.java.services.modelenhancers.EditorialFeaturesEnhancer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -70,7 +71,7 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
 
   @Autowired
   @SuppressWarnings("unused")
-  private AddEditorialFeaturesEnhancer enhancer;
+  private EditorialFeaturesEnhancer enhancer;
 
   @Override
   public CourseParameter convert(EntryToCourse.Compound compound) {
@@ -78,7 +79,11 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
     final List<CDAEntry> cdaCategories = course.getField("categories");
     final List<Category> categories = getCategories(cdaCategories);
 
-    final List<CDAEntry> cdaLessons = course.getField("lessons");
+    List<CDAEntry> cdaLessons = course.getField("lessons");
+    if (cdaLessons == null) {
+      cdaLessons = Collections.emptyList();
+    }
+
     final List<LessonParameter> lessons = new ArrayList<>();
     LessonParameter sluggedLesson = null;
     final Set<String> visitedLessons = compound.getVisitedLessons() == null ? new HashSet<>() : compound.getVisitedLessons();
@@ -112,6 +117,14 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
     final String visited = visitedLessons.contains("/") ? "visited" : "";
     final String overviewCssClass = String.format("%s %s", active, visited);
 
+    String skillLevelField = course.getField("skillLevel");
+    if (skillLevelField == null) {
+      skillLevelField = "beginner";
+    }
+
+    final String skillLevel = t(Keys.valueOf(skillLevelField.toLowerCase() + "Label"));
+    final Double durationFieldValue = course.getField("duration");
+    final int duration = durationFieldValue == null ? 0 : durationFieldValue.intValue();
     courseParameter
         .setDurationLabel(t(Keys.durationLabel))
         .setStartCourseLabel(t(Keys.startCourseLabel))
@@ -124,15 +137,15 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
         .setNextLessonLabel(t(Keys.nextLessonLabel))
         .setCourse(new Course()
             .setCategories(categories)
-            .setImageUrl(image.url())
+            .setImageUrl(image != null ? image.url() : "")
             .setDescription(m(course.getField("description")))
             .setShortDescription(course.getField("shortDescription"))
             .setTitle(course.getField("title"))
             .setSlug(course.getField("slug"))
-            .setDuration((((Double) course.getField("duration"))).intValue())
-            .setDraft(isDraft(course))
-            .setPendingChanges(hasPendingChanges(course))
-            .setSkillLevel(t(Keys.valueOf(course.getField("skillLevel") + "Label")))
+            .setDuration(duration)
+            .setDraft(enhancer.isDraft(course))
+            .setPendingChanges(enhancer.isPending(course))
+            .setSkillLevel(skillLevel)
             .setLessons(lessons)
             .setNextLessonSlug(nextLesson != null ? nextLesson.getSlug() : null)
             .setCurrentLesson(sluggedLesson)
@@ -143,8 +156,8 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
     if (sluggedLesson != null) {
       final MetaParameter sluggedMeta = sluggedLesson.getBase().getMeta();
       final MetaParameter courseMeta = courseParameter.getBase().getMeta();
-      courseMeta.setPendingChanges(sluggedMeta.hasPendingChanges());
-      courseMeta.setDraft(sluggedMeta.isDraft());
+      courseMeta.setPendingChanges(courseMeta.isDraft() || sluggedMeta.hasPendingChanges());
+      courseMeta.setDraft(courseMeta.isDraft() || sluggedMeta.isDraft());
       courseMeta.setDeeplinkToContentful(sluggedMeta.getDeeplinkToContentful());
     }
 
