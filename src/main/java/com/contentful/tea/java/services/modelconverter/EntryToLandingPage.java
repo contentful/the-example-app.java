@@ -43,6 +43,14 @@ public class EntryToLandingPage extends ContentfulModelToMappableTypeConverter<C
     for (final CDAEntry module : contentModules) {
       final BaseModule moduleParameter = createNewModuleParameter(module);
       parameter.addModule(moduleParameter);
+
+      if (enhancer.isDraft(module)) {
+        parameter.getBase().getMeta().setDraft(true);
+      }
+
+      if (enhancer.isPending(module)) {
+        parameter.getBase().getMeta().setPendingChanges(true);
+      }
     }
   }
 
