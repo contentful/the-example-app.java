@@ -2,19 +2,37 @@ version: 2
 jobs:
    build:
      docker:
-       - image: circleci/java:8
+       - image: circleci/openjdk:8-node-browsers
      steps:
       - checkout
       - run:
           name: The Example App Java - Building and Testing
           command: ./gradlew clean test
       - run:
-          name: Save test results 
+          name: The Example App Java - Run Server
+          command: ./gradlew run
+          background: true
+      - run:
+          name: Wait for Started Server to warm up
+          command: sleep 5
+      - run:
+          name: Checkout and Install E2E Tests
+          command: git clone https://github.com/contentful/the-example-app-e2e-tests.git ./test/e2e && cd ./test/e2e && npm install
+      - run:
+          name: Make Cypress different configuration aware
+          command: mv cypress-circleci.json cypress.json
+      - run:
+          name: The Example App Java - E2E
+          command: ./test/e2e/node_modules/.bin/cypress run
+      - run:
+          name: Save test results
           command: |
-            mkdir -p ~/junit/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+            mkdir -p ./junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ./junit/ \;
           when: always
       - store_test_results:
-          path: ~/junit
+          path: ./junit
       - store_artifacts:
-          path: ~/junit    
+          path: ./junit
+      - store_artifacts:
+          path: ./cypress
