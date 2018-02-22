@@ -1,11 +1,14 @@
 include _entryState
 
-mixin editorialFeatures
+mixin editorialFeatures(item)
   if base.meta.editorialFeatures
     .editorial-features
-      if base.meta.draft || base.meta.pendingChanges
+      if item.base.meta.draft || item.base.meta.pendingChanges
         .editorial-features__item
-          +entryState
+          +entryState(item.base.meta.draft, item.base.meta.pendingChanges)
+      if item.draft || item.pendingChanges
+        .editorial-features__item
+          +entryState(item.draft, item.pendingChanges)
       .editorial-features__item
         a.editorial-features__text(
           href='!{base.meta.deeplinkToContentful}'

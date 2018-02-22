@@ -11,7 +11,7 @@ import com.contentful.tea.java.models.courses.Course;
 import com.contentful.tea.java.models.courses.CoursesParameter;
 import com.contentful.tea.java.services.contentful.Contentful;
 import com.contentful.tea.java.services.localization.Keys;
-import com.contentful.tea.java.services.modelenhancers.AddEditorialFeaturesEnhancer;
+import com.contentful.tea.java.services.modelenhancers.EditorialFeaturesEnhancer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -53,7 +53,7 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
 
   @Autowired
   @SuppressWarnings("unused")
-  private AddEditorialFeaturesEnhancer enhancer;
+  private EditorialFeaturesEnhancer enhancer;
 
   @Override
   public CoursesParameter convert(ArrayAndSelectedCategory compound) {
@@ -152,6 +152,8 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
           .setImageUrl(image != null ? image.url() : "")
           .setTitle(course.getField("title"))
           .setShortDescription(course.getField("description"))
+          .setDraft(enhancer.isDraft(course))
+          .setPendingChanges(enhancer.isPending(course))
           .setSlug(course.getField("slug"));
 
       final List<CDAEntry> categories = course.getField("categories");

@@ -26,14 +26,6 @@ public abstract class ContentfulModelToMappableTypeConverter<ContentfulModel, Vi
   @SuppressWarnings("unused")
   protected CommonmarkMarkdownParser markdown;
 
-  protected boolean isDraft(CDAEntry module) {
-    return false;
-  }
-
-  protected boolean hasPendingChanges(CDAEntry module) {
-    return false;
-  }
-
   protected String t(Keys translateKey) {
     return localizer.localize(translateKey);
   }

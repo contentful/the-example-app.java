@@ -40,5 +40,6 @@ block content
                   use(xlink:href='/icons/icons.svg#skill-level')
                 .course__overview-value #{skillLevelLabel}: #{course.skillLevel}
             .course__overview-cta-wrapper
-              a.course__overview-cta.cta(href='/courses/!{course.slug}/lessons/!{course.lessons[0].slug}!{base.meta.queryString}') #{startCourseLabel}
+              if course.lessons && course.lessons[0]
+                a.course__overview-cta.cta(href='/courses/!{course.slug}/lessons/!{course.lessons[0].slug}!{base.meta.queryString}') #{startCourseLabel}
           .course__description !{course.description}

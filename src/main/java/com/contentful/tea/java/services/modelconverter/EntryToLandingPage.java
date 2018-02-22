@@ -8,7 +8,7 @@ import com.contentful.tea.java.models.landing.modules.CopyModule;
 import com.contentful.tea.java.models.landing.modules.HeroImageModule;
 import com.contentful.tea.java.models.landing.modules.HighlightedCourseModule;
 import com.contentful.tea.java.services.localization.Keys;
-import com.contentful.tea.java.services.modelenhancers.AddEditorialFeaturesEnhancer;
+import com.contentful.tea.java.services.modelenhancers.EditorialFeaturesEnhancer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class EntryToLandingPage extends ContentfulModelToMappableTypeConverter<C
 
   @Autowired
   @SuppressWarnings("unused")
-  private AddEditorialFeaturesEnhancer enhancer;
+  private EditorialFeaturesEnhancer enhancer;
 
   @Override
   public LandingPageParameter convert(CDAEntry entry) {
@@ -43,6 +43,14 @@ public class EntryToLandingPage extends ContentfulModelToMappableTypeConverter<C
     for (final CDAEntry module : contentModules) {
       final BaseModule moduleParameter = createNewModuleParameter(module);
       parameter.addModule(moduleParameter);
+
+      if (enhancer.isDraft(module)) {
+        parameter.getBase().getMeta().setDraft(true);
+      }
+
+      if (enhancer.isPending(module)) {
+        parameter.getBase().getMeta().setPendingChanges(true);
+      }
     }
   }
 

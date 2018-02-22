@@ -18,11 +18,11 @@ import static org.mockito.Mockito.mock;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MainController.class)
-public class AddEditorialFeaturesEnhancerTest {
+public class EditorialFeaturesEnhancerTest {
 
   @Autowired
   @SuppressWarnings("unused")
-  private AddEditorialFeaturesEnhancer enhancer;
+  private EditorialFeaturesEnhancer enhancer;
 
   @MockBean
   @SuppressWarnings("unused")
