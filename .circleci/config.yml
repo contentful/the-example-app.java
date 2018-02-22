@@ -16,8 +16,19 @@ jobs:
           name: Wait for Started Server to warm up
           command: sleep 5
       - run:
-          name: Checkout and Install E2E Tests
-          command: git clone https://github.com/contentful/the-example-app-e2e-tests.git ./test/e2e && cd ./test/e2e && npm install
+          name: Checkout E2E Tests
+          command: git clone https://github.com/contentful/the-example-app-e2e-tests.git ./test/e2e
+      - restore_cache:
+          keys:
+          - tea-e2e-tests-{{ checksum "./test/e2e/package.json" }}
+          - tea-e2e-tests-
+      - run:
+          name: Install E2E Tests
+          command: cd ./test/e2e && npm install
+      - save_cache:
+          key: tea-e2e-tests-{{ checksum "./test/e2e/package.json" }}
+          paths:
+            - ./test/e2e/node_modules
       - run:
           name: Make Cypress different configuration aware
           command: mv cypress-circleci.json cypress.json
