@@ -39,7 +39,7 @@ public class Localizer {
     if (localized != null) {
       return localized.get(key.name());
     } else {
-      return null;
+      return localizations.get("en-US").get(key.name());
     }
   }
 

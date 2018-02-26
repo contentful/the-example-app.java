@@ -18,6 +18,10 @@ public class LocalizerTests {
   public void basicTranslationWorks() {
     assertThat(localizer.localize("en-US", Keys.whatIsThisApp)).isEqualTo("Help");
     assertThat(localizer.localize("de-DE", Keys.whatIsThisApp)).isEqualTo("Hilfe");
-    assertThat(localizer.localize("DoesNotExist", Keys.defaultTitle)).isNull();
+  }
+
+  @Test
+  public void notSupportedLocaleReturnsEnglish() {
+    assertThat(localizer.localize("non existing locale", Keys.whatIsThisApp)).isEqualTo("Help");
   }
 }
