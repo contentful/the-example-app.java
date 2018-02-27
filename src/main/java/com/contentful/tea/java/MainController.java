@@ -14,6 +14,7 @@ import com.contentful.tea.java.models.settings.SettingsParameter;
 import com.contentful.tea.java.models.settings.SettingsParameter.Errors;
 import com.contentful.tea.java.services.StaticContentSetter;
 import com.contentful.tea.java.services.contentful.Contentful;
+import com.contentful.tea.java.services.http.Constants;
 import com.contentful.tea.java.services.http.SessionParser;
 import com.contentful.tea.java.services.http.UrlParameterParser;
 import com.contentful.tea.java.services.localization.Keys;
@@ -372,8 +373,7 @@ public class MainController implements ErrorController {
   }
 
   private boolean configurationIsDifferentToLastTime(Contentful lastContentful, Settings lastSettings) {
-    final boolean differenceFound = !(lastContentful.equals(contentful) && lastSettings.equals(settings));
-    return differenceFound;
+    return !(lastContentful.equals(contentful) && lastSettings.equals(settings));
   }
 
   @ExceptionHandler(Throwable.class)

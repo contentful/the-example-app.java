@@ -319,14 +319,10 @@ public class StaticContentSetter {
   }
 
   private String t(Keys key) {
-    final String localized = localizer.localize(key);
-    return localized;
+    return localizer.localize(key);
   }
 
   private String m(String s) {
-    final String parsed = markdown.parse(s);
-    return parsed;
+    return markdown.parse(s);
   }
-
-
 }

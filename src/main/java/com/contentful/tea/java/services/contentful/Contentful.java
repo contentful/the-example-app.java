@@ -266,9 +266,9 @@ public class Contentful {
     try {
       properties.load(input);
 
-      return !getSpaceId().equals(properties.getProperty("spaceId", ""))
-          || !getDeliveryAccessToken().equals(properties.getProperty("deliveryToken", ""))
-          || !getPreviewAccessToken().equals(properties.getProperty("previewToken", ""));
+      return !Objects.equals(getSpaceId(), properties.getProperty("spaceId", ""))
+          || !Objects.equals(getDeliveryAccessToken(), properties.getProperty("deliveryToken", ""))
+          || !Objects.equals(getPreviewAccessToken(), properties.getProperty("previewToken", ""));
     } catch (IOException e) {
       return true;
     }
