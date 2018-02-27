@@ -22,6 +22,7 @@ public class Contentful {
 
   private String api = API_CDA;
 
+  private String host;
   private String spaceId;
   private String deliveryAccessToken;
   private String previewAccessToken;
@@ -32,13 +33,30 @@ public class Contentful {
   CDAClient contentfulDeliveryClient;
   CDAClient contentfulPreviewClient;
 
+  public Contentful() {
+    reset();
+  }
+
   public Contentful reset() {
     api = API_CDA;
+    host = "https://cdn.contentful.com";
     spaceId = null;
     deliveryAccessToken = null;
     previewAccessToken = null;
     contentfulDeliveryClient = null;
     contentfulPreviewClient = null;
+
+    overwriteDefaultsWithEnvironment();
+
+    return this;
+  }
+
+  public String getHost() {
+    return host;
+  }
+
+  public Contentful setHost(String host) {
+    this.host = host;
     return this;
   }
 
@@ -65,6 +83,7 @@ public class Contentful {
 
   private CDAClient getContentfulPreviewClient() {
     if (contentfulPreviewClient == null) {
+      setHost(getHost().replace("cdn", "preview"));
       contentfulPreviewClient = createContentfulBuilder()
           .setToken(getPreviewAccessToken())
           .build();
@@ -75,34 +94,29 @@ public class Contentful {
 
   private CDAClient.Builder createContentfulBuilder() {
     final CDAClient.Builder builder = CDAClient
-        .builder()
-        .setSpace(getSpaceId())
-        .setApplication(getApplicationName(), getVersionString());
+        .builder();
 
     if (getApi().equals(API_CPA)) {
       builder.preview();
     }
 
-    checkIfDifferentCredentialsProvidedByEnvironment(builder);
+    builder
+        .setEndpoint(host)
+        .setSpace(getSpaceId())
+        .setApplication(getApplicationName(), getVersionString());
 
     return builder;
   }
 
-  private void checkIfDifferentCredentialsProvidedByEnvironment(CDAClient.Builder builder) {
-
+  private void overwriteDefaultsWithEnvironment() {
     String overwriteHost = System.getenv(ENVIRONMENT_OVERWRITE_HOST);
     if (overwriteHost != null && !overwriteHost.isEmpty()) {
-      if (getApi().equals(API_CPA)) {
-        overwriteHost = overwriteHost.replace("cdn", "preview");
-      }
-
       System.out.println("Overwriting host with '" + overwriteHost + "'.");
-      builder.setEndpoint(overwriteHost);
+      setHost(overwriteHost);
     }
 
     final String spaceId = System.getenv(ENVIRONMENT_OVERWRITE_SPACE_ID);
     if (spaceId != null && !spaceId.isEmpty()) {
-      builder.setSpace(spaceId);
       setSpaceId(spaceId);
       System.out.println("Overwriting space id with '" + spaceId + "'.");
     }
@@ -110,7 +124,7 @@ public class Contentful {
     final String overwriteDeliveryToken = System.getenv(ENVIRONMENT_OVERWRITE_DELIVERY_TOKEN);
     if (overwriteDeliveryToken != null && !overwriteDeliveryToken.isEmpty()) {
       setDeliveryAccessToken(overwriteDeliveryToken);
-      System.out.println("Overwriting delivery token with '" + overwriteDeliveryToken+ "'.");
+      System.out.println("Overwriting delivery token with '" + overwriteDeliveryToken + "'.");
     }
 
     final String overwritePreviewToken = System.getenv(ENVIRONMENT_OVERWRITE_PREVIEW_TOKEN);
@@ -170,7 +184,7 @@ public class Contentful {
   }
 
   @Override
-  public boolean  equals(Object o) {
+  public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof Contentful)) return false;
     final Contentful other = (Contentful) o;
