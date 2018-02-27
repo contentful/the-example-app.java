@@ -125,7 +125,7 @@ public class MainController implements ErrorController {
       final CDAEntry cdaLanding = client
           .fetch(CDAEntry.class)
           .include(5)
-          .where("locale", settings.getLocale())
+          .where("locale", "*")
           .one("2uNOpLMJioKeoMq8W44uYc");
 
       final LandingPageParameter parameter = entryToLandingPage.convert(cdaLanding);
@@ -151,7 +151,7 @@ public class MainController implements ErrorController {
           .fetch(CDAEntry.class)
           .include(5)
           .withContentType("course")
-          .where("locale", settings.getLocale())
+          .where("locale", "*")
           .orderBy("-sys.createdAt")
           .all();
 
@@ -184,7 +184,7 @@ public class MainController implements ErrorController {
           .fetch(CDAEntry.class)
           .include(5)
           .withContentType("course")
-          .where("locale", settings.getLocale())
+          .where("locale", "*")
           .all();
 
       final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory()
@@ -217,7 +217,7 @@ public class MainController implements ErrorController {
           .include(5)
           .withContentType("course")
           .where("fields.slug", coursesSlug)
-          .where("locale", settings.getLocale())
+          .where("locale", "*")
           .all()
           .items()
           .get(0));
@@ -257,7 +257,7 @@ public class MainController implements ErrorController {
           .include(5)
           .withContentType("course")
           .where("fields.slug", courseSlug)
-          .where("locale", settings.getLocale())
+          .where("locale", "*")
           .all()
           .items()
           .get(0));

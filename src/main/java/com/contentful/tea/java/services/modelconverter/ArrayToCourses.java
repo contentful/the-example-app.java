@@ -114,7 +114,7 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
         .getCurrentClient()
         .fetch(CDAEntry.class)
         .withContentType("category")
-        .where("locale", settings.getLocale())
+        .where("locale", "*")
         .all();
 
     for (final CDAResource resource : courses.items()) {
