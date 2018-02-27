@@ -382,6 +382,8 @@ public class MainController implements ErrorController {
   public String serverError(HttpServletRequest request, Throwable serverException) {
     serverException.printStackTrace(System.err);
 
+    settings.setLocale(request.getParameter(Constants.NAME_LOCALE));
+
     final ErrorParameter errorParameter = exceptionToError.convert(serverException);
 
     try {
