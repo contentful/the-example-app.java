@@ -142,7 +142,7 @@ public class UrlParameterParser {
             }
           }
         } else {
-          System.err.println("Undefined parameter found: '" + urlParameterKey + "': '" + values + "'. Ignorring it.");
+          System.err.println("Undefined parameter found: '" + urlParameterKey + "': '" + values + "'. Ignoring it.");
         }
       }
 
