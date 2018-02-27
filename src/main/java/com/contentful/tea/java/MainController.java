@@ -357,7 +357,7 @@ public class MainController implements ErrorController {
         settings.load(lastSettings);
         contentful.load(lastContentful);
       } else {
-        if (request.getParameterMap().size() > 0) {
+        if (request.getParameterMap().size() > 0 && configurationIsDifferentToLastTime(lastContentful, lastSettings)) {
           parameter.setSuccessful(true);
         }
         staticContentSetter.applyContent(parameter.getBase());
@@ -369,6 +369,11 @@ public class MainController implements ErrorController {
     } finally {
       teardownRoute(request);
     }
+  }
+
+  private boolean configurationIsDifferentToLastTime(Contentful lastContentful, Settings lastSettings) {
+    final boolean differenceFound = !(lastContentful.equals(contentful) && lastSettings.equals(settings));
+    return differenceFound;
   }
 
   @ExceptionHandler(Throwable.class)

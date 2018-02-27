@@ -80,8 +80,6 @@ public class Settings {
     if (!(o instanceof Settings)) return false;
     final Settings settings = (Settings) o;
     return Objects.equals(getQueryString(), settings.getQueryString()) &&
-        Objects.equals(getBaseUrl(), settings.getBaseUrl()) &&
-        Objects.equals(getPath(), settings.getPath()) &&
         Objects.equals(getLocale(), settings.getLocale()) &&
         Objects.equals(areEditorialFeaturesEnabled(), settings.areEditorialFeaturesEnabled());
   }

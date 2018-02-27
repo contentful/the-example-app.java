@@ -170,14 +170,14 @@ public class Contentful {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean  equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof Contentful)) return false;
-    final Contentful settings = (Contentful) o;
-    return Objects.equals(getApi(), settings.getApi()) &&
-        Objects.equals(getSpaceId(), settings.getSpaceId()) &&
-        Objects.equals(getDeliveryAccessToken(), settings.getDeliveryAccessToken()) &&
-        Objects.equals(getPreviewAccessToken(), settings.getPreviewAccessToken());
+    final Contentful other = (Contentful) o;
+    return Objects.equals(getApi(), other.getApi()) &&
+        Objects.equals(getSpaceId(), other.getSpaceId()) &&
+        Objects.equals(getDeliveryAccessToken(), other.getDeliveryAccessToken()) &&
+        Objects.equals(getPreviewAccessToken(), other.getPreviewAccessToken());
   }
 
   @Override
