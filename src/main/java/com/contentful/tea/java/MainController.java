@@ -324,16 +324,8 @@ public class MainController implements ErrorController {
   @SuppressWarnings("unused")
   public String updateSettings(HttpServletRequest request) {
     try {
-      contentful.reset().loadFromPreferences();
-      settings.reset();
-      sessionParser.loadSession(request.getSession());
-      settings.setBaseUrl(request.getRequestURL().toString());
-      settings.setPath(request.getServletPath());
-
       final Settings lastSettings = settings.save();
       final Contentful lastContentful = contentful.save();
-      contentful.reset().loadFromPreferences();
-      settings.reset();
       settings.setBaseUrl(request.getRequestURL().toString());
       settings.setPath(request.getServletPath());
 
