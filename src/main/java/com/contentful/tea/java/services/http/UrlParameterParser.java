@@ -57,12 +57,12 @@ public class UrlParameterParser {
     });
     manipulatorsByNameMap.put(Constants.NAME_LOCALE, new Manipulator() {
       @Override public void fromUrlParameterValueToApp(String value) {
-        settings.setLocale(value);
-        final String queryString = addToQueryString(settings.getQueryString(), Constants.NAME_LOCALE, value);
-        settings.setQueryString(queryString);
         if (value == null || value.isEmpty()) {
           throw new IllegalStateException("Locale cannot be empty!");
         }
+        settings.setLocale(value);
+        final String queryString = addToQueryString(settings.getQueryString(), Constants.NAME_LOCALE, value);
+        settings.setQueryString(queryString);
       }
 
       @Override public String fromAppToUrlParameterValue() {
@@ -71,10 +71,10 @@ public class UrlParameterParser {
     });
     manipulatorsByNameMap.put(Constants.NAME_SPACE_ID, new Manipulator() {
       @Override public void fromUrlParameterValueToApp(String value) {
-        contentful.setSpaceId(value);
         if (value == null || value.isEmpty()) {
           throw new IllegalStateException("Spaceid cannot be empty!");
         }
+        contentful.setSpaceId(value);
       }
 
       @Override public String fromAppToUrlParameterValue() {
@@ -103,10 +103,10 @@ public class UrlParameterParser {
     });
     manipulatorsByNameMap.put(Constants.NAME_DELIVERY_TOKEN, new Manipulator() {
       @Override public void fromUrlParameterValueToApp(String value) {
-        contentful.setDeliveryAccessToken(value);
         if (value == null || value.isEmpty()) {
           throw new IllegalStateException("Delivery token cannot be empty!");
         }
+        contentful.setDeliveryAccessToken(value);
       }
 
       @Override public String fromAppToUrlParameterValue() {

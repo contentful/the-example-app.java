@@ -52,19 +52,19 @@ public class ExceptionToErrorParameter implements Converter<Throwable, ErrorPara
     base.getMeta().setTitle(t(Keys.errorOccurredTitleLabel));
 
     return errorParameter
-        .setContentModelChangedErrorLabel(t(Keys.contentModelChangedErrorLabel))
-        .setDraftOrPublishedErrorLabel(t(Keys.draftOrPublishedErrorLabel))
-        .setError404Route(t(Keys.error404Route))
+        .setContentModelChangedErrorLabel(t(Keys.contentModelChangedErrorHint))
+        .setDraftOrPublishedErrorLabel(t(Keys.draftOrPublishedErrorHint))
+        .setError404Route(t(Keys.errorMessage404Route))
         .setErrorLabel(t(Keys.errorLabel))
-        .setLocaleContentErrorLabel(t(Keys.localeContentErrorLabel))
+        .setLocaleContentErrorLabel(t(Keys.localeContentErrorHint))
         .setResponseData(source.getMessage())
         .setSomethingWentWrongLabel(t(Keys.somethingWentWrongLabel))
         .setStack(getStackTrace(source))
-        .setStackTraceErrorLabel(t(Keys.stackTraceErrorLabel))
+        .setStackTraceErrorLabel(t(Keys.stackTraceErrorHint))
         .setStackTraceLabel(t(Keys.stackTraceLabel))
         .setStatus(exceptionToStatusCode(source))
-        .setTryLabel(t(Keys.tryLabel))
-        .setVerifyCredentialsErrorLabel(t(Keys.verifyCredentialsErrorLabel))
+        .setTryLabel(t(Keys.hintsLabel))
+        .setVerifyCredentialsErrorLabel(t(Keys.verifyCredentialsErrorHint))
         ;
   }
 

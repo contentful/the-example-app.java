@@ -58,14 +58,14 @@ public class ExceptionToErrorParameterTest {
   private void verifyStaticErrorLabels(ErrorParameter subject) {
     assertThat(subject.getBase()).isNotNull();
     assertThat(subject.getErrorLabel()).isEqualTo(t(Keys.errorLabel));
-    assertThat(subject.getContentModelChangedErrorLabel()).isEqualTo(t(Keys.contentModelChangedErrorLabel));
-    assertThat(subject.getDraftOrPublishedErrorLabel()).isEqualTo(t(Keys.draftOrPublishedErrorLabel));
-    assertThat(subject.getError404Route()).isEqualTo(t(Keys.error404Route));
-    assertThat(subject.getLocaleContentErrorLabel()).isEqualTo(t(Keys.localeContentErrorLabel));
+    assertThat(subject.getContentModelChangedErrorLabel()).isEqualTo(t(Keys.contentModelChangedErrorHint));
+    assertThat(subject.getDraftOrPublishedErrorLabel()).isEqualTo(t(Keys.draftOrPublishedErrorHint));
+    assertThat(subject.getError404Route()).isEqualTo(t(Keys.errorMessage404Route));
+    assertThat(subject.getLocaleContentErrorLabel()).isEqualTo(t(Keys.localeContentErrorHint));
     assertThat(subject.getSomethingWentWrongLabel()).isEqualTo(t(Keys.somethingWentWrongLabel));
-    assertThat(subject.getStackTraceErrorLabel()).isEqualTo(t(Keys.stackTraceErrorLabel));
+    assertThat(subject.getStackTraceErrorLabel()).isEqualTo(t(Keys.stackTraceErrorHint));
     assertThat(subject.getStackTraceLabel()).isEqualTo(t(Keys.stackTraceLabel));
-    assertThat(subject.getVerifyCredentialsErrorLabel()).isEqualTo(t(Keys.verifyCredentialsErrorLabel));
+    assertThat(subject.getVerifyCredentialsErrorLabel()).isEqualTo(t(Keys.verifyCredentialsErrorHint));
   }
 
   private String t(Keys errorLabel) {
