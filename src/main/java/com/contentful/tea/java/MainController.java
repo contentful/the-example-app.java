@@ -128,7 +128,7 @@ public class MainController implements ErrorController {
           .where("locale", "*")
           .one("2uNOpLMJioKeoMq8W44uYc");
 
-      final LandingPageParameter parameter = entryToLandingPage.convert(cdaLanding);
+      final LandingPageParameter parameter = entryToLandingPage.convert(cdaLanding, 2);
 
       staticContentSetter.applyContent(parameter.getBase());
 
@@ -161,7 +161,7 @@ public class MainController implements ErrorController {
           .setList(courses.items())
           .setCategorySlug(categorySlug);
 
-      final CoursesParameter parameter = arrayToCourses.convert(compound);
+      final CoursesParameter parameter = arrayToCourses.convert(compound, 1);
       staticContentSetter.applyContent(parameter.getBase());
 
       return htmlGenerator.generate("courses.jade", parameter.toMap());
@@ -191,7 +191,7 @@ public class MainController implements ErrorController {
           .setList(courses.items())
           .setCategorySlug(slug);
 
-      final CoursesParameter parameter = arrayToCourses.convert(compound);
+      final CoursesParameter parameter = arrayToCourses.convert(compound, 1);
       staticContentSetter.applyContent(parameter.getBase());
 
       return htmlGenerator.generate("courses.jade", parameter.toMap());
@@ -230,7 +230,7 @@ public class MainController implements ErrorController {
           .setCourseSlug(coursesSlug)
           .setVisitedLessons(visitedLessons);
 
-      final CourseParameter parameter = entryToCourse.convert(compound);
+      final CourseParameter parameter = entryToCourse.convert(compound, 1);
       staticContentSetter.applyContent(parameter.getBase());
 
       return htmlGenerator.generate("course.jade", parameter.toMap());
@@ -271,7 +271,7 @@ public class MainController implements ErrorController {
           .setLessonSlug(lessonSlug)
           .setVisitedLessons(visitedLessons);
 
-      final CourseParameter parameter = entryToCourse.convert(compound);
+      final CourseParameter parameter = entryToCourse.convert(compound, 2);
       staticContentSetter.applyContent(parameter.getBase());
 
       return htmlGenerator.generate("course.jade", parameter.toMap());
@@ -348,8 +348,14 @@ public class MainController implements ErrorController {
       }
 
       if (parameter.getErrors().hasErrors()) {
+
+        System.err.println(parameter.getErrors().getDeliveryToken());
+        System.err.println(parameter.getErrors().getPreviewToken());
+        System.err.println(parameter.getErrors().getSpaceId());
+
         staticContentSetter.applyErrorContent(parameter.getBase());
         settingsCreator.setStaticLabels(parameter);
+
         parameter
             .setDeliveryToken(contentful.getDeliveryAccessToken())
             .setPreviewToken(contentful.getPreviewAccessToken())
@@ -438,7 +444,11 @@ public class MainController implements ErrorController {
     sessionParser.saveSession(request.getSession());
   }
 
-  private Set<String> updateVisitedLessonsInSession(HttpServletRequest request, @SessionAttribute(required = false) Map<String, Set<String>> visitedLessonsByCourseSlug, @PathVariable String courseSlug, @PathVariable String lessonSlug) {
+  private Set<String> updateVisitedLessonsInSession(
+      HttpServletRequest request,
+      @SessionAttribute(required = false) Map<String, Set<String>> visitedLessonsByCourseSlug,
+      @PathVariable String courseSlug,
+      @PathVariable String lessonSlug) {
     if (visitedLessonsByCourseSlug == null) {
       visitedLessonsByCourseSlug = new HashMap<>();
     }

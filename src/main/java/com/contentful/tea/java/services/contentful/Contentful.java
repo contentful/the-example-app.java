@@ -73,6 +73,7 @@ public class Contentful {
 
   private CDAClient getContentfulDeliveryClient() {
     if (contentfulDeliveryClient == null) {
+      setHost(getHost().replace("preview", "cdn"));
       contentfulDeliveryClient = createContentfulBuilder()
           .setToken(getDeliveryAccessToken())
           .build();

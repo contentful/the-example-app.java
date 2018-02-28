@@ -117,6 +117,8 @@ public class SettingsCreator {
       } catch (CDAHttpException e) {
         switch (e.responseCode()) {
           default:
+            errors.setDeliveryToken(new SettingsParameter.Errors.Error().setMessage(t(Keys.errorOccurredTitleLabel)));
+            break;
           case 401:
             errors.setDeliveryToken(new SettingsParameter.Errors.Error().setMessage(t(Keys.deliveryKeyInvalidLabel)));
             break;

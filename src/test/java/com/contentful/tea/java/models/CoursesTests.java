@@ -77,7 +77,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
         .items()
         .get(0);
 
-    final LandingPageParameter p = landingPageConverter.convert(homeEntry);
+    final LandingPageParameter p = landingPageConverter.convert(homeEntry, 2);
 
     assertThat(p.getBase().getMeta().getTitle()).isEqualTo("Home");
 
@@ -113,7 +113,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
         .all();
 
     final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory().setList(courses.items());
-    final CoursesParameter p = arrayToCourses.convert(compound);
+    final CoursesParameter p = arrayToCourses.convert(compound, 2);
 
     assertThat(p.getBase().getMeta().getTitle()).isEqualTo("All courses (5)");
 
@@ -142,7 +142,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
         .all();
 
     final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory().setList(courses.items()).setCategorySlug("application-development");
-    final CoursesParameter p = arrayToCourses.convert(compound);
+    final CoursesParameter p = arrayToCourses.convert(compound, 2);
 
     assertThat(p.getBase().getMeta().getTitle()).isEqualTo("Application Development (2)");
 
@@ -170,7 +170,7 @@ public class CoursesTests extends EnqueuedHttpResponseTests {
         .one("34MlmiuMgU8wKCOOIkAuMy");
 
     final EntryToCourse.Compound compound = new EntryToCourse.Compound().setCourse(cdaCourse);
-    final Course course = entryToCourse.convert(compound).getCourse();
+    final Course course = entryToCourse.convert(compound, 2).getCourse();
 
     assertThat(course.getSlug()).isEqualTo("how-the-example-app-is-built");
     assertThat(course.getTitle()).isEqualTo("How the example app is built");

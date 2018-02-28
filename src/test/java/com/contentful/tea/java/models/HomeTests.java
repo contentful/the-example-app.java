@@ -9,11 +9,11 @@ import com.contentful.tea.java.models.landing.modules.CopyModule;
 import com.contentful.tea.java.models.landing.modules.HeroImageModule;
 import com.contentful.tea.java.models.landing.modules.HighlightedCourseModule;
 import com.contentful.tea.java.services.contentful.Contentful;
-import com.contentful.tea.java.services.settings.Settings;
 import com.contentful.tea.java.services.modelconverter.ArrayToCourses;
 import com.contentful.tea.java.services.modelconverter.ArrayToCourses.ArrayAndSelectedCategory;
 import com.contentful.tea.java.services.modelconverter.EntryToCourse;
 import com.contentful.tea.java.services.modelconverter.EntryToLandingPage;
+import com.contentful.tea.java.services.settings.Settings;
 import com.contentful.tea.java.utils.http.EnqueueHttpResponse;
 import com.contentful.tea.java.utils.http.EnqueuedHttpResponseTests;
 
@@ -76,7 +76,7 @@ public class HomeTests extends EnqueuedHttpResponseTests {
         .items()
         .get(0);
 
-    final LandingPageParameter p = landingPageConverter.convert(homeEntry);
+    final LandingPageParameter p = landingPageConverter.convert(homeEntry, 2);
 
     assertThat(p.getBase().getMeta().getTitle()).isEqualTo("Home");
 
@@ -117,7 +117,7 @@ public class HomeTests extends EnqueuedHttpResponseTests {
     final ArrayAndSelectedCategory compound = new ArrayAndSelectedCategory()
         .setList(courses.items())
         .setCategorySlug("");
-    final CoursesParameter p = coursesConverter.convert(compound);
+    final CoursesParameter p = coursesConverter.convert(compound, 2);
 
     assertThat(p.getBase().getMeta().getTitle()).isEqualTo("All courses (5)");
 

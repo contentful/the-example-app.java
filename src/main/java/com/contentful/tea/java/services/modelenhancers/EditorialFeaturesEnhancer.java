@@ -74,7 +74,6 @@ public class EditorialFeaturesEnhancer {
 
       final CDAEntry publishedEntry = client
           .fetch(CDAEntry.class)
-          .include(5)
           .one(previewEntry.id());
 
       if (publishedEntry == null) {
@@ -104,7 +103,6 @@ public class EditorialFeaturesEnhancer {
 
       final CDAEntry publishedEntry = client
           .fetch(CDAEntry.class)
-          .include(5)
           .one(previewEntry.id());
 
       if (isPreviewUpdatedMoreRecently(publishedEntry, previewEntry)) {

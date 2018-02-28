@@ -56,7 +56,7 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
   private EditorialFeaturesEnhancer enhancer;
 
   @Override
-  public CoursesParameter convert(ArrayAndSelectedCategory compound) {
+  public CoursesParameter convert(ArrayAndSelectedCategory compound, int editorialFeaturesDepth) {
     final CoursesParameter parameter = new CoursesParameter();
 
     final String slug = compound.getCategorySlug() == null ? "" : compound.getCategorySlug();
@@ -75,7 +75,9 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
         sluggedCategory = category;
       }
 
-      enhancer.enhance(course, base);
+      if (editorialFeaturesDepth > 0) {
+        enhancer.enhance(course, base);
+      }
 
       final String collectionUrl = meta.getDeeplinkToContentful().replace(course.id(), "");
       meta.setDeeplinkToContentful(collectionUrl);

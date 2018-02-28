@@ -27,34 +27,37 @@ public class EntryToLandingPage extends ContentfulModelToMappableTypeConverter<C
   private EditorialFeaturesEnhancer enhancer;
 
   @Override
-  public LandingPageParameter convert(CDAEntry entry) {
+  public LandingPageParameter convert(CDAEntry entry, int editorialFeaturesDepth) {
     final LandingPageParameter parameter = new LandingPageParameter();
     parameter.getBase().getMeta().setTitle(t(Keys.homeLabel));
 
-    addModules(parameter, entry);
+    addModules(parameter, entry, editorialFeaturesDepth);
 
-    enhancer.enhance(entry, parameter.getBase());
-
+    if (editorialFeaturesDepth > 0) {
+      enhancer.enhance(entry, parameter.getBase());
+    }
     return parameter;
   }
 
-  private void addModules(LandingPageParameter parameter, CDAEntry entry) {
+  private void addModules(LandingPageParameter parameter, CDAEntry entry, int editorialFeaturesDepth) {
     final List<CDAEntry> contentModules = entry.getField("contentModules");
     for (final CDAEntry module : contentModules) {
-      final BaseModule moduleParameter = createNewModuleParameter(module);
+      final BaseModule moduleParameter = createNewModuleParameter(module, editorialFeaturesDepth);
       parameter.addModule(moduleParameter);
 
-      if (enhancer.isDraft(module)) {
-        parameter.getBase().getMeta().setDraft(true);
-      }
+      if (editorialFeaturesDepth > 0) {
+        if (enhancer.isDraft(module)) {
+          parameter.getBase().getMeta().setDraft(true);
+        }
 
-      if (enhancer.isPending(module)) {
-        parameter.getBase().getMeta().setPendingChanges(true);
+        if (enhancer.isPending(module)) {
+          parameter.getBase().getMeta().setPendingChanges(true);
+        }
       }
     }
   }
 
-  private BaseModule createNewModuleParameter(CDAEntry module) {
+  private BaseModule createNewModuleParameter(CDAEntry module, int editorialFeaturesDepth) {
     switch (module.contentType().id()) {
       case "layoutCopy":
         return new CopyModule()
@@ -69,7 +72,8 @@ public class EntryToLandingPage extends ContentfulModelToMappableTypeConverter<C
             .setCourse(
                 courseConverter.convert(
                     new EntryToCourse.Compound()
-                        .setCourse(((CDAEntry) module.getField("course")))
+                        .setCourse((module.getField("course"))),
+                    editorialFeaturesDepth - 1
                 ).getCourse());
       case "layoutHeroImage":
         return new HeroImageModule()

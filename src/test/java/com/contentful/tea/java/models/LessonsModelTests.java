@@ -69,7 +69,7 @@ public class LessonsModelTests extends EnqueuedHttpResponseTests {
 
     final CDAEntry cdaLesson = client.fetch(CDAEntry.class).one("2SAYsnajosIkCOWqSmKaio");
 
-    final LessonParameter lesson = lessonConverter.convert(cdaLesson);
+    final LessonParameter lesson = lessonConverter.convert(cdaLesson, 2);
     assertThat(lesson.getSlug()).isEqualTo("complete_lesson");
     assertThat(lesson.getTitle()).isEqualTo("Complete Lesson > all the modules");
 

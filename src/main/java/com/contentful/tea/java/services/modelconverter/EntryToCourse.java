@@ -74,7 +74,7 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
   private EditorialFeaturesEnhancer enhancer;
 
   @Override
-  public CourseParameter convert(EntryToCourse.Compound compound) {
+  public CourseParameter convert(EntryToCourse.Compound compound, int depth) {
     final CDAEntry course = compound.getCourse();
     final List<CDAEntry> cdaCategories = course.getField("categories");
     final List<Category> categories = getCategories(cdaCategories);
@@ -88,7 +88,7 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
     LessonParameter sluggedLesson = null;
     final Set<String> visitedLessons = compound.getVisitedLessons() == null ? new HashSet<>() : compound.getVisitedLessons();
     for (final CDAEntry cdaLesson : cdaLessons) {
-      final LessonParameter lesson = entryToLesson.convert(cdaLesson);
+      final LessonParameter lesson = entryToLesson.convert(cdaLesson, depth - 1);
       final boolean matchingSlug = Objects.equals(compound.getLessonSlug(), lesson.getSlug());
       if (matchingSlug) {
         sluggedLesson = lesson;
@@ -143,21 +143,23 @@ public class EntryToCourse extends ContentfulModelToMappableTypeConverter<EntryT
             .setTitle(course.getField("title"))
             .setSlug(course.getField("slug"))
             .setDuration(duration)
-            .setDraft(enhancer.isDraft(course))
-            .setPendingChanges(enhancer.isPending(course))
+            .setDraft(depth > 0 ? enhancer.isDraft(course) : false)
+            .setPendingChanges(depth > 0 ? enhancer.isPending(course) : false)
             .setSkillLevel(skillLevel)
             .setLessons(lessons)
             .setNextLessonSlug(nextLesson != null ? nextLesson.getSlug() : null)
             .setCurrentLesson(sluggedLesson)
         );
 
-    enhancer.enhance(course, courseParameter.getBase());
+    if (depth > 0) {
+      enhancer.enhance(course, courseParameter.getBase());
+    }
 
     if (sluggedLesson != null) {
       final MetaParameter sluggedMeta = sluggedLesson.getBase().getMeta();
       final MetaParameter courseMeta = courseParameter.getBase().getMeta();
-      courseMeta.setPendingChanges(courseMeta.isDraft() || sluggedMeta.hasPendingChanges());
       courseMeta.setDraft(courseMeta.isDraft() || sluggedMeta.isDraft());
+      courseMeta.setPendingChanges(courseMeta.hasPendingChanges() || sluggedMeta.hasPendingChanges());
       courseMeta.setDeeplinkToContentful(sluggedMeta.getDeeplinkToContentful());
     }
 

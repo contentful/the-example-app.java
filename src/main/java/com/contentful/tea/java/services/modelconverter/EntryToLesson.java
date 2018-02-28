@@ -30,7 +30,7 @@ public class EntryToLesson extends ContentfulModelToMappableTypeConverter<CDAEnt
   private EditorialFeaturesEnhancer enhancer;
 
   @Override
-  public LessonParameter convert(CDAEntry cdaLesson) {
+  public LessonParameter convert(CDAEntry cdaLesson, int editorialFeaturesDepth) {
     final LessonParameter result = new LessonParameter()
         .setSlug(cdaLesson.getField("slug"))
         .setTitle(cdaLesson.getField("title"));
@@ -42,15 +42,19 @@ public class EntryToLesson extends ContentfulModelToMappableTypeConverter<CDAEnt
         result.addModule(module);
       }
 
-      if (enhancer.isPending(cdaModule)) {
-        result.getBase().getMeta().setPendingChanges(true);
-      }
-      if (enhancer.isDraft(cdaModule)) {
-        result.getBase().getMeta().setDraft(true);
+      if (editorialFeaturesDepth > 0) {
+        if (enhancer.isPending(cdaModule)) {
+          result.getBase().getMeta().setPendingChanges(true);
+        }
+        if (enhancer.isDraft(cdaModule)) {
+          result.getBase().getMeta().setDraft(true);
+        }
       }
     }
 
-    enhancer.enhance(cdaLesson, result.getBase());
+    if (editorialFeaturesDepth > 0) {
+      enhancer.enhance(cdaLesson, result.getBase());
+    }
 
     return result;
   }
