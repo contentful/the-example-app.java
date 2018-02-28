@@ -348,10 +348,9 @@ public class MainController implements ErrorController {
       }
 
       if (parameter.getErrors().hasErrors()) {
-
-        System.err.println(parameter.getErrors().getDeliveryToken());
-        System.err.println(parameter.getErrors().getPreviewToken());
-        System.err.println(parameter.getErrors().getSpaceId());
+        outputError(parameter.getErrors().getDeliveryToken());
+        outputError(parameter.getErrors().getPreviewToken());
+        outputError(parameter.getErrors().getSpaceId());
 
         staticContentSetter.applyErrorContent(parameter.getBase());
         settingsCreator.setStaticLabels(parameter);
@@ -375,6 +374,12 @@ public class MainController implements ErrorController {
       throw new IllegalStateException("Cannot render settings page.", t);
     } finally {
       teardownRoute(request);
+    }
+  }
+
+  private void outputError(SettingsParameter.Errors.Error error) {
+    if (error != null) {
+      System.err.println("Following error occurred: '" +  error.toString() + "'.");
     }
   }
 
