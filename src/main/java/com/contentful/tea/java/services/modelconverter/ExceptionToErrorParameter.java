@@ -9,14 +9,13 @@ import com.contentful.tea.java.services.StaticContentSetter;
 import com.contentful.tea.java.services.localization.Keys;
 import com.contentful.tea.java.services.localization.Localizer;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import static org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace;
 
 @Component
 public class ExceptionToErrorParameter implements Converter<Throwable, ErrorParameter> {
@@ -66,6 +65,11 @@ public class ExceptionToErrorParameter implements Converter<Throwable, ErrorPara
         .setTryLabel(t(Keys.hintsLabel))
         .setVerifyCredentialsErrorLabel(t(Keys.verifyCredentialsErrorHint))
         ;
+  }
+
+  private String getStackTrace(Throwable source) {
+    final Throwable cause = source.getCause();
+    return cause instanceof CDAHttpException ? cause.toString() : ExceptionUtils.getStackTrace(source);
   }
 
   private int exceptionToStatusCode(Throwable source) {
