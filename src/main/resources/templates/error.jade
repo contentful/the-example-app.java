@@ -9,22 +9,13 @@ block content
       h1 #{somethingWentWrongLabel} (#{status})
       h2 #{tryLabel}
       ul
-        case status
-          when 404
-            li #{error404Route}
-            li #{draftOrPublishedErrorLabel}
-          when 400
-            li #{contentModelChangedErrorLabel}
-          when 401
-            li #{verifyCredentialsErrorLabel}
-            li #{localeContentErrorLabel}
-        if stack
-          li #{stackTraceErrorLabel}
+        each hint in hints
+          li #{hint}
       if responseData
-        h2 #{errorLabel}
-          pre.error__stack-trace
-            code.shell #{responseData}
-      if stack
-        h2 #{stackTraceLabel}
+        h2 #{responseDataLabel}
         pre.error__stack-trace
-          code.shell #{stack}
+          code.shell #{responseData}
+      if stack
+        //
+          #{stackTraceLabel}
+          #{stack}

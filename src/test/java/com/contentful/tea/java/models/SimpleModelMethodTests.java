@@ -43,13 +43,6 @@ public class SimpleModelMethodTests {
     assertThat(object.hashCode()).isNotEqualTo(new LandingPageParameter());
   }
 
-  @Test public void testErrorParameterToString() {
-    final ErrorParameter object = new ErrorParameter().setErrorLabel("TEST-ErrorParameter");
-    assertThat(object.toString()).contains("TEST-ErrorParameter");
-    assertThat(object).isNotEqualTo(new ErrorParameter());
-    assertThat(object.hashCode()).isNotEqualTo(new ErrorParameter());
-  }
-
   @Test public void testCoursesParameterToString() {
     final CoursesParameter object = new CoursesParameter().setTitle("TEST-CoursesParameter");
     assertThat(object.toString()).contains("TEST-CoursesParameter");

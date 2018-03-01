@@ -118,7 +118,7 @@
   "draftOrPublishedErrorHint": "Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted (Content Preview API & Content Delivery API).",
   "localeContentErrorHint": "Check if all required fields have content for this locale.",
   "verifyCredentialsErrorHint": "Verify that your space id and access tokens are correct and up to date.",
-  "stackTraceErrorHint": "Check the stack trace below.",
+  "stackTraceErrorHint": "Check the stack trace in the HTML source code of this page.",
   "errorLabel": "Error from Contentful:",
   "stackTraceLabel": "Stack trace:"
 }

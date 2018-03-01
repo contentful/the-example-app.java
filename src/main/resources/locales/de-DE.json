@@ -118,7 +118,7 @@
   "draftOrPublishedErrorHint": "Überprüfen Sie, ob der Inhalt veröffentlicht wurde, Änderungen enthält (Content Delivery API) oder gelöscht wurde (Content Preview API & Content Delivery API).",
   "localeContentErrorHint": "Überprüfen Sie, ob alle benötigten Felder dieser Sprache befüllt wurden.",
   "verifyCredentialsErrorHint": "Überprüfen Sie, ob die Space ID und die Access Tokens richtig und nicht abgelaufen sind.",
-  "stackTraceErrorHint": "Schauen Sie sich den folgenden Stack Trace an.",
+  "stackTraceErrorHint": "Schauen Sie sich den Stack Trace im Quelltext dieser Seite an.",
   "errorLabel": "Fehler von Contentful:",
   "stackTraceLabel": "Stack trace:"
 }

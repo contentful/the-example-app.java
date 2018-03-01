@@ -5,17 +5,24 @@ import com.contentful.java.cda.CDAResourceNotFoundException;
 import com.contentful.tea.java.models.base.BaseParameter;
 import com.contentful.tea.java.models.base.Locale;
 import com.contentful.tea.java.models.errors.ErrorParameter;
+import com.contentful.tea.java.models.exceptions.TeaException;
 import com.contentful.tea.java.services.StaticContentSetter;
 import com.contentful.tea.java.services.localization.Keys;
 import com.contentful.tea.java.services.localization.Localizer;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
+
+import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace;
 
 @Component
 public class ExceptionToErrorParameter implements Converter<Throwable, ErrorParameter> {
@@ -51,56 +58,34 @@ public class ExceptionToErrorParameter implements Converter<Throwable, ErrorPara
     base.getMeta().setTitle(t(Keys.errorOccurredTitleLabel));
 
     return errorParameter
-        .setContentModelChangedErrorLabel(t(Keys.contentModelChangedErrorHint))
-        .setDraftOrPublishedErrorLabel(t(Keys.draftOrPublishedErrorHint))
-        .setError404Route(t(Keys.errorMessage404Route))
-        .setErrorLabel(t(Keys.errorLabel))
-        .setLocaleContentErrorLabel(t(Keys.localeContentErrorHint))
-        .setResponseData(source.getMessage())
+        .setHints(hintKeysToHints(source))
+        .setResponseDataLabel(t(Keys.errorLabel))
         .setSomethingWentWrongLabel(t(Keys.somethingWentWrongLabel))
-        .setStack(getStackTrace(source))
-        .setStackTraceErrorLabel(t(Keys.stackTraceErrorHint))
-        .setStackTraceLabel(t(Keys.stackTraceLabel))
-        .setStatus(exceptionToStatusCode(source))
+        .setResponseData(getResponseData(source))
+        .setStatus(404)
         .setTryLabel(t(Keys.hintsLabel))
-        .setVerifyCredentialsErrorLabel(t(Keys.verifyCredentialsErrorHint))
+        .setStackTraceLabel(t(Keys.stackTraceLabel))
+        .setStack(getStackTrace(source))
         ;
   }
 
-  private String getStackTrace(Throwable source) {
-    final Throwable cause = source.getCause();
-    return cause instanceof CDAHttpException ? cause.toString() : ExceptionUtils.getStackTrace(source);
+  private List<String> hintKeysToHints(Throwable source) {
+    final List<Keys> keys = source instanceof TeaException ? ((TeaException) source).createHints() : Collections.singletonList(Keys.notFoundErrorHint);
+    return keys
+        .stream()
+        .filter(Objects::nonNull)
+        .map(this::t)
+        .filter(not(String::isEmpty))
+        .collect(toList());
   }
 
-  private int exceptionToStatusCode(Throwable source) {
-    if (source instanceof FileNotFoundException) {
-      return 404;
-    }
+  private static <T> Predicate<T> not(Predicate<T> t) {
+    return t.negate();
+  }
 
-    if (source.getCause() != null) {
-      if (source.getCause() instanceof CDAResourceNotFoundException) {
-        return 404;
-      }
-
-      if (source.getCause() instanceof CDAHttpException) {
-        return ((CDAHttpException) source.getCause()).responseCode();
-      }
-    }
-
-    if (source instanceof CDAHttpException) {
-      final CDAHttpException cdaException = (CDAHttpException) source;
-      return cdaException.responseCode();
-    }
-
-    if (source instanceof IOException) {
-      return 500;
-    }
-
-    if (source.getMessage() == null) {
-      return 404;
-    }
-
-    return 500;
+  private String getResponseData(Throwable source) {
+    final Throwable cause = source.getCause();
+    return cause instanceof CDAHttpException ? cause.toString() : null;
   }
 
   private String t(Keys key) {

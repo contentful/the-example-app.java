@@ -8,6 +8,7 @@ import com.contentful.tea.java.html.JadeHtmlGenerator;
 import com.contentful.tea.java.models.courses.CourseParameter;
 import com.contentful.tea.java.models.courses.CoursesParameter;
 import com.contentful.tea.java.models.errors.ErrorParameter;
+import com.contentful.tea.java.models.exceptions.TeaException;
 import com.contentful.tea.java.models.imprint.ImprintParameter;
 import com.contentful.tea.java.models.landing.LandingPageParameter;
 import com.contentful.tea.java.models.settings.SettingsParameter;
@@ -33,6 +34,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -134,7 +137,7 @@ public class MainController implements ErrorController {
 
       return htmlGenerator.generate("landingPage.jade", parameter.toMap());
     } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render landing page.", t);
+      throw new TeaException.HomeLayoutNotFoundException(t);
     } finally {
       teardownRoute(request);
     }
@@ -166,7 +169,7 @@ public class MainController implements ErrorController {
 
       return htmlGenerator.generate("courses.jade", parameter.toMap());
     } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render courses page.", t);
+      throw new TeaException.CoursesNotFoundException(t);
     } finally {
       teardownRoute(request);
     }
@@ -196,7 +199,7 @@ public class MainController implements ErrorController {
 
       return htmlGenerator.generate("courses.jade", parameter.toMap());
     } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render '" + slug + "' courses category page.", t);
+      throw new TeaException.CoursesForCategoryNotFoundException(slug, t);
     } finally {
       teardownRoute(request);
     }
@@ -235,7 +238,7 @@ public class MainController implements ErrorController {
 
       return htmlGenerator.generate("course.jade", parameter.toMap());
     } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render '" + coursesSlug + "' courses page.", t);
+      throw new TeaException.CourseNotFoundException(coursesSlug, t);
     } finally {
       teardownRoute(request);
     }
@@ -276,7 +279,7 @@ public class MainController implements ErrorController {
 
       return htmlGenerator.generate("course.jade", parameter.toMap());
     } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render " + courseSlug + "'s lesson '" + lessonSlug + "' page.", t);
+      throw new TeaException.LessonFromCourseNotFoundException(courseSlug, lessonSlug, t);
     } finally {
       teardownRoute(request);
     }
@@ -293,7 +296,7 @@ public class MainController implements ErrorController {
 
       return htmlGenerator.generate("imprint.jade", parameter.toMap());
     } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render imprint page.", t);
+      throw new TeaException.ImprintRenderingException(t);
     } finally {
       teardownRoute(request);
     }
@@ -315,7 +318,7 @@ public class MainController implements ErrorController {
 
       return htmlGenerator.generate("settings.jade", parameter.toMap());
     } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render settings page.", t);
+      throw new TeaException.SettingsRenderingException(t);
     } finally {
       teardownRoute(request);
     }
@@ -371,7 +374,7 @@ public class MainController implements ErrorController {
 
       return htmlGenerator.generate("settings.jade", parameter.toMap());
     } catch (Throwable t) {
-      throw new IllegalStateException("Cannot render settings page.", t);
+      throw new TeaException.SettingsRenderingException(t);
     } finally {
       teardownRoute(request);
     }
@@ -379,7 +382,7 @@ public class MainController implements ErrorController {
 
   private void outputError(SettingsParameter.Errors.Error error) {
     if (error != null) {
-      System.err.println("Following error occurred: '" +  error.toString() + "'.");
+      System.err.println("Following error occurred: '" + error.toString() + "'.");
     }
   }
 
@@ -387,32 +390,36 @@ public class MainController implements ErrorController {
     return !(lastContentful.equals(contentful) && lastSettings.equals(settings));
   }
 
-  @ExceptionHandler(Throwable.class)
-  @RequestMapping(value = "/error", produces = "text/html")
+  @ExceptionHandler(TeaException.class)
+  @RequestMapping(value = "/error/tea", produces = "text/html")
   @SuppressWarnings("unused")
-  public String serverError(HttpServletRequest request, Throwable serverException) {
-    serverException.printStackTrace(System.err);
+  public ResponseEntity<String> teaError(HttpServletRequest request, TeaException teaException) {
+    teaException.printStackTrace(System.err);
 
     settings.setLocale(request.getParameter(Constants.NAME_LOCALE));
 
-    final ErrorParameter errorParameter = exceptionToError.convert(serverException);
+    final ErrorParameter errorParameter = exceptionToError.convert(teaException);
 
     try {
-      return htmlGenerator.generate("error.jade", errorParameter.toMap());
+      return new ResponseEntity<>(htmlGenerator.generate("error.jade", errorParameter.toMap()),
+          HttpStatus.NOT_FOUND);
     } catch (Throwable nestedException) {
-      return format(
-          "<h1>Nested exception thrown while handling a server exception</h1><br/>\n\n%s while %s<br/>\n\n<!--\n%s\n\nwhile\n\n%s\n-->",
-          nestedException,
-          serverException,
-          getStackTrace(nestedException),
-          getStackTrace(serverException));
+      return new ResponseEntity<>(
+          format(
+              "<h1>Nested exception thrown while handling a server exception</h1><br/>\n\n%s while %s<br/>\n\n<!--\n%s\n\nwhile\n\n%s\n-->",
+              nestedException,
+              teaException,
+              getStackTrace(nestedException),
+              getStackTrace(teaException)),
+          HttpStatus.NOT_FOUND);
     }
   }
+
 
   @ExceptionHandler(CDAHttpException.class)
   @RequestMapping(value = "/error/contentful", produces = "text/html")
   @SuppressWarnings("unused")
-  public String contentfulError(HttpServletRequest request, CDAHttpException contentfulException) {
+  public ResponseEntity<String> contentfulError(HttpServletRequest request, CDAHttpException contentfulException) {
     contentfulException.printStackTrace(System.err);
 
     settings.setPath(request.getRequestURL().toString());
@@ -420,14 +427,42 @@ public class MainController implements ErrorController {
     errorParameter.getBase().getMeta().setTitle(localizer.localize(Keys.errorOccurredTitleLabel));
 
     try {
-      return htmlGenerator.generate("error.jade", errorParameter.toMap());
+      return new ResponseEntity<>(htmlGenerator.generate("error.jade", errorParameter.toMap()),
+          HttpStatus.NOT_FOUND);
     } catch (Throwable nestedException) {
-      return format(
-          "<h1>Nested exception thrown while handling a server exception</h1><br/>\n\n%s while %s<br/>\n\n<!--\n%s\n\nwhile\n\n%s\n-->",
-          nestedException,
-          contentfulException,
-          getStackTrace(nestedException),
-          getStackTrace(contentfulException));
+      return new ResponseEntity<>(
+          format(
+              "<h1>Nested exception thrown while handling a server exception</h1><br/>\n\n%s while %s<br/>\n\n<!--\n%s\n\nwhile\n\n%s\n-->",
+              nestedException,
+              contentfulException,
+              getStackTrace(nestedException),
+              getStackTrace(contentfulException)),
+          HttpStatus.NOT_FOUND);
+    }
+  }
+
+  @ExceptionHandler(Throwable.class)
+  @RequestMapping(value = "/error/general", produces = "text/html")
+  @SuppressWarnings("unused")
+  public ResponseEntity<String> serverError(HttpServletRequest request, Throwable serverException) {
+    serverException.printStackTrace(System.err);
+
+    settings.setLocale(request.getParameter(Constants.NAME_LOCALE));
+
+    final ErrorParameter errorParameter = exceptionToError.convert(serverException);
+
+    try {
+      return new ResponseEntity<>(htmlGenerator.generate("error.jade", errorParameter.toMap()),
+          HttpStatus.NOT_FOUND);
+    } catch (Throwable nestedException) {
+      return new ResponseEntity<>(
+          format(
+              "<h1>Nested exception thrown while handling a server exception</h1><br/>\n\n%s while %s<br/>\n\n<!--\n%s\n\nwhile\n\n%s\n-->",
+              nestedException,
+              serverException,
+              getStackTrace(nestedException),
+              getStackTrace(serverException)),
+          HttpStatus.NOT_FOUND);
     }
   }
 
