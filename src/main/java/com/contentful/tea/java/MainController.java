@@ -285,6 +285,18 @@ public class MainController implements ErrorController {
     }
   }
 
+  @RequestMapping(value = "/courses/**/lessons/**", produces = "text/html")
+  @SuppressWarnings("unused")
+  public ResponseEntity<String> errorLessonsRoute(HttpServletRequest request) {
+    return teaError(request, new TeaException.LessonRouteNotFoundException());
+  }
+
+  @RequestMapping(value = "/courses/**", produces = "text/html")
+  @SuppressWarnings("unused")
+  public ResponseEntity<String> errorCoursesRoute(HttpServletRequest request) {
+    return teaError(request, new TeaException.CoursesRouteNotFoundException());
+  }
+
   @RequestMapping(value = "/imprint", produces = "text/html")
   @SuppressWarnings("unused")
   public String imprint(HttpServletRequest request) {

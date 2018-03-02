@@ -23,7 +23,7 @@ public abstract class TeaException extends IllegalStateException {
           Keys.errorMessage404Route,
           Keys.errorHighlightedCourse,
           Keys.stackTraceErrorHint
-          );
+      );
     }
   }
 
@@ -35,6 +35,7 @@ public abstract class TeaException extends IllegalStateException {
     @Override public List<Keys> createHints() {
       return asList(
           Keys.notFoundErrorHint,
+          Keys.errorMessage404Route,
           Keys.errorMessage404Course,
           Keys.stackTraceErrorHint
       );
@@ -49,6 +50,7 @@ public abstract class TeaException extends IllegalStateException {
     @Override public List<Keys> createHints() {
       return asList(
           Keys.notFoundErrorHint,
+          Keys.errorMessage404Route,
           Keys.errorMessage404Course,
           Keys.errorMessage404Lesson,
           Keys.stackTraceErrorHint
@@ -64,9 +66,41 @@ public abstract class TeaException extends IllegalStateException {
     @Override public List<Keys> createHints() {
       return asList(
           Keys.notFoundErrorHint,
+          Keys.errorMessage404Route,
           Keys.errorMessage404Course,
           Keys.errorMessage404Category,
           Keys.errorMessage404Lesson,
+          Keys.stackTraceErrorHint
+      );
+    }
+  }
+
+  public static class LessonRouteNotFoundException extends TeaException {
+    public LessonRouteNotFoundException() {
+      super("Cannot find route on coures' lesson.", null);
+    }
+
+    @Override public List<Keys> createHints() {
+      return asList(
+          Keys.notFoundErrorHint,
+          Keys.errorMessage404Route,
+          Keys.errorMessage404Course,
+          Keys.errorMessage404Lesson,
+          Keys.stackTraceErrorHint
+      );
+    }
+  }
+
+  public static class CoursesRouteNotFoundException extends TeaException {
+    public CoursesRouteNotFoundException() {
+      super("Cannot find route on courses.", null);
+    }
+
+    @Override public List<Keys> createHints() {
+      return asList(
+          Keys.notFoundErrorHint,
+          Keys.errorMessage404Course,
+          Keys.errorMessage404Route,
           Keys.stackTraceErrorHint
       );
     }

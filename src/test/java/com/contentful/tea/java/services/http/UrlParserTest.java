@@ -74,11 +74,6 @@ public class UrlParserTest {
     assertThat(after).isEqualTo("cda_token");
   }
 
-  @Test(expected = IllegalStateException.class)
-  public void invalidApiThrowsOnParsing() {
-    parser.urlParameterToApp(singletonMap(NAME_API, new String[]{"not_allowed"}));
-  }
-
   @Test
   public void allParameterCanGetParsed() {
     final Map<String, String[]> map = new HashMap<>();
