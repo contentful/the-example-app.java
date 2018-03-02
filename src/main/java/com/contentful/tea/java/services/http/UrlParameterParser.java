@@ -14,7 +14,6 @@ import java.util.Map;
 
 import static com.contentful.tea.java.services.contentful.Contentful.API_CDA;
 import static com.contentful.tea.java.services.contentful.Contentful.API_CPA;
-import static com.contentful.tea.java.services.http.Constants.EDITORIAL_FEATURES_DISABLED;
 import static com.contentful.tea.java.services.http.Constants.EDITORIAL_FEATURES_ENABLED;
 import static java.lang.String.join;
 import static java.util.Arrays.asList;
@@ -39,16 +38,13 @@ public class UrlParameterParser {
 
     manipulatorsByNameMap.put(Constants.NAME_API, new Manipulator() {
       @Override public void fromUrlParameterValueToApp(String value) {
-        switch (value) {
-          case API_CPA:
-          case API_CDA:
-            contentful.setApi(value);
-            final String queryString = addToQueryString(settings.getQueryString(), Constants.NAME_API, value);
-            settings.setQueryString(queryString);
-            break;
-          default:
-            throw new IllegalStateException("API cannot be of value '" + value + "'. Only '" + API_CDA + "' and '" + API_CPA + "' are allowed.");
+        if (!API_CPA.equals(value) && !API_CPA.equals(value)) {
+          value = API_CDA;
         }
+
+        contentful.setApi(value);
+        final String queryString = addToQueryString(settings.getQueryString(), Constants.NAME_API, value);
+        settings.setQueryString(queryString);
       }
 
       @Override public String fromAppToUrlParameterValue() {

@@ -67,6 +67,8 @@ public class Contentful {
   public Contentful setApi(String api) {
     if (API_CDA.equals(api) || API_CPA.equals(api)) {
       this.api = api;
+    } else {
+      this.api = API_CDA;
     }
     return this;
   }
