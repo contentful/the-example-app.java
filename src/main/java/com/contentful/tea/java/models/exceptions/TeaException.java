@@ -53,6 +53,7 @@ public abstract class TeaException extends IllegalStateException {
           Keys.errorMessage404Route,
           Keys.errorMessage404Course,
           Keys.errorMessage404Lesson,
+          Keys.draftOrPublishedErrorHint,
           Keys.stackTraceErrorHint
       );
     }
@@ -70,6 +71,7 @@ public abstract class TeaException extends IllegalStateException {
           Keys.errorMessage404Course,
           Keys.errorMessage404Category,
           Keys.errorMessage404Lesson,
+          Keys.draftOrPublishedErrorHint,
           Keys.stackTraceErrorHint
       );
     }
@@ -77,7 +79,7 @@ public abstract class TeaException extends IllegalStateException {
 
   public static class LessonRouteNotFoundException extends TeaException {
     public LessonRouteNotFoundException() {
-      super("Cannot find route on coures' lesson.", null);
+      super("Cannot find route on courses' lesson.", null);
     }
 
     @Override public List<Keys> createHints() {
@@ -86,6 +88,7 @@ public abstract class TeaException extends IllegalStateException {
           Keys.errorMessage404Route,
           Keys.errorMessage404Course,
           Keys.errorMessage404Lesson,
+          Keys.draftOrPublishedErrorHint,
           Keys.stackTraceErrorHint
       );
     }
@@ -101,6 +104,7 @@ public abstract class TeaException extends IllegalStateException {
           Keys.notFoundErrorHint,
           Keys.errorMessage404Course,
           Keys.errorMessage404Route,
+          Keys.draftOrPublishedErrorHint,
           Keys.stackTraceErrorHint
       );
     }
@@ -116,6 +120,7 @@ public abstract class TeaException extends IllegalStateException {
           Keys.notFoundErrorHint,
           Keys.errorMessage404Course,
           Keys.errorMessage404Lesson,
+          Keys.draftOrPublishedErrorHint,
           Keys.stackTraceErrorHint
       );
     }
