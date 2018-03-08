@@ -60,8 +60,6 @@ import static org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace;
 @ResponseBody
 @EnableAutoConfiguration
 public class MainController implements ErrorController {
-  private static final String ERROR_PATH = "/error";
-
   public static void main(String[] args) {
     SpringApplication.run(MainController.class, args);
   }
@@ -454,34 +452,12 @@ public class MainController implements ErrorController {
   }
 
   @ExceptionHandler(Throwable.class)
-  @RequestMapping(value = "/error/general", produces = "text/html")
+  @RequestMapping(path = "/error", produces = "text/html")
   @SuppressWarnings("unused")
-  public ResponseEntity<String> serverError(HttpServletRequest request, Throwable serverException) {
-    serverException.printStackTrace(System.err);
-
-    settings.setLocale(request.getParameter(Constants.NAME_LOCALE));
-
-    final ErrorParameter errorParameter = exceptionToError.convert(serverException);
-
-    try {
-      return new ResponseEntity<>(htmlGenerator.generate("error.jade", errorParameter.toMap()),
-          HttpStatus.NOT_FOUND);
-    } catch (Throwable nestedException) {
-      return new ResponseEntity<>(
-          format(
-              "<h1>Nested exception thrown while handling a server exception</h1><br/>\n\n%s while %s<br/>\n\n<!--\n%s\n\nwhile\n\n%s\n-->",
-              nestedException,
-              serverException,
-              getStackTrace(nestedException),
-              getStackTrace(serverException)),
-          HttpStatus.NOT_FOUND);
-    }
+  public ResponseEntity<String> generalError(HttpServletRequest request, Throwable serverException) {
+    return teaError(request, new TeaException.RouteNotFoundException(request.getRequestURI()));
   }
 
-  @Override
-  public String getErrorPath() {
-    return ERROR_PATH;
-  }
 
   private void setupRoute(HttpServletRequest request) {
     contentful.reset().loadFromPreferences();
@@ -511,4 +487,7 @@ public class MainController implements ErrorController {
     return visitedLessons;
   }
 
+  @Override public String getErrorPath() {
+    return "/";
+  }
 }

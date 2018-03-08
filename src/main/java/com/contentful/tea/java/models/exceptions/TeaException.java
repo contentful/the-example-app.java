@@ -112,7 +112,7 @@ public abstract class TeaException extends IllegalStateException {
 
   public static class LessonFromCourseNotFoundException extends TeaException {
     public LessonFromCourseNotFoundException(String courseSlug, String lessonSlug, Throwable cause) {
-      super("Cannot render " + courseSlug + "'s lesson '" + lessonSlug + "' page.", cause);
+      super("Cannot render '" + courseSlug + "'s lesson '" + lessonSlug + "' page.", cause);
     }
 
     @Override public List<Keys> createHints() {
@@ -120,6 +120,21 @@ public abstract class TeaException extends IllegalStateException {
           Keys.notFoundErrorHint,
           Keys.errorMessage404Course,
           Keys.errorMessage404Lesson,
+          Keys.draftOrPublishedErrorHint,
+          Keys.stackTraceErrorHint
+      );
+    }
+  }
+
+  public static class RouteNotFoundException extends TeaException {
+    public RouteNotFoundException(String route) {
+      super("Cannot render route '" + route + "'.", null);
+    }
+
+    @Override public List<Keys> createHints() {
+      return asList(
+          Keys.notFoundErrorHint,
+          Keys.errorMessage404Route,
           Keys.draftOrPublishedErrorHint,
           Keys.stackTraceErrorHint
       );

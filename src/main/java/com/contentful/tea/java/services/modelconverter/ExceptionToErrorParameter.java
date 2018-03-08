@@ -29,11 +29,11 @@ public class ExceptionToErrorParameter implements Converter<Throwable, ErrorPara
 
   @Autowired
   @SuppressWarnings("unused")
-  private StaticContentSetter staticContentSetter;
+  StaticContentSetter staticContentSetter;
 
   @Autowired
   @SuppressWarnings("unused")
-  private Localizer localizer;
+  Localizer localizer;
 
   @Override
   public ErrorParameter convert(Throwable source) {
@@ -88,7 +88,7 @@ public class ExceptionToErrorParameter implements Converter<Throwable, ErrorPara
     return cause instanceof CDAHttpException ? cause.toString() : null;
   }
 
-  private String t(Keys key) {
+  public String t(Keys key) {
     return localizer.localize(key);
   }
 
