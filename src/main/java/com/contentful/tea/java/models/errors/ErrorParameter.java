@@ -16,6 +16,8 @@ public class ErrorParameter extends MappableType {
   private String somethingWentWrongLabel;
   private String stackTraceLabel;
   private String tryLabel;
+  private boolean useCustomCredentials;
+  private String resetCredentialsLabel;
   private int status;
   private List<String> hints = new ArrayList<>();
 
@@ -102,6 +104,24 @@ public class ErrorParameter extends MappableType {
     return this;
   }
 
+  public boolean usesCustomCredentials() {
+    return useCustomCredentials;
+  }
+
+  public ErrorParameter setUseCustomCredentials(boolean useCustomCredentials) {
+    this.useCustomCredentials = useCustomCredentials;
+    return this;
+  }
+
+  public String getResetCredentialsLabel() {
+    return resetCredentialsLabel;
+  }
+
+  public ErrorParameter setResetCredentialsLabel(String resetCredentialsLabel) {
+    this.resetCredentialsLabel = resetCredentialsLabel;
+    return this;
+  }
+
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof ErrorParameter)) return false;
@@ -114,6 +134,8 @@ public class ErrorParameter extends MappableType {
         Objects.equals(getSomethingWentWrongLabel(), that.getSomethingWentWrongLabel()) &&
         Objects.equals(getTryLabel(), that.getTryLabel()) &&
         Objects.equals(getStackTraceLabel(), that.getStackTraceLabel()) &&
+        Objects.equals(getResetCredentialsLabel(), that.getResetCredentialsLabel()) &&
+        Objects.equals(usesCustomCredentials(), that.usesCustomCredentials()) &&
         Objects.equals(getHints(), that.getHints());
   }
 

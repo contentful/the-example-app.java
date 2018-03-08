@@ -1,12 +1,12 @@
 package com.contentful.tea.java.services.modelconverter;
 
 import com.contentful.java.cda.CDAHttpException;
-import com.contentful.java.cda.CDAResourceNotFoundException;
 import com.contentful.tea.java.models.base.BaseParameter;
 import com.contentful.tea.java.models.base.Locale;
 import com.contentful.tea.java.models.errors.ErrorParameter;
 import com.contentful.tea.java.models.exceptions.TeaException;
 import com.contentful.tea.java.services.StaticContentSetter;
+import com.contentful.tea.java.services.contentful.Contentful;
 import com.contentful.tea.java.services.localization.Keys;
 import com.contentful.tea.java.services.localization.Localizer;
 
@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -34,6 +32,10 @@ public class ExceptionToErrorParameter implements Converter<Throwable, ErrorPara
   @Autowired
   @SuppressWarnings("unused")
   Localizer localizer;
+
+  @Autowired
+  @SuppressWarnings("unused")
+  Contentful contentful;
 
   @Override
   public ErrorParameter convert(Throwable source) {
@@ -66,6 +68,8 @@ public class ExceptionToErrorParameter implements Converter<Throwable, ErrorPara
         .setTryLabel(t(Keys.hintsLabel))
         .setStackTraceLabel(t(Keys.stackTraceLabel))
         .setStack(getStackTrace(source))
+        .setUseCustomCredentials(contentful.isUsingCustomCredentials())
+        .setResetCredentialsLabel(t(Keys.resetCredentialsLabel))
         ;
   }
 

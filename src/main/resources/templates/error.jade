@@ -14,6 +14,10 @@ block content
         h2 !{responseDataLabel}
         pre.error__stack-trace
           code.shell !{responseData}
+      if useCustomCredentials
+        form(action='/settings?reset=true' method='POST')
+          p
+            button(type="submit") #{resetCredentialsLabel}
       if stack
         //
           !{stackTraceLabel}
