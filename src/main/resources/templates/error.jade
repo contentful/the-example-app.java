@@ -5,16 +5,16 @@ include mixins/_breadcrumb
 block content
   .layout-centered
     .error
-      h1 #{somethingWentWrongLabel} (#{status})
-      h2 #{tryLabel}
+      h1 !{somethingWentWrongLabel} (!{status})
+      h2 !{tryLabel}
       ul
         each hint in hints
-          li #{hint}
+          li !{hint}
       if responseData
-        h2 #{responseDataLabel}
+        h2 !{responseDataLabel}
         pre.error__stack-trace
-          code.shell #{responseData}
+          code.shell !{responseData}
       if stack
         //
-          #{stackTraceLabel}
-          #{stack}
+          !{stackTraceLabel}
+          !{stack}
