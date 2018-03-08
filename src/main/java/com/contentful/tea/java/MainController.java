@@ -8,6 +8,7 @@ import com.contentful.tea.java.html.JadeHtmlGenerator;
 import com.contentful.tea.java.models.courses.CourseParameter;
 import com.contentful.tea.java.models.courses.CoursesParameter;
 import com.contentful.tea.java.models.errors.ErrorParameter;
+import com.contentful.tea.java.models.exceptions.RedirectException;
 import com.contentful.tea.java.models.exceptions.TeaException;
 import com.contentful.tea.java.models.imprint.ImprintParameter;
 import com.contentful.tea.java.models.landing.LandingPageParameter;
@@ -119,9 +120,9 @@ public class MainController implements ErrorController {
   @RequestMapping(value = "/", produces = "text/html")
   @SuppressWarnings("unused")
   public String home(HttpServletRequest request) {
-    try {
-      setupRoute(request);
+    setupRoute(request);
 
+    try {
       final CDAClient client = contentful.getCurrentClient();
       final CDAEntry cdaLanding = client
           .fetch(CDAEntry.class)
@@ -144,9 +145,9 @@ public class MainController implements ErrorController {
   @RequestMapping(value = "/courses", produces = "text/html")
   @SuppressWarnings("unused")
   public String courses(HttpServletRequest request) {
-    try {
-      setupRoute(request);
+    setupRoute(request);
 
+    try {
       final CDAClient client = contentful.getCurrentClient();
       final CDAArray courses = client
           .fetch(CDAEntry.class)
@@ -177,9 +178,9 @@ public class MainController implements ErrorController {
   @SuppressWarnings("unused")
   public String coursesCategory(HttpServletRequest request,
                                 @PathVariable(value = "slug", required = false) String slug) {
-    try {
-      setupRoute(request);
+    setupRoute(request);
 
+    try {
       final CDAClient client = contentful.getCurrentClient();
       final CDAArray courses = client
           .fetch(CDAEntry.class)
@@ -209,9 +210,9 @@ public class MainController implements ErrorController {
       HttpServletRequest request,
       @SessionAttribute(required = false) Map<String, Set<String>> visitedLessonsByCourseSlug,
       @PathVariable("coursesSlug") String coursesSlug) {
-    try {
-      setupRoute(request);
+    setupRoute(request);
 
+    try {
       final CDAClient client = contentful.getCurrentClient();
       final CDAEntry course = ((CDAEntry) client
           .fetch(CDAEntry.class)
@@ -249,9 +250,9 @@ public class MainController implements ErrorController {
       @SessionAttribute(required = false) Map<String, Set<String>> visitedLessonsByCourseSlug,
       @PathVariable String courseSlug,
       @PathVariable String lessonSlug) {
-    try {
-      setupRoute(request);
+    setupRoute(request);
 
+    try {
       final CDAClient client = contentful.getCurrentClient();
       final CDAEntry course = ((CDAEntry) client
           .fetch(CDAEntry.class)
@@ -298,9 +299,9 @@ public class MainController implements ErrorController {
   @RequestMapping(value = "/imprint", produces = "text/html")
   @SuppressWarnings("unused")
   public String imprint(HttpServletRequest request) {
-    try {
-      setupRoute(request);
+    setupRoute(request);
 
+    try {
       final ImprintParameter parameter = imprintCreator.create();
       staticContentSetter.applyContent(parameter.getBase());
 
@@ -320,9 +321,9 @@ public class MainController implements ErrorController {
       return updateSettings(request);
     }
 
-    try {
-      setupRoute(request);
+    setupRoute(request);
 
+    try {
       final SettingsParameter parameter = settingsCreator.create();
       staticContentSetter.applyContent(parameter.getBase());
 
@@ -458,6 +459,17 @@ public class MainController implements ErrorController {
     return teaError(request, new TeaException.RouteNotFoundException(request.getRequestURI()));
   }
 
+  @ExceptionHandler(RedirectException.class)
+  @RequestMapping(path = "/error/redirect", produces = "text/html")
+  @SuppressWarnings("unused")
+  public String redirectException(HttpServletRequest request, RedirectException redirect) {
+    if ("/settings".equals(redirect.getWhereTo())) {
+      return settings(request);
+    } else {
+      throw new TeaException.RouteNotFoundException("redirect:/" + redirect.getWhereTo());
+    }
+  }
+
 
   private void setupRoute(HttpServletRequest request) {
     contentful.reset().loadFromPreferences();
@@ -466,6 +478,19 @@ public class MainController implements ErrorController {
     urlParameterParser.urlParameterToApp(request.getParameterMap());
     settings.setBaseUrl(request.getRequestURL().toString());
     settings.setPath(request.getServletPath());
+
+    if (!areCredentialsValid()) {
+      throw new RedirectException("/settings");
+    }
+  }
+
+  private boolean areCredentialsValid() {
+    try {
+      contentful.getCurrentClient().fetchSpace();
+      return true;
+    } catch (CDAHttpException e) {
+      return false;
+    }
   }
 
   private void teardownRoute(HttpServletRequest request) {
