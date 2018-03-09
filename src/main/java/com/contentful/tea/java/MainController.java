@@ -338,57 +338,79 @@ public class MainController implements ErrorController {
   @PostMapping(value = "/settings", produces = "text/html")
   @SuppressWarnings("unused")
   public String updateSettings(HttpServletRequest request) {
-    try {
-      final Settings lastSettings = settings.save();
-      final Contentful lastContentful = contentful.save();
-      settings.setBaseUrl(request.getRequestURL().toString());
-      settings.setPath(request.getServletPath());
+    if (shouldReset(request)) {
+      contentful.reset().loadFromPreferences();
+      settings.reset();
+      return settings(request);
+    } else {
 
-      SettingsParameter parameter = new SettingsParameter();
       try {
-        urlParameterParser.urlParameterToApp(request.getParameterMap());
-        parameter = settingsCreator.create();
-      } catch (Throwable t) {
-        parameter
-            .setErrors(
-                parameter.getErrors()
-                    .setSpaceId(
-                        new Errors.Error()
-                            .setMessage(
-                                localizer.localize(Keys.spaceOrTokenInvalid)
-                            )
-                    )
-            );
-      }
 
-      if (parameter.getErrors().hasErrors()) {
-        outputError(parameter.getErrors().getDeliveryToken());
-        outputError(parameter.getErrors().getPreviewToken());
-        outputError(parameter.getErrors().getSpaceId());
+        final Settings lastSettings = settings.save();
+        final Contentful lastContentful = contentful.save();
+        settings.setBaseUrl(request.getRequestURL().toString());
+        settings.setPath(request.getServletPath());
 
-        staticContentSetter.applyErrorContent(parameter.getBase());
-        settingsCreator.setStaticLabels(parameter);
-
-        parameter
-            .setDeliveryToken(contentful.getDeliveryAccessToken())
-            .setPreviewToken(contentful.getPreviewAccessToken())
-            .setSpaceId(contentful.getSpaceId());
-
-        settings.load(lastSettings);
-        contentful.load(lastContentful);
-      } else {
-        if (request.getParameterMap().size() > 0 && configurationIsDifferentToLastTime(lastContentful, lastSettings)) {
-          parameter.setSuccessful(true);
+        SettingsParameter parameter = new SettingsParameter();
+        try {
+          contentful.reset().loadFromPreferences();
+          urlParameterParser.urlParameterToApp(request.getParameterMap());
+          parameter = settingsCreator.create();
+        } catch (Throwable t) {
+          parameter
+              .setErrors(
+                  parameter.getErrors()
+                      .setSpaceId(
+                          new Errors.Error()
+                              .setMessage(
+                                  localizer.localize(Keys.spaceOrTokenInvalid)
+                              )
+                      )
+              );
         }
-        staticContentSetter.applyContent(parameter.getBase());
-      }
 
-      return htmlGenerator.generate("settings.jade", parameter.toMap());
-    } catch (Throwable t) {
-      throw new TeaException.SettingsRenderingException(t);
-    } finally {
-      teardownRoute(request);
+        if (parameter.getErrors().hasErrors()) {
+          outputError(parameter.getErrors().getDeliveryToken());
+          outputError(parameter.getErrors().getPreviewToken());
+          outputError(parameter.getErrors().getSpaceId());
+
+          staticContentSetter.applyErrorContent(parameter.getBase());
+          settingsCreator.setStaticLabels(parameter);
+
+          parameter
+              .setDeliveryToken(contentful.getDeliveryAccessToken())
+              .setPreviewToken(contentful.getPreviewAccessToken())
+              .setSpaceId(contentful.getSpaceId());
+
+          settings.load(lastSettings);
+          contentful.load(lastContentful);
+        } else {
+          if (request.getParameterMap().size() > 0 ) {
+            parameter.setSuccessful(true);
+          }
+          staticContentSetter.applyContent(parameter.getBase());
+        }
+
+        return htmlGenerator.generate("settings.jade", parameter.toMap());
+      } catch (Throwable t) {
+        throw new TeaException.SettingsRenderingException(t);
+      } finally {
+        teardownRoute(request);
+      }
     }
+  }
+
+  private boolean shouldReset(HttpServletRequest request) {
+    boolean reset = false;
+
+    if (contentful.isUsingCustomCredentials()) {
+      final String[] resets = request.getParameterMap().get("reset");
+      if (resets != null && resets.length > 0) {
+        reset = Boolean.parseBoolean(resets[0]);
+      }
+    }
+
+    return reset;
   }
 
   private void outputError(SettingsParameter.Errors.Error error) {
