@@ -24,6 +24,11 @@ block content
         h1= title
         +editorialFeatures(course)
         .grid-list
-          each course in courses
-            .grid-list__item
-              +courseCard(course)
+          if courses
+            each course in courses
+              .grid-list__item
+                +courseCard(course)
+          else
+              .course-card
+                h2(class='course-card__title') #{base.labels.noContentLabel}
+                p(class='course-card__description') #{base.labels.errorDoesNotExistLabel}

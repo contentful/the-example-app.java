@@ -66,6 +66,7 @@ public class ArrayToCourses extends ContentfulModelToMappableTypeConverter<Array
     final List<CDAResource> filteredCourses = new ArrayList<>();
     final BaseParameter base = parameter.getBase();
     final MetaParameter meta = base.getMeta();
+    base.getLabels().setErrorDoesNotExistLabel(t(Keys.errorMessage404Course));
 
     for (final CDAResource courseResource : compound.getList()) {
       final CDAEntry course = (CDAEntry) courseResource;
