@@ -105,6 +105,7 @@ public class StaticContentSetter {
         .setViewCourseLabel(t(Keys.viewCourseLabel))
         .setViewOnGitHub(t(Keys.viewOnGithub))
         .setWhatIsThisApp(t(Keys.whatIsThisApp))
+        .setNoContentLabel(t(Keys.noContentLabel))
     ;
   }
 

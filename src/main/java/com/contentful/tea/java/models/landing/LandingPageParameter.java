@@ -1,8 +1,8 @@
 package com.contentful.tea.java.models.landing;
 
-import com.contentful.tea.java.models.mappable.MappableType;
 import com.contentful.tea.java.models.base.BaseParameter;
 import com.contentful.tea.java.models.landing.modules.BaseModule;
+import com.contentful.tea.java.models.mappable.MappableType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,10 +28,14 @@ public class LandingPageParameter extends MappableType {
   }
 
   public LandingPageParameter addModule(BaseModule... baseModules) {
-    if (baseModules == null) {
+    if (this.modules == null) {
       this.modules = new ArrayList<>();
     }
-    this.modules.addAll(Arrays.asList(baseModules));
+
+    if (baseModules != null) {
+      this.modules.addAll(Arrays.asList(baseModules));
+    }
+
     return this;
   }
 

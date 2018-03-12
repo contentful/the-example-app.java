@@ -12,13 +12,23 @@ block content
   .layout-centered
     +editorialFeatures(landingPage)
   .modules-container
-    each module in modules
-      case module.type
-        when 'copy'
-          +moduleCopy(module)
+    if modules
+      each module in modules
+        case module.type
+          when 'copy'
+            +moduleCopy(module)
 
-        when 'heroImage'
-          +moduleHeroImage(module)
+          when 'heroImage'
+            +moduleHeroImage(module)
 
-        when 'highlightedCourse'
-          +moduleHighlightedCourse(module)
+          when 'highlightedCourse'
+            +moduleHighlightedCourse(module)
+    else
+      .module.module-highlighted-course
+        .module-highlighted-course__wrapper
+          .module-highlighted-course__overlay
+            .module-highlighted-course__content
+              h1
+              | #{base.labels.noContentLabel}
+              span
+              | #{base.labels.errorDoesNotExistLabel}

@@ -30,6 +30,7 @@ public class EntryToLandingPage extends ContentfulModelToMappableTypeConverter<C
   public LandingPageParameter convert(CDAEntry entry, int editorialFeaturesDepth) {
     final LandingPageParameter parameter = new LandingPageParameter();
     parameter.getBase().getMeta().setTitle(t(Keys.homeLabel));
+    parameter.getBase().getLabels().setErrorDoesNotExistLabel(t(Keys.errorHighlightedCourse));
 
     addModules(parameter, entry, editorialFeaturesDepth);
 
@@ -41,9 +42,16 @@ public class EntryToLandingPage extends ContentfulModelToMappableTypeConverter<C
 
   private void addModules(LandingPageParameter parameter, CDAEntry entry, int editorialFeaturesDepth) {
     final List<CDAEntry> contentModules = entry.getField("contentModules");
+    if (contentModules == null) {
+      return;
+    }
+
     for (final CDAEntry module : contentModules) {
       final BaseModule moduleParameter = createNewModuleParameter(module, editorialFeaturesDepth);
-      parameter.addModule(moduleParameter);
+
+      if (moduleParameter != null) {
+        parameter.addModule(moduleParameter);
+      }
 
       if (editorialFeaturesDepth > 0) {
         if (enhancer.isDraft(module)) {
@@ -68,13 +76,18 @@ public class EntryToLandingPage extends ContentfulModelToMappableTypeConverter<C
             .setEmphasizeStyle("Emphasized".equals(module.getField("visualStyle")))
             ;
       case "layoutHighlightedCourse":
-        return new HighlightedCourseModule()
-            .setCourse(
-                courseConverter.convert(
-                    new EntryToCourse.Compound()
-                        .setCourse((module.getField("course"))),
-                    editorialFeaturesDepth - 1
-                ).getCourse());
+        final CDAEntry course = module.getField("course");
+        if (course != null) {
+          return new HighlightedCourseModule()
+              .setCourse(
+                  courseConverter.convert(
+                      new EntryToCourse.Compound()
+                          .setCourse(course),
+                      editorialFeaturesDepth - 1
+                  ).getCourse());
+        } else {
+          return null;
+        }
       case "layoutHeroImage":
         return new HeroImageModule()
             .setHeadline(module.getField("headline"))

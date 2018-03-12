@@ -39,6 +39,8 @@ public class LabelsParameter {
   private String viewCourseLabel;
   private String viewOnGitHub;
   private String whatIsThisApp;
+  private String errorDoesNotExistLabel;
+  private String noContentLabel;
 
   public String getAllCoursesLabel() {
     return allCoursesLabel;
@@ -364,6 +366,24 @@ public class LabelsParameter {
     return this;
   }
 
+  public String getErrorDoesNotExistLabel() {
+    return errorDoesNotExistLabel;
+  }
+
+  public LabelsParameter setErrorDoesNotExistLabel(String errorDoesNotExistLabel) {
+    this.errorDoesNotExistLabel = errorDoesNotExistLabel;
+    return this;
+  }
+
+  public String getNoContentLabel() {
+    return noContentLabel;
+  }
+
+  public LabelsParameter setNoContentLabel(String noContentLabel) {
+    this.noContentLabel = noContentLabel;
+    return this;
+  }
+
   @Override public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof LabelsParameter)) return false;
@@ -402,14 +422,55 @@ public class LabelsParameter {
         Objects.equals(getTwitterCard(), that.getTwitterCard()) &&
         Objects.equals(getViewCourseLabel(), that.getViewCourseLabel()) &&
         Objects.equals(getViewOnGitHub(), that.getViewOnGitHub()) &&
+        Objects.equals(getErrorDoesNotExistLabel(), that.getErrorDoesNotExistLabel()) &&
+        Objects.equals(getNoContentLabel(), that.getNoContentLabel()) &&
         Objects.equals(getWhatIsThisApp(), that.getWhatIsThisApp());
   }
 
   @Override public int hashCode() {
-    return Objects.hash(getAllCoursesLabel(), getApiSwitcherHelp(), getCategoriesLabel(), getComingSoonLabel(), getContactUsLabel(), getContentDeliveryApiHelp(), getContentDeliveryApiLabel(), getContentPreviewApiHelp(), getContentPreviewApiLabel(), getCoursesLabel(), getCurrentApiLabel(), getDraftLabel(), getEditInWebAppLabel(), getEditorialFeaturesHint(), getFooterDisclaimer(), getHomeLabel(), getHostedLabel(), getImageAlt(), getImageDescription(), getImprintLabel(), getLocaleLabel(), getLocaleQuestion(), getLogoAlt(), getModalCTALabel(), getModalIntro(), getModalPlatforms(), getModalSpaceIntro(), getModalSpaceLinkLabel(), getModalTitle(), getPendingChangesLabel(), getSettingsLabel(), getTwitterCard(), getViewCourseLabel(), viewOnGitHub, getWhatIsThisApp());
+    return Objects.hash(getAllCoursesLabel(), getApiSwitcherHelp(), getCategoriesLabel(), getComingSoonLabel(), getContactUsLabel(), getContentDeliveryApiHelp(), getContentDeliveryApiLabel(), getContentPreviewApiHelp(), getContentPreviewApiLabel(), getCoursesLabel(), getCurrentApiLabel(), getDraftLabel(), getEditInWebAppLabel(), getEditorialFeaturesHint(), getFooterDisclaimer(), getHomeLabel(), getHostedLabel(), getImageAlt(), getImageDescription(), getImprintLabel(), getLocaleLabel(), getLocaleQuestion(), getLogoAlt(), getModalCTALabel(), getModalIntro(), getModalPlatforms(), getModalSpaceIntro(), getModalSpaceLinkLabel(), getModalTitle(), getPendingChangesLabel(), getSettingsLabel(), getTwitterCard(), getViewCourseLabel(), getViewOnGitHub(), getErrorDoesNotExistLabel(), getNoContentLabel(), getWhatIsThisApp());
   }
 
   @Override public String toString() {
-    return "LabelsParameter …";
+    return "LabelsParameter { "
+        + "allCoursesLabel = " + getAllCoursesLabel() + ", "
+        + "apiSwitcherHelp = " + getApiSwitcherHelp() + ", "
+        + "categoriesLabel = " + getCategoriesLabel() + ", "
+        + "comingSoonLabel = " + getComingSoonLabel() + ", "
+        + "contactUsLabel = " + getContactUsLabel() + ", "
+        + "contentDeliveryApiHelp = " + getContentDeliveryApiHelp() + ", "
+        + "contentDeliveryApiLabel = " + getContentDeliveryApiLabel() + ", "
+        + "contentPreviewApiHelp = " + getContentPreviewApiHelp() + ", "
+        + "contentPreviewApiLabel = " + getContentPreviewApiLabel() + ", "
+        + "coursesLabel = " + getCoursesLabel() + ", "
+        + "currentApiLabel = " + getCurrentApiLabel() + ", "
+        + "description = " + getDescription() + ", "
+        + "draftLabel = " + getDraftLabel() + ", "
+        + "editInWebAppLabel = " + getEditInWebAppLabel() + ", "
+        + "editorialFeaturesHint = " + getEditorialFeaturesHint() + ", "
+        + "errorDoesNotExistLabel = " + getErrorDoesNotExistLabel() + ", "
+        + "footerDisclaimer = " + getFooterDisclaimer() + ", "
+        + "homeLabel = " + getHomeLabel() + ", "
+        + "hostedLabel = " + getHostedLabel() + ", "
+        + "imageAlt = " + getImageAlt() + ", "
+        + "imageDescription = " + getImageDescription() + ", "
+        + "imprintLabel = " + getImprintLabel() + ", "
+        + "localeLabel = " + getLocaleLabel() + ", "
+        + "localeQuestion = " + getLocaleQuestion() + ", "
+        + "logoAlt = " + getLogoAlt() + ", "
+        + "modalCTALabel = " + getModalCTALabel() + ", "
+        + "modalIntro = " + getModalIntro() + ", "
+        + "modalPlatforms = " + getModalPlatforms() + ", "
+        + "modalSpaceIntro = " + getModalSpaceIntro() + ", "
+        + "modalSpaceLinkLabel = " + getModalSpaceLinkLabel() + ", "
+        + "modalTitle = " + getModalTitle() + ", "
+        + "noContentLabel + " + getNoContentLabel() + ", "
+        + "pendingChangesLabel = " + getPendingChangesLabel() + ", "
+        + "settingsLabel = " + getSettingsLabel() + ", "
+        + "twitterCard = " + getTwitterCard() + ", "
+        + "viewCourseLabel = " + getViewCourseLabel() + ", "
+        + "viewOnGitHub = " + getViewOnGitHub() + ", "
+        + "whatIsThisApp = " + getWhatIsThisApp() + " "
+        + "}";
   }
 }
