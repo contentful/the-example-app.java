@@ -36,18 +36,20 @@ public class EntryToLesson extends ContentfulModelToMappableTypeConverter<CDAEnt
         .setTitle(cdaLesson.getField("title"));
 
     final List<CDAEntry> cdaModules = cdaLesson.getField("modules");
-    for (final CDAEntry cdaModule : cdaModules) {
-      final Module module = createModule(cdaModule);
-      if (module != null) {
-        result.addModule(module);
-      }
-
-      if (editorialFeaturesDepth > 0) {
-        if (enhancer.isPending(cdaModule)) {
-          result.getBase().getMeta().setPendingChanges(true);
+    if (cdaModules != null) {
+      for (final CDAEntry cdaModule : cdaModules) {
+        final Module module = createModule(cdaModule);
+        if (module != null) {
+          result.addModule(module);
         }
-        if (enhancer.isDraft(cdaModule)) {
-          result.getBase().getMeta().setDraft(true);
+
+        if (editorialFeaturesDepth > 0) {
+          if (enhancer.isPending(cdaModule)) {
+            result.getBase().getMeta().setPendingChanges(true);
+          }
+          if (enhancer.isDraft(cdaModule)) {
+            result.getBase().getMeta().setDraft(true);
+          }
         }
       }
     }
