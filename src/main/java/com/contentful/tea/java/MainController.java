@@ -316,11 +316,6 @@ public class MainController implements ErrorController {
   @GetMapping(value = "/settings", produces = "text/html")
   @SuppressWarnings("unused")
   public String settings(HttpServletRequest request) {
-    // url contains parameter?
-    if (request.getParameterMap().size() > 0) {
-      return updateSettings(request);
-    }
-
     setupRoute(request);
 
     try {
@@ -341,6 +336,7 @@ public class MainController implements ErrorController {
     if (shouldReset(request)) {
       contentful.reset().loadFromPreferences();
       settings.reset();
+      sessionParser.saveToSession(request.getSession());
       return settings(request);
     } else {
 
@@ -385,7 +381,7 @@ public class MainController implements ErrorController {
           settings.load(lastSettings);
           contentful.load(lastContentful);
         } else {
-          if (request.getParameterMap().size() > 0 ) {
+          if (request.getParameterMap().size() > 0) {
             parameter.setSuccessful(true);
           }
           staticContentSetter.applyContent(parameter.getBase());
@@ -496,7 +492,7 @@ public class MainController implements ErrorController {
   private void setupRoute(HttpServletRequest request) {
     contentful.reset().loadFromPreferences();
     settings.reset();
-    sessionParser.loadSession(request.getSession());
+    sessionParser.loadFromSession(request.getSession());
     urlParameterParser.urlParameterToApp(request.getParameterMap());
     settings.setBaseUrl(request.getRequestURL().toString());
     settings.setPath(request.getServletPath());
@@ -516,7 +512,7 @@ public class MainController implements ErrorController {
   }
 
   private void teardownRoute(HttpServletRequest request) {
-    sessionParser.saveSession(request.getSession());
+    sessionParser.saveToSession(request.getSession());
   }
 
   private Set<String> updateVisitedLessonsInSession(

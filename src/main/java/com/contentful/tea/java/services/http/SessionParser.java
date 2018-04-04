@@ -68,7 +68,7 @@ public class SessionParser {
     });
   }
 
-  public void loadSession(HttpSession session) {
+  public void loadFromSession(HttpSession session) {
     final Enumeration<String> names = session.getAttributeNames();
     for (; names.hasMoreElements(); ) {
       final String name = names.nextElement();
@@ -83,7 +83,7 @@ public class SessionParser {
     session.setMaxInactiveInterval(TIME_48_HOURS);
   }
 
-  public void saveSession(HttpSession session) {
+  public void saveToSession(HttpSession session) {
     manipulatorsByNameMap
         .keySet()
         .forEach(name -> session.setAttribute(name, manipulatorsByNameMap.get(name).get()));

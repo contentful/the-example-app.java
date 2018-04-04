@@ -54,7 +54,7 @@ public class SessionParserTest {
     session.setAttribute(NAME_DELIVERY_TOKEN, "cdaToken");
     session.setAttribute(NAME_PREVIEW_TOKEN, "cpaToken");
 
-    parser.loadSession(session);
+    parser.loadFromSession(session);
 
     assertThat(contentful.getSpaceId()).isEqualTo("spaceId");
     assertThat(contentful.getDeliveryAccessToken()).isEqualTo("cdaToken");
@@ -69,7 +69,7 @@ public class SessionParserTest {
         .setPreviewAccessToken("cpaToken");
 
     final HttpSession session = new MockHttpSession();
-    parser.saveSession(session);
+    parser.saveToSession(session);
 
     assertThat(session.getAttributeNames()).isNotNull();
     Map<String, Object> attributes = extractAttributesIntoMap(session);
