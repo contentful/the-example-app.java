@@ -280,14 +280,21 @@ public class Contentful {
   public boolean isUsingCustomCredentials() {
     final InputStream input = SettingsCreator.class.getClassLoader().getResourceAsStream("application.properties");
     final Properties properties = new Properties();
-    try {
-      properties.load(input);
 
-      return !Objects.equals(getSpaceId(), properties.getProperty("spaceId", ""))
-          || !Objects.equals(getDeliveryAccessToken(), properties.getProperty("deliveryToken", ""))
-          || !Objects.equals(getPreviewAccessToken(), properties.getProperty("previewToken", ""));
-    } catch (IOException e) {
-      return true;
+    if (getOverwrittenHost().isEmpty()) {
+      try {
+        properties.load(input);
+
+        return !Objects.equals(getSpaceId(), properties.getProperty("spaceId", ""))
+            || !Objects.equals(getDeliveryAccessToken(), properties.getProperty("deliveryToken", ""))
+            || !Objects.equals(getPreviewAccessToken(), properties.getProperty("previewToken", ""));
+      } catch (IOException e) {
+        return true;
+      }
+    } else {
+      return !Objects.equals(getSpaceId(), getOverwrittenHost())
+          || !Objects.equals(getDeliveryAccessToken(), System.getenv(ENVIRONMENT_OVERWRITE_DELIVERY_TOKEN))
+          || !Objects.equals(getPreviewAccessToken(), System.getenv(ENVIRONMENT_OVERWRITE_PREVIEW_TOKEN));
     }
   }
 
