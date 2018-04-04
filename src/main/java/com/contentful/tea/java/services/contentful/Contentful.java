@@ -46,8 +46,6 @@ public class Contentful {
     contentfulDeliveryClient = null;
     contentfulPreviewClient = null;
 
-    overwriteDefaultsWithEnvironment();
-
     return this;
   }
 
@@ -112,7 +110,7 @@ public class Contentful {
   }
 
   private void overwriteDefaultsWithEnvironment() {
-    String overwriteHost = System.getenv(ENVIRONMENT_OVERWRITE_HOST);
+    final String overwriteHost = System.getenv(ENVIRONMENT_OVERWRITE_HOST);
     if (overwriteHost != null && !overwriteHost.isEmpty()) {
       System.out.println("Overwriting host with '" + overwriteHost + "'.");
       setHost(overwriteHost);
@@ -233,6 +231,8 @@ public class Contentful {
     } catch (IOException exception) {
       throw new IllegalStateException("Could not load default settings.", exception);
     }
+
+    overwriteDefaultsWithEnvironment();
 
     return this;
   }
