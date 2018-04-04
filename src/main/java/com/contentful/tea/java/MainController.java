@@ -482,12 +482,11 @@ public class MainController implements ErrorController {
   @SuppressWarnings("unused")
   public String redirectException(HttpServletRequest request, RedirectException redirect) {
     if ("/settings".equals(redirect.getWhereTo())) {
-      return settings(request);
+      return updateSettings(request);
     } else {
       throw new TeaException.RouteNotFoundException("redirect:/" + redirect.getWhereTo());
     }
   }
-
 
   private void setupRoute(HttpServletRequest request) {
     contentful.reset().loadFromPreferences();
