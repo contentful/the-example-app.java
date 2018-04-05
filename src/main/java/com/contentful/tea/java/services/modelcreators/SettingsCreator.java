@@ -11,10 +11,6 @@ import com.contentful.tea.java.services.settings.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 @Component
 public class SettingsCreator {
   private static final String LOCAL_SETTINGS_REFERENCE_IN_TO_GITHUB = "https://github.com/contentful/the-example-app.java/blob/master/src/main/resources/application.properties";

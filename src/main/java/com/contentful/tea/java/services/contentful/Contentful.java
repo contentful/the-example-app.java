@@ -278,11 +278,11 @@ public class Contentful {
   }
 
   public boolean isUsingCustomCredentials() {
-    final InputStream input = SettingsCreator.class.getClassLoader().getResourceAsStream("application.properties");
-    final Properties properties = new Properties();
-
     if (getOverwrittenHost().isEmpty()) {
       try {
+        final InputStream input = SettingsCreator.class.getClassLoader().getResourceAsStream("application.properties");
+        final Properties properties = new Properties();
+
         properties.load(input);
 
         return !Objects.equals(getSpaceId(), properties.getProperty("spaceId", ""))
@@ -292,10 +292,21 @@ public class Contentful {
         return true;
       }
     } else {
-      return !Objects.equals(getSpaceId(), getOverwrittenHost())
+      return !usesSameHostExceptForApi()
+          || !Objects.equals(getSpaceId(), System.getenv(ENVIRONMENT_OVERWRITE_SPACE_ID))
           || !Objects.equals(getDeliveryAccessToken(), System.getenv(ENVIRONMENT_OVERWRITE_DELIVERY_TOKEN))
           || !Objects.equals(getPreviewAccessToken(), System.getenv(ENVIRONMENT_OVERWRITE_PREVIEW_TOKEN));
     }
+  }
+
+  private boolean usesSameHostExceptForApi() {
+    String overwrittenHost = getOverwrittenHost();
+    String host = getHost();
+
+    overwrittenHost = overwrittenHost.replaceAll("preview", "cdn");
+    host = host.replaceAll("preview", "cdn");
+
+    return Objects.equals(overwrittenHost, host);
   }
 
 }

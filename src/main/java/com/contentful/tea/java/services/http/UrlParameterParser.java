@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -138,7 +139,7 @@ public class UrlParameterParser {
             }
           }
         } else {
-          System.err.println("Undefined parameter found: '" + urlParameterKey + "': '" + values + "'. Ignoring it.");
+          System.err.println("Undefined parameter found: '" + urlParameterKey + "': '" + Arrays.toString(values) + "'. Ignoring it.");
         }
       }
 
