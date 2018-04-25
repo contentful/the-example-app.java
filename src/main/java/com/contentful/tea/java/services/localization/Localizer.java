@@ -52,7 +52,7 @@ public class Localizer {
 
       localizations.put(locale, fromJson);
     } catch (IOException e) {
-      throw new IllegalStateException(format("Cannot find locale '%s'' in '%s'.", locale, path), e);
+      throw new IllegalStateException(format("Cannot find locale '%s' in '%s'.", locale, path), e);
     }
   }
 }

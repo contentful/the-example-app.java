@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EnqueueHttpResponse {
-  String[] defaults() default { "defaults/space.json", "defaults/content_types.json" };
+  String[] defaults() default { "defaults/locales.json", "defaults/content_types.json" };
 
   String[] value() default {};
 

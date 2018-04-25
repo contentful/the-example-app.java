@@ -62,7 +62,7 @@ public class LessonsModelTests extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"lessons/complete.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"lessons/complete.json", "defaults/locales.json"})
   public void lessonTest() {
     settings.setPath("/courses/one_course");
     settings.setQueryString("");

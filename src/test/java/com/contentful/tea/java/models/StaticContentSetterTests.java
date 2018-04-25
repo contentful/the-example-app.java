@@ -56,7 +56,7 @@ public class StaticContentSetterTests extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"home/main.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"defaults/locales.json", "home/main.json"})
   public void homeRouteSetsStaticContent() {
     settings.setPath("/");
     settings.setQueryString("");
@@ -88,7 +88,7 @@ public class StaticContentSetterTests extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"home/main.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"defaults/locales.json", "home/main.json"})
   public void nonDefaultSettingsResultInQueryStringForAllApps() {
     given(contentful.isUsingCustomCredentials()).willReturn(true);
     given(contentful.getSpaceId()).willReturn("ThisIsNotASpaceId");
@@ -100,7 +100,7 @@ public class StaticContentSetterTests extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"home/main.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"defaults/locales.json", "home/main.json"})
   public void homeRouteSetsStaticContentInGerman() {
     settings.setPath("/");
     settings.setQueryString("");
@@ -114,7 +114,7 @@ public class StaticContentSetterTests extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"models/courses.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"defaults/locales.json", "models/courses.json"})
   public void coursesRouteTest() {
     settings.setPath("/courses");
     settings.setQueryString("");
