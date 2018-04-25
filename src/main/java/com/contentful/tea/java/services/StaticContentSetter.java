@@ -4,7 +4,7 @@ import com.contentful.java.cda.CDAArray;
 import com.contentful.java.cda.CDAClient;
 import com.contentful.java.cda.CDAEntry;
 import com.contentful.java.cda.CDALocale;
-import com.contentful.java.cda.CDASpace;
+import com.contentful.java.cda.CDAResource;
 import com.contentful.java.cda.QueryOperation;
 import com.contentful.tea.java.markdown.MarkdownParser;
 import com.contentful.tea.java.models.base.AnalyticsParameter;
@@ -21,7 +21,6 @@ import com.contentful.tea.java.services.settings.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Objects;
 
 import static com.contentful.tea.java.services.contentful.Contentful.API_CDA;
@@ -163,14 +162,14 @@ public class StaticContentSetter {
 
   private void updateLocales(BaseParameter base) {
     final CDAClient client = contentful.getCurrentClient();
-    final CDASpace space = client.fetchSpace();
-    final List<CDALocale> locales = space.locales();
+    final CDAArray locales = client.fetch(CDALocale.class).all();
 
     final LocalesParameter localesParameter = base.getLocales();
     localesParameter
         .setCurrentLocaleCode(settings.getLocale());
 
-    for (final CDALocale locale : locales) {
+    for (final CDAResource resource : locales.items()) {
+      final CDALocale locale = (CDALocale) resource;
       final Locale localeParameter = new Locale();
       localeParameter
           .setCode(locale.code())

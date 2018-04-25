@@ -65,7 +65,7 @@ public class HomeTests extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"home/main.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"home/main.json", "defaults/locales.json"})
   public void homeTest() {
     settings.setPath("/");
     settings.setQueryString("");
@@ -105,7 +105,7 @@ public class HomeTests extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"models/courses.json", "models/categories.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"models/courses.json", "models/categories.json", "defaults/locales.json"})
   public void allCoursesTest() {
     settings.setPath("/courses");
     settings.setQueryString("");

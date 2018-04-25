@@ -33,7 +33,7 @@ dependencies {
     compile 'com.atlassian.commonmark:commonmark:0.10.0'
     compile 'de.neuland-bfi:jade4j:1.2.7'
 
-    compile 'com.contentful.java:java-sdk:9.0.0'
+    compile 'com.contentful.java:java-sdk:10.0.0'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test:1.5.8.RELEASE'
     testCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'

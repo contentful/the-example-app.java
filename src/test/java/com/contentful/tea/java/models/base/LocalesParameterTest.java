@@ -48,7 +48,7 @@ public class LocalesParameterTest extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"home/main.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"defaults/locales.json", "home/main.json"})
   public void staticTextCanBeTranslated() {
     settings.setLocale("de-DE");
 

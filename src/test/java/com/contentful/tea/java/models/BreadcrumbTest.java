@@ -3,9 +3,9 @@ package com.contentful.tea.java.models;
 import com.contentful.tea.java.MainController;
 import com.contentful.tea.java.models.base.BreadcrumbParameter;
 import com.contentful.tea.java.models.courses.CoursesParameter;
+import com.contentful.tea.java.services.StaticContentSetter;
 import com.contentful.tea.java.services.contentful.Contentful;
 import com.contentful.tea.java.services.settings.Settings;
-import com.contentful.tea.java.services.StaticContentSetter;
 import com.contentful.tea.java.utils.http.EnqueueHttpResponse;
 import com.contentful.tea.java.utils.http.EnqueuedHttpResponseTests;
 
@@ -49,12 +49,13 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
 
   @After
   public void shutDown() {
+    contentful.getCurrentClient().clearCache();
     contentful.reset();
     settings.reset();
   }
 
   @Test
-  @EnqueueHttpResponse({"models/courses.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"defaults/locales.json", "models/courses.json"})
   public void coursesListBreadcrumb() {
     settings.setPath("/courses");
     settings.setQueryString("");
@@ -72,7 +73,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"models/courses.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"defaults/locales.json", "models/courses.json"})
   public void categoriesBreadcrumb() {
     settings.setPath("/courses/categories");
     settings.setQueryString("");
@@ -92,7 +93,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"models/courses.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"defaults/locales.json", "models/courses.json"})
   public void specificCategoryBreadcrumb() {
     settings.setPath("/courses/categories/something_cheesy");
     settings.setQueryString("");
@@ -114,7 +115,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"models/courses.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"defaults/locales.json", "models/courses.json"})
   public void specificCourseBreadcrumb() {
     settings.setPath("/courses/something_meaty");
     settings.setQueryString("");
@@ -134,7 +135,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"courses/one.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"courses/one.json", "defaults/locales.json"})
   public void specificCourseLessonBreadcrumb() {
     settings.setPath("/courses/something_meaty/lessons/1HR1QvURo4MoSqO0eqmUeO");
     settings.setQueryString("");
@@ -158,7 +159,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"courses/one.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"courses/one.json", "defaults/locales.json"})
   public void generalCourseLessonBreadcrumb() {
     settings.setPath("/courses/something_meaty/lessons");
     settings.setQueryString("");
@@ -180,7 +181,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"courses/one.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"defaults/locales.json", "courses/one.json"})
   public void settingsBreadcrumb() {
     settings.setPath("/settings");
     settings.setQueryString("");
@@ -198,7 +199,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"courses/one.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"defaults/locales.json", "courses/one.json"})
   public void imprintBreadcrumb() {
     settings.setPath("/imprint");
     settings.setQueryString("");
@@ -216,7 +217,7 @@ public class BreadcrumbTest extends EnqueuedHttpResponseTests {
   }
 
   @Test
-  @EnqueueHttpResponse({"courses/one.json", "defaults/space.json"})
+  @EnqueueHttpResponse({"defaults/locales.json", "courses/one.json"})
   public void imprintBreadcrumbDeutsch() {
     settings.setPath("/imprint");
     settings.setQueryString("");
